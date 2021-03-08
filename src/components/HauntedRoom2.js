@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../../public/css/HauntedRoom.css';
 import TypeWriterEffect from 'react-typewriter-effect';
 import {
   Stage,
@@ -12,7 +11,12 @@ import {
   Rect,
 } from 'react-konva';
 import useImage from 'use-image';
+//import css file
 import '../../public/css/HauntedRoom.css';
+
+//react modal
+import ReactDOM from 'react-dom';
+import Modal from 'react-modal';
 
 //background image
 const HauntedHallway = (props) => {
@@ -23,7 +27,6 @@ const HauntedHallway = (props) => {
 const Clue = (props) => {
   const [clueImage] = useImage('/question.png');
   const [greenCheck] = useImage('/check.png');
-  console.log(typeof props.showClue, 'props.showclue');
   return (
     <Image
       onClick={props.showClue}
@@ -43,7 +46,7 @@ export const HauntedRoom2 = (props) => {
     three: { solved: false, show: false },
   };
   const [clues, setClues] = useState(roomClues); //an array of clue info
-  //   const [clue1, setClue1] = useState({ show: false, solved: false });
+  const [showModal, setShowModal] = useState(false);
   return (
     <div className="game-room">
       <div className="narrative">
@@ -102,6 +105,11 @@ export const HauntedRoom2 = (props) => {
       {clues.one.show ? <div>show clue one</div> : ''}
       {clues.two.show ? <div>show clue two</div> : ''}
       {clues.three.show ? <div>show clue three</div> : ''}
+      <button onClick={() => setShowModal(true)}>click me to open modal</button>
+      <Modal isOpen={showModal}>
+        <p>This is a modal. please close it now</p>
+        <button onClick={() => setShowModal(false)}>Close the modal now</button>
+      </Modal>
     </div>
   );
 };

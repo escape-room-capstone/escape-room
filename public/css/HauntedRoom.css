@@ -1,0 +1,24 @@
+.game-room {
+}
+
+.konvajs-content {
+  margin: 0 auto;
+}
+
+.narrative {
+  display: flex;
+  justify-content: center;
+}
+/* #house {
+  position: absolute;
+  top: 462px;
+  padding: 0.3rem;
+  left: 935px;
+  width: 3.5rem;
+  border-radius: 100%;
+  height: 3.5rem;
+} */
+
+#house.selected {
+  background-color: greenyellow;
+}

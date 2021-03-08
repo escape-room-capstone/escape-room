@@ -19,5 +19,12 @@
 }
 
 .puzzle-modal {
-  background-image: url(../public/puzzlepieces.jpg);
+  height: inherit;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('../puzzlepieces.jpg');
+}
+
+.search {
+  cursor: 'pointer';
 }

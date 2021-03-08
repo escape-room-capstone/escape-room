@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../public/css/HauntedRoom.css';
+
 export const ClueOne = (props) => {
   return (
     <div className="puzzle-modal">

@@ -20,7 +20,6 @@ const App = () => {
         <Route exact path="/haunted/room3" component={HauntedRoom3} />
         <Route exact path="/haunted/room2/success" component={Success} />
       </Router>
-      <HauntedRoom3 />
     </Provider>
   );
 };

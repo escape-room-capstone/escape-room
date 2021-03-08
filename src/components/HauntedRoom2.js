@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import TypeWriterEffect from 'react-typewriter-effect';
 import { Stage, Layer, Text, Circle, Group, Image } from 'react-konva';
 import useImage from 'use-image';
+import { Redirect } from 'react-router-dom';
 
 //import css file
 import '../../public/css/HauntedRoom.css';
@@ -53,9 +54,10 @@ export const HauntedRoom2 = (props) => {
     three: { solved: false, show: false },
   };
 
-  //   const [clues, setClues] = useState(roomClues); //an array of clue info
   const [room, setRoom] = useState({ clues: roomClues, showModal: false });
-  //   const [showModal, setShowModal] = useState(false);
+
+  //helper function that takes a clueNum and sets the clue.show to be false, clue.solved to be true,
+  //and showModal to be false (may need to change later if we don't want modal to close with solving a clue)
   const setSolved = (clue) => {
     setRoom((prevRoom) => {
       return {
@@ -66,6 +68,22 @@ export const HauntedRoom2 = (props) => {
           [clue]: {
             show: false,
             solved: true,
+          },
+        },
+      };
+    });
+  };
+  //helper function that takes a clueNumber and sets showModal:true and sets the status of the clue.show to be true
+  const show = (clue) => {
+    setRoom((prevRoom) => {
+      return {
+        ...prevRoom,
+        showModal: true,
+        clues: {
+          ...prevRoom.clues,
+          [clue]: {
+            ...prevRoom.clues[clue],
+            show: true,
           },
         },
       };
@@ -94,59 +112,20 @@ export const HauntedRoom2 = (props) => {
         <Layer>
           <HauntedHallway />
           <Clue
-            showClue={() =>
-              setRoom((prevRoom) => {
-                return {
-                  ...prevRoom,
-                  showModal: true,
-                  clues: {
-                    ...prevRoom.clues,
-                    one: { ...prevRoom.clues.one, show: true },
-                  },
-                };
-              })
-            }
+            showClue={() => show('one')}
             solved={room.clues.one.solved}
             name="one"
             x={625}
             y={470}
           />
           <Clue
-            showClue={() =>
-              setRoom((prevRoom) => {
-                return {
-                  ...prevRoom,
-                  showModal: true,
-                  clues: {
-                    ...prevRoom.clues,
-                    two: {
-                      ...prevRoom.clues.two,
-                      show: true,
-                    },
-                  },
-                };
-              })
-            }
+            showClue={() => show('two')}
             solved={room.clues.two.solved}
             x={870}
             y={420}
           />
           <Clue
-            showClue={() =>
-              setRoom((prevRoom) => {
-                return {
-                  ...prevRoom,
-                  showModal: true,
-                  clues: {
-                    ...prevRoom.clues,
-                    three: {
-                      ...prevRoom.clues.three,
-                      show: true,
-                    },
-                  },
-                };
-              })
-            }
+            showClue={() => show('three')}
             solved={room.clues.three.solved}
             x={750}
             y={275}
@@ -156,26 +135,7 @@ export const HauntedRoom2 = (props) => {
 
       <Modal style={customStyles} isOpen={room.showModal}>
         <p>This is a modal. please close it now</p>
-        {room.clues.one.show && (
-          <ClueOne
-            solve={
-              () => setSolved('one')
-              //   setRoom((prevRoom) => {
-              //     return {
-              //       ...prevRoom,
-              //       showModal: false,
-              //       clues: {
-              //         ...prevRoom.clues,
-              //         one: {
-              //           show: false,
-              //           solved: true,
-              //         },
-              //       },
-              //     };
-              //   })
-            }
-          />
-        )}
+        {room.clues.one.show && <ClueOne solve={() => setSolved('one')} />}
         {room.clues.two.show && <ClueTwo solve={() => setSolved('two')} />}
         {room.clues.three.show && (
           <ClueThree solve={() => setSolved('three')} />
@@ -196,9 +156,17 @@ export const HauntedRoom2 = (props) => {
             })
           }
         >
-          Close the modal now
+          Close the modal
         </button>
       </Modal>
+      {room.clues.one.solved &&
+      room.clues.two.solved &&
+      room.clues.three.solved ? (
+        <Redirect to="/haunted/room2/success" />
+      ) : (
+        ''
+      )}
     </div>
   );
 };
+//need logic for when all three puzzles are solved, redirect to succss page,then to next room in game

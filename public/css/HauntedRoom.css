@@ -1,4 +1,8 @@
 .game-room {
+  background-color: black;
+  text-align: center;
+  color: white;
+  min-height: 90vh;
 }
 
 .konvajs-content {
@@ -9,16 +13,11 @@
   display: flex;
   justify-content: center;
 }
-/* #house {
-  position: absolute;
-  top: 462px;
-  padding: 0.3rem;
-  left: 935px;
-  width: 3.5rem;
-  border-radius: 100%;
-  height: 3.5rem;
-} */
 
 #house.selected {
   background-color: greenyellow;
+}
+
+.puzzle-modal {
+  background-image: url(../public/puzzlepieces.jpg);
 }

@@ -46,6 +46,7 @@ export const HauntedRoom2 = (props) => {
     three: { solved: false, show: false },
   };
   const [clues, setClues] = useState(roomClues); //an array of clue info
+  const [room, setRoom] = useState({ clues: roomClues, showModal: false });
   const [showModal, setShowModal] = useState(false);
   return (
     <div className="game-room">
@@ -71,29 +72,56 @@ export const HauntedRoom2 = (props) => {
           <HauntedHallway />
           <Clue
             showClue={() =>
-              setClues((prevClues) => {
-                return { ...prevClues, one: { show: true, solved: false } };
+              setRoom((prevRoom) => {
+                return {
+                  ...prevRoom,
+                  showModal: true,
+                  clues: {
+                    ...prevRoom.clues,
+                    one: { ...prevRoom.clues.one, show: true },
+                  },
+                };
               })
             }
-            solved={clues.one.solved}
+            solved={room.clues.one.solved}
             name="one"
             x={625}
             y={470}
           />
           <Clue
             showClue={() =>
-              setClues((prevClues) => {
-                return { ...prevClues, two: { show: true, solved: false } };
+              setRoom((prevRoom) => {
+                return {
+                  ...prevRoom,
+                  showModal: true,
+                  clues: {
+                    ...prevRoom.clues,
+                    two: {
+                      ...prevRoom.clues.two,
+                      show: true,
+                    },
+                  },
+                };
               })
             }
-            solved={clues.two.solved}
+            solved={room.clues.two.solved}
             x={870}
             y={420}
           />
           <Clue
             showClue={() =>
-              setClues((prevClues) => {
-                return { ...prevClues, three: { show: true, solved: false } };
+              setRoom((prevRoom) => {
+                return {
+                  ...prevRoom,
+                  showModal: true,
+                  clues: {
+                    ...prevRoom.clues,
+                    three: {
+                      ...prevRoom.clues.three,
+                      show: true,
+                    },
+                  },
+                };
               })
             }
             solved={clues.three.solved}
@@ -102,13 +130,42 @@ export const HauntedRoom2 = (props) => {
           />
         </Layer>
       </Stage>
-      {clues.one.show ? <div>show clue one</div> : ''}
+      {/* {clues.one.show ? <div>show clue one</div> : ''}
       {clues.two.show ? <div>show clue two</div> : ''}
-      {clues.three.show ? <div>show clue three</div> : ''}
-      <button onClick={() => setShowModal(true)}>click me to open modal</button>
-      <Modal isOpen={showModal}>
+      {clues.three.show ? <div>show clue three</div> : ''} */}
+      {/* <button onClick={() => setShowModal(true)}>click me to open modal</button> */}
+      {/* <button
+        onClick={() =>
+          setRoom((prevRoom) => {
+            return { ...prevRoom, showModal: true };
+          })
+        }
+      >
+        OPEN MODAL
+      </button> */}
+      <Modal isOpen={room.showModal}>
         <p>This is a modal. please close it now</p>
-        <button onClick={() => setShowModal(false)}>Close the modal now</button>
+        {room.clues.one.show && 'here is clue1'}
+        {room.clues.two.show && 'here is clue 2'}
+        {room.clues.three.show && 'here is clue 3'}
+        <button
+          onClick={() =>
+            setRoom((prevRoom) => {
+              return {
+                ...prevRoom,
+                showModal: false,
+                clues: {
+                  ...prevRoom.clues,
+                  one: { ...prevRoom.clues.one, show: false },
+                  two: { ...prevRoom.clues.two, show: false },
+                  three: { ...prevRoom.clues.three, show: false },
+                },
+              };
+            })
+          }
+        >
+          Close the modal now
+        </button>
       </Modal>
     </div>
   );

@@ -7,7 +7,7 @@ import useImage from 'use-image';
 import '../../public/css/HauntedRoom.css';
 
 // import clue components
-import { ClueOne } from './HauntedRoom2Clues';
+import { ClueOne, ClueTwo, ClueThree } from './HauntedRoom2Clues';
 
 //react modal
 import ReactDOM from 'react-dom';
@@ -52,9 +52,25 @@ export const HauntedRoom2 = (props) => {
     two: { solved: false, show: false },
     three: { solved: false, show: false },
   };
-  const [clues, setClues] = useState(roomClues); //an array of clue info
+
+  //   const [clues, setClues] = useState(roomClues); //an array of clue info
   const [room, setRoom] = useState({ clues: roomClues, showModal: false });
-  const [showModal, setShowModal] = useState(false);
+  //   const [showModal, setShowModal] = useState(false);
+  const setSolved = (clue) => {
+    setRoom((prevRoom) => {
+      return {
+        ...prevRoom,
+        showModal: false,
+        clues: {
+          ...prevRoom.clues,
+          [clue]: {
+            show: false,
+            solved: true,
+          },
+        },
+      };
+    });
+  };
   return (
     <div className="game-room">
       <div className="narrative">
@@ -131,7 +147,7 @@ export const HauntedRoom2 = (props) => {
                 };
               })
             }
-            solved={clues.three.solved}
+            solved={room.clues.three.solved}
             x={750}
             y={275}
           />
@@ -140,9 +156,30 @@ export const HauntedRoom2 = (props) => {
 
       <Modal style={customStyles} isOpen={room.showModal}>
         <p>This is a modal. please close it now</p>
-        {room.clues.one.show && <ClueOne />}
-        {room.clues.two.show && 'here is clue 2'}
-        {room.clues.three.show && 'here is clue 3'}
+        {room.clues.one.show && (
+          <ClueOne
+            solve={
+              () => setSolved('one')
+              //   setRoom((prevRoom) => {
+              //     return {
+              //       ...prevRoom,
+              //       showModal: false,
+              //       clues: {
+              //         ...prevRoom.clues,
+              //         one: {
+              //           show: false,
+              //           solved: true,
+              //         },
+              //       },
+              //     };
+              //   })
+            }
+          />
+        )}
+        {room.clues.two.show && <ClueTwo solve={() => setSolved('two')} />}
+        {room.clues.three.show && (
+          <ClueThree solve={() => setSolved('three')} />
+        )}
         <button
           onClick={() =>
             setRoom((prevRoom) => {

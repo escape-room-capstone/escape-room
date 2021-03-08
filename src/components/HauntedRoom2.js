@@ -1,18 +1,13 @@
 import React, { useState } from 'react';
 import TypeWriterEffect from 'react-typewriter-effect';
-import {
-  Stage,
-  Layer,
-  Star,
-  Text,
-  Circle,
-  Group,
-  Image,
-  Rect,
-} from 'react-konva';
+import { Stage, Layer, Text, Circle, Group, Image } from 'react-konva';
 import useImage from 'use-image';
+
 //import css file
 import '../../public/css/HauntedRoom.css';
+
+// import clue components
+import { ClueOne } from './HauntedRoom2Clues';
 
 //react modal
 import ReactDOM from 'react-dom';
@@ -38,7 +33,19 @@ const Clue = (props) => {
     />
   );
 };
-
+// styles for modal
+const customStyles = {
+  content: {
+    width: '50%',
+    height: '80%',
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
 export const HauntedRoom2 = (props) => {
   const roomClues = {
     one: { solved: false, show: false },
@@ -130,22 +137,10 @@ export const HauntedRoom2 = (props) => {
           />
         </Layer>
       </Stage>
-      {/* {clues.one.show ? <div>show clue one</div> : ''}
-      {clues.two.show ? <div>show clue two</div> : ''}
-      {clues.three.show ? <div>show clue three</div> : ''} */}
-      {/* <button onClick={() => setShowModal(true)}>click me to open modal</button> */}
-      {/* <button
-        onClick={() =>
-          setRoom((prevRoom) => {
-            return { ...prevRoom, showModal: true };
-          })
-        }
-      >
-        OPEN MODAL
-      </button> */}
-      <Modal isOpen={room.showModal}>
+
+      <Modal style={customStyles} isOpen={room.showModal}>
         <p>This is a modal. please close it now</p>
-        {room.clues.one.show && 'here is clue1'}
+        {room.clues.one.show && <ClueOne />}
         {room.clues.two.show && 'here is clue 2'}
         {room.clues.three.show && 'here is clue 3'}
         <button

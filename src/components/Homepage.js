@@ -26,8 +26,10 @@ const Homepage = (props) => {
       <hr />
 
       <Link to="/haunted/intro">Haunted House</Link>
-
+      <hr />
       <Link to="/game4"> Game 4 </Link>
+      <hr />
+      <Link to ="/Bobafett"> Steve Game </Link>
     
       <div>
           <p> In the following game, you will have to rob a bank and escape with all the $$$</p>

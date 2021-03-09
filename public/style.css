@@ -45,9 +45,9 @@ html, body, .cashDesk, .bankGame, .bankSafe, .bankVictory, #app, #routesDiv {
     justify-content: center;
 }
 
-body {
+/* body {
     background-color: black;
-}
+} */
 
 h1 {
     display: flex;

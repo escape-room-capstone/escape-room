@@ -1,7 +1,4 @@
 
-
-
-
 import Routes from "./routes";
 
 import BobaFett from "./components/SteveGame/BobaFett";
@@ -30,10 +27,9 @@ import Attic from './components/GameFour/Attic';
 const App = () => {
   return (
     <Provider store={store}>
-      <BobaFett/>
       <Router history={history}>
         <Route exact path="/" component={Homepage} />
-
+        <Route exact path ="/Bobafett" component={BobaFett} />
         <Route exact path="/haunted/intro" component={HauntedIntro} />
         <Route exact path="/haunted/room1" component={HauntedRoom1} />
         <Route exact path="/haunted/room2" component={HauntedRoom2} />

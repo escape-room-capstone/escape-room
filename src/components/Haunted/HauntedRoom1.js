@@ -39,7 +39,7 @@ export const HauntedRoom1 = (props) => {
         <div>
           <TypeWriterEffect
             textStyle={{ fontFamily: 'Red Hat Display' }}
-            startDelay={6000}
+            startDelay={5000}
             cursorColor="white"
             text="You go in."
             typeSpeed={80}

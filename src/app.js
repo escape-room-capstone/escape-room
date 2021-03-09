@@ -10,6 +10,7 @@ import history from './history';
 import { HauntedRoom1 } from './components/Haunted/HauntedRoom1';
 import { HauntedRoom2 } from './components/Haunted/HauntedRoom2';
 import { HauntedRoom3 } from './components/Haunted/HauntedRoom3';
+import { HauntedRoom4 } from './components/Haunted/HauntedRoom4';
 import { HauntedIntro } from './components/Haunted/HauntedIntro';
 import { Success } from './components/Haunted/HauntedR2Success';
 
@@ -36,6 +37,7 @@ const App = () => {
         <Route exact path="/haunted/room2" component={HauntedRoom2} />
         <Route exact path="/haunted/room3" component={HauntedRoom3} />
         <Route exact path="/haunted/room2/success" component={Success} />
+        <Route exact path="/haunted/room4" component={HauntedRoom4} />
 
         <Route exact path="/game4" component={GameFour} />
         <Route exact path="/game4/livingroom" component={LivingRoom} />
@@ -50,6 +52,7 @@ const App = () => {
         <Route exact path="/BankgameVictory" component={BankGameVictory} />
         <Redirect to="/" />
       </Router>
+      <HauntedRoom3 />
     </Provider>
   );
 };

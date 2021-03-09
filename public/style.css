@@ -1,0 +1,42 @@
+#bobaImage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: 100%;
+}
+
+.bobaBg {
+    justify-content: center;
+}
+
+body {
+    background-color: black;
+}
+
+h1 {
+    display: flex;
+    color: white;
+    justify-content: center;
+    text-align: center;
+}
+
+p {
+    display: flex;
+    color: white;
+    justify-content: center;
+    text-align: center;
+    margin: 0
+}
+
+#controls {
+    position: absolute;
+    bottom: 13.5%;
+    left: 14%;
+    background-color: transparent;
+    border-color: red;
+    width: 220px;
+    height: 120px;
+    cursor: crosshair;
+    
+}

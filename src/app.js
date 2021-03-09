@@ -1,11 +1,12 @@
 import React from "react";
 import { Provider } from "react-redux";
+import BobaFett from "./components/SteveGame/BobaFett";
 import store from './store'
 
 const App = () => {
   return (
     <Provider store={store}>
-      <div>Hello World!</div>
+      <BobaFett/>
     </Provider>
   );
 };

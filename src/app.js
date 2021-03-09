@@ -1,9 +1,7 @@
 
-import Routes from "./routes";
-
 import BobaFett from "./components/SteveGame/BobaFett";
 
-import { Router, Route } from 'react-router-dom';
+import { Router, Route, Redirect } from 'react-router-dom';
 import React from 'react';
 import { Provider } from 'react-redux';
 import Homepage from './components/Homepage';
@@ -22,6 +20,12 @@ import BackRoom from './components/GameFour/BackRoom';
 import HerRoom from './components/GameFour/HerRoom';
 import HisRoom from './components/GameFour/HisRoom';
 import Attic from './components/GameFour/Attic';
+
+import BankGameLevel2 from './components/BankGame/BankGameLevel2';
+import BankGameLevel3 from './components/BankGame/BankGameLevel3';
+import BankGameStart from './components/BankGame/BankGameStart';
+import BankGameVictory from './components/BankGame/BankGameVictory';
+
 
 
 const App = () => {
@@ -42,6 +46,12 @@ const App = () => {
         <Route exact path="/game4/backroom" component={BackRoom} />
         <Route exact path="/game4/hisroom" component={HisRoom} />
         <Route exact path="/game4/attic" component={Attic} />
+
+        <Route exact path="/Bankgame" component={BankGameStart} />
+        <Route exact path="/Bankgame2" component={BankGameLevel2} />
+        <Route exact path="/Bankgame3" component={BankGameLevel3} />
+        <Route exact path="/BankgameVictory" component={BankGameVictory} />
+        <Redirect to="/" />
 
       </Router>
     </Provider>

@@ -4,14 +4,11 @@ import { Provider } from "react-redux";
 import Homepage from "./components/Homepage";
 import store from './store'
 import history from "./history";
+import Routes from "./routes";
 
 const App = () => {
   return (
-    <Provider store={store}>
-      <Router history={history}>
-      <Homepage />
-      </Router>
-    </Provider>
+      <Routes />
   );
 };
 

@@ -5,13 +5,13 @@ import { Stage, Layer, Text, Circle, Group, Image } from 'react-konva';
 import { Redirect } from 'react-router-dom';
 
 const RainScene = (props) => {
-  const [image] = useImage('/thunder.jpg');
+  const [image] = useImage('/Images/thunder.jpg');
   return <Image image={image} />;
 };
 
 export const HauntedIntro = (props) => {
   const [advance, setAdvance] = useState(false);
-  useEffect(() => setTimeout(() => setAdvance(true), 10000), []);
+  useEffect(() => setTimeout(() => setAdvance(true), 8000), []);
   return (
     <div className="game-room">
       <div className="narrative intro">
@@ -19,7 +19,7 @@ export const HauntedIntro = (props) => {
           textStyle={{ fontFamily: 'Red Hat Display' }}
           startDelay={50}
           cursorColor="white"
-          text="Driving home one night in a storm, your car breaks down. You leave your car to look for shelter..."
+          text="Driving home in a storm, your car breaks down. You leave your car to look for shelter..."
           typeSpeed={70}
         />
       </div>

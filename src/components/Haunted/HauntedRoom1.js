@@ -19,7 +19,7 @@ import TypeWriterEffect from 'react-typewriter-effect';
 
 //make images to attach to stage
 const HauntedHouse = (props) => {
-  const [image] = useImage('/hauntedhouse.jpg');
+  const [image] = useImage('/Images/hauntedhouse.jpg');
   return <Image image={image} />;
 };
 
@@ -33,7 +33,7 @@ export const HauntedRoom1 = (props) => {
           textStyle={{ fontFamily: 'Red Hat Display' }}
           startDelay={100}
           cursorColor="white"
-          text="After walking for a while, you spot a boarded up house across a small bridge. This looks promising..."
+          text="You spot a boarded up house across a small bridge. This looks promising..."
           typeSpeed={80}
         />
       </div>

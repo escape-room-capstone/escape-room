@@ -6,11 +6,11 @@ import { Redirect } from 'react-router-dom';
 import Modal from 'react-modal';
 
 const DarkRoom = (props) => {
-  const [image] = useImage('/darkroom.jpg');
+  const [image] = useImage('/Images/darkroom.jpg');
   return <Image image={image} />;
 };
 const KeyPad = (props) => {
-  const [image] = useImage('/keypad.jpg');
+  const [image] = useImage('/Images/keypad.jpg');
   return (
     <Image
       onClick={props.open}
@@ -30,6 +30,7 @@ export const HauntedRoom3 = (props) => {
   const [showModal, setShowModal] = useState(false);
   return (
     <div className="game-room">
+      <div className="narrative"></div>
       <Stage
         onClick={(e) => {
           console.log(e.evt.layerX, 'layerX position');
@@ -50,7 +51,7 @@ export const HauntedRoom3 = (props) => {
       </Stage>
       <Modal isOpen={showModal}>
         <p>enter the right code...</p>
-        <img src="/keypad.jpg" />
+        <img src="/Images/keypad.jpg" />
         <button onClick={() => setShowModal(false)}>CLOSE</button>
       </Modal>
     </div>

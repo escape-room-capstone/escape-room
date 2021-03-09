@@ -15,13 +15,13 @@ import Modal from 'react-modal';
 
 //background image
 const HauntedHallway = (props) => {
-  const [image] = useImage('/spooky-stairs.jpg');
+  const [image] = useImage('/Images/spooky-stairs.jpg');
   return <Image image={image} />;
 };
 // clue image
 const Clue = (props) => {
-  const [clueImage] = useImage('/question.png');
-  const [greenCheck] = useImage('/check.png');
+  const [clueImage] = useImage('/Images/question.png');
+  const [greenCheck] = useImage('/Images/check.png');
   return (
     <Image
       onClick={props.showClue}
@@ -90,15 +90,7 @@ export const HauntedRoom2 = (props) => {
   };
   return (
     <div className="game-room">
-      {/* <div className="narrative">
-        <TypeWriterEffect
-          textStyle={{ fontFamily: 'Red Hat Display' }}
-          startDelay={100}
-          cursorColor="white"
-          text=''
-          typeSpeed={100}
-        />
-      </div> */}
+      <div className="narrative"></div>
       <Stage
         onClick={(e) => {
           console.log(e.evt.layerX, 'layerX position');

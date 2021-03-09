@@ -7,10 +7,16 @@
 }
 
 .konvajs-content {
+  overflow: hidden;
+  border: 20px solid white;
   margin: 0 auto;
+  margin-top: 2rem;
+  margin-bottom: 5rem;
 }
 
 .narrative {
+  height: 5rem;
+  margin-top: 1rem;
   display: flex;
   justify-content: center;
 }
@@ -34,7 +40,7 @@
   height: inherit;
   background-repeat: no-repeat;
   background-position: center;
-  background-image: url('../puzzlepieces.jpg');
+  background-image: url('../Images/puzzlepieces.jpg');
 }
 
 .search {

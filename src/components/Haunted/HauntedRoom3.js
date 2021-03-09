@@ -105,7 +105,7 @@ export const HauntedRoom3 = (props) => {
               />
 
               <Circle
-                onMouseEnter={() =>
+                onMouseOver={() =>
                   setCircleVisibility((prev) => ({ ...prev, one: true }))
                 }
                 opacity={cirlceVisibility.one ? 1 : 0}
@@ -117,7 +117,7 @@ export const HauntedRoom3 = (props) => {
               <Text x={495} y={190} text="7" flll="red" fontSize={25}></Text>
 
               <Circle
-                onMouseEnter={() =>
+                onMouseOver={() =>
                   setCircleVisibility((prev) => ({ ...prev, two: true }))
                 }
                 opacity={cirlceVisibility.two ? 1 : 0}
@@ -129,7 +129,7 @@ export const HauntedRoom3 = (props) => {
               <Text x={195} y={390} text="1" flll="red" fontSize={25}></Text>
 
               <Circle
-                onMouseEnter={() =>
+                onMouseOver={() =>
                   setCircleVisibility((prev) => ({ ...prev, three: true }))
                 }
                 opacity={cirlceVisibility.three ? 1 : 0}
@@ -141,7 +141,7 @@ export const HauntedRoom3 = (props) => {
               <Text x={995} y={190} text="3" flll="red" fontSize={25}></Text>
 
               <Circle
-                onMouseEnter={() =>
+                onMouseOver={() =>
                   setCircleVisibility((prev) => ({ ...prev, four: true }))
                 }
                 opacity={cirlceVisibility.four ? 1 : 0}

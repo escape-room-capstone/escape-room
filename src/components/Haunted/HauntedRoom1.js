@@ -19,7 +19,7 @@ import TypeWriterEffect from 'react-typewriter-effect';
 
 //make images to attach to stage
 const HauntedHouse = (props) => {
-  const [image] = useImage('/Images/hauntedhouse.jpg');
+  const [image] = useImage('/Images/mansion.jpg');
   return <Image image={image} />;
 };
 

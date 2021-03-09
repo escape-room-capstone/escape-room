@@ -9,7 +9,6 @@ export const HauntedRoom4 = (props) => {
   return (
     <div className="game-room">
       <div className="narrative">
-        {' '}
         <TypeWriterEffect
           textStyle={{ fontFamily: 'Red Hat Display' }}
           startDelay={50}

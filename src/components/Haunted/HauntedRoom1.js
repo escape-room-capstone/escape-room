@@ -14,7 +14,7 @@ import Konva from 'konva';
 import { Redirect, Link } from 'react-router-dom';
 import { Portal } from './Portal';
 import useImage from 'use-image';
-import '../../public/css/HauntedRoom.css';
+import '../../../public/css/HauntedRoom.css';
 import TypeWriterEffect from 'react-typewriter-effect';
 
 //make images to attach to stage
@@ -33,8 +33,8 @@ export const HauntedRoom1 = (props) => {
           textStyle={{ fontFamily: 'Red Hat Display' }}
           startDelay={100}
           cursorColor="white"
-          text="This looks promising..."
-          typeSpeed={100}
+          text="After walking for a while, you spot a boarded up house across a small bridge. This looks promising..."
+          typeSpeed={80}
         />
       </div>
       <Stage

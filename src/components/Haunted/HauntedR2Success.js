@@ -12,7 +12,7 @@ export const Success = (props) => {
           textStyle={{ fontFamily: 'Red Hat Display' }}
           startDelay={100}
           cursorColor="white"
-          text="You made it to the next room..insert graphic here or more narrative, etc .."
+          text="You made it to the next room..blahblah..."
           typeSpeed={100}
         />
       </div>

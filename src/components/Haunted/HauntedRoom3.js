@@ -5,7 +5,7 @@ import { Stage, Layer, Text, Circle, Group, Image } from 'react-konva';
 import { Redirect } from 'react-router-dom';
 import Modal from 'react-modal';
 
-const GreenDoor = (props) => {
+const DarkRoom = (props) => {
   const [image] = useImage('/darkroom.jpg');
   return <Image image={image} />;
 };
@@ -40,7 +40,7 @@ export const HauntedRoom3 = (props) => {
         width={1200}
       >
         <Layer>
-          <GreenDoor />
+          <DarkRoom />
           <KeyPad
             open={() => setShowModal(true)}
             toggleIlluminate={() => setShowKeyPad(!showKeyPad)}

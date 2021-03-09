@@ -5,13 +5,12 @@ import useImage from 'use-image';
 import { Redirect } from 'react-router-dom';
 
 //import css file
-import '../../public/css/HauntedRoom.css';
+import '../../../public/css/HauntedRoom.css';
 
 // import clue components
 import { ClueOne, ClueTwo, ClueThree } from './HauntedRoom2Clues';
 
 //react modal
-import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 
 //background image
@@ -91,15 +90,15 @@ export const HauntedRoom2 = (props) => {
   };
   return (
     <div className="game-room">
-      <div className="narrative">
+      {/* <div className="narrative">
         <TypeWriterEffect
           textStyle={{ fontFamily: 'Red Hat Display' }}
           startDelay={100}
           cursorColor="white"
-          text="Not sure why you thought this was a good idea..."
+          text=''
           typeSpeed={100}
         />
-      </div>
+      </div> */}
       <Stage
         onClick={(e) => {
           console.log(e.evt.layerX, 'layerX position');

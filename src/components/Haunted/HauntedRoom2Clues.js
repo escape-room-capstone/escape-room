@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../public/css/HauntedRoom.css';
+import '../../../public/css/HauntedRoom.css';
 
 export const ClueOne = (props) => {
   return (

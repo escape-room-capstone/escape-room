@@ -1,4 +1,9 @@
 
+
+
+
+import Routes from "./routes";
+
 import BobaFett from "./components/SteveGame/BobaFett";
 
 import { Router, Route } from 'react-router-dom';
@@ -44,6 +49,7 @@ const App = () => {
 
       </Router>
     </Provider>
+
   );
 };
 

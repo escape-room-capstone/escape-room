@@ -1,0 +1,42 @@
+.game-room {
+  border: 3px solid white;
+  background-color: black;
+  text-align: center;
+  color: white;
+  min-height: 90vh;
+}
+
+.konvajs-content {
+  margin: 0 auto;
+}
+
+.narrative {
+  display: flex;
+  justify-content: center;
+}
+
+.intro {
+  border-radius: 20px;
+  position: absolute;
+  width: 30vw;
+  background-color: #f1f3e559;
+  z-index: 3;
+  translate: 50px 50px;
+  transform: translate(100%, 50%);
+  font-weight: 100;
+  padding: 2rem;
+}
+#house.selected {
+  background-color: greenyellow;
+}
+
+.puzzle-modal {
+  height: inherit;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('../puzzlepieces.jpg');
+}
+
+.search {
+  cursor: 'pointer';
+}

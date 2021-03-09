@@ -1,3 +1,4 @@
+import BobaFett from "./components/SteveGame/BobaFett";
 import { Router, Route } from 'react-router-dom';
 import React from 'react';
 import { Provider } from 'react-redux';
@@ -14,6 +15,7 @@ import Attic from './components/GameFour/Attic';
 const App = () => {
   return (
     <Provider store={store}>
+      <BobaFett/>
       <Router history={history}>
         <Route exact path="/" component={Homepage} />
         <Route exact path="/game4" component={GameFour} />

@@ -31,11 +31,21 @@ export const HauntedRoom1 = (props) => {
       <div className="narrative">
         <TypeWriterEffect
           textStyle={{ fontFamily: 'Red Hat Display' }}
-          startDelay={100}
           cursorColor="white"
-          text="You spot a boarded up house across a small bridge. This looks promising..."
+          text="You spot a boarded up house across a small bridge."
           typeSpeed={80}
+          hideCursorAfterText={true}
         />
+        <div>
+          <TypeWriterEffect
+            textStyle={{ fontFamily: 'Red Hat Display' }}
+            startDelay={6000}
+            cursorColor="white"
+            text="You go in."
+            typeSpeed={80}
+            hideCursorAfterText={true}
+          />
+        </div>
       </div>
       <Stage
         onClick={(e) => {
@@ -68,7 +78,7 @@ export const HauntedRoom1 = (props) => {
           ></Text>
         </Layer>
       </Stage>
-      {enterHome ? <Redirect to="/haunted/room2" /> : ''}
+      {enterHome ? <Redirect push to="/haunted/room2" /> : ''}
     </div>
   );
 };

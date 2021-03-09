@@ -1,5 +1,4 @@
-
-import BobaFett from "./components/SteveGame/BobaFett";
+import BobaFett from './components/SteveGame/BobaFett';
 
 import { Router, Route, Redirect } from 'react-router-dom';
 import React from 'react';
@@ -26,14 +25,12 @@ import BankGameLevel3 from './components/BankGame/BankGameLevel3';
 import BankGameStart from './components/BankGame/BankGameStart';
 import BankGameVictory from './components/BankGame/BankGameVictory';
 
-
-
 const App = () => {
   return (
     <Provider store={store}>
       <Router history={history}>
         <Route exact path="/" component={Homepage} />
-        <Route exact path ="/Bobafett" component={BobaFett} />
+        <Route exact path="/Bobafett" component={BobaFett} />
         <Route exact path="/haunted/intro" component={HauntedIntro} />
         <Route exact path="/haunted/room1" component={HauntedRoom1} />
         <Route exact path="/haunted/room2" component={HauntedRoom2} />
@@ -52,10 +49,8 @@ const App = () => {
         <Route exact path="/Bankgame3" component={BankGameLevel3} />
         <Route exact path="/BankgameVictory" component={BankGameVictory} />
         <Redirect to="/" />
-
       </Router>
     </Provider>
-
   );
 };
 

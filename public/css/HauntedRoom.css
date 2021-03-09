@@ -18,7 +18,9 @@
   height: 5rem;
   margin-top: 1rem;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .intro {

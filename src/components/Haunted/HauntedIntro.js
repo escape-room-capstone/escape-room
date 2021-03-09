@@ -18,6 +18,7 @@ export const HauntedIntro = (props) => {
         <TypeWriterEffect
           textStyle={{ fontFamily: 'Red Hat Display' }}
           startDelay={50}
+          hideCursorAfterText={true}
           cursorColor="white"
           text="Driving home in a storm, your car breaks down. You leave your car to look for shelter..."
           typeSpeed={70}
@@ -36,7 +37,7 @@ export const HauntedIntro = (props) => {
           <RainScene />
         </Layer>
       </Stage>
-      {advance && <Redirect to="/haunted/room1" />}
+      {advance && <Redirect push to="/haunted/room1" />}
     </div>
   );
 };

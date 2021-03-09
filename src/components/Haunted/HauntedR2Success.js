@@ -32,7 +32,7 @@ export const Success = (props) => {
         <Layer></Layer>
       </Stage>
 
-      {advance ? <Redirect to="/haunted/room3" /> : ''}
+      {advance ? <Redirect push to="/haunted/room3" /> : ''}
     </div>
   );
 };

@@ -23,7 +23,11 @@ const Homepage = (props) => {
       <hr />
       <Link to="/game3"> Game 3 </Link>
       <hr />
+
       <Link to="/haunted/intro">Haunted House</Link>
+
+      <Link to="/game4"> Game 4 </Link>
+
 
       <h3
         style={{

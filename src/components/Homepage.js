@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Homepage = (props) => {
-
   console.log(props);
 
   return (
@@ -24,18 +23,20 @@ const Homepage = (props) => {
       <hr />
       <Link to="/game3"> Game 3 </Link>
       <hr />
-
       <Link to="/haunted/intro">Haunted House</Link>
       <hr />
       <Link to="/game4"> Game 4 </Link>
       <hr />
-      <Link to ="/Bobafett"> Steve Game </Link>
-    
+      <Link to="/Bobafett"> Steve Game </Link>
+      <hr />
       <div>
-          <p> In the following game, you will have to rob a bank and escape with all the $$$</p>
-        <Link to ="/Bankgame"> Bank Game </Link>
-        </div>
-
+        <Link to="/Bankgame"> Bank Game </Link>
+        <p>
+          In the following game, you will have to rob a bank and escape with all
+          the $$$
+        </p>
+      </div>
+      <hr />
 
       <h3
         style={{
@@ -50,7 +51,6 @@ const Homepage = (props) => {
         {' '}
         Designed by VARKS{' '}
       </h3>
-
     </div>
   );
 };

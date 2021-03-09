@@ -1,0 +1,43 @@
+/*                                              ARWINDERS GAME STYLES                                               */
+
+/* 
+
+
+i had to comment out the * sizing because it was affecting the other components. maybe try adding it as a main container div?
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+} */
+
+.bankGame {
+  background: url('../Images/bank_background.jpg') center no-repeat;
+  background-color: rgb(195, 155, 129);
+}
+.cashDesk {
+  background: url('../Images/rsz_cashdesk.jpg') center no-repeat;
+  background-color: rgb(165, 220, 115);
+}
+.bankSafe {
+  background: url('../Images/rsz_safe.jpg') center no-repeat;
+  background-color: rgb(217, 228, 232);
+}
+.bankVictory {
+  background: url('../Images/bankVictory.jpg') center no-repeat;
+  background-color: rgb(62, 168, 118);
+}
+
+/* had to comment these out too so it wouldnt affect the other componenets, may be able to resolve by ading a main container div  */
+/* html,
+body,
+#app, */
+.cashDesk,
+.bankGame,
+.bankSafe,
+.bankVictory,
+#routesDiv {
+  height: 854px;
+  width: 1440px;
+}
+
+/*                                              ARWINDERS GAME STYLES END                                               */

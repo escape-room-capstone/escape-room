@@ -36,6 +36,7 @@ const Clue = (props) => {
 // styles for modal
 const customStyles = {
   content: {
+    backgroundColor: 'black',
     width: '50%',
     height: '80%',
     top: '50%',
@@ -47,6 +48,7 @@ const customStyles = {
   },
 };
 export const HauntedRoom2 = (props) => {
+  console.log(props.history, 'props.history');
   const roomClues = {
     one: { solved: false, show: false },
     two: { solved: false, show: false },
@@ -153,11 +155,10 @@ export const HauntedRoom2 = (props) => {
       {room.clues.one.solved &&
       room.clues.two.solved &&
       room.clues.three.solved ? (
-        <Redirect to="/haunted/room2/success" />
+        <Redirect push to="/haunted/room2/success" />
       ) : (
         ''
       )}
     </div>
   );
 };
-//need logic for when all three puzzles are solved, redirect to succss page,then to next room in game

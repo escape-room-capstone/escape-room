@@ -10,6 +10,7 @@ const RainScene = (props) => {
 };
 
 export const HauntedIntro = (props) => {
+  console.log(props.history, 'props.history');
   const [advance, setAdvance] = useState(false);
   useEffect(() => setTimeout(() => setAdvance(true), 8000), []);
   return (

@@ -24,6 +24,7 @@ const HauntedHouse = (props) => {
 };
 
 export const HauntedRoom1 = (props) => {
+  console.log(props.history, 'props.history');
   const [buttonSelected, setButtonSelected] = useState(false);
   const [enterHome, setEnterHome] = useState(false);
   return (

@@ -5,6 +5,11 @@ import { Stage, Layer, Text, Circle, Group, Image } from 'react-konva';
 import { Redirect } from 'react-router-dom';
 import Modal from 'react-modal';
 
+const DoorAjar = (props) => {
+  const [image] = useImage('/Images/doorajar.jpg');
+  return <Image image={image} />;
+};
+
 export const HauntedRoom4 = (props) => {
   return (
     <div className="game-room">
@@ -27,7 +32,9 @@ export const HauntedRoom4 = (props) => {
         align="center"
         width={1200}
       >
-        <Layer></Layer>
+        <Layer>
+          <DoorAjar />
+        </Layer>
       </Stage>
     </div>
   );

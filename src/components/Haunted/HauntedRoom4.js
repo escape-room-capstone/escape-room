@@ -19,7 +19,7 @@ export const HauntedRoom4 = (props) => {
           startDelay={50}
           hideCursorAfterText={true}
           cursorColor="white"
-          text="Room 4"
+          text="A door on the opposite side of the room creaks open..."
           typeSpeed={70}
         />
       </div>

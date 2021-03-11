@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import TypeWriterEffect from 'react-typewriter-effect';
-import { Stage, Layer, Text, Circle, Group, Image } from 'react-konva';
+import { Stage, Layer, Text, Circle, Group, Rect, Image } from 'react-konva';
 import useImage from 'use-image';
 import { Redirect } from 'react-router-dom';
-
 //import css file
 import '../../../public/css/HauntedRoom.css';
 
@@ -19,8 +18,8 @@ const HauntedHallway = (props) => {
   return <Image image={image} />;
 };
 // clue image
-const Clue = (props) => {
-  const [clueImage] = useImage('/Images/question.png');
+const Lock = (props) => {
+  const [lock] = useImage('/Images/lock.png');
   const [greenCheck] = useImage('/Images/check.png');
   return (
     <Image
@@ -29,14 +28,14 @@ const Clue = (props) => {
       y={props.y}
       height={35}
       width={35}
-      image={props.solved ? greenCheck : clueImage}
+      draggable={true}
+      image={props.solved ? greenCheck : lock}
     />
   );
 };
 // styles for modal
 const customStyles = {
   content: {
-    backgroundColor: 'black',
     width: '50%',
     height: '80%',
     top: '50%',
@@ -48,7 +47,9 @@ const customStyles = {
   },
 };
 export const HauntedRoom2 = (props) => {
-  console.log(props.history, 'props.history');
+  //lock image
+  const [lock] = useImage('/Images/lock.png');
+
   const roomClues = {
     one: { solved: false, show: false },
     two: { solved: false, show: false },
@@ -104,24 +105,87 @@ export const HauntedRoom2 = (props) => {
       >
         <Layer>
           <HauntedHallway />
-          <Clue
+
+          <Rect
+            onMouseOver={(e) => {
+              // style stage container:
+              const container = e.target.getStage().container();
+              container.style.cursor = 'pointer';
+            }}
+            onMouseLeave={(e) => {
+              // style stage container:
+              const container = e.target.getStage().container();
+              container.style.cursor = 'default';
+            }}
+            onClick={() => show('one')}
+            solved={room.clues.one.solved}
+            x={585}
+            y={300}
+            opacity={0}
+            width={90}
+            height={350}
+            fill="green"
+          />
+
+          <Rect
+            onMouseOver={(e) => {
+              // style stage container:
+              const container = e.target.getStage().container();
+              container.style.cursor = 'pointer';
+            }}
+            onMouseLeave={(e) => {
+              // style stage container:
+              const container = e.target.getStage().container();
+              container.style.cursor = 'default';
+            }}
+            onClick={() => show('two')}
+            solved={room.clues.two.solved}
+            x={855}
+            y={350}
+            opacity={0}
+            width={45}
+            height={100}
+            fill="green"
+          />
+
+          <Rect
+            onMouseOver={(e) => {
+              // style stage container:
+              const container = e.target.getStage().container();
+              container.style.cursor = 'pointer';
+            }}
+            onMouseLeave={(e) => {
+              // style stage container:
+              const container = e.target.getStage().container();
+              container.style.cursor = 'default';
+            }}
+            onClick={() => show('three')}
+            solved={room.clues.three.solved}
+            x={725}
+            y={175}
+            opacity={0}
+            width={85}
+            height={150}
+            fill="green"
+            draggable={true}
+          />
+          <Lock
             showClue={() => show('one')}
             solved={room.clues.one.solved}
-            name="one"
-            x={625}
-            y={470}
+            x={975}
+            y={50}
           />
-          <Clue
+          <Lock
             showClue={() => show('two')}
             solved={room.clues.two.solved}
-            x={870}
-            y={420}
+            x={1025}
+            y={50}
           />
-          <Clue
+          <Lock
             showClue={() => show('three')}
             solved={room.clues.three.solved}
-            x={750}
-            y={275}
+            x={1075}
+            y={50}
           />
         </Layer>
       </Stage>

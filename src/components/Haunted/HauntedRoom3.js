@@ -81,7 +81,10 @@ export const HauntedRoom3 = (props) => {
     }
   };
   return (
-    <div className="game-room">
+    <div
+      style={{ cursor: 'url(/Images/flashlight.cur),auto' }}
+      className="game-room"
+    >
       {advance ? (
         <HauntedRoom4 />
       ) : (

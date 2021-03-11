@@ -1,0 +1,226 @@
+.container {
+  background-color: white;
+}
+
+/* background div */
+.background {
+  margin: 8rem auto;
+  border: 20px solid black;
+  background-size: contain;
+  height: 60rem;
+  width: 90rem;
+}
+
+/* background images  */
+#home {
+  background-image: url('../assets/home.jpg');
+}
+
+#livingroom {
+  background-image: url('../assets/livingroom.jpg');
+}
+
+#roomOne {
+  background-image: url('../assets/roomOne.jpg');
+}
+
+#roomTwo {
+  background-image: url('../assets/roomTwo.jpg');
+}
+
+#attic {
+  background-image: url('../assets/attic.jpg');
+}
+
+#backRoom {
+  background-image: url('../assets/backroom.jpg');
+}
+
+/* not visible buttons */
+.secretButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* link inside of secretbutton */
+.secretButton > a {
+  text-decoration: none;
+  height: auto;
+  width: auto;
+}
+
+/* secretbutton location */
+#roomOneButton {
+  height: 7.5rem;
+  width: 14.4rem;
+  position: relative;
+  top: 320px;
+  left: 480px;
+  margin-right: 0;
+}
+
+#roomTwoButton {
+  height: 12.5rem;
+  width: 7rem;
+  position: relative;
+  top: 75px;
+  left: 420px;
+  margin-right: 0;
+}
+
+#atticButton {
+  height: 5rem;
+  width: 4rem;
+  position: relative;
+  top: 55px;
+  left: 970px;
+  margin-right: 0;
+}
+
+#livingRoomButton {
+  height: 17rem;
+  width: 10rem;
+  position: relative;
+  top: 515px;
+  left: 195px;
+  margin-right: 0;
+}
+
+#backRoomButton {
+  height: 16rem;
+  width: 7rem;
+  position: relative;
+  top: 520px;
+  left: 710px;
+  margin-right: 0;
+}
+
+/* used as overlayClassName */
+.OverlayAttic {
+  margin: 6rem auto;
+  padding: 20px;
+  height: 65rem;
+  width: 95rem;
+  position: fixed;
+  /* inset kinda works like a margin, but if removed, portal does not pop up */
+  inset: 0;
+  background-color: #0c4483e0;
+  box-shadow: 0px 0px 30px 10px #0c4483e0;
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+}
+
+.OverlayBackRoom {
+  margin: 6rem auto;
+  padding: 20px;
+  height: 65rem;
+  width: 95rem;
+  position: fixed;
+  /* inset kinda works like a margin, but if removed, portal does not pop up */
+  inset: 0;
+  background-color: #aa4375d2;
+  box-shadow: 0px 0px 30px 10px #aa4375d2;
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+}
+
+.OverlayRoomOne {
+  margin: 6rem auto;
+  padding: 20px;
+  height: 65rem;
+  width: 95rem;
+  position: fixed;
+  /* inset kinda works like a margin, but if removed, portal does not pop up */
+  inset: 0;
+  background-color: #8133c0d2;
+  box-shadow: 0px 0px 30px 10px #8133c0d2;
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+}
+
+.OverlayRoomTwo {
+  margin: 6rem auto;
+  padding: 20px;
+  height: 65rem;
+  width: 95rem;
+  position: fixed;
+  /* inset kinda works like a margin, but if removed, portal does not pop up */
+  inset: 0;
+  background-color: #d6bb23d2;
+  box-shadow: 0px 0px 30px 10px#d6bb23d2;
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+}
+
+.OverlayLivingRoom {
+  margin: 6rem auto;
+  padding: 20px;
+  height: 65rem;
+  width: 95rem;
+  position: fixed;
+  /* inset kinda works like a margin, but if removed, portal does not pop up */
+  inset: 0;
+  background-color: #22a0b6c9;
+  box-shadow: 0px 0px 30px 10px #22a0b6c9;
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+}
+
+/* all classNames for modal, basic div */
+.modal {
+  margin: auto;
+  height: 60rem;
+  width: 90rem;
+  outline: none;
+}
+
+/* Add Animation to Modal below*/
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+/* used inside of modal div */
+.modal-content {
+  margin: 2rem auto;
+  padding-left: 2rem;
+  padding-top: 2rem;
+  height: 60rem;
+  width: 88rem;
+  color: whitesmoke;
+  font-size: 25px;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+}
+
+/* The Modals Close Button  */
+.close {
+  position: relative;
+  top: -73px;
+  right: -41px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  float: right;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: grey;
+  text-decoration: none;
+  cursor: pointer;
+}

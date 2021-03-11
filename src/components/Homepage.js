@@ -16,7 +16,6 @@ const Homepage = (props) => {
       >
         Welcome to escape-room
       </h3>
-
       <Link to="/game1"> Game 1 </Link>
       <hr />
       <Link to="/game2"> Game 2 </Link>
@@ -25,7 +24,12 @@ const Homepage = (props) => {
       <hr />
       <Link to="/haunted/intro">Haunted House</Link>
       <hr />
-      <Link to="/game4"> Game 4 </Link>
+      <Link to="/trapped"> ~~House of Riddlez~~ </Link>
+      <p>
+        You wake up one morning only to find out that you are trapped in the
+        House of Riddles. And the only way out is to solve every riddle! But
+        there's a catch...
+      </p>
       <hr />
       <Link to="/Bobafett"> Steve Game </Link>
       <hr />
@@ -37,7 +41,6 @@ const Homepage = (props) => {
         </p>
       </div>
       <hr />
-
       <h3
         style={{
           position: 'absolute',

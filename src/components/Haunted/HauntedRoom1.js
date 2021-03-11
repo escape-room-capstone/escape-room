@@ -19,11 +19,12 @@ import TypeWriterEffect from 'react-typewriter-effect';
 
 //make images to attach to stage
 const HauntedHouse = (props) => {
-  const [image] = useImage('/hauntedhouse.jpg');
+  const [image] = useImage('/Images/mansion.jpg');
   return <Image image={image} />;
 };
 
 export const HauntedRoom1 = (props) => {
+  console.log(props.history, 'props.history');
   const [buttonSelected, setButtonSelected] = useState(false);
   const [enterHome, setEnterHome] = useState(false);
   return (
@@ -31,11 +32,21 @@ export const HauntedRoom1 = (props) => {
       <div className="narrative">
         <TypeWriterEffect
           textStyle={{ fontFamily: 'Red Hat Display' }}
-          startDelay={100}
           cursorColor="white"
-          text="After walking for a while, you spot a boarded up house across a small bridge. This looks promising..."
+          text="You spot a boarded up house across a small bridge."
           typeSpeed={80}
+          hideCursorAfterText={true}
         />
+        <div>
+          <TypeWriterEffect
+            textStyle={{ fontFamily: 'Red Hat Display' }}
+            startDelay={5000}
+            cursorColor="white"
+            text="You go in."
+            typeSpeed={80}
+            hideCursorAfterText={true}
+          />
+        </div>
       </div>
       <Stage
         onClick={(e) => {
@@ -68,7 +79,7 @@ export const HauntedRoom1 = (props) => {
           ></Text>
         </Layer>
       </Stage>
-      {enterHome ? <Redirect to="/haunted/room2" /> : ''}
+      {enterHome ? <Redirect push to="/haunted/room2" /> : ''}
     </div>
   );
 };

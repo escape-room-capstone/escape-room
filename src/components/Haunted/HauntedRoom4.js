@@ -1,25 +1,28 @@
 import React, { useState, useEffect } from 'react';
+import useImage from 'use-image';
 import TypeWriterEffect from 'react-typewriter-effect';
-import { Redirect } from 'react-router-dom';
 import { Stage, Layer, Text, Circle, Group, Image } from 'react-konva';
-// import css
-import '../../../public/css/HauntedRoom.css';
+import { Redirect } from 'react-router-dom';
+import Modal from 'react-modal';
 
-export const Success = (props) => {
-  const [advance, setAdvance] = useState(false);
-  useEffect(() => setTimeout(() => setAdvance(true), 10000), []);
+const DoorAjar = (props) => {
+  const [image] = useImage('/Images/doorajar.jpg');
+  return <Image image={image} />;
+};
+
+export const HauntedRoom4 = (props) => {
   return (
     <div className="game-room">
       <div className="narrative">
         <TypeWriterEffect
           textStyle={{ fontFamily: 'Red Hat Display' }}
-          startDelay={100}
+          startDelay={50}
+          hideCursorAfterText={true}
           cursorColor="white"
-          text="You made it to the next room..blahblah..."
-          typeSpeed={100}
+          text="Room 4"
+          typeSpeed={70}
         />
       </div>
-
       <Stage
         onClick={(e) => {
           console.log(e.evt.layerX, 'layerX position');
@@ -29,10 +32,10 @@ export const Success = (props) => {
         align="center"
         width={1200}
       >
-        <Layer></Layer>
+        <Layer>
+          <DoorAjar />
+        </Layer>
       </Stage>
-
-      {advance ? <Redirect push to="/haunted/room3" /> : ''}
     </div>
   );
 };

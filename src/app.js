@@ -10,12 +10,9 @@ import history from './history';
 import { HauntedRoom1 } from './components/Haunted/HauntedRoom1';
 import { HauntedRoom2 } from './components/Haunted/HauntedRoom2';
 import { HauntedRoom3 } from './components/Haunted/HauntedRoom3';
+import { HauntedRoom4 } from './components/Haunted/HauntedRoom4';
 import { HauntedIntro } from './components/Haunted/HauntedIntro';
 import { Success } from './components/Haunted/HauntedR2Success';
-
-// import GameFour from './components/GameFour/GameFour.js';
-// import RoomOne from './components/GameFour/HerRoom';
-// import RoomTwo from './components/GameFour/HisRoom';
 
 import Trapped from './components/Trapped/Trapped';
 import LivingRoom from './components/Trapped/LivingRoom';
@@ -33,15 +30,15 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router history={history}>
+    
         <Route exact path="/" component={Homepage} />
-
-        <Route exact path="/Bobafett" component={BobaFett} />
 
         <Route exact path="/haunted/intro" component={HauntedIntro} />
         <Route exact path="/haunted/room1" component={HauntedRoom1} />
         <Route exact path="/haunted/room2" component={HauntedRoom2} />
         <Route exact path="/haunted/room3" component={HauntedRoom3} />
         <Route exact path="/haunted/room2/success" component={Success} />
+        <Route exact path="/haunted/room4" component={HauntedRoom4} />
 
         <Route exact path="/trapped" component={Trapped} />
         <Route exact path="/livingroom" component={LivingRoom} />
@@ -56,7 +53,9 @@ const App = () => {
         <Route exact path="/BankgameVictory" component={BankGameVictory} />
 
         {/* <Redirect to="/" /> */}
+
       </Router>
+      <HauntedRoom3 />
     </Provider>
   );
 };

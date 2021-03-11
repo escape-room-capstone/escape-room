@@ -15,13 +15,13 @@ import Modal from 'react-modal';
 
 //background image
 const HauntedHallway = (props) => {
-  const [image] = useImage('/spooky-stairs.jpg');
+  const [image] = useImage('/Images/spooky-stairs.jpg');
   return <Image image={image} />;
 };
 // clue image
 const Clue = (props) => {
-  const [clueImage] = useImage('/question.png');
-  const [greenCheck] = useImage('/check.png');
+  const [clueImage] = useImage('/Images/question.png');
+  const [greenCheck] = useImage('/Images/check.png');
   return (
     <Image
       onClick={props.showClue}
@@ -36,6 +36,7 @@ const Clue = (props) => {
 // styles for modal
 const customStyles = {
   content: {
+    backgroundColor: 'black',
     width: '50%',
     height: '80%',
     top: '50%',
@@ -47,6 +48,7 @@ const customStyles = {
   },
 };
 export const HauntedRoom2 = (props) => {
+  console.log(props.history, 'props.history');
   const roomClues = {
     one: { solved: false, show: false },
     two: { solved: false, show: false },
@@ -90,15 +92,7 @@ export const HauntedRoom2 = (props) => {
   };
   return (
     <div className="game-room">
-      {/* <div className="narrative">
-        <TypeWriterEffect
-          textStyle={{ fontFamily: 'Red Hat Display' }}
-          startDelay={100}
-          cursorColor="white"
-          text=''
-          typeSpeed={100}
-        />
-      </div> */}
+      <div className="narrative"></div>
       <Stage
         onClick={(e) => {
           console.log(e.evt.layerX, 'layerX position');
@@ -161,11 +155,10 @@ export const HauntedRoom2 = (props) => {
       {room.clues.one.solved &&
       room.clues.two.solved &&
       room.clues.three.solved ? (
-        <Redirect to="/haunted/room2/success" />
+        <Redirect push to="/haunted/room2/success" />
       ) : (
         ''
       )}
     </div>
   );
 };
-//need logic for when all three puzzles are solved, redirect to succss page,then to next room in game

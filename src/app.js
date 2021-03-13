@@ -43,6 +43,7 @@ const App = () => {
         <Route exact path="/haunted/room2/success" component={Success} />
         <Route exact path="/haunted/room4" component={HauntedRoom4} />
         <Route exact path="/haunted/room5" component={HauntedRoom5} />
+        <Route exact path="/haunted/room6" component={HauntedRoom6} />
 
         <Route exact path="/houseofriddlez" component={HouseOfRiddlez} />
         <Route exact path="/livingroom" component={LivingRoom} />
@@ -59,7 +60,6 @@ const App = () => {
 
         {/* <Redirect to="/" /> */}
       </Router>
-
     </Provider>
   );
 };

@@ -35,14 +35,25 @@ export const Room5Clue1 = (props) => {
         </Layer>
       </Stage>
       <hr></hr>
+      <button onClick={props.solve}>SOLVE</button>
     </div>
   );
 };
 
 export const Room5Clue2 = (props) => {
-  return <div>THIS IS PUZZLE TWO</div>;
+  return (
+    <div>
+      THIS IS PUZZLE TWO
+      <button onClick={props.solve}>SOLVE</button>
+    </div>
+  );
 };
 
 export const Room5Clue3 = (props) => {
-  return <div>THIS IS PUZZLE THREE</div>;
+  return (
+    <div>
+      THIS IS PUZZLE THREE
+      <button onClick={props.solve}>SOLVE</button>
+    </div>
+  );
 };

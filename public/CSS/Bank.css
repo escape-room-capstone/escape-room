@@ -13,6 +13,7 @@ i had to comment out the * sizing because it was affecting the other components.
 .bankGame {
   background: url('../Images/bank_background.jpg') center no-repeat;
   background-color: rgb(195, 155, 129);
+  color: rgb(195, 155, 129);
 }
 .cashDesk {
   background: url('../Images/rsz_cashdesk.jpg') center no-repeat;
@@ -39,5 +40,77 @@ body,
   height: 854px;
   width: 1440px;
 }
+
+.lock{
+  display: flex;
+  margin-left: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 15px;
+}
+
+.lock img{
+  margin-top: 10px;
+  width : 20px;
+}
+
+.homeButton {
+    background-color: #4CAF50; 
+    border: none;
+    color: green;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin-left: 17%;
+    margin-top: 35%;
+    border-radius: 25%;
+    opacity: 0.5;    
+    transition-duration: 0.5s;
+}
+
+.homeButton:hover {
+  background-color: red;
+  color: white;
+  transform: scale(2.0);
+}
+
+/* TEST CSS */
+.goNextButton {
+  background-color: #1c87c9;
+  -webkit-border-radius: 60px;
+  border-radius: 60px;
+  border: none;
+  color: #eeeeee;
+  cursor: pointer;
+  display: inline-block;
+  font-family: sans-serif;
+  font-size: 20px;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+}
+@keyframes glowing {
+  0% {
+    background-color: #2ba805;
+    box-shadow: 0 0 5px #2ba805;
+  }
+  50% {
+    background-color: #49e819;
+    box-shadow: 0 0 20px #49e819;
+  }
+  100% {
+    background-color: #2ba805;
+    box-shadow: 0 0 5px #2ba805;
+  }
+}
+.goNextButton {
+  animation: glowing 1300ms infinite;
+}
+
+
+/* TEST CSS */
+
 
 /*                                              ARWINDERS GAME STYLES END                                               */

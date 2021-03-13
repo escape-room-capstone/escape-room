@@ -1,11 +1,63 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../../public/CSS/Bank.css';
+import lock from '../../../public/Images/lock-2.png';
+import unlocked from '../../../public/Images/unlocked.png';
+import Modal from "react-modal";
+
 
 //streetlight coordinates from top left of streetlight, to bottom right
 //x1 150, y1 220
 //x2 200, y2 310
 
 const BankGameStart = (props) => {
+  const [lightPuzzle, setLightPuzzle] = useState(false);
+  const [doorPuzzle, setDoorPuzzle] = useState(false);
+  const [points, setPoints] = useState(0);
+  const [doorModal, setDoorModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [codeEntered, setCodeEntered] = useState('');
+
+  const customStyles = {
+    content: {
+      top: 'auto',
+      bottom: 'auto',
+      right: 'auto',
+      left: 'auto',
+      transform: 'translate(150%, 250%)',
+    },
+  };
+
+  useEffect(()=>{
+    console.log(lightPuzzle, doorPuzzle, points, showModal);
+    if(lightPuzzle && doorPuzzle && points === 2){
+      setTimeout(() => {
+        setShowModal(true);
+      }, 2000);
+    }
+  })
+
+  const handleChange = (e) => {
+    setCodeEntered(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (codeEntered === '1234') {
+      alert("Correct!");
+      setDoorModal(false);
+      setDoorPuzzle(true);
+      setPoints(points+1);      
+    }
+     else {
+      alert("Incorrect!");
+      setCodeEntered('');
+    }
+  };
+
+  const nextRoom = (e) => {
+    setShowModal(false);
+    props.history.push("/Bankgame2");
+  }
   //coordinates array will be an array in this format [ x1, y1, x2, y2]
   //so we will check to see if what we clicked is within the range of our x and y coordinates
   const clickedStreetlight = (x, y, coordinatesArr) => {
@@ -17,64 +69,64 @@ const BankGameStart = (props) => {
     );
   };
   // coordinates for streetlight 2 ---> 1260, 230, 1300, 310
-  const handleClick = (e) => {
-    //console.log("EVENT", e);
+  const handleClick = async(e) => {
     console.log(e.pageX, e.pageY);
     e.preventDefault();
 
-    //This part of the code is where the user will be accredited points for solving hints
-    //and where the state will be modified
-
-    //ALSO ADD pictures of some sort of locks and keys system to show the user how many hints/problems
-    //they need to solve in order to advance to the next level
-    //Could be a lock and a key, solving one hint turns the lock picture into a unlocked or key picture
-    //could be happy and sad faces, solving one hint turns one of the sad faces to a happy face
-    if (
-      clickedStreetlight(e.pageX, e.pageY, [150, 200, 220, 310]) ||
-      clickedStreetlight(e.pageX, e.pageY, [1260, 230, 1300, 310])
+    if(clickedStreetlight(e.pageX, e.pageY, [640, 430, 780, 730])){
+      if(!doorPuzzle){
+        setDoorModal(true);
+      }
+    }
+    else if (
+      (clickedStreetlight(e.pageX, e.pageY, [150, 200, 220, 310]) ||
+      clickedStreetlight(e.pageX, e.pageY, [1260, 230, 1300, 310]) ) && !lightPuzzle      
     ) {
-      if (window.prompt("What's 2+2?") === '4') {
-        window.alert(
-          "Wow, good guess. We need a way to cut the electricity so we don't raise alarms."
-        );
+      const streetlightPrompt = window.prompt("What is always coming, but never arrives?");
+      
+       if(streetlightPrompt === null){
+         return window.alert("Are you sure you want to cancel? You really need to solve this riddle to get inside...");
+       }
 
-        if (
-          window.prompt(
-            'Pick one out of the four ways. Cut the wires, Call 911, Call Con-Edison, Climb the street light and hang on the wires'
-          ) === 'Cut the wires'
-        ) {
-          window.alert(
-            "Thank god you're smart, hit ok to go to the next level"
-          );
-          props.history.push('/Bankgame2');
-        } else {
-          window.alert('Sorry, try again');
-        }
-      } else {
+       if(streetlightPrompt.toLowerCase() === "tomorrow"){  
+         window.alert("That's correct");    
+        setLightPuzzle(true);
+        setPoints(points+1);
+      } 
+      else {
         window.alert(
-          "Sorry that's incorrect.  Hint: It's not a trick question"
+          "Sorry that's incorrect."
         );
       }
     }
 
-    clickedStreetlight(e.pageX, e.pageY, [1250, 220, 1305, 310]);
-    //console.log(e.pageX, e.pageY);
+
   };
 
-  //I PLAN TO ADD A STATE TO THIS COMPONENT AND ONLY LETTING THE USER PASS WHEN HE HAS
-  //ACCUMULATED A CERTAIN AMOUNT OF POINTS/HINTS TO ADVANCE TO THE NEXT LEVEL
 
-  //EXAMPLE OF USING STATE
-  //STATE = {
-  //    numberOfPoints : 0,
-  //    hint1Solved: false,
-  //    hint2Solved: false,
-  //    hint3Solved: false
-  //}
-
-  //When a user solves a hint/problem correctly, setState of solved hint to TRUE, and
-  //reward user a point. When all 3 hints are TRUE and numberOfPoints: 3, they move on.
-  return <div className="bankGame" onClick={handleClick}></div>;
+  return <div className="mainContainer">
+    <div className="bankGame" style={ lightPuzzle ? { backgroundColor : "black"} : {}} onClick={handleClick}><p style={{paddingTop:"100px", paddingLeft:"20px"}}>1234</p></div>
+    <div className="lock"> 
+    <img src={lightPuzzle ? unlocked : lock} />
+    <img src={doorPuzzle ? unlocked: lock} />
+     </div>
+     <Modal style={customStyles} isOpen={doorModal}>
+       <p>
+         The door is locked... what is the code?
+       </p>
+       <form onSubmit={handleSubmit}>
+          <label>
+            Enter Code :
+            <input style={{ marginLeft: "10px", marginRight: "10px" }} value={codeEntered} onChange={handleChange} />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
+        <button  style={{ marginTop : "10px" }} onClick={()=>setDoorModal(false)}>Close</button>
+     </Modal>
+     <Modal style={customStyles} isOpen={showModal}>
+        <button className="goNextButton" onClick={nextRoom}>Next Room</button>
+      </Modal>
+  </div>;
 };
 
 export default BankGameStart;

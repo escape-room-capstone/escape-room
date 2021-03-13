@@ -57,3 +57,30 @@ export const Room5Clue3 = (props) => {
     </div>
   );
 };
+
+export const Room7Clue1 = (props) => {
+  return (
+    <div>
+      THIS IS PUZZLE ONE
+      <button onClick={props.solve}>SOLVE</button>
+    </div>
+  );
+};
+
+export const Room7Clue2 = (props) => {
+  return (
+    <div>
+      THIS IS PUZZLE TWO
+      <button onClick={props.solve}>SOLVE</button>
+    </div>
+  );
+};
+
+export const Room7Clue3 = (props) => {
+  return (
+    <div>
+      THIS IS PUZZLE THREE
+      <button onClick={props.solve}>SOLVE</button>
+    </div>
+  );
+};

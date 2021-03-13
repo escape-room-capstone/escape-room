@@ -1,16 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import {
-  Stage,
-  Layer,
-  Star,
-  Text,
-  Circle,
-  Group,
-  Image,
-  Rect,
-} from 'react-konva';
-import Konva from 'konva';
+import { Stage, Layer, Star, Text, Circle, Image, Rect } from 'react-konva';
 import { Redirect, Link } from 'react-router-dom';
 import useImage from 'use-image';
 import '../../../public/css/HauntedRoom.css';
@@ -60,8 +50,8 @@ export const HauntedRoom1 = (props) => {
           <HauntedHouse />
           <Circle
             onClick={() => setEnterHome(true)}
-            x={656}
-            y={473}
+            x={810}
+            y={575}
             radius={35}
             fill={buttonSelected ? '#66ff00' : 'white'}
             onMouseEnter={() => setButtonSelected(true)}
@@ -70,8 +60,8 @@ export const HauntedRoom1 = (props) => {
           <Text
             onClick={() => setEnterHome(true)}
             onMouseEnter={() => setButtonSelected(true)}
-            x={633}
-            y={468}
+            x={785}
+            y={570}
             fontSize={15}
             text="ENTER"
             fill="black"

@@ -1,4 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+//sound effect hook and sound
+import useSound from 'use-sound';
+// import { dooropen } from '../../sounds/opendoor.mp3';
+
 import {
   Stage,
   Layer,
@@ -30,19 +34,51 @@ import { Lock } from './HauntedRoom2';
 import { customStyles } from '../../utils/helpers';
 
 //background image
-const ForestDoor = (props) => {
+const ForestDoor = () => {
   const [image] = useImage('/Images/forestdoor.jpg');
   return <Image image={image} />;
+};
+
+//key
+const Key = (props) => {
+  const [image] = useImage('/Images/hauntedkey.png');
+
+  return (
+    <Image
+      onDragEnd={(e) => {
+        console.log(e.target.x(), e.target.y(), 'e.target.x( + y)');
+        if (
+          e.target.x() >= 710 &&
+          e.target.x() <= 759 &&
+          e.target.y() >= 276 &&
+          e.target.y() <= 307
+        ) {
+          console.log('success');
+          props.unlock();
+        }
+      }}
+      draggable={true}
+      x={150}
+      y={530}
+      opacity={props.locked ? 1 : 0}
+      image={image}
+    />
+  );
 };
 export const HauntedRoom6 = (props) => {
   const roomClues = {
     one: { solved: false, show: false },
-    two: { solved: false, show: false },
-    three: { solved: false, show: false },
   };
 
   const [room, setRoom] = useState({ clues: roomClues, showModal: false });
-  //helper function
+  const [locked, setLocked] = useState(true);
+  const [advance, setAdvance] = useState(false);
+  //   const [play] = useSound(dooropen);
+  useEffect(() => {
+    if (locked === false) props.history.push('/haunted/room7');
+  }, [locked]);
+
+  //helper functions
   const show = (clue) => {
     setRoom((prevRoom) => {
       return {
@@ -96,34 +132,18 @@ export const HauntedRoom6 = (props) => {
       >
         <Layer>
           <ForestDoor />
-
+          <Key
+            locked={locked}
+            unlock={() => {
+              setLocked(false);
+            }}
+          />
           <Lock
             showClue={() => show('one')}
             solved={room.clues.one.solved}
             x={1075}
             y={50}
           />
-
-          {/* <Rect
-            onMouseOver={(e) => {
-              // style stage container:
-              const container = e.target.getStage().container();
-              container.style.cursor = 'pointer';
-            }}
-            onMouseLeave={(e) => {
-              // style stage container:
-              const container = e.target.getStage().container();
-              container.style.cursor = 'default';
-            }}
-            onClick={() => show('one')}
-            solved={room.clues.one.solved}
-            x={150}
-            y={300}
-            opacity={0}
-            width={155}
-            height={100}
-            fill="green"
-          /> */}
         </Layer>
       </Stage>
     </div>

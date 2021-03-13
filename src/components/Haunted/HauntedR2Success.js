@@ -7,7 +7,7 @@ import '../../../public/css/HauntedRoom.css';
 
 export const Success = (props) => {
   const [advance, setAdvance] = useState(false);
-  useEffect(() => setTimeout(() => setAdvance(true), 10000), []);
+  useEffect(() => setTimeout(() => setAdvance(true), 5000), []);
   return (
     <div className="game-room">
       <div className="narrative">
@@ -15,8 +15,8 @@ export const Success = (props) => {
           textStyle={{ fontFamily: 'Red Hat Display' }}
           startDelay={100}
           cursorColor="white"
-          text="You made it to the next room..blahblah..."
-          typeSpeed={100}
+          text="replace with image of a door in a hallway"
+          typeSpeed={70}
         />
       </div>
 

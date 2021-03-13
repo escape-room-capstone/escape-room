@@ -47,7 +47,7 @@ export const HauntedRoom3 = (props) => {
 
   useEffect(() => {
     if (success) {
-      setTimeout(() => setAdvance(true), 2000);
+      setTimeout(() => setAdvance(true), 1000);
     }
     if (error.length) {
       setTimeout(() => setEntries([]), 1500);
@@ -116,7 +116,7 @@ export const HauntedRoom3 = (props) => {
                 x={500}
                 y={200}
                 fill="white"
-                radius={20}
+                radius={30}
               ></Circle>
               <Text x={495} y={190} text="7" flll="red" fontSize={25}></Text>
 
@@ -128,7 +128,7 @@ export const HauntedRoom3 = (props) => {
                 x={200}
                 y={400}
                 fill="white"
-                radius={20}
+                radius={30}
               ></Circle>
               <Text x={195} y={390} text="1" flll="red" fontSize={25}></Text>
 
@@ -140,7 +140,7 @@ export const HauntedRoom3 = (props) => {
                 x={1000}
                 y={200}
                 fill="white"
-                radius={20}
+                radius={30}
               ></Circle>
               <Text x={995} y={190} text="3" flll="red" fontSize={25}></Text>
 
@@ -152,7 +152,7 @@ export const HauntedRoom3 = (props) => {
                 x={670}
                 y={460}
                 fill="white"
-                radius={20}
+                radius={30}
               ></Circle>
               <Text x={665} y={450} text="3" flll="red" fontSize={25}></Text>
             </Layer>

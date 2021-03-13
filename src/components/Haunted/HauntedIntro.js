@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import useImage from 'use-image';
 import TypeWriterEffect from 'react-typewriter-effect';
-import { Stage, Layer, Text, Circle, Group, Image } from 'react-konva';
+import { Stage, Layer, Image } from 'react-konva';
 import { Redirect } from 'react-router-dom';
 
 const RainScene = (props) => {
@@ -10,7 +10,6 @@ const RainScene = (props) => {
 };
 
 export const HauntedIntro = (props) => {
-  console.log(props.history, 'props.history');
   const [advance, setAdvance] = useState(false);
   useEffect(() => setTimeout(() => setAdvance(true), 8000), []);
   return (

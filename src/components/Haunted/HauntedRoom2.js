@@ -103,7 +103,7 @@ export const HauntedRoom2 = (props) => {
               const container = e.target.getStage().container();
               container.style.cursor = 'default';
             }}
-            onClick={() => show('one', setRoom)}
+            onClick={() => show('one')}
             solved={room.clues.one.solved}
             x={585}
             y={300}

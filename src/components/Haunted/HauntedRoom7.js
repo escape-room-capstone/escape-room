@@ -1,24 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import {
-  Stage,
-  Layer,
-  Star,
-  Text,
-  Circle,
-  Line,
-  Group,
-  Image,
-  Rect,
-} from 'react-konva';
+import { Stage, Layer, Image, Rect } from 'react-konva';
 
 //react modal
 import Modal from 'react-modal';
 
 //react-router
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import useImage from 'use-image';
+
+//import clue components
+import { Room7Clue1, Room7Clue2, Room7Clue3 } from './Clues';
 
 //css
 import '../../../public/css/HauntedRoom.css';
@@ -33,6 +26,51 @@ const Forest = (props) => {
   const [image] = useImage('/Images/forestnight.jpg');
   return <Image image={image} />;
 };
+
+const Owl = (props) => {
+  const [image] = useImage('/Images/owl.png');
+  return (
+    <Image
+      onClick={props.show}
+      onMouseOver={props.illuminate}
+      height={100}
+      width={70}
+      x={425}
+      y={100}
+      opacity={props.visibile ? 1 : 0}
+      image={image}
+    />
+  );
+};
+const Wolf = (props) => {
+  const [image] = useImage('/Images/wolf.png');
+  return (
+    <Image
+      onClick={props.show}
+      onMouseOver={props.illuminate}
+      x={900}
+      y={250}
+      opacity={props.visibile ? 1 : 0}
+      image={image}
+    />
+  );
+};
+const Frog = (props) => {
+  const [image] = useImage('/Images/frog.png');
+  return (
+    <Image
+      onClick={props.show}
+      onMouseOver={props.illuminate}
+      x={570}
+      y={450}
+      height={100}
+      width={175}
+      opacity={props.visibile ? 1 : 0}
+      image={image}
+    />
+  );
+};
+
 export const HauntedRoom7 = (props) => {
   const roomClues = {
     one: { solved: false, show: false },
@@ -41,7 +79,26 @@ export const HauntedRoom7 = (props) => {
   };
 
   const [room, setRoom] = useState({ clues: roomClues, showModal: false });
-  //helper function
+  useEffect(() => {
+    if (
+      room.clues.one.solved &&
+      room.clues.two.solved &&
+      room.clues.three.solved
+    ) {
+      props.history.push('/haunted/room8');
+    }
+  }, [room]);
+  const [itemsVisible, setItemsVisible] = useState({
+    frog: false,
+    wolf: false,
+    owl: false,
+  });
+  const illuminate = (item) => {
+    setItemsVisible((prevItems) => {
+      return { ...prevItems, [item]: true };
+    });
+  };
+  //helper functions
   const show = (clue) => {
     setRoom((prevRoom) => {
       return {
@@ -113,16 +170,31 @@ export const HauntedRoom7 = (props) => {
             x={1075}
             y={50}
           />
+          <Owl
+            show={() => show('one')}
+            visibile={itemsVisible.owl}
+            illuminate={() => illuminate('owl')}
+          />
+          <Frog
+            show={() => show('two')}
+            visibile={itemsVisible.frog}
+            illuminate={() => illuminate('frog')}
+          />
+          <Wolf
+            show={() => show('three')}
+            visibile={itemsVisible.wolf}
+            illuminate={() => illuminate('wolf')}
+          />
         </Layer>
       </Stage>
 
       <Modal style={customStyles} isOpen={room.showModal}>
         <p>This is a modal. please close it now</p>
-        {/* {room.clues.one.show && <Room5Clue1 solve={() => setSolved('one')} />}
-        {room.clues.two.show && <Room5Clue2 solve={() => setSolved('two')} />}
+        {room.clues.one.show && <Room7Clue1 solve={() => setSolved('one')} />}
+        {room.clues.two.show && <Room7Clue2 solve={() => setSolved('two')} />}
         {room.clues.three.show && (
-          <Room5Clue3 solve={() => setSolved('three')} />
-        )} */}
+          <Room7Clue3 solve={() => setSolved('three')} />
+        )}
         <button
           onClick={() =>
             setRoom((prevRoom) => {
@@ -142,13 +214,6 @@ export const HauntedRoom7 = (props) => {
           Close the modal
         </button>
       </Modal>
-      {room.clues.one.solved &&
-      room.clues.two.solved &&
-      room.clues.three.solved ? (
-        <Redirect push to="/haunted/room8" />
-      ) : (
-        ''
-      )}
     </div>
   );
 };

@@ -96,12 +96,30 @@ export const Room8Clue1 = (props) => {
       <img src="/Images/phoneinhand.png" />
       <p>Enter Phone Number To Call For Help</p>
 
-      <input className="small" type="text" placeholder="xxx"></input>
+      <input
+        name="first"
+        onChange={props.handleChange}
+        className="small"
+        type="text"
+        placeholder="xxx"
+      ></input>
       <span>-</span>
-      <input className="small" type="text" placeholder="xxxx"></input>
+      <input
+        name="middle"
+        onChange={props.handleChange}
+        className="small"
+        type="text"
+        placeholder="xxxx"
+      ></input>
       <span>-</span>
-      <input type="text" placeholder="xxxx" />
+      <input
+        name="last"
+        onChange={props.handleChange}
+        type="text"
+        placeholder="xxxx"
+      />
       <br></br>
+      <button onClick={props.checkAnswer}>DIAL</button>
     </div>
   );
 };

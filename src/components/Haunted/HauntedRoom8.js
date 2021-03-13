@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Stage, Layer, Image } from 'react-konva';
 import { Redirect } from 'react-router-dom';
 import useImage from 'use-image';
@@ -29,6 +29,19 @@ const Phone = (props) => {
 
 export const HauntedRoom8 = (props) => {
   const [showModal, setShowModal] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState({
+    first: '',
+    middle: '',
+    last: '',
+  });
+  const checkAnswer = () => {
+    if (
+      phoneNumber.first + phoneNumber.middle + phoneNumber.last ===
+      '2032469853'
+    ) {
+      props.history.push('/haunted/room9');
+    }
+  };
   return (
     <div className="game-room">
       <div className="narrative">
@@ -56,7 +69,15 @@ export const HauntedRoom8 = (props) => {
         </Layer>
       </Stage>
       <Modal style={customStyles} isOpen={showModal}>
-        <Room8Clue1 />
+        <Room8Clue1
+          checkAnswer={() => checkAnswer()}
+          handleChange={(e) =>
+            setPhoneNumber((prevNum) => ({
+              ...prevNum,
+              [e.target.name]: e.target.value,
+            }))
+          }
+        />
 
         <button onClick={() => setShowModal(false)}>CLOSE</button>
       </Modal>

@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import '../../../public/CSS/Trapped.css';
+import '../../../public/CSS/HouseOfRiddlez.css';
 import ReactModal from 'react-modal';
+import { Link } from 'react-router-dom';
+import LetterBank from './LetterBank';
 
-const RoomTwo = (props) => {
+const LivingRoom = (props) => {
   const [puzzle1, setPuzzle1] = useState({
     riddle: '',
     solution: '',
     clue: '',
+    letter: '',
     solved: false,
     showModal: false,
   });
@@ -14,6 +17,7 @@ const RoomTwo = (props) => {
     riddle: '',
     solution: '',
     clue: '',
+    letter: '',
     solved: false,
     showModal: false,
   });
@@ -21,16 +25,27 @@ const RoomTwo = (props) => {
     riddle: '',
     solution: '',
     clue: '',
+    letter: '',
     solved: false,
     showModal: false,
   });
+  const [puzzle4, setPuzzle4] = useState({
+    riddle: '',
+    solution: '',
+    clue: '',
+    letter: '',
+    solved: false,
+    showModal: false,
+  });
+  const [bank, setBank] = useState([]);
 
   const [count, setCount] = useState(0);
 
   return (
     <div className="container">
+      <LetterBank props={props} />
       <ReactModal
-        overlayClassName="OverlayRoomTwo"
+        overlayClassName="OverlayLivingRoom"
         className="modal"
         isOpen={puzzle1.showModal}
         onRequestClose={() => setPuzzle1({ showModal: false })}
@@ -47,7 +62,7 @@ const RoomTwo = (props) => {
       </ReactModal>
 
       <ReactModal
-        overlayClassName="OverlayRoomTwo"
+        overlayClassName="OverlayLivingRoom"
         className="modal"
         isOpen={puzzle2.showModal}
         onRequestClose={() => setPuzzle2({ showModal: false })}
@@ -63,7 +78,7 @@ const RoomTwo = (props) => {
         </div>
       </ReactModal>
       <ReactModal
-        overlayClassName="OverlayRoomTwo"
+        overlayClassName="OverlayLivingRoom"
         className="modal"
         isOpen={puzzle3.showModal}
         onRequestClose={() => setPuzzle3({ showModal: false })}
@@ -78,7 +93,7 @@ const RoomTwo = (props) => {
           </button>
         </div>
       </ReactModal>
-      <div className="background" id="roomTwo">
+      <div className="background" id="livingroom">
         <button onClick={() => setPuzzle1({ showModal: true })}>
           Puzzle 1
         </button>
@@ -94,4 +109,4 @@ const RoomTwo = (props) => {
   );
 };
 
-export default RoomTwo;
+export default LivingRoom;

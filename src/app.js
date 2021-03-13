@@ -14,23 +14,23 @@ import { HauntedRoom4 } from './components/Haunted/HauntedRoom4';
 import { HauntedIntro } from './components/Haunted/HauntedIntro';
 import { Success } from './components/Haunted/HauntedR2Success';
 
-import Trapped from './components/Trapped/Trapped';
-import LivingRoom from './components/Trapped/LivingRoom';
-import BackRoom from './components/Trapped/BackRoom';
-import Attic from './components/Trapped/Attic';
-import RoomOne from './components/Trapped/RoomOne';
-import RoomTwo from './components/Trapped/RoomTwo';
+import HouseOfRiddlez from './components/HouseOfRiddlez/HouseOfRiddlez';
+import LivingRoom from './components/HouseOfRiddlez/LivingRoom';
+import BackRoom from './components/HouseOfRiddlez/BackRoom';
+import Attic from './components/HouseOfRiddlez/Attic';
+import RoomOne from './components/HouseOfRiddlez/RoomOne';
+import RoomTwo from './components/HouseOfRiddlez/RoomTwo';
 
 import BankGameLevel2 from './components/BankGame/BankGameLevel2';
 import BankGameLevel3 from './components/BankGame/BankGameLevel3';
 import BankGameStart from './components/BankGame/BankGameStart';
 import BankGameVictory from './components/BankGame/BankGameVictory';
+import LetterBank from './components/HouseOfRiddlez/LetterBank';
 
 const App = () => {
   return (
     <Provider store={store}>
       <Router history={history}>
-    
         <Route exact path="/" component={Homepage} />
 
         <Route exact path="/haunted/intro" component={HauntedIntro} />
@@ -40,12 +40,13 @@ const App = () => {
         <Route exact path="/haunted/room2/success" component={Success} />
         <Route exact path="/haunted/room4" component={HauntedRoom4} />
 
-        <Route exact path="/trapped" component={Trapped} />
+        <Route exact path="/houseofriddlez" component={HouseOfRiddlez} />
         <Route exact path="/livingroom" component={LivingRoom} />
         <Route exact path="/room1" component={RoomOne} />
         <Route exact path="/room2" component={RoomTwo} />
         <Route exact path="/backroom" component={BackRoom} />
         <Route exact path="/attic" component={Attic} />
+        <Route exact path="/letterbank" component={LetterBank} />
 
         <Route exact path="/Bankgame" component={BankGameStart} />
         <Route exact path="/Bankgame2" component={BankGameLevel2} />
@@ -53,9 +54,8 @@ const App = () => {
         <Route exact path="/BankgameVictory" component={BankGameVictory} />
 
         {/* <Redirect to="/" /> */}
-
       </Router>
-      <HauntedRoom3 />
+      {/* <HauntedRoom3 /> */}
     </Provider>
   );
 };

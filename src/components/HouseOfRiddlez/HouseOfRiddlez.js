@@ -1,10 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import '../../../public/CSS/Trapped.css';
+import '../../../public/CSS/HouseOfRiddlez.css';
 import { Link } from 'react-router-dom';
+import LetterBank from './LetterBank';
 
-const Trapped = (props) => {
+const HouseOfRiddlez = () => {
+  const [puzzle1, setPuzzle1] = useState({
+    riddle: '',
+    solution: '',
+    clue: '',
+    letter: '',
+    solved: false,
+    showModal: false,
+  });
+
+  const [mainRoom, setMainRoom] = useState({
+    mainRoomBank: 'CLUESSSSSS',
+    completed: false,
+  });
+
   return (
-    <div className="container">
+    <div className="houseContainer">
+      <LetterBank mainRoom={mainRoom.mainRoomBank} />
+
       <div className="background" id="home">
         <Link to="/room2">
           <button className="secretButton" id="roomTwoButton">
@@ -36,4 +53,4 @@ const Trapped = (props) => {
   );
 };
 
-export default Trapped;
+export default HouseOfRiddlez;

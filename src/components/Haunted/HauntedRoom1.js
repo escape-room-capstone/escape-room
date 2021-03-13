@@ -12,14 +12,13 @@ import {
 } from 'react-konva';
 import Konva from 'konva';
 import { Redirect, Link } from 'react-router-dom';
-import { Portal } from './Portal';
 import useImage from 'use-image';
 import '../../../public/css/HauntedRoom.css';
 import TypeWriterEffect from 'react-typewriter-effect';
 
 //make images to attach to stage
 const HauntedHouse = (props) => {
-  const [image] = useImage('/Images/mansion.jpg');
+  const [image] = useImage('/Images/house.jpg');
   return <Image image={image} />;
 };
 

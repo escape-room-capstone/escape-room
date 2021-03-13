@@ -5,6 +5,7 @@ import { Stage, Layer, Group, Circle, Image, Text } from 'react-konva';
 import { Redirect } from 'react-router-dom';
 import Modal from 'react-modal';
 import { HauntedRoom4 } from './HauntedRoom4';
+import '../../../public/css/HauntedRoom.css';
 
 const DarkRoom = (props) => {
   const [image] = useImage('/Images/darkroom.jpg');
@@ -86,7 +87,7 @@ export const HauntedRoom3 = (props) => {
       className="game-room"
     >
       {advance ? (
-        <HauntedRoom4 />
+        <Redirect push to="/Haunted/room4" />
       ) : (
         <>
           <div className="narrative"></div>

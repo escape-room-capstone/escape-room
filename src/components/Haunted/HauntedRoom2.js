@@ -3,6 +3,8 @@ import TypeWriterEffect from 'react-typewriter-effect';
 import { Stage, Layer, Text, Circle, Group, Rect, Image } from 'react-konva';
 import useImage from 'use-image';
 import { Redirect } from 'react-router-dom';
+//custom modal styles
+import { customStyles } from '../../utils/helpers';
 //import css file
 import '../../../public/css/HauntedRoom.css';
 
@@ -17,8 +19,8 @@ const HauntedHallway = (props) => {
   const [image] = useImage('/Images/spooky-stairs.jpg');
   return <Image image={image} />;
 };
-// clue image
-const Lock = (props) => {
+// lock or check image
+export const Lock = (props) => {
   const [lock] = useImage('/Images/lock.png');
   const [greenCheck] = useImage('/Images/check.png');
   return (
@@ -28,28 +30,12 @@ const Lock = (props) => {
       y={props.y}
       height={35}
       width={35}
-      draggable={true}
       image={props.solved ? greenCheck : lock}
     />
   );
 };
-// styles for modal
-const customStyles = {
-  content: {
-    width: '50%',
-    height: '80%',
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-};
-export const HauntedRoom2 = (props) => {
-  //lock image
-  const [lock] = useImage('/Images/lock.png');
 
+export const HauntedRoom2 = (props) => {
   const roomClues = {
     one: { solved: false, show: false },
     two: { solved: false, show: false },
@@ -117,7 +103,7 @@ export const HauntedRoom2 = (props) => {
               const container = e.target.getStage().container();
               container.style.cursor = 'default';
             }}
-            onClick={() => show('one')}
+            onClick={() => show('one', setRoom)}
             solved={room.clues.one.solved}
             x={585}
             y={300}

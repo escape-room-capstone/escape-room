@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import useImage from 'use-image';
 import TypeWriterEffect from 'react-typewriter-effect';
-import { Stage, Layer, Text, Circle, Group, Image } from 'react-konva';
+import { Stage, Layer, Rect, Text, Circle, Group, Image } from 'react-konva';
 import { Redirect } from 'react-router-dom';
 import Modal from 'react-modal';
+import '../../../public/css/HauntedRoom.css';
 
 const DoorAjar = (props) => {
   const [image] = useImage('/Images/doorajar.jpg');
@@ -11,6 +12,7 @@ const DoorAjar = (props) => {
 };
 
 export const HauntedRoom4 = (props) => {
+  const [advance, setAdvance] = useState(false);
   return (
     <div className="game-room">
       <div className="narrative">
@@ -19,8 +21,8 @@ export const HauntedRoom4 = (props) => {
           startDelay={50}
           hideCursorAfterText={true}
           cursorColor="white"
-          text="Room 4"
-          typeSpeed={70}
+          text="A door on the opposite side of the room creaks open."
+          typeSpeed={50}
         />
       </div>
       <Stage
@@ -34,8 +36,31 @@ export const HauntedRoom4 = (props) => {
       >
         <Layer>
           <DoorAjar />
+          <Rect
+            onClick={() => setAdvance(true)}
+            onMouseOver={(e) => {
+              // style stage container:
+              const container = e.target.getStage().container();
+              container.style.cursor = 'pointer';
+            }}
+            onMouseLeave={(e) => {
+              // style stage container:
+              const container = e.target.getStage().container();
+              container.style.cursor = 'default';
+            }}
+            opacity={0}
+            x={1080}
+            y={65}
+            fill="white"
+            border="green"
+            strokeWidth={1} // border width
+            stroke="green" // border color
+            height={300}
+            width={80}
+          />
         </Layer>
       </Stage>
+      {advance ? <Redirect push to="/haunted/Room5" /> : ''}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../../../public/CSS/Bank.css';
-import lock from '../../../public/Images/lock.png';
+import lock from '../../../public/Images/lock-2.png';
 import unlocked from '../../../public/Images/unlocked.png';
 import Modal from "react-modal";
 

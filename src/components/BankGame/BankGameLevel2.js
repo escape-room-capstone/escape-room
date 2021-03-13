@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Gun from '../../../public/Images/gun.png';
 import Key from '../../../public/Images/key.png';
-import lock from '../../../public/Images/lock.png';
+import lock from '../../../public/Images/lock-2.png';
 import unlocked from '../../../public/Images/unlocked.png';
 import Modal from 'react-modal';
 import '../../../public/CSS/Bank.css';

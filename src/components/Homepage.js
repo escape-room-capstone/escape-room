@@ -24,11 +24,11 @@ const Homepage = (props) => {
       <hr />
       <Link to="/haunted/intro">Haunted House</Link>
       <hr />
-      <Link to="/trapped"> ~~House of Riddlez~~ </Link>
+      <Link to="/houseofriddlez"> ~~House of Riddlez~~ </Link>
       <p>
-        You wake up one morning only to find out that you are trapped in the
-        House of Riddles. And the only way out is to solve every riddle! But
-        there's a catch...
+        You wake up one morning only to find out that you are trapped in a House
+        of Riddles. The only way out is to solve every riddle! But there's a
+        catch...
       </p>
       <hr />
       <Link to="/Bobafett"> Steve Game </Link>

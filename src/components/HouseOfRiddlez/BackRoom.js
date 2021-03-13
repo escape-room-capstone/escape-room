@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import '../../../public/CSS/Trapped.css';
+import '../../../public/CSS/HouseOfRiddlez.css';
 import ReactModal from 'react-modal';
+import { Link } from 'react-router-dom';
+import LetterBank from './LetterBank';
 
-const Attic = (props) => {
+const BackRoom = (props) => {
   const [puzzle1, setPuzzle1] = useState({
     riddle: '',
     solution: '',
     clue: '',
+    letter: '',
     solved: false,
     showModal: false,
   });
@@ -14,6 +17,7 @@ const Attic = (props) => {
     riddle: '',
     solution: '',
     clue: '',
+    letter: '',
     solved: false,
     showModal: false,
   });
@@ -21,6 +25,7 @@ const Attic = (props) => {
     riddle: '',
     solution: '',
     clue: '',
+    letter: '',
     solved: false,
     showModal: false,
   });
@@ -28,23 +33,18 @@ const Attic = (props) => {
     riddle: '',
     solution: '',
     clue: '',
+    letter: '',
     solved: false,
     showModal: false,
   });
   const [bank, setBank] = useState([]);
 
   const [count, setCount] = useState(0);
-
-  // const modal = document.getElementById('modal-content');
-  // window.onClick = function (event) {
-  //   if (event.target !== modal) {
-  //     modal.portalClassName.style.display = 'none';
-  //   }
-  // };
   return (
     <div className="container">
+      <LetterBank props={props} />
       <ReactModal
-        overlayClassName="OverlayAttic"
+        overlayClassName="OverlayBackRoom"
         className="modal"
         isOpen={puzzle1.showModal}
         onRequestClose={() => setPuzzle1({ showModal: false })}
@@ -61,7 +61,7 @@ const Attic = (props) => {
       </ReactModal>
 
       <ReactModal
-        overlayClassName="OverlayAttic"
+        overlayClassName="OverlayBackRoom"
         className="modal"
         isOpen={puzzle2.showModal}
         onRequestClose={() => setPuzzle2({ showModal: false })}
@@ -77,7 +77,7 @@ const Attic = (props) => {
         </div>
       </ReactModal>
       <ReactModal
-        overlayClassName="OverlayAttic"
+        overlayClassName="OverlayBackRoom"
         className="modal"
         isOpen={puzzle3.showModal}
         onRequestClose={() => setPuzzle3({ showModal: false })}
@@ -92,8 +92,7 @@ const Attic = (props) => {
           </button>
         </div>
       </ReactModal>
-
-      <div className="background" id="attic">
+      <div className="background" id="backRoom">
         <button onClick={() => setPuzzle1({ showModal: true })}>
           Puzzle 1
         </button>
@@ -109,4 +108,4 @@ const Attic = (props) => {
   );
 };
 
-export default Attic;
+export default BackRoom;

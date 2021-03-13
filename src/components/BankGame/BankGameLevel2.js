@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Gun from '../../../public/Images/gun.png';
+import Key from '../../../public/Images/key.png';
+import lock from '../../../public/Images/lock-2.png';
+import unlocked from '../../../public/Images/unlocked.png';
 import Modal from 'react-modal';
 import '../../../public/CSS/Bank.css';
 
@@ -8,13 +11,58 @@ import '../../../public/CSS/Bank.css';
 //x2 200, y2 310
 
 const BankGameLevel2 = (props) => {
-  const [showWeapon, setShowWeapon] = useState(false);
-  const [showModal, setShowModal] = useState(false);
 
-  const handleHint = (e) => {
-    setShowModal(true);
+  const customStyles = {
+    content: {
+      top: 'auto',
+      bottom: 'auto',
+      right: 'auto',
+      left: 'auto',
+      transform : 'translate(125%, 70%)'
+    },
   };
-  const clickedGun = (x, y, coordinatesArr) => {
+
+  const customStyles2 = {
+    content: {
+      position: "fixed",
+      width: "500px",
+      height: "100px",
+      bottom: "calc(50% - 50px)",
+      left: "calc(50% - 250px)"
+    }
+  };
+
+  //for weapon modal and key modal
+  const [showWeapon, setShowWeapon] = useState(false);
+  const [showKey, setShowKey] = useState(false);
+  const [weaponPuzzle, setWeaponPuzzle] = useState(false);
+  const [keyPuzzle, setKeyPuzzle] = useState(false);
+  const [nextRoomModal, setNRModal] = useState(false);
+  const [points, setPoints] = useState(0);
+
+  useEffect(()=>{
+    console.log(weaponPuzzle, keyPuzzle, points)
+    if(weaponPuzzle && keyPuzzle && points === 2){
+      setNRModal(true);
+    }
+  })
+
+  const nextRoom = (e) => {
+    setNRModal(false);
+    props.history.push("/Bankgame3");
+  }
+
+  const closeWeaponModal = (e) => {
+    setShowWeapon(false)
+    setPoints(points+1);
+  }
+
+  const closeKeyModal = (e) => {
+    setShowKey(false);
+    setPoints(points+1);
+  }
+
+  const clickedClue = (x, y, coordinatesArr) => {
     return (
       x >= coordinatesArr[0] &&
       x <= coordinatesArr[2] &&
@@ -22,55 +70,66 @@ const BankGameLevel2 = (props) => {
       y <= coordinatesArr[3]
     );
   };
+  //Keys [375, 605, 410, 635]
   //[90, 40, 105, 55]
-  const handleClickedGun = (e) => {
+  const handleClickedClue = (e) => {
     console.log(e.pageX, e.pageY);
-    if (clickedGun(e.pageX, e.pageY, [90, 47, 105, 67])) {
+    if ( !weaponPuzzle && clickedClue(e.pageX, e.pageY, [150, 65, 375, 315])) {
+      setWeaponPuzzle(true);
       setShowWeapon(true);
     }
+    else if ( !keyPuzzle && clickedClue(e.pageX, e.pageY, [375, 605, 410, 635]) ){
+      setKeyPuzzle(true);
+      setShowKey(true);
+    }
   };
+
 
   //There are some numbers in the room written in a board, thinking of adding another puzzle where the answer will be all of those numbers added up
 
   return (
-    <div className="cashDesk" onClick={handleClickedGun}>
-      <Modal isOpen={showModal}>
-        <p>
-          Looks like we made it inside the bank... You may have to canvas the
-          area for a weapon.
-        </p>
-        <button onClick={() => setShowModal(false)}>Close this hint</button>
-      </Modal>
-      <Modal isOpen={showWeapon}>
-        <p>WOW, this looks like it can be dangerous</p>
-        <img src={Gun} alt=""></img>
-        <p>Lets use this gun to get the teller to take us to the safe</p>
-        <button onClick={() => props.history.push('/Bankgame3')}>
-          {' '}
-          Proceed{' '}
-        </button>
+    <div className="mainContainer">
+    <div className="cashDesk" onClick={handleClickedClue}>
+      <Modal style={customStyles} isOpen={showWeapon}>
+        <p>It appears your partner hid a weapon for you behind the board...</p>
+        <img style={{height:"200px"}} src={Gun} alt=""></img>
         <button
-          style={{ marginLeft: '10px' }}
-          onClick={() => setShowWeapon(false)}
+          onClick={closeWeaponModal}
         >
-          Keep Searching Room
+          Close
         </button>
       </Modal>
-      <button style={{ float: 'right' }} onClick={handleHint}>
-        Click for a hint
-      </button>
-      <div className="gun">
+      <Modal style={customStyles} isOpen={showKey}>
+        <p>Nice, this key might help us get into any locked rooms</p>
+        <img style={{height:"200px"}} src={Key} alt=""></img>
+        <button
+          onClick={closeKeyModal}
+        >
+          Close
+        </button>
+      </Modal>
+      <div className="key">
         <img
-          style={{
-            marginTop: '50px',
-            marginLeft: '100px',
-            height: '4px',
-            width: '4px',
-          }}
-          src={Gun}
+        style={{
+          height: "30px",
+          marginLeft: "370px",
+          marginTop: "594px"
+        }}
+          src={Key}
           alt=""
         ></img>
       </div>
+    </div>
+    <div className="lock"> 
+    <img src={weaponPuzzle ? unlocked : lock} />
+    <img src={keyPuzzle ? unlocked: lock} />
+     </div>
+     <Modal style={customStyles2} isOpen={nextRoomModal}>
+        <p>
+          Looks like you solved all the clues needed to advance...
+        </p>
+        <button className="goNextButton" onClick={nextRoom}>Next room</button>
+     </Modal>
     </div>
   );
 };

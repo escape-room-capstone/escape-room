@@ -57,7 +57,6 @@ const App = () => {
         <Route exact path="/Bankgame2" component={BankGameLevel2} />
         <Route exact path="/Bankgame3" component={BankGameLevel3} />
         <Route exact path="/BankgameVictory" component={BankGameVictory} />
-
         {/* <Redirect to="/" /> */}
       </Router>
     </Provider>

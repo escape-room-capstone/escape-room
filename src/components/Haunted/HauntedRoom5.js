@@ -1,41 +1,42 @@
 import React, { useState } from 'react';
-import TypeWriterEffect from 'react-typewriter-effect';
-import { Stage, Layer, Text, Circle, Group, Rect, Image } from 'react-konva';
-import useImage from 'use-image';
-import { Redirect } from 'react-router-dom';
-//custom modal styles
-import { customStyles } from '../../utils/helpers';
-//import css file
-import '../../../public/css/HauntedRoom.css';
-
-// import clue components
-import { ClueOne, ClueTwo, ClueThree } from './HauntedRoom2Clues';
+import { connect } from 'react-redux';
+import {
+  Stage,
+  Layer,
+  Star,
+  Text,
+  Circle,
+  Line,
+  Group,
+  Image,
+  Rect,
+} from 'react-konva';
 
 //react modal
 import Modal from 'react-modal';
 
+//react-router
+import { Redirect, Link } from 'react-router-dom';
+
+import { Portal } from './Portal';
+import useImage from 'use-image';
+
+//css
+import '../../../public/css/HauntedRoom.css';
+
+import TypeWriterEffect from 'react-typewriter-effect';
+import { Lock } from './HauntedRoom2';
+//clues
+import { Room5Clue1, Room5Clue2, Room5Clue3 } from './Clues';
+//custom modal styles
+import { customStyles } from '../../utils/helpers';
+
 //background image
-const HauntedHallway = (props) => {
-  const [image] = useImage('/Images/spooky-stairs.jpg');
+const GhostRoom = (props) => {
+  const [image] = useImage('/Images/girlghost.jpg');
   return <Image image={image} />;
 };
-// lock or check image
-export const Lock = (props) => {
-  const [lock] = useImage('/Images/lock.png');
-  const [greenCheck] = useImage('/Images/check.png');
-  return (
-    <Image
-      onClick={props.showClue}
-      x={props.x}
-      y={props.y}
-      height={35}
-      width={35}
-      image={props.solved ? greenCheck : lock}
-    />
-  );
-};
-
-export const HauntedRoom2 = (props) => {
+export const HauntedRoom5 = (props) => {
   const roomClues = {
     one: { solved: false, show: false },
     two: { solved: false, show: false },
@@ -43,25 +44,7 @@ export const HauntedRoom2 = (props) => {
   };
 
   const [room, setRoom] = useState({ clues: roomClues, showModal: false });
-
-  //helper function that takes a clueNum and sets the clue.show to be false, clue.solved to be true,
-  //and showModal to be false (may need to change later if we don't want modal to close with solving a clue)
-  const setSolved = (clue) => {
-    setRoom((prevRoom) => {
-      return {
-        ...prevRoom,
-        showModal: false,
-        clues: {
-          ...prevRoom.clues,
-          [clue]: {
-            show: false,
-            solved: true,
-          },
-        },
-      };
-    });
-  };
-  //helper function that takes a clueNumber and sets showModal:true and sets the status of the clue.show to be true
+  //helper function
   const show = (clue) => {
     setRoom((prevRoom) => {
       return {
@@ -77,9 +60,33 @@ export const HauntedRoom2 = (props) => {
       };
     });
   };
+  const setSolved = (clue) => {
+    setRoom((prevRoom) => {
+      return {
+        ...prevRoom,
+        showModal: false,
+        clues: {
+          ...prevRoom.clues,
+          [clue]: {
+            show: false,
+            solved: true,
+          },
+        },
+      };
+    });
+  };
   return (
     <div className="game-room">
-      <div className="narrative"></div>
+      <div className="narrative">
+        <TypeWriterEffect
+          textStyle={{ fontFamily: 'Red Hat Display' }}
+          startDelay={50}
+          hideCursorAfterText={true}
+          cursorColor="white"
+          text=""
+          typeSpeed={70}
+        />
+      </div>
       <Stage
         onClick={(e) => {
           console.log(e.evt.layerX, 'layerX position');
@@ -90,71 +97,7 @@ export const HauntedRoom2 = (props) => {
         width={1200}
       >
         <Layer>
-          <HauntedHallway />
-
-          <Rect
-            onMouseOver={(e) => {
-              // style stage container:
-              const container = e.target.getStage().container();
-              container.style.cursor = 'pointer';
-            }}
-            onMouseLeave={(e) => {
-              // style stage container:
-              const container = e.target.getStage().container();
-              container.style.cursor = 'default';
-            }}
-            onClick={() => show('one', setRoom)}
-            solved={room.clues.one.solved}
-            x={585}
-            y={300}
-            opacity={0}
-            width={90}
-            height={350}
-            fill="green"
-          />
-
-          <Rect
-            onMouseOver={(e) => {
-              // style stage container:
-              const container = e.target.getStage().container();
-              container.style.cursor = 'pointer';
-            }}
-            onMouseLeave={(e) => {
-              // style stage container:
-              const container = e.target.getStage().container();
-              container.style.cursor = 'default';
-            }}
-            onClick={() => show('two')}
-            solved={room.clues.two.solved}
-            x={855}
-            y={350}
-            opacity={0}
-            width={45}
-            height={100}
-            fill="green"
-          />
-
-          <Rect
-            onMouseOver={(e) => {
-              // style stage container:
-              const container = e.target.getStage().container();
-              container.style.cursor = 'pointer';
-            }}
-            onMouseLeave={(e) => {
-              // style stage container:
-              const container = e.target.getStage().container();
-              container.style.cursor = 'default';
-            }}
-            onClick={() => show('three')}
-            solved={room.clues.three.solved}
-            x={725}
-            y={175}
-            opacity={0}
-            width={85}
-            height={150}
-            fill="green"
-            draggable={true}
-          />
+          <GhostRoom />
           <Lock
             showClue={() => show('one')}
             solved={room.clues.one.solved}
@@ -173,15 +116,95 @@ export const HauntedRoom2 = (props) => {
             x={1075}
             y={50}
           />
+          <Rect
+            onMouseOver={(e) => {
+              // style stage container:
+              const container = e.target.getStage().container();
+              container.style.cursor = 'pointer';
+            }}
+            onMouseLeave={(e) => {
+              // style stage container:
+              const container = e.target.getStage().container();
+              container.style.cursor = 'default';
+            }}
+            onClick={() => show('one')}
+            solved={room.clues.one.solved}
+            x={150}
+            y={300}
+            opacity={0}
+            width={155}
+            height={100}
+            fill="green"
+          />
+          <Rect
+            onMouseOver={(e) => {
+              // style stage container:
+              const container = e.target.getStage().container();
+              container.style.cursor = 'pointer';
+            }}
+            onMouseLeave={(e) => {
+              // style stage container:
+              const container = e.target.getStage().container();
+              container.style.cursor = 'default';
+            }}
+            onClick={() => show('one')}
+            solved={room.clues.one.solved}
+            x={150}
+            y={300}
+            opacity={0}
+            width={155}
+            height={100}
+            fill="green"
+          />
+          <Rect
+            onMouseOver={(e) => {
+              // style stage container:
+              const container = e.target.getStage().container();
+              container.style.cursor = 'pointer';
+            }}
+            onMouseLeave={(e) => {
+              // style stage container:
+              const container = e.target.getStage().container();
+              container.style.cursor = 'default';
+            }}
+            onClick={() => show('two')}
+            solved={room.clues.two.solved}
+            x={635}
+            y={325}
+            opacity={0}
+            width={80}
+            height={90}
+            fill="green"
+          />
+          <Rect
+            onMouseOver={(e) => {
+              // style stage container:
+              const container = e.target.getStage().container();
+              container.style.cursor = 'pointer';
+            }}
+            onMouseLeave={(e) => {
+              // style stage container:
+              const container = e.target.getStage().container();
+              container.style.cursor = 'default';
+            }}
+            onClick={() => show('three')}
+            solved={room.clues.three.solved}
+            x={975}
+            y={310}
+            opacity={0}
+            width={80}
+            height={80}
+            fill="green"
+          />
         </Layer>
       </Stage>
 
       <Modal style={customStyles} isOpen={room.showModal}>
         <p>This is a modal. please close it now</p>
-        {room.clues.one.show && <ClueOne solve={() => setSolved('one')} />}
-        {room.clues.two.show && <ClueTwo solve={() => setSolved('two')} />}
+        {room.clues.one.show && <Room5Clue1 solve={() => setSolved('one')} />}
+        {room.clues.two.show && <Room5Clue2 solve={() => setSolved('two')} />}
         {room.clues.three.show && (
-          <ClueThree solve={() => setSolved('three')} />
+          <Room5Clue3 solve={() => setSolved('three')} />
         )}
         <button
           onClick={() =>
@@ -205,7 +228,7 @@ export const HauntedRoom2 = (props) => {
       {room.clues.one.solved &&
       room.clues.two.solved &&
       room.clues.three.solved ? (
-        <Redirect push to="/haunted/room2/success" />
+        <Redirect push to="/haunted/room6" />
       ) : (
         ''
       )}

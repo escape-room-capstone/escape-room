@@ -2,6 +2,11 @@ import React from 'react';
 import { Stage, Layer, Circle, Line, Image } from 'react-konva';
 import useImage from 'use-image';
 
+const Phone = (props) => {
+  const [image] = useImage('/Images/phoneforward.jpg');
+  return <Image x={100} y={50} image={image} />;
+};
+
 export const Room5Clue1 = (props) => {
   const Hangman = (props) => {
     const [image] = useImage('/Images/gallows.png');
@@ -81,6 +86,22 @@ export const Room7Clue3 = (props) => {
     <div>
       THIS IS PUZZLE THREE
       <button onClick={props.solve}>SOLVE</button>
+    </div>
+  );
+};
+
+export const Room8Clue1 = (props) => {
+  return (
+    <div className="phone-number">
+      <img src="/Images/phoneinhand.png" />
+      <p>Enter Phone Number To Call For Help</p>
+
+      <input className="small" type="text" placeholder="xxx"></input>
+      <span>-</span>
+      <input className="small" type="text" placeholder="xxxx"></input>
+      <span>-</span>
+      <input type="text" placeholder="xxxx" />
+      <br></br>
     </div>
   );
 };

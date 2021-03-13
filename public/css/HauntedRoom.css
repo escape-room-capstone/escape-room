@@ -90,3 +90,27 @@ div.success {
   color: white;
   padding: 0.5rem;
 }
+
+/* .cellphone {
+  background-image: url('../Images/phoneforward.jpg');
+  background-repeat: no-repeat;
+  height: 700px;
+} */
+
+.phone-number input {
+  margin: 0.5rem;
+  padding: 0.2rem;
+  width: 4rem;
+}
+
+input::placeholder {
+  text-align: center;
+}
+
+input.small {
+  width: 2rem;
+}
+
+.phone-number {
+  text-align: center;
+}

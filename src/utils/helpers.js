@@ -37,7 +37,7 @@ export const show = (clue) => {
 export const customStyles = {
   content: {
     width: '50%',
-    height: '50%',
+    height: '80%',
     top: '50%',
     left: '50%',
     right: 'auto',

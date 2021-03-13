@@ -177,7 +177,6 @@ export const HauntedRoom2 = (props) => {
       </Stage>
 
       <Modal style={customStyles} isOpen={room.showModal}>
-        <p>This is a modal. please close it now</p>
         {room.clues.one.show && <ClueOne solve={() => setSolved('one')} />}
         {room.clues.two.show && <ClueTwo solve={() => setSolved('two')} />}
         {room.clues.three.show && (

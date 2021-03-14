@@ -1,5 +1,4 @@
 import BobaFett from './components/SteveGame/BobaFett';
-
 import { Router, Route, Redirect } from 'react-router-dom';
 import React from 'react';
 import { Provider } from 'react-redux';
@@ -35,7 +34,7 @@ const App = () => {
     <Provider store={store}>
       <Router history={history}>
         <Route exact path="/" component={Homepage} />
-
+        <Route exact path="/Bobafett" component={BobaFett} />
         <Route exact path="/haunted/intro" component={HauntedIntro} />
         <Route exact path="/haunted/room1" component={HauntedRoom1} />
         <Route exact path="/haunted/room2" component={HauntedRoom2} />

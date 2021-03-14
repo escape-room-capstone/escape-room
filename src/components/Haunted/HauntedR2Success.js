@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import TypeWriterEffect from 'react-typewriter-effect';
 import { Redirect } from 'react-router-dom';
+import { Stage, Layer, Text, Circle, Group, Image } from 'react-konva';
+// import css
+import '../../../public/css/HauntedRoom.css';
 
 export const Success = (props) => {
   const [advance, setAdvance] = useState(false);
@@ -16,8 +19,20 @@ export const Success = (props) => {
           typeSpeed={100}
         />
       </div>
-      <div>YAY YOU MADE IT</div>
-      {advance ? <Redirect to="/haunted/room3" /> : ''}
+
+      <Stage
+        onClick={(e) => {
+          console.log(e.evt.layerX, 'layerX position');
+          console.log(e.evt.layerY), 'layerY position)';
+        }}
+        height={700}
+        align="center"
+        width={1200}
+      >
+        <Layer></Layer>
+      </Stage>
+
+      {advance ? <Redirect push to="/haunted/room3" /> : ''}
     </div>
   );
 };

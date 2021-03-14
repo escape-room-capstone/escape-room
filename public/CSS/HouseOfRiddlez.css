@@ -1,0 +1,269 @@
+body {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+/* main container for all components */
+.container {
+  background-color: white;
+}
+
+/* background div for all components */
+.background {
+  background-repeat: no-repeat;
+  margin: 1rem auto;
+  border: 20px solid black;
+  background-size: contain;
+  height: 40rem;
+  width: 60rem;
+}
+
+/* background images for all components  */
+#home {
+  flex: 3;
+  background-image: url('../Images/home.jpg');
+}
+
+#livingroom {
+  background-image: url('../Images/livingroom.jpg');
+}
+
+#roomOne {
+  background-image: url('../Images/roomOne.jpg');
+}
+
+#roomTwo {
+  background-image: url('../Images/roomTwo.jpg');
+}
+
+#attic {
+  background-image: url('../Images/attic.jpg');
+}
+
+#backRoom {
+  background-image: url('../Images/backroom.jpg');
+}
+
+/* HOUSE OF RIDDLES COMPONENT */
+
+.houseContainer {
+  background-color: white;
+}
+
+/* not visible buttons */
+.secretButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* secretbutton location */
+#roomOneButton {
+  height: 7.5rem;
+  width: 14.4rem;
+  position: relative;
+  top: 220px;
+  left: 120px;
+  margin-right: 0;
+}
+
+#roomTwoButton {
+  height: 12.5rem;
+  width: 7rem;
+  position: relative;
+  top: 75px;
+  left: 230px;
+  margin-right: 0;
+}
+
+#atticButton {
+  height: 5rem;
+  width: 4rem;
+  position: relative;
+  top: 55px;
+  left: 500px;
+  margin-right: 0;
+}
+
+#livingRoomButton {
+  height: 17rem;
+  width: 10rem;
+  position: relative;
+  top: 215px;
+  left: 95px;
+  margin-right: 0;
+}
+
+#backRoomButton {
+  height: 16rem;
+  width: 7rem;
+  position: relative;
+  top: 320px;
+  left: 220px;
+  margin-right: 0;
+}
+
+/* REACT MODALS CSS */
+
+/* all classNames for modal, basic div */
+.modal {
+  height: 45rem;
+  width: 65rem;
+  outline: none;
+}
+
+/* Add Animation to Modal below*/
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+/* used inside of modal div */
+.modal-content {
+  margin: auto;
+  height: 45rem;
+  width: 65rem;
+  color: whitesmoke;
+  font-size: 20px;
+  /* animation-name: animatetop;
+  animation-duration: 0.4s; */
+}
+
+/* The Modals Close Button  */
+.close {
+  position: relative;
+  top: -10px;
+  right: 1px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  float: right;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: grey;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* used as overlayClassName */
+.OverlayAttic {
+  margin: 15.5rem auto;
+  padding: 20px;
+  height: 45rem;
+  width: 65rem;
+  position: absolute;
+  /* inset kinda works like a margin, 
+  but if removed, portal does not pop up */
+  inset: 0;
+  background-color: #0c4483e0;
+  box-shadow: 0px 0px 30px 10px #0c4483e0;
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+}
+
+.OverlayBackRoom {
+  margin: 15.5rem auto;
+  padding: 20px;
+  height: 45rem;
+  width: 65rem;
+  position: absolute;
+  /* inset kinda works like a margin, 
+  but if removed, portal does not pop up */
+  inset: 0;
+  background-color: #aa4375d2;
+  box-shadow: 0px 0px 30px 10px #aa4375d2;
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+}
+
+.OverlayRoomOne {
+  margin: 15.5rem auto;
+  padding: 20px;
+  height: 45rem;
+  width: 65rem;
+  position: absolute;
+  /* inset kinda works like a margin, 
+  but if removed, portal does not pop up */
+  inset: 0;
+  background-color: #8133c0d2;
+  box-shadow: 0px 0px 30px 10px #8133c0d2;
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+}
+
+.OverlayRoomTwo {
+  margin: 15.5rem auto;
+  padding: 20px;
+  height: 45rem;
+  width: 65rem;
+  position: absolute;
+  /* inset kinda works like a margin, 
+  but if removed, portal does not pop up */
+  inset: 0;
+  background-color: #d6bb23d2;
+  box-shadow: 0px 0px 30px 10px#d6bb23d2;
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+}
+
+.OverlayLivingRoom {
+  margin: 15.5rem auto;
+  padding: 20px;
+  height: 45rem;
+  width: 65rem;
+  position: absolute;
+  /* inset kinda works like a margin, 
+  but if removed, portal does not pop up */
+  inset: 0;
+  background-color: #22a0b6c9;
+  box-shadow: 0px 0px 30px 10px #22a0b6c9;
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+}
+
+/* LETTERS BANK COMPONENT CSS */
+.bankContainer {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  width: 60rem;
+  /* justify-content: center; */
+}
+.bankRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.bankDivs {
+  font-size: 13px;
+  border: dashed 2px black;
+  margin: 0 auto;
+  padding-bottom: 1rem;
+  width: 28rem;
+  overflow: wrap;
+}
+
+.bankHeadings {
+  text-align: center;
+  text-decoration: underline;
+}
+
+.bankParagraphs {
+  margin: 2px;
+  padding: 0 1rem;
+  width: 26rem;
+}

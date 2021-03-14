@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import '../../../public/CSS/Bank.css';
 
@@ -6,15 +6,28 @@ const BankGameLevel3 = (props) => {
   const [showKeypad, setShowKeypad] = useState(false);
   const [attempts, setAttempts] = useState(9);
   const [codeEntered, setCodeEntered] = useState('');
+  const [points, setPoints] = useState(0);
+
+
+  useEffect(()=>{
+    console.log(points);
+    if(points === 1){
+      setTimeout(() => {
+        props.history.push("/BankGameVictory")
+      }, 2000);
+    }
+  })
 
   const handleChange = (e) => {
     setCodeEntered(e.target.value);
     console.log(codeEntered);
   };
   const handleSubmit = (e) => {
+    e.preventDefault();
     if (codeEntered === '18776') {
+      setPoints(points+1);
+      setShowKeypad(false);
       alert('Congratulations! You successfully robbed the bank !!!');
-      props.history.push('/BankgameVictory');
     }
     if (attempts === 0) {
       alert('You got caught, enjoy your life in prison...');
@@ -23,7 +36,6 @@ const BankGameLevel3 = (props) => {
       alert(`INCORRECT! You have ${attempts} attempts remaining...`);
       setAttempts(attempts - 1);
       setCodeEntered('');
-      e.preventDefault();
     }
   };
 
@@ -56,14 +68,13 @@ const BankGameLevel3 = (props) => {
         <form onSubmit={handleSubmit}>
           <label>
             Enter Code :
-            <textarea value={codeEntered} onChange={handleChange} />
+            <input style={{margin: "10px" }} value={codeEntered} onChange={handleChange} />
           </label>
           <input type="submit" value="Submit" />
         </form>
 
-        <button onClick={() => props.history.push('/Bankgame2')}>
-          {' '}
-          Back to level 2{' '}
+        <button onClick={() => props.history.push('/Bankgame2')}>          
+          Back to level 2
         </button>
         <button
           style={{ marginLeft: '10px' }}

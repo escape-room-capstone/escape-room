@@ -187,11 +187,13 @@ export const HauntedRoom2 = (props) => {
       </Stage>
 
       <Modal style={customStyles} isOpen={room.showModal}>
-        {room.clues.one.show && <PuzzleOne solve={() => setSolved('one')} />}
+        {/* {room.clues.one.show && <PuzzleOne solve={() => setSolved('one')} />} */}
+        {room.clues.one.show && <ClueOne solve={() => setSolved('one')} />}
         {room.clues.two.show && <ClueTwo solve={() => setSolved('two')} />}
         {room.clues.three.show && (
           <ClueThree solve={() => setSolved('three')} />
         )}
+
         <button
           onClick={() =>
             setRoom((prevRoom) => {

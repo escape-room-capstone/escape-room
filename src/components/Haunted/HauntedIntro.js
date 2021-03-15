@@ -10,8 +10,11 @@ const RainScene = (props) => {
 };
 
 export const HauntedIntro = (props) => {
-  const [advance, setAdvance] = useState(false);
-  useEffect(() => setTimeout(() => setAdvance(true), 8000), []);
+  // const [advance, setAdvance] = useState(false);
+  useEffect(
+    () => setTimeout(() => props.history.push('/haunted/room1'), 9000),
+    []
+  );
   return (
     <div className="game-room">
       <div className="narrative intro">
@@ -37,7 +40,7 @@ export const HauntedIntro = (props) => {
           <RainScene />
         </Layer>
       </Stage>
-      {advance && <Redirect push to="/haunted/room1" />}
+      {/* {advance && <Redirect push to="/haunted/room1" />} */}
     </div>
   );
 };

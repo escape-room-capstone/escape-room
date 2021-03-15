@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import Modal from 'react-modal'
-import '../../../public/CSS/BobaFett.css'
+import Modal from "react-modal";
+import "../../../public/CSS/BobaFett.css";
 import LeverPuzzle from "./LeverPuzzle";
+import MagicSquarePuzzle from "./MagicSquarePuzzle";
 
 export default function BobaFett() {
   const [leverModalOpen, setLeverModalOpen] = useState(false);
+  const [magicSquareModalOpen, setMagicSquareModalOpen] = useState(false);
   const [leverPuzzleCompleted, setLeverPuzzleCompleted] = useState(false);
-  console.log(leverPuzzleCompleted)
+  const [magicSquarePuzzleCompleted, setMagicSquarePuzzleCompleted] = useState(
+    false
+  );
   return (
     <div className='boba-container'>
       <div className='boba-background'>
@@ -15,7 +19,20 @@ export default function BobaFett() {
           <button onClick={() => setLeverModalOpen(false)}>Close Puzzle</button>
           <LeverPuzzle setLeverPuzzleCompleted={setLeverPuzzleCompleted}/>
         </Modal>
+        <button className='boba-magic-square-button' onClick={() => setMagicSquareModalOpen(true)}></button>
+        <Modal isOpen={magicSquareModalOpen}>
+          <button onClick={() => setMagicSquareModalOpen(false)}>Close Puzzle</button>
+          <MagicSquarePuzzle setMagicSquarePuzzleCompleted={setMagicSquarePuzzleCompleted}/>
+        </Modal>
       </div>
     </div>
   );
+}
+
+{
+  /* <button className='boba-magic-square-button' onClick={() => setMagicSquareModalOpen(true)}></button>
+<Modal isOpen={magicSquareModalOpen}>
+  <button onClick={() => setMagicSquareModalOpen(false)}>Close Puzzle</button>
+  <MagicSquarePuzzle setMagicSquarePuzzleCompleted={setMagicSquarePuzzleCompleted}/>
+</Modal>*/
 }

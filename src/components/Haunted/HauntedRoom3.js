@@ -30,8 +30,6 @@ const KeyPad = (props) => {
 export const HauntedRoom3 = (props) => {
   const [showKeyPad, setShowKeyPad] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [entries, setEntries] = useState([]);
-  const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
   const [keypad, setKeypad] = useState({ entries: [], errror: false });
   const [advance, setAdvance] = useState(false);
@@ -94,7 +92,17 @@ export const HauntedRoom3 = (props) => {
         <Redirect push to="/Haunted/room4" />
       ) : (
         <>
-          <div className="narrative"></div>
+          <div className="narrative">
+            {' '}
+            <TypeWriterEffect
+              textStyle={{ fontFamily: 'Red Hat Display' }}
+              startDelay={50}
+              hideCursorAfterText={true}
+              cursorColor="white"
+              text="The door slams shut behind you..."
+              typeSpeed={80}
+            />
+          </div>
           <Stage
             onClick={(e) => {
               console.log(e.evt.layerX, 'layerX position');

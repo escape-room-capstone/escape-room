@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { Stage, Layer, Star, Text, Circle, Image, Rect } from 'react-konva';
-import { Redirect, Link } from 'react-router-dom';
+import { Stage, Layer, Text, Circle, Image, Rect } from 'react-konva';
+import { Redirect } from 'react-router-dom';
 import useImage from 'use-image';
 import '../../../public/css/HauntedRoom.css';
 import TypeWriterEffect from 'react-typewriter-effect';
@@ -13,7 +12,6 @@ const HauntedHouse = (props) => {
 };
 
 export const HauntedRoom1 = (props) => {
-  console.log(props.history, 'props.history');
   const [buttonSelected, setButtonSelected] = useState(false);
   const [enterHome, setEnterHome] = useState(false);
   return (
@@ -22,7 +20,7 @@ export const HauntedRoom1 = (props) => {
         <TypeWriterEffect
           textStyle={{ fontFamily: 'Red Hat Display' }}
           cursorColor="white"
-          text="You spot a boarded up house across a small bridge."
+          text="You spot a house in the distance..."
           typeSpeed={80}
           hideCursorAfterText={true}
         />

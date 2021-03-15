@@ -17,6 +17,8 @@ import { Success } from './components/Haunted/HauntedR2Success';
 import { HauntedRoom6 } from './components/Haunted/HauntedRoom6';
 import { HauntedRoom7 } from './components/Haunted/HauntedRoom7';
 import { HauntedRoom8 } from './components/Haunted/HauntedRoom8';
+import { HauntedRoom9 } from './components/Haunted/HauntedRoom9';
+import { HauntedFinal } from './components/Haunted/HauntedFinal';
 
 import HouseOfRiddlez from './components/HouseOfRiddlez/HouseOfRiddlez';
 import LivingRoom from './components/HouseOfRiddlez/LivingRoom';
@@ -47,6 +49,8 @@ const App = () => {
         <Route exact path="/haunted/room6" component={HauntedRoom6} />
         <Route exact path="/haunted/room7" component={HauntedRoom7} />
         <Route exact path="/haunted/room8" component={HauntedRoom8} />
+        <Route exact path="/haunted/room9" component={HauntedRoom9} />
+        <Route exact path="/haunted/final" component={HauntedFinal} />
 
         <Route exact path="/houseofriddlez" component={HouseOfRiddlez} />
         <Route exact path="/livingroom" component={LivingRoom} />

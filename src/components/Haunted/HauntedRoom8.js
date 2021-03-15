@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Stage, Layer, Image } from 'react-konva';
-import { Redirect } from 'react-router-dom';
 import useImage from 'use-image';
 import '../../../public/css/HauntedRoom.css';
 import TypeWriterEffect from 'react-typewriter-effect';

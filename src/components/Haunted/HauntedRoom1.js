@@ -1,17 +1,6 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import {
-  Stage,
-  Layer,
-  Star,
-  Text,
-  Circle,
-  Group,
-  Image,
-  Rect,
-} from 'react-konva';
-import Konva from 'konva';
-import { Redirect, Link } from 'react-router-dom';
+import { Stage, Layer, Text, Circle, Image, Rect } from 'react-konva';
+import { Redirect } from 'react-router-dom';
 import useImage from 'use-image';
 import '../../../public/css/HauntedRoom.css';
 import TypeWriterEffect from 'react-typewriter-effect';
@@ -23,7 +12,6 @@ const HauntedHouse = (props) => {
 };
 
 export const HauntedRoom1 = (props) => {
-  console.log(props.history, 'props.history');
   const [buttonSelected, setButtonSelected] = useState(false);
   const [enterHome, setEnterHome] = useState(false);
   return (
@@ -32,7 +20,7 @@ export const HauntedRoom1 = (props) => {
         <TypeWriterEffect
           textStyle={{ fontFamily: 'Red Hat Display' }}
           cursorColor="white"
-          text="You spot a boarded up house across a small bridge."
+          text="You spot a house in the distance..."
           typeSpeed={80}
           hideCursorAfterText={true}
         />
@@ -60,8 +48,8 @@ export const HauntedRoom1 = (props) => {
           <HauntedHouse />
           <Circle
             onClick={() => setEnterHome(true)}
-            x={656}
-            y={473}
+            x={810}
+            y={575}
             radius={35}
             fill={buttonSelected ? '#66ff00' : 'white'}
             onMouseEnter={() => setButtonSelected(true)}
@@ -70,8 +58,8 @@ export const HauntedRoom1 = (props) => {
           <Text
             onClick={() => setEnterHome(true)}
             onMouseEnter={() => setButtonSelected(true)}
-            x={633}
-            y={468}
+            x={785}
+            y={570}
             fontSize={15}
             text="ENTER"
             fill="black"

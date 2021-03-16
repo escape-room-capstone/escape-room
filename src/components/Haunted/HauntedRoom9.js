@@ -1,34 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import TypeWriterEffect from 'react-typewriter-effect';
-import { Redirect } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import { Stage, Layer, Image } from 'react-konva';
 import useImage from 'use-image';
-
-// import css
 import '../../../public/css/HauntedRoom.css';
+import TypeWriterEffect from 'react-typewriter-effect';
 
-const Doorway = (props) => {
-  const [image] = useImage('/Images/darkdoor.jpg');
+const Police = (props) => {
+  const [image] = useImage('/Images/hauntedpolice.jpg');
   return <Image image={image} />;
 };
-export const Success = (props) => {
-  // const [advance, setAdvance] = useState(false);
-  useEffect(
-    () => setTimeout(() => props.history.push('/haunted/room3'), 6000),
-    []
-  );
+
+export const HauntedRoom9 = (props) => {
+  useEffect(() => {
+    setTimeout(() => props.history.push('/haunted/final'), 9500);
+  }, []);
   return (
     <div className="game-room">
       <div className="narrative">
         <TypeWriterEffect
           textStyle={{ fontFamily: 'Red Hat Display' }}
-          startDelay={100}
+          startDelay={50}
+          hideCursorAfterText={true}
           cursorColor="white"
-          text="You run past the ghosts and through an open door at the top of the stairway..."
-          typeSpeed={60}
+          text="The police arrive and drive you home. As you dry off from the rain, you think how lucky you were to have escaped"
+          typeSpeed={65}
         />
       </div>
-
       <Stage
         onClick={(e) => {
           console.log(e.evt.layerX, 'layerX position');
@@ -39,11 +35,9 @@ export const Success = (props) => {
         width={1200}
       >
         <Layer>
-          <Doorway />
+          <Police />
         </Layer>
       </Stage>
-
-      {/* {advance ? <Redirect push to="/haunted/room3" /> : ''} */}
     </div>
   );
 };

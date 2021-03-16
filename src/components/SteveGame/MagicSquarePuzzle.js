@@ -43,7 +43,7 @@ export default function MagicSquarePuzzle({ setMagicSquarePuzzleCompleted }) {
   }, [square]);
 
   return (
-    <>
+    <div className="magic-body">
       <div className='status'>{status}</div>
       <div className="grid-container">
         <div className="sq">
@@ -128,6 +128,6 @@ export default function MagicSquarePuzzle({ setMagicSquarePuzzleCompleted }) {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 }

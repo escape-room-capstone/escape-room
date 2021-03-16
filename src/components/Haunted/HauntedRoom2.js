@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import TypeWriterEffect from 'react-typewriter-effect';
-import { Stage, Layer, Text, Circle, Group, Rect, Image } from 'react-konva';
+import { componentMapping } from './Clues';
+import { Stage, Layer, Rect, Image } from 'react-konva';
 import useImage from 'use-image';
 import { Redirect } from 'react-router-dom';
 //custom modal styles
@@ -44,6 +45,15 @@ export const HauntedRoom2 = (props) => {
 
   const [room, setRoom] = useState({ clues: roomClues, showModal: false });
 
+  //hard-coded - but this would come from db really - and be set in state as props
+  //for multiple puzzles, maybe we can map over the puzzles array and call the function below which returns a component for each value;
+  // that way, we will then have an array of the puzzle components that we want and can access by index
+  const puzzles = ['PuzzleOne'];
+  const PuzzleOne = () => {
+    const Component = componentMapping[puzzles[0]];
+    return <Component />;
+  };
+
   //helper function that takes a clueNum and sets the clue.show to be false, clue.solved to be true,
   //and showModal to be false (may need to change later if we don't want modal to close with solving a clue)
   const setSolved = (clue) => {
@@ -61,7 +71,7 @@ export const HauntedRoom2 = (props) => {
       };
     });
   };
-  //helper function that takes a clueNumber and sets showModal:true and sets the status of the clue.show to be true
+  //helper function that takes a clueNumber and shows the modal and the clue
   const show = (clue) => {
     setRoom((prevRoom) => {
       return {
@@ -103,7 +113,7 @@ export const HauntedRoom2 = (props) => {
               const container = e.target.getStage().container();
               container.style.cursor = 'default';
             }}
-            onClick={() => show('one', setRoom)}
+            onClick={() => show('one')}
             solved={room.clues.one.solved}
             x={585}
             y={300}
@@ -177,12 +187,13 @@ export const HauntedRoom2 = (props) => {
       </Stage>
 
       <Modal style={customStyles} isOpen={room.showModal}>
-        <p>This is a modal. please close it now</p>
+        {/* {room.clues.one.show && <PuzzleOne solve={() => setSolved('one')} />} */}
         {room.clues.one.show && <ClueOne solve={() => setSolved('one')} />}
         {room.clues.two.show && <ClueTwo solve={() => setSolved('two')} />}
         {room.clues.three.show && (
           <ClueThree solve={() => setSolved('three')} />
         )}
+
         <button
           onClick={() =>
             setRoom((prevRoom) => {

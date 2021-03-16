@@ -30,9 +30,8 @@ const KeyPad = (props) => {
 export const HauntedRoom3 = (props) => {
   const [showKeyPad, setShowKeyPad] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [entries, setEntries] = useState([]);
-  const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
+  const [keypad, setKeypad] = useState({ entries: [], errror: false });
   const [advance, setAdvance] = useState(false);
   const [cirlceVisibility, setCircleVisibility] = useState({
     one: false,
@@ -42,27 +41,30 @@ export const HauntedRoom3 = (props) => {
   });
 
   const addNumber = (num) => {
-    setEntries((prevEntries) => [...prevEntries, num]);
+    setKeypad((prevKeypad) => ({
+      ...prevKeypad,
+      entries: [...prevKeypad.entries, num],
+    }));
   };
 
   useEffect(() => {
     if (success) {
-      setTimeout(() => setAdvance(true), 2000);
+      setTimeout(() => setAdvance(true), 1000);
     }
-    if (error.length) {
-      setTimeout(() => setEntries([]), 1500);
+    if (keypad.error) {
+      setTimeout(
+        () => setKeypad((prevKeypad) => ({ ...prevKeypad, error: false })),
+        1000
+      );
     }
-    if (!entries.length) {
-      setError('');
-    }
-    if (entries.length >= 4) {
-      if (entries.join('') === '1337') {
+    if (keypad.entries.length === 4) {
+      if (keypad.entries.join('') === '1337') {
         setSuccess(true);
       } else {
-        setError('incorrect code');
+        setKeypad({ entries: [], error: true });
       }
     }
-  }, [entries, error, success]);
+  }, [keypad, success]);
   const enterNumber = (x, y) => {
     if (x >= 102 && x <= 159) {
       if (y >= 60 && y <= 133) addNumber(1);
@@ -90,7 +92,17 @@ export const HauntedRoom3 = (props) => {
         <Redirect push to="/Haunted/room4" />
       ) : (
         <>
-          <div className="narrative"></div>
+          <div className="narrative">
+            {' '}
+            <TypeWriterEffect
+              textStyle={{ fontFamily: 'Red Hat Display' }}
+              startDelay={50}
+              hideCursorAfterText={true}
+              cursorColor="white"
+              text="The door slams shut behind you..."
+              typeSpeed={80}
+            />
+          </div>
           <Stage
             onClick={(e) => {
               console.log(e.evt.layerX, 'layerX position');
@@ -116,7 +128,7 @@ export const HauntedRoom3 = (props) => {
                 x={500}
                 y={200}
                 fill="white"
-                radius={20}
+                radius={30}
               ></Circle>
               <Text x={495} y={190} text="7" flll="red" fontSize={25}></Text>
 
@@ -128,7 +140,7 @@ export const HauntedRoom3 = (props) => {
                 x={200}
                 y={400}
                 fill="white"
-                radius={20}
+                radius={30}
               ></Circle>
               <Text x={195} y={390} text="1" flll="red" fontSize={25}></Text>
 
@@ -140,7 +152,7 @@ export const HauntedRoom3 = (props) => {
                 x={1000}
                 y={200}
                 fill="white"
-                radius={20}
+                radius={30}
               ></Circle>
               <Text x={995} y={190} text="3" flll="red" fontSize={25}></Text>
 
@@ -152,7 +164,7 @@ export const HauntedRoom3 = (props) => {
                 x={670}
                 y={460}
                 fill="white"
-                radius={20}
+                radius={30}
               ></Circle>
               <Text x={665} y={450} text="3" flll="red" fontSize={25}></Text>
             </Layer>
@@ -167,10 +179,18 @@ export const HauntedRoom3 = (props) => {
                 src="/Images/keypad.jpg"
               />
 
-              <div className={error ? 'keypad-entry red' : 'keypad-entry'}>
-                <p>{entries.join('')}</p>
+              <div
+                className={keypad.error ? 'keypad-entry red' : 'keypad-entry'}
+              >
+                <p>{keypad.entries.join('')}</p>
               </div>
-              {error ? <div className="error">{error}</div> : ''}
+              {keypad.error ? (
+                <div className="error">
+                  <p>Incorrect Entry</p>
+                </div>
+              ) : (
+                ''
+              )}
               {success ? <div className="success">CORRECT</div> : ''}
               <button onClick={() => setShowModal(false)}>CLOSE</button>
             </div>

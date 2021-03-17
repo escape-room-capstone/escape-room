@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Stage, Layer, Text, Circle, Image, Rect } from 'react-konva';
 import { Redirect } from 'react-router-dom';
 import useImage from 'use-image';
+import { connect } from 'react-redux';
 import '../../../public/css/HauntedRoom.css';
 import TypeWriterEffect from 'react-typewriter-effect';
+import { fetchGame } from '../../reducers/game.js';
 
 //make images to attach to stage
 const HauntedHouse = (props) => {
@@ -11,9 +13,14 @@ const HauntedHouse = (props) => {
   return <Image image={image} />;
 };
 
-export const HauntedRoom1 = (props) => {
+const _HauntedRoom1 = (props) => {
   const [buttonSelected, setButtonSelected] = useState(false);
   const [enterHome, setEnterHome] = useState(false);
+  useEffect(() => {
+    //hard coded gameId for now for testing purposes
+    props.getGame(1);
+  }, []);
+  console.log(props, 'props of hauntedroom1');
   return (
     <div className="game-room">
       <div className="narrative">
@@ -72,17 +79,15 @@ export const HauntedRoom1 = (props) => {
 };
 
 {
-  /* <Portal>
-          <div>
-            <button
-              onClick={() => setEnterHome(true)}
-              id="house"
-              onMouseEnter={() => setButtonSelected(true)}
-              onMouseLeave={() => setButtonSelected(false)}
-              className={buttonSelected ? 'selected' : 'house'}
-            >
-              <strong> ENTER</strong>
-            </button>
-          </div>
-        </Portal> */
 }
+
+const mapDispatch = (dispatch) => {
+  return {
+    getGame: (gameId) => dispatch(fetchGame(gameId)),
+  };
+};
+
+export const HauntedRoom1 = connect(
+  (state) => state,
+  mapDispatch
+)(_HauntedRoom1);

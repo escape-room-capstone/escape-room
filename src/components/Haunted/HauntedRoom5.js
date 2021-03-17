@@ -1,16 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import {
-  Stage,
-  Layer,
-  Star,
-  Text,
-  Circle,
-  Line,
-  Group,
-  Image,
-  Rect,
-} from 'react-konva';
+import { Stage, Layer, Image, Rect } from 'react-konva';
 
 //react modal
 import Modal from 'react-modal';

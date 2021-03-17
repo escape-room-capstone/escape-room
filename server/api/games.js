@@ -1,0 +1,18 @@
+const router = require('express').Router();
+const {
+  models: { Puzzle, Game, GamePuzzles },
+} = require('../db');
+
+//mounted at /api/games
+router.get('/:gameId', async (req, res, next) => {
+  try {
+    let game = await Game.findByPk(req.params.gameId);
+    //this is an instance method I created when defining the Game model
+    game = await game.loadGame();
+    res.send(game);
+  } catch (ex) {
+    next(ex);
+  }
+});
+
+module.exports = router;

@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TypeWriterEffect from 'react-typewriter-effect';
 import { componentMapping } from './Clues';
+import { connect } from 'react-redux';
+
 import { Stage, Layer, Rect, Image } from 'react-konva';
 import useImage from 'use-image';
 import { Redirect } from 'react-router-dom';
@@ -10,6 +12,7 @@ import { customStyles } from '../../utils/helpers';
 import '../../../public/css/HauntedRoom.css';
 
 // import clue components
+//previosu hard-coded puzzles for the room
 import { ClueOne, ClueTwo, ClueThree } from './HauntedRoom2Clues';
 
 //react modal
@@ -36,7 +39,7 @@ export const Lock = (props) => {
   );
 };
 
-export const HauntedRoom2 = (props) => {
+const _HauntedRoom2 = (props) => {
   const roomClues = {
     one: { solved: false, show: false },
     two: { solved: false, show: false },
@@ -45,15 +48,22 @@ export const HauntedRoom2 = (props) => {
 
   const [room, setRoom] = useState({ clues: roomClues, showModal: false });
 
-  //hard-coded - but this would come from db really - and be set in state as props
-  //for multiple puzzles, maybe we can map over the puzzles array and call the function below which returns a component for each value;
-  // that way, we will then have an array of the puzzle components that we want and can access by index
-  const puzzles = ['PuzzleOne'];
-  const PuzzleOne = () => {
-    const Component = componentMapping[puzzles[0]];
-    return <Component />;
+  //this is now coming from DB and is set in state and mapped to props
+  const { puzzles } = props;
+  console.log(puzzles, 'puzzles');
+  //dynamically rendering components based on which puzzles are in the array from the DB
+  const Puzzle1 = (props) => {
+    const Component = componentMapping[puzzles[0].name];
+    return <Component {...props} />;
   };
-
+  const Puzzle2 = (props) => {
+    const Component = componentMapping[puzzles[1].name];
+    return <Component {...props} />;
+  };
+  const Puzzle3 = (props) => {
+    const Component = componentMapping[puzzles[2].name];
+    return <Component {...props} />;
+  };
   //helper function that takes a clueNum and sets the clue.show to be false, clue.solved to be true,
   //and showModal to be false (may need to change later if we don't want modal to close with solving a clue)
   const setSolved = (clue) => {
@@ -101,7 +111,6 @@ export const HauntedRoom2 = (props) => {
       >
         <Layer>
           <HauntedHallway />
-
           <Rect
             onMouseOver={(e) => {
               // style stage container:
@@ -187,12 +196,16 @@ export const HauntedRoom2 = (props) => {
       </Stage>
 
       <Modal style={customStyles} isOpen={room.showModal}>
-        {/* {room.clues.one.show && <PuzzleOne solve={() => setSolved('one')} />} */}
-        {room.clues.one.show && <ClueOne solve={() => setSolved('one')} />}
+        {room.clues.one.show && <Puzzle1 solve={() => setSolved('one')} />}
+        {room.clues.two.show && <Puzzle2 solve={() => setSolved('two')} />}
+        {room.clues.three.show && <Puzzle3 solve={() => setSolved('three')} />}
+
+        {/* hard-coded */}
+        {/* {room.clues.one.show && <ClueOne solve={() => setSolved('one')} />}
         {room.clues.two.show && <ClueTwo solve={() => setSolved('two')} />}
         {room.clues.three.show && (
           <ClueThree solve={() => setSolved('three')} />
-        )}
+        )} */}
 
         <button
           onClick={() =>
@@ -223,3 +236,10 @@ export const HauntedRoom2 = (props) => {
     </div>
   );
 };
+
+const mapState = (state) => {
+  const { puzzles } = state.game;
+  return { puzzles };
+};
+
+export const HauntedRoom2 = connect(mapState)(_HauntedRoom2);

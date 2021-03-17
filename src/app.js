@@ -58,7 +58,6 @@ const App = () => {
         <Route exact path="/BankgameVictory" component={BankGameVictory} />
         {/* <Redirect to="/" /> */}
       </Router>
-
     </Provider>
   );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'react-dom';
+import ReactDOM, { render } from 'react-dom';
 import App from './app';
 import store from './store';
 
@@ -12,7 +12,7 @@ import Modal from 'react-modal';
 const app = document.querySelector('#app');
 Modal.setAppElement(app);
 
-render(
+ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <App />

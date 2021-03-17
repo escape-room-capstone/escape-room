@@ -1,6 +1,15 @@
 const db = require('./db');
 
 const User = require('./models/User');
+const Puzzle = require('./models/Puzzle');
+const Theme = require('./models/Theme');
+
+//I want to make associations so that themes can have many puzzles
+//and puzzles can be assigned to which ever theme.
+//Im not sure about the below?
+Theme.hasMany(Puzzle);
+// Puzzle.hasMany(Theme);
+Puzzle.belongsTo(Theme);
 
 const syncAndSeed = async () => {
   await db.sync({ force: true });
@@ -56,7 +65,29 @@ const syncAndSeed = async () => {
     }),
   ]);
 
+  const puzzles = await Promise.all([
+    Puzzle.create({
+      name: 'atticP1',
+      prompt: 'this is attic riddle 1',
+      solution: 'this is attic solution 1',
+      clue: 'i am attic puzzle 1 clue',
+    }),
+    Puzzle.create({
+      name: 'atticP2',
+      prompt: 'this is attic riddle 2',
+      solution: 'this is attic solution 2',
+      clue: 'i am attic puzzle 2 clue',
+    }),
+    Puzzle.create({
+      name: 'atticP3',
+      prompt: 'this is attic riddle 3',
+      solution: 'this is attic solution 3',
+      clue: 'i am attic puzzle 3 clue',
+    }),
+  ]);
+
   const [cody, arwinder, kate, nes, steve, roman] = users;
+  const [atticPuzzleOne, atticPuzzleTwo, atticPuzzleThree] = puzzles;
 
   return {
     users: {
@@ -67,6 +98,11 @@ const syncAndSeed = async () => {
       steve,
       roman,
     },
+    puzzles: {
+      atticPuzzleOne,
+      atticPuzzleTwo,
+      atticPuzzleThree,
+    },
   };
 };
 
@@ -75,5 +111,6 @@ module.exports = {
   syncAndSeed,
   models: {
     User,
+    Puzzle,
   },
 };

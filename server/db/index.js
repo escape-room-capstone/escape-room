@@ -86,6 +86,16 @@ const syncAndSeed = async () => {
     }),
   ]);
 
+  // const RiddleTheme = await Theme.create({
+  //   name: 'House of Riddles Theme',
+  //   backgroundImageOne: '../RiddlezImages/home.jpg',
+  //   backgroundImageTwo:'../RiddlezImages/livingroom.jpg',
+  //   backgroundImageThree: '../RiddlezImages/roomOne.jpg',
+  //   backgroundImageFour: '../RiddlezImages/roomTwo.jpg',
+  //   backgroundImageFive: '../RiddlezImages/attic.jpg',
+  //   backgroundImageSix: '../RiddlezImages/backroom.jpg',
+  // })
+
   const [cody, arwinder, kate, nes, steve, roman] = users;
   const [atticPuzzleOne, atticPuzzleTwo, atticPuzzleThree] = puzzles;
 

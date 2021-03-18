@@ -32,6 +32,7 @@ const syncAndSeed = async () => {
   await GamePuzzles.create({ gameId: 1, puzzleId: 2 });
   await GamePuzzles.create({ gameId: 1, puzzleId: 4 });
 
+
   const users = await Promise.all([
     User.create({
       firstName: 'Cody',

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server",
     "build": "webpack",
-    "seed": "node seed.js",
+    "seed": "node server/seed/seed.js",
     "build:watch": "webpack --watch",
     "start:server": "node-dev --respawn server",
     "start:dev": "npm run build:watch & npm run start:server",

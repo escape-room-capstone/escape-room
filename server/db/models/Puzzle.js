@@ -1,4 +1,3 @@
-
 const db = require('../db');
 const { Sequelize, INTEGER } = require('sequelize');
 const { STRING } = Sequelize;
@@ -27,6 +26,6 @@ const Puzzle = db.define('puzzle', {
   name: {
     type: STRING,
   },
-
+});
 
 module.exports = Puzzle;

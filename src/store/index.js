@@ -1,10 +1,9 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-// import { createLogger } from 'redux-logger';
-// import thunkMiddleware from 'redux-thunk';
-// import { composeWithDevTools } from 'redux-devtools-extension';
+import { createLogger } from 'redux-logger';
+import thunkMiddleware from 'redux-thunk';
 
-import { puzzleReducer } from './puzzles';
-import { userReducer } from './users';
+import { puzzleReducer } from '../reducers/puzzles';
+import { userReducer } from '../reducers/users';
 
 const reducer = combineReducers({
   puzzles: puzzleReducer,

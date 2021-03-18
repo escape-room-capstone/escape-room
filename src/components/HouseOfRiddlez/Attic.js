@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import '../../../public/CSS/HouseOfRiddlez.css';
 import ReactModal from 'react-modal';
-import { Link } from 'react-router-dom';
 import LetterBank from './LetterBank';
+import { connect, useSelector, useDispatch } from 'react-redux';
+import { setPuzzles } from '../../store/puzzles.js';
 
-const Attic = () => {
+const Attic = ({ puzzles }, props) => {
   const [atticPuzzle1, setAtticPuzzle1] = useState({
     riddle: '',
     solution: '',
@@ -17,7 +18,7 @@ const Attic = () => {
     clue2: 'clue2',
     clue3: 'i am attic clue3',
   });
-
+  setPuzzles();
   const [count, setCount] = useState(0);
 
   // const modal = document.getElementById('modal-content');
@@ -26,7 +27,8 @@ const Attic = () => {
   //     modal.portalClassName.style.display = 'none';
   //   }
   // };
-
+  console.log('state=>', puzzles);
+  console.log('props=>', props);
   return (
     <div className="container">
       <LetterBank atticClue1={atticClues.clue1} />
@@ -96,4 +98,15 @@ const Attic = () => {
   );
 };
 
+// const mapToState = (state) => {
+//   return state;
+// };
+
+// const mapToDispatch = (dispatch) => {
+//   return {
+//     getPuzzles: () => dispatch(setPuzzles()),
+//   };
+// };
+
+// export default connect(mapToState, mapToDispatch)(Attic);
 export default Attic;

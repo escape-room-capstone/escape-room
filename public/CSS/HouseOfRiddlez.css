@@ -20,27 +20,27 @@ body {
 /* background images for all components  */
 #home {
   flex: 3;
-  background-image: url('../Images/home.jpg');
+  background-image: url('../RiddlezImages/home.jpg');
 }
 
 #livingroom {
-  background-image: url('../Images/livingroom.jpg');
+  background-image: url('../RiddlezImages/livingroom.jpg');
 }
 
 #roomOne {
-  background-image: url('../Images/roomOne.jpg');
+  background-image: url('../RiddlezImages/roomOne.jpg');
 }
 
 #roomTwo {
-  background-image: url('../Images/roomTwo.jpg');
+  background-image: url('../RiddlezImages/roomTwo.jpg');
 }
 
 #attic {
-  background-image: url('../Images/attic.jpg');
+  background-image: url('../RiddlezImages/attic.jpg');
 }
 
 #backRoom {
-  background-image: url('../Images/backroom.jpg');
+  background-image: url('../RiddlezImages/backroom.jpg');
 }
 
 /* HOUSE OF RIDDLES COMPONENT */

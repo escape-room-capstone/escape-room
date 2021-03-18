@@ -1,12 +1,13 @@
-
-
 const router = require('express').Router();
-const Puzzle = require('../db/models/Puzzle');
+const {
+  models: { Theme },
+} = require('../db');
+module.exports = router;
 
 router.get('/', async (req, res, next) => {
   try {
-    const puzzles = await Puzzle.findAll();
-    res.status(200).send(puzzles);
+    const themes = await Theme.findAll();
+    res.status(200).send(themes);
   } catch (err) {
     next(err);
   }
@@ -15,14 +16,9 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const id = req.params.id;
-    const puzzle = await Puzzle.findByPk(id);
-    res.status(200).send(puzzle);
+    const theme = await Theme.findByPk(id);
+    res.status(200).send(theme);
   } catch (err) {
     next(err);
   }
 });
-
-
-
-module.exports = router;
-

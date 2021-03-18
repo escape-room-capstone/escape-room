@@ -1,9 +1,9 @@
 import BobaFett from './components/SteveGame/BobaFett';
 import { Router, Route, Redirect } from 'react-router-dom';
 import React from 'react';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import Homepage from './components/Homepage';
-import store from './store';
+import store from './store/index';
 import history from './history';
 
 import { HauntedRoom1 } from './components/Haunted/HauntedRoom1';

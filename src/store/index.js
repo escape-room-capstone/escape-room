@@ -1,21 +1,24 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+// import { createStore, combineReducers, applyMiddleware } from 'redux';
 // import { createLogger } from 'redux-logger';
 // import thunkMiddleware from 'redux-thunk';
 // import { composeWithDevTools } from 'redux-devtools-extension';
 
-import { puzzleReducer } from './puzzles';
-import { userReducer } from './users';
+// import { puzzleReducer } from './puzzles';
+// import { userReducer } from './users';
+// import { gameReducer } from './game';
 
-const reducer = combineReducers({
-  puzzles: puzzleReducer,
-  users: userReducer,
-  // themes: themeReducer
-});
+// const initialState = {};
 
+// const rootReducer = combineReducers({
+//   puzzles: puzzleReducer,
+//   users: userReducer,
+//   game: gameReducer,
+//   // themes: themeReducer
+// });
 // const middleware = composeWithDevTools(
 //   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 // );
 
-const store = createStore(reducer, applyMiddleware);
+// const store = createStore(rootReducer, applyMiddleware);
 
-export default store;
+// export default store;

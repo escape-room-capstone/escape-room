@@ -1,8 +1,6 @@
-
 //access point for all things db related
 
 const db = require('./db.js');
-
 
 const User = require('./models/User');
 const Theme = require('./models/Theme');
@@ -22,6 +20,7 @@ const syncAndSeed = async () => {
   const defaultHauntedGame = await Game.create({
     title: 'The Haunted House',
     theme: 'haunted',
+    numPuzzles: 9,
   });
   const gameId = defaultHauntedGame.id;
   //   //create 3 puzzles associated with default Haunted Game
@@ -30,11 +29,10 @@ const syncAndSeed = async () => {
     await Puzzle.create({ name: `Puzzle${i}` });
   }
   await GamePuzzles.create({ gameId: 1, puzzleId: 1 });
-  await GamePuzzles.create({ gameId: 1, puzzleId: 6 });
-  await GamePuzzles.create({ gameId: 1, puzzleId: 5 });
-  
-  
-   const users = await Promise.all([
+  await GamePuzzles.create({ gameId: 1, puzzleId: 2 });
+  await GamePuzzles.create({ gameId: 1, puzzleId: 4 });
+
+  const users = await Promise.all([
     User.create({
       firstName: 'Cody',
       lastName: 'Redmile',
@@ -85,26 +83,26 @@ const syncAndSeed = async () => {
     }),
   ]);
 
-//   const puzzles = await Promise.all([
-//     Puzzle.create({
-//       name: 'atticP1',
-//       prompt: 'this is attic riddle 1',
-//       solution: 'this is attic solution 1',
-//       clue: 'i am attic puzzle 1 clue',
-//     }),
-//     Puzzle.create({
-//       name: 'atticP2',
-//       prompt: 'this is attic riddle 2',
-//       solution: 'this is attic solution 2',
-//       clue: 'i am attic puzzle 2 clue',
-//     }),
-//     Puzzle.create({
-//       name: 'atticP3',
-//       prompt: 'this is attic riddle 3',
-//       solution: 'this is attic solution 3',
-//       clue: 'i am attic puzzle 3 clue',
-//     }),
-//   ]);
+  //   const puzzles = await Promise.all([
+  //     Puzzle.create({
+  //       name: 'atticP1',
+  //       prompt: 'this is attic riddle 1',
+  //       solution: 'this is attic solution 1',
+  //       clue: 'i am attic puzzle 1 clue',
+  //     }),
+  //     Puzzle.create({
+  //       name: 'atticP2',
+  //       prompt: 'this is attic riddle 2',
+  //       solution: 'this is attic solution 2',
+  //       clue: 'i am attic puzzle 2 clue',
+  //     }),
+  //     Puzzle.create({
+  //       name: 'atticP3',
+  //       prompt: 'this is attic riddle 3',
+  //       solution: 'this is attic solution 3',
+  //       clue: 'i am attic puzzle 3 clue',
+  //     }),
+  //   ]);
 
   // const RiddleTheme = await Theme.create({
   //   name: 'House of Riddles Theme',
@@ -117,10 +115,11 @@ const syncAndSeed = async () => {
   // })
 
   const [cody, arwinder, kate, nes, steve, roman] = users;
-//   const [atticPuzzleOne, atticPuzzleTwo, atticPuzzleThree] = puzzles;
-  
-  
+  //   const [atticPuzzleOne, atticPuzzleTwo, atticPuzzleThree] = puzzles;
 };
 
-module.exports = { db, syncAndSeed, models: { Puzzle, Game, GamePuzzles, User } };
-
+module.exports = {
+  db,
+  syncAndSeed,
+  models: { Puzzle, Game, GamePuzzles, User },
+};

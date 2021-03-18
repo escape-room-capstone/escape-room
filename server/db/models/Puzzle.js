@@ -1,6 +1,6 @@
 const db = require('../db');
 const { Sequelize, INTEGER } = require('sequelize');
-const { STRING } = Sequelize;
+const { STRING, TEXT } = Sequelize;
 
 const Puzzle = db.define('puzzle', {
   type: {
@@ -8,6 +8,12 @@ const Puzzle = db.define('puzzle', {
   },
   number: {
     type: INTEGER,
+  },
+  description: {
+    type: TEXT,
+  },
+  nickname: {
+    type: STRING,
   },
   prompt: {
     type: STRING,

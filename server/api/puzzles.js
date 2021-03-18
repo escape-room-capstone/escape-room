@@ -1,8 +1,7 @@
+
+
 const router = require('express').Router();
-const {
-  models: { Puzzle },
-} = require('../db');
-module.exports = router;
+const Puzzle = require('../db/models/Puzzle');
 
 router.get('/', async (req, res, next) => {
   try {
@@ -23,21 +22,7 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-// router.put('/:id', async (req, res, next) => {
-//   try {
-//     const puzzle = await Puzzle.findByPk(req.params.id);
-//     res.status(201).send(await puzzle.update(req.body));
-//   } catch (er) {
-//     next(er);
-//   }
-// });
 
-// router.delete('/:id', async (req, res, next) => {
-//   try {
-//     const puzzle = await Puzzle.findByPk(req.params.id);
-//     await puzzle.destroy();
-//     res.sendStatus(204);
-//   } catch (er) {
-//     next(er);
-//   }
-// });
+
+module.exports = router;
+

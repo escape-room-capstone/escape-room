@@ -1,33 +1,25 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import {
-  Stage,
-  Layer,
-  Star,
-  Text,
-  Circle,
-  Line,
-  Group,
-  Image,
-  Rect,
-} from 'react-konva';
+import { Stage, Layer, Image, Rect } from 'react-konva';
 
 //react modal
 import Modal from 'react-modal';
 
 //react-router
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
-import { Portal } from './Portal';
 import useImage from 'use-image';
 
 //css
 import '../../../public/css/HauntedRoom.css';
 
 import TypeWriterEffect from 'react-typewriter-effect';
+
 import { Lock } from './HauntedRoom2';
-//clues
+
+//import clue components
 import { Room5Clue1, Room5Clue2, Room5Clue3 } from './Clues';
+
 //custom modal styles
 import { customStyles } from '../../utils/helpers';
 

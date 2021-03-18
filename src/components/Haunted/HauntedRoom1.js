@@ -1,20 +1,11 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import {
-  Stage,
-  Layer,
-  Star,
-  Text,
-  Circle,
-  Group,
-  Image,
-  Rect,
-} from 'react-konva';
-import Konva from 'konva';
-import { Redirect, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Stage, Layer, Text, Circle, Image, Rect } from 'react-konva';
+import { Redirect } from 'react-router-dom';
 import useImage from 'use-image';
+import { connect } from 'react-redux';
 import '../../../public/css/HauntedRoom.css';
 import TypeWriterEffect from 'react-typewriter-effect';
+import { fetchGame } from '../../reducers/game.js';
 
 //make images to attach to stage
 const HauntedHouse = (props) => {
@@ -22,17 +13,21 @@ const HauntedHouse = (props) => {
   return <Image image={image} />;
 };
 
-export const HauntedRoom1 = (props) => {
-  console.log(props.history, 'props.history');
+const _HauntedRoom1 = (props) => {
   const [buttonSelected, setButtonSelected] = useState(false);
   const [enterHome, setEnterHome] = useState(false);
+  useEffect(() => {
+    //hard coded gameId for now for testing purposes
+    props.getGame(1);
+  }, []);
+  console.log(props, 'props of hauntedroom1');
   return (
     <div className="game-room">
       <div className="narrative">
         <TypeWriterEffect
           textStyle={{ fontFamily: 'Red Hat Display' }}
           cursorColor="white"
-          text="You spot a boarded up house across a small bridge."
+          text="You spot a house in the distance..."
           typeSpeed={80}
           hideCursorAfterText={true}
         />
@@ -60,8 +55,8 @@ export const HauntedRoom1 = (props) => {
           <HauntedHouse />
           <Circle
             onClick={() => setEnterHome(true)}
-            x={656}
-            y={473}
+            x={810}
+            y={575}
             radius={35}
             fill={buttonSelected ? '#66ff00' : 'white'}
             onMouseEnter={() => setButtonSelected(true)}
@@ -70,8 +65,8 @@ export const HauntedRoom1 = (props) => {
           <Text
             onClick={() => setEnterHome(true)}
             onMouseEnter={() => setButtonSelected(true)}
-            x={633}
-            y={468}
+            x={785}
+            y={570}
             fontSize={15}
             text="ENTER"
             fill="black"
@@ -84,17 +79,15 @@ export const HauntedRoom1 = (props) => {
 };
 
 {
-  /* <Portal>
-          <div>
-            <button
-              onClick={() => setEnterHome(true)}
-              id="house"
-              onMouseEnter={() => setButtonSelected(true)}
-              onMouseLeave={() => setButtonSelected(false)}
-              className={buttonSelected ? 'selected' : 'house'}
-            >
-              <strong> ENTER</strong>
-            </button>
-          </div>
-        </Portal> */
 }
+
+const mapDispatch = (dispatch) => {
+  return {
+    getGame: (gameId) => dispatch(fetchGame(gameId)),
+  };
+};
+
+export const HauntedRoom1 = connect(
+  (state) => state,
+  mapDispatch
+)(_HauntedRoom1);

@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node server",
     "build": "webpack",
+    "seed": "node server/seed/seed.js",
     "build:watch": "webpack --watch",
     "seed": "node seed.js",
     "start:server": "node-dev --respawn server",
@@ -51,6 +52,7 @@
     "redux-thunk": "^2.3.0",
     "sequelize": "^6.5.1",
     "style-loader": "^2.0.0",
-    "use-image": "^1.0.7"
+    "use-image": "^1.0.7",
+    "use-sound": "^2.0.1"
   }
 }

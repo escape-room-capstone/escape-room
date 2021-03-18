@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import useImage from 'use-image';
 import TypeWriterEffect from 'react-typewriter-effect';
-import { Stage, Layer, Text, Circle, Group, Image } from 'react-konva';
+import { Stage, Layer, Image } from 'react-konva';
 import { Redirect } from 'react-router-dom';
 
 const RainScene = (props) => {
@@ -10,9 +10,11 @@ const RainScene = (props) => {
 };
 
 export const HauntedIntro = (props) => {
-  console.log(props.history, 'props.history');
   const [advance, setAdvance] = useState(false);
-  useEffect(() => setTimeout(() => setAdvance(true), 8000), []);
+  useEffect(
+    () => setTimeout(() => props.history.push('/haunted/room1'), 9000),
+    []
+  );
   return (
     <div className="game-room">
       <div className="narrative intro">
@@ -38,7 +40,7 @@ export const HauntedIntro = (props) => {
           <RainScene />
         </Layer>
       </Stage>
-      {advance && <Redirect push to="/haunted/room1" />}
+      {/* {advance && <Redirect push to="/haunted/room1" />} */}
     </div>
   );
 };

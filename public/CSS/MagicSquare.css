@@ -1,0 +1,31 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 200px 200px 200px;
+    grid-template-rows: 200px 200px 200px;
+}
+
+.magic-body {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.sq {
+    background: #444;
+    border: 1px solid #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #AAA;
+}
+
+input {
+    text-align: center;
+    font-size: x-large;
+    width: 40px;
+}
+
+.status {
+    font-size: x-large;
+    font-family: verdana;
+}

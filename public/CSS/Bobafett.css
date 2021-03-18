@@ -1,41 +1,37 @@
-#bobaImage {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: auto;
-  width: 100%;
+.boba-container {
+  border: 20px solid black;
+  background-size: contain;
+  height: 60rem;
+  width: 60rem;
+  margin: 4rem auto;
 }
 
-.bobaBg {
-  justify-content: center;
+.boba-background {
+  background-image: url("https://static2.srcdn.com/wordpress/wp-content/uploads/2020/12/The-Mandalorian-Concept-Art-5-Boba-Fett-Ship.jpg?q=50&fit=crop&w=740&h=370");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  height: 60rem;
+  width: 60rem;
 }
 
-body {
-  background-color: black;
-}
-
-h1 {
-  display: flex;
-  color: white;
-  justify-content: center;
-  text-align: center;
-}
-
-p {
-  display: flex;
-  color: white;
-  justify-content: center;
-  text-align: center;
-  margin: 0;
-}
-
-#controls {
-  position: absolute;
-  bottom: 13.5%;
-  left: 14%;
+.boba-lever-button {
+  height: 7rem;
+  width: 10rem;
+  position: relative;
+  top: 60%;
+  left: 80%;
+  margin-right: 0;
   background-color: transparent;
-  border-color: red;
-  width: 220px;
-  height: 120px;
-  cursor: crosshair;
+  border: 4px solid red;
+}
+
+.boba-magic-square-button {
+  height: 14rem;
+  width: 1rem;
+  position: relative;
+  top: 33%;
+  left: 26%;
+  margin-right: 0;
+  background-color: transparent;
+  border: 4px solid red;
 }

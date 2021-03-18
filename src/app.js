@@ -34,38 +34,36 @@ import LetterBank from './components/HouseOfRiddlez/LetterBank';
 
 const App = () => {
   return (
-    <Provider store={store}>
-      <Router history={history}>
-        <Route exact path="/" component={Homepage} />
-        <Route exact path="/Bobafett" component={BobaFett} />
-        <Route exact path="/haunted/intro" component={HauntedIntro} />
-        <Route exact path="/haunted/room1" component={HauntedRoom1} />
-        <Route exact path="/haunted/room2" component={HauntedRoom2} />
-        <Route exact path="/haunted/room3" component={HauntedRoom3} />
-        <Route exact path="/haunted/room2/success" component={Success} />
-        <Route exact path="/haunted/room4" component={HauntedRoom4} />
-        <Route exact path="/haunted/room5" component={HauntedRoom5} />
-        <Route exact path="/haunted/room6" component={HauntedRoom6} />
-        <Route exact path="/haunted/room7" component={HauntedRoom7} />
-        <Route exact path="/haunted/room8" component={HauntedRoom8} />
-        <Route exact path="/haunted/room9" component={HauntedRoom9} />
-        <Route exact path="/haunted/final" component={HauntedFinal} />
+    <Router history={history}>
+      <Route exact path="/" component={Homepage} />
+      <Route exact path="/Bobafett" component={BobaFett} />
+      <Route exact path="/haunted/intro" component={HauntedIntro} />
+      <Route exact path="/haunted/room1" component={HauntedRoom1} />
+      <Route exact path="/haunted/room2" component={HauntedRoom2} />
+      <Route exact path="/haunted/room3" component={HauntedRoom3} />
+      <Route exact path="/haunted/room2/success" component={Success} />
+      <Route exact path="/haunted/room4" component={HauntedRoom4} />
+      <Route exact path="/haunted/room5" component={HauntedRoom5} />
+      <Route exact path="/haunted/room6" component={HauntedRoom6} />
+      <Route exact path="/haunted/room7" component={HauntedRoom7} />
+      <Route exact path="/haunted/room8" component={HauntedRoom8} />
+      <Route exact path="/haunted/room9" component={HauntedRoom9} />
+      <Route exact path="/haunted/final" component={HauntedFinal} />
 
-        <Route exact path="/houseofriddlez" component={HouseOfRiddlez} />
-        <Route exact path="/livingroom" component={LivingRoom} />
-        <Route exact path="/room1" component={RoomOne} />
-        <Route exact path="/room2" component={RoomTwo} />
-        <Route exact path="/backroom" component={BackRoom} />
-        <Route exact path="/attic" component={Attic} />
-        <Route exact path="/letterbank" component={LetterBank} />
+      <Route exact path="/houseofriddlez" component={HouseOfRiddlez} />
+      <Route exact path="/livingroom" component={LivingRoom} />
+      <Route exact path="/room1" component={RoomOne} />
+      <Route exact path="/room2" component={RoomTwo} />
+      <Route exact path="/backroom" component={BackRoom} />
+      <Route exact path="/attic" component={Attic} />
+      <Route exact path="/letterbank" component={LetterBank} />
 
-        <Route exact path="/Bankgame" component={BankGameStart} />
-        <Route exact path="/Bankgame2" component={BankGameLevel2} />
-        <Route exact path="/Bankgame3" component={BankGameLevel3} />
-        <Route exact path="/BankgameVictory" component={BankGameVictory} />
-        {/* <Redirect to="/" /> */}
-      </Router>
-    </Provider>
+      <Route exact path="/Bankgame" component={BankGameStart} />
+      <Route exact path="/Bankgame2" component={BankGameLevel2} />
+      <Route exact path="/Bankgame3" component={BankGameLevel3} />
+      <Route exact path="/BankgameVictory" component={BankGameVictory} />
+      {/* <Redirect to="/" /> */}
+    </Router>
   );
 };
 

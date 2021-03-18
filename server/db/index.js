@@ -20,6 +20,7 @@ const syncAndSeed = async () => {
   const defaultHauntedGame = await Game.create({
     title: 'The Haunted House',
     theme: 'haunted',
+    numPuzzles: 9,
   });
   const gameId = defaultHauntedGame.id;
   //   //create 3 puzzles associated with default Haunted Game
@@ -28,8 +29,9 @@ const syncAndSeed = async () => {
     await Puzzle.create({ name: `Puzzle${i}` });
   }
   await GamePuzzles.create({ gameId: 1, puzzleId: 1 });
-  await GamePuzzles.create({ gameId: 1, puzzleId: 6 });
-  await GamePuzzles.create({ gameId: 1, puzzleId: 5 });
+  await GamePuzzles.create({ gameId: 1, puzzleId: 2 });
+  await GamePuzzles.create({ gameId: 1, puzzleId: 4 });
+
 
   const users = await Promise.all([
     User.create({

@@ -5,12 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "node server",
-    "build": "webpack",
+    "build": "webpack -p",
     "seed": "node server/seed/seed.js",
     "build:watch": "webpack --watch",
     "start:server": "node-dev --respawn server",
-    "start:dev": "npm run build:watch & npm run start:server",
-    "start:dev:seed": "SEED=true npm run start:dev"
+    "start:dev": "npm run build:watch & npm run start:server"
   },
   "repository": {
     "type": "git",
@@ -47,6 +46,7 @@
     "react-router-dom": "^5.2.0",
     "react-typewriter-effect": "^1.0.2",
     "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.9",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "sequelize": "^6.5.1",

@@ -1,10 +1,14 @@
 const db = require('../db');
-const { Sequelize, ENUM } = require('sequelize');
+const { Sequelize, ENUM, INTEGER } = require('sequelize');
 const { STRING } = Sequelize;
 
 const Game = db.define('game', {
   title: {
     type: STRING,
+  },
+  numPuzzles: {
+    type: INTEGER,
+    allowNull: false,
   },
   theme: {
     type: ENUM('haunted' || 'house' || 'bank' || 'star wars'),

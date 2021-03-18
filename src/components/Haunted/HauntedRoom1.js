@@ -5,7 +5,7 @@ import useImage from 'use-image';
 import { connect } from 'react-redux';
 import '../../../public/css/HauntedRoom.css';
 import TypeWriterEffect from 'react-typewriter-effect';
-import { fetchGame } from '../../reducers/game.js';
+import { fetchGame } from '../../store/game.js';
 
 //make images to attach to stage
 const HauntedHouse = (props) => {

@@ -1,6 +1,9 @@
-import { combineReducers } from 'redux';
-import { gameReducer } from './game.js';
+// import { combineReducers } from 'redux';
+// import roomReducer from './roomReducer';
+// // import { gameReducer } from './game.js';
 
-const rootReducer = combineReducers({ game: gameReducer });
-// this is the "root reducer"; add any imported reducers into combineReducers
-export default rootReducer;
+// const rootReducer = combineReducers({ roomReducer, game: gameReducer });
+// // this is the "root reducer"; add any imported reducers into combineReducers
+// export default rootReducer;
+
+

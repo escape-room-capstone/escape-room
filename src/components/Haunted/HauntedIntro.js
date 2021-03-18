@@ -10,7 +10,7 @@ const RainScene = (props) => {
 };
 
 export const HauntedIntro = (props) => {
-  // const [advance, setAdvance] = useState(false);
+  const [advance, setAdvance] = useState(false);
   useEffect(
     () => setTimeout(() => props.history.push('/haunted/room1'), 9000),
     []

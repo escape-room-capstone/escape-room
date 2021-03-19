@@ -16,25 +16,22 @@ export const _CustomizeGame = (props) => {
     fetchPuzzles();
   }, []);
   console.log(props.puzzles, 'props.puzzles');
-  console.log(props.allGames, 'props.games');
+  console.log(props.allGames, 'props.allGames');
   return (
     <div id="customize-game">
       <h2>Create Your Game</h2>
       <h3>Choose A Theme</h3>
       <div>
-        {props.puzzles.map((puzzle, idx) => (
-          <div key={idx} className="puzzle">
-            {puzzle.name}
+        {props.allGames.map((game, idx) => (
+          <div key={idx} className="game">
+            {game.title}
+            <img height="200" width="250" src={game.imgSrc} />
+            <p>{game.description}</p>
+            {/* <button onClick={() => props.createGame()}>CUSTOMIZE</button> */}
           </div>
         ))}
       </div>
-      {/* <select onChange={(e) => setTheme(e.target.value)}>
-        <option value="haunted">The Haunted House</option>
-        <option value="bank">Bank Robbery</option>
-        <option value="star wars">Star Wars</option>
-        <option value="riddlez">House of Riddlez</option>
-        <option value="island">The Island</option>
-      </select> */}
+
       {theme ? <ChoosePuzzleForm theme={theme} /> : ''}
     </div>
   );

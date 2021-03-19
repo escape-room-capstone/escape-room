@@ -1,5 +1,5 @@
 const db = require('../db');
-const { Sequelize, ENUM, INTEGER } = require('sequelize');
+const { Sequelize, ENUM, INTEGER, BOOLEAN } = require('sequelize');
 const { STRING, TEXT } = Sequelize;
 
 const Game = db.define('game', {
@@ -9,6 +9,9 @@ const Game = db.define('game', {
   numPuzzles: {
     type: INTEGER,
     allowNull: false,
+  },
+  public: {
+    type: BOOLEAN,
   },
   theme: {
     type: STRING,

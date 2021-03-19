@@ -10,6 +10,7 @@ router.get('/', async (req, res, next) => {
       await Game.findAll({
         where: {
           userId: null,
+          public: true,
         },
       })
     );

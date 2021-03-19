@@ -14,6 +14,7 @@ export const fetchUsers = () => {
   };
 };
 
+
 export const userReducer = (state = [], action) => {
   if (action.type === SET_USERS) {
     return action.users;

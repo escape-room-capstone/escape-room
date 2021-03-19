@@ -4,6 +4,7 @@ import { fetchTheme } from '../../store/singleTheme';
 import axios from "axios"
 
 
+
 const CreateGame = (props) => {
 
     const [title, setTitle] = useState("");
@@ -17,7 +18,7 @@ const CreateGame = (props) => {
       const submitCreateGame = async(e) => {
           e.preventDefault();
         await axios.post(`/api/users/${2}/games`, { theme: props.theme.name, title, numPuzzles })
-        console.log("created game under user number 2");
+        props.history.push("/addpuzzles");
       }
       
 

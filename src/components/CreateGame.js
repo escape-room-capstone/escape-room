@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { ChoosePuzzleForm } from './ChoosePuzzleForm';
 import { connect } from 'react-redux';
-
-import { setPuzzles } from '../reducers/puzzles';
-import { fetchGames } from '../reducers/allGames.js';
+import '../../public/CSS/CustomizeGame.css';
+import { setPuzzles } from '../store/puzzles';
+import { fetchGames } from '../store/allGames.js';
 
 export const _CreateGame = (props) => {
   const [chosenPuzzles, setChosenPuzzles] = useState([]);
@@ -15,12 +15,13 @@ export const _CreateGame = (props) => {
     };
     fetchPuzzles();
   }, []);
+  console.log(props, 'props');
   console.log(props.puzzles, 'props.puzzles');
   console.log(props.allGames, 'props.allGames');
   return (
     <div id="customize-game">
       <h2>Create Your Game</h2>
-      <h3>Choose A Theme</h3>
+      <h3>Choose One Of Ours Themes</h3>
       <div>
         {props.allGames.map((game, idx) => (
           <div key={idx} className="game">
@@ -31,7 +32,7 @@ export const _CreateGame = (props) => {
           </div>
         ))}
       </div>
-
+      <h3>Or</h3> <button>Create Your Own</button>
       {theme ? <ChoosePuzzleForm theme={theme} /> : ''}
     </div>
   );

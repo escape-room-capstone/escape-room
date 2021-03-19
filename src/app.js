@@ -68,9 +68,8 @@ const App = () => {
       <Route exact path="/BankgameVictory" component={BankGameVictory} />
       <Route exact path="/choosetheme" component={ChooseTheme} />
       <Route exact path="/theme/:id" component={ConfirmTheme} />
-      <Route exact path="/creategame/:id" component={CreateAGame} />    
+      <Route exact path="/creategame/:id" component={CreateAGame} />
       {/* <Redirect to="/" /> */}
-      <CreateGame />
     </Router>
   );
 };

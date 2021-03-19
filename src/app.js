@@ -33,7 +33,7 @@ import BankGameStart from './components/BankGame/BankGameStart';
 import BankGameVictory from './components/BankGame/BankGameVictory';
 import LetterBank from './components/HouseOfRiddlez/LetterBank';
 import ChooseTheme from './components/CreateGame/ChooseTheme';
-import CreateGame from './components/CreateGame/CreateGame';
+import CreateAGame from './components/CreateGame/CreateGame';
 import ConfirmTheme from './components/CreateGame/ConfirmTheme';
 
 const App = () => {
@@ -68,7 +68,7 @@ const App = () => {
       <Route exact path="/BankgameVictory" component={BankGameVictory} />
       <Route exact path="/choosetheme" component={ChooseTheme} />
       <Route exact path="/theme/:id" component={ConfirmTheme} />
-      <Route exact path="/creategame/:id" component={CreateGame} />    
+      <Route exact path="/creategame/:id" component={CreateAGame} />    
       {/* <Redirect to="/" /> */}
       <CreateGame />
     </Router>

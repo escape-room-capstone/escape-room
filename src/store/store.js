@@ -7,6 +7,7 @@ import { puzzleReducer } from '../reducers/puzzles';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { userReducer } from '../reducers/users';
 import { gameReducer } from './game';
+import { allGamesReducer } from '../reducers/allGames';
 // import dynamicGame from './dynamicGameStore';
 const initialState = {};
 
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   puzzles: puzzleReducer,
   users: userReducer,
   game: gameReducer,
+  allGames: allGamesReducer,
   // dynamicGame,
 
   // themes: themeReducer

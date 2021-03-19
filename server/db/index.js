@@ -13,6 +13,9 @@ const GamePuzzles = require('./models/GamePuzzles.js');
 Game.belongsToMany(Puzzle, { through: GamePuzzles, foreignKey: 'gameId' });
 Puzzle.belongsToMany(Game, { through: GamePuzzles, foreignKey: 'puzzleId' });
 
+Game.belongsTo(User);
+User.hasMany(Game);
+
 //define syncAndSeed function
 const syncAndSeed = async () => {
   await db.sync({ force: true });
@@ -21,17 +24,33 @@ const syncAndSeed = async () => {
     title: 'The Haunted House',
     theme: 'haunted',
     numPuzzles: 9,
+    description: `Seeking shelter in a rainstorm after your car breaks down, you find yourself trapped in a haunted house. Solve the puzzles to escape.`,
+    imgSrc: '/Images/hauntedhousefinal.jpg',
   });
-  const gameId = defaultHauntedGame.id;
-  //   //create 3 puzzles associated with default Haunted Game
+  const defaultHouseOfRiddlez = await Game.create({
+    title: 'House of Riddlez',
+    theme: 'riddlez',
+    numPuzzles: 12,
+    description: `You wake up one morning only to find out that you are trapped in a House of Riddles. The only way out is to solve every riddle! But there's a catch...`,
+  });
+  const defaultBank = await Game.create({
+    title: 'Bank Robbery',
+    theme: 'bank',
+    numPuzzles: 12,
+    description: `Rob a bank and escape with all the $$$`,
+  });
+
   //seed all puzzles - which will be associated with the same named components on the front end
   for (let i = 1; i < 10; i++) {
     await Puzzle.create({ name: `Puzzle${i}` });
   }
-  await GamePuzzles.create({ gameId: 1, puzzleId: 1 });
-  await GamePuzzles.create({ gameId: 1, puzzleId: 2 });
-  await GamePuzzles.create({ gameId: 1, puzzleId: 4 });
-
+  //default puzzles for the Haunted Game
+  const hauntedId = defaultHauntedGame.id;
+  await Promise.all([
+    GamePuzzles.create({ gameId: hauntedId, puzzleId: 1 }),
+    GamePuzzles.create({ gameId: hauntedId, puzzleId: 2 }),
+    GamePuzzles.create({ gameId: hauntedId, puzzleId: 4 }),
+  ]);
 
   const users = await Promise.all([
     User.create({

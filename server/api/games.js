@@ -4,6 +4,20 @@ const {
 } = require('../db');
 
 //mounted at /api/games
+router.get('/', async (req, res, next) => {
+  try {
+    res.send(
+      await Game.findAll({
+        where: {
+          userId: null,
+        },
+      })
+    );
+  } catch (ex) {
+    next(ex);
+  }
+});
+
 router.get('/:gameId', async (req, res, next) => {
   try {
     let game = await Game.findByPk(req.params.gameId);

@@ -1,6 +1,6 @@
 const db = require('../db');
 const { Sequelize, ENUM, INTEGER } = require('sequelize');
-const { STRING } = Sequelize;
+const { STRING, TEXT } = Sequelize;
 
 const Game = db.define('game', {
   title: {
@@ -11,11 +11,17 @@ const Game = db.define('game', {
     allowNull: false,
   },
   theme: {
-    type: ENUM('haunted' || 'house' || 'bank' || 'star wars'),
+    type: STRING,
     allowNull: false,
     validate: {
       notEmpty: true,
     },
+  },
+  description: {
+    type: TEXT,
+  },
+  imgSrc: {
+    type: STRING,
   },
 });
 

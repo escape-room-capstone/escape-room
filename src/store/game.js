@@ -19,5 +19,6 @@ export const gameReducer = (state = {}, action) => {
   if (action.type === SET_GAME) {
     return action.game;
   }
+
   return state;
 };

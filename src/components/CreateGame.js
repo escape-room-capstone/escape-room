@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { setPuzzles } from '../reducers/puzzles';
 import { fetchGames } from '../reducers/allGames.js';
 
-export const _CreateeGame = (props) => {
+export const _CreateGame = (props) => {
   const [chosenPuzzles, setChosenPuzzles] = useState([]);
   const [theme, setTheme] = useState('');
   useEffect(() => {
@@ -44,4 +44,4 @@ const mapDispatch = (dispatch) => {
   };
 };
 
-export const CreateeGame = connect((state) => state, mapDispatch)(_CreateGame);
+export const CreateGame = connect((state) => state, mapDispatch)(_CreateGame);

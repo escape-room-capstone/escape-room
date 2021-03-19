@@ -21,7 +21,7 @@ const rootReducer = combineReducers({
   users: userReducer,
   game: gameReducer,
   themes: themesReducer,
-  theme: themeReducer
+  theme: themeReducer  
   // dynamicGame,
 
   // themes: themeReducer

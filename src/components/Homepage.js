@@ -41,7 +41,7 @@ const Homepage = (props) => {
         </p>
       </div>
       <hr />
-      <Link to ="/createtheme"> Create game </Link>
+      <Link to ="/choosetheme"> Create game </Link>
       <h3
         style={{
           position: 'absolute',

@@ -26,18 +26,18 @@ router.get('/:gameId', async (req, res, next) => {
   }
 });
 
-router.post('/', async (req, res, next) => {
-  try{
-    const game = await Game.create({
-      title: req.body.title,
-      numPuzzles: req.body.numPuzzles,
-      theme: req.body.theme
-    })
-    res.send(game);
-  }
-  catch(ex){
-    next(ex);
-  }
-})
+// router.post('/', async (req, res, next) => {
+//   try{
+//     const game = await Game.create({
+//       title: req.body.title,
+//       numPuzzles: req.body.numPuzzles,
+//       theme: req.body.theme
+//     })
+//     res.send(game);
+//   }
+//   catch(ex){
+//     next(ex);
+//   }
+// })
 
 module.exports = router;

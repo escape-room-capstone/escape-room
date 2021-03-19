@@ -7,7 +7,7 @@ export const CreateGame = (props) => {
   const [theme, setTheme] = useState('');
   return (
     <div id="customize-game">
-      <h2>Create Your Game</h2>
+      {/* <h2>Create Your Game</h2>
       <h3>Choose A Theme</h3>
 
       <select onChange={(e) => setTheme(e.target.value)}>
@@ -17,7 +17,7 @@ export const CreateGame = (props) => {
         <option value="riddlez">House of Riddlez</option>
         <option value="island">The Island</option>
       </select>
-      {theme ? <ChoosePuzzleForm theme={theme} /> : ''}
+      {theme ? <ChoosePuzzleForm theme={theme} /> : ''} */}
     </div>
   );
 };

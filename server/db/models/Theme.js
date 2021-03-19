@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-const { STRING, UUID, UUIDV4 } = Sequelize;
+const { STRING, ENUM, UUID, UUIDV4 } = Sequelize;
 
 const Theme = db.define('theme', {
   // id: {
@@ -12,7 +12,13 @@ const Theme = db.define('theme', {
   name: {
     type: STRING,
   },
-
+  themeLabel: {
+    type: ENUM('haunted', 'house', 'bank', 'star wars'),
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+  },
   backgroundImageOne: {
     type: STRING,
   },

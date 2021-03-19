@@ -18,7 +18,7 @@ export const setPuzzles = () => {
   };
 };
 
-export const puzzleReducer = (state = [], action) => {
+export const puzzleReducer = (state = {}, action) => {
   if (action.type === SET_PUZZLES) {
     return action.puzzles;
   }

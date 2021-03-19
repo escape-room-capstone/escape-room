@@ -28,7 +28,7 @@ const HouseOfRiddlez = () => {
             room 2
           </button>
         </Link>
-        <Link to="/attic">
+        <Link to="/houseofriddlez/attic">
           <button className="secretButton" id="atticButton">
             attic
           </button>

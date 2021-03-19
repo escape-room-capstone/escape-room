@@ -1,10 +1,10 @@
-import BobaFett from './components/SteveGame/BobaFett';
-import { Router, Route, Redirect } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
 import React from 'react';
-import { Provider, connect } from 'react-redux';
 import Homepage from './components/Homepage';
-import store from './store/index';
 import history from './history';
+// import { Provider, connect } from 'react-redux';
+
+import BobaFett from './components/SteveGame/BobaFett';
 
 import { HauntedRoom1 } from './components/Haunted/HauntedRoom1';
 import { HauntedRoom2 } from './components/Haunted/HauntedRoom2';
@@ -55,7 +55,7 @@ const App = () => {
       <Route exact path="/room1" component={RoomOne} />
       <Route exact path="/room2" component={RoomTwo} />
       <Route exact path="/backroom" component={BackRoom} />
-      <Route exact path="/attic" component={Attic} />
+      <Route exact path="/houseofriddlez/attic" component={Attic} />
       <Route exact path="/letterbank" component={LetterBank} />
 
       <Route exact path="/Bankgame" component={BankGameStart} />

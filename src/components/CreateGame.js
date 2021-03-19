@@ -14,7 +14,7 @@ export const CreateGame = (props) => {
         <option value="haunted">The Haunted House</option>
         <option value="bank">Bank Robbery</option>
         <option value="star wars">Star Wars</option>
-        <option value="house">The House</option>
+        <option value="riddlez">House of Riddlez</option>
         <option value="island">The Island</option>
       </select>
       {theme ? <ChoosePuzzleForm theme={theme} /> : ''}

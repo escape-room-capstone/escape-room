@@ -3,7 +3,7 @@ import '../../../public/CSS/HouseOfRiddlez.css';
 import ReactModal from 'react-modal';
 import LetterBank from './LetterBank';
 import { connect, useSelector, useDispatch } from 'react-redux';
-import { setPuzzles } from '../../store/puzzles.js';
+import { setPuzzles } from '../../reducers/puzzles.js';
 
 const Attic = ({ puzzles }, props) => {
   const [atticPuzzle1, setAtticPuzzle1] = useState({

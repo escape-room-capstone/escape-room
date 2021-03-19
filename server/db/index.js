@@ -33,6 +33,8 @@ const syncAndSeed = async () => {
   await GamePuzzles.create({ gameId: 1, puzzleId: 4 });
 
 
+
+
   const users = await Promise.all([
     User.create({
       firstName: 'Cody',
@@ -84,6 +86,17 @@ const syncAndSeed = async () => {
     }),
   ]);
 
+  const themes = await Promise.all([
+    Theme.create({
+      name: 'the wild',
+      backgroundImageOne : "../../public/Theme_Images/the-wild.jpg"
+    }),
+    Theme.create({
+      name: 'cafe',
+      backgroundImageOne : "../../public/Theme_Images/cafe.jpg"
+    })
+  ]);
+
   //   const puzzles = await Promise.all([
   //     Puzzle.create({
   //       name: 'atticP1',
@@ -115,12 +128,15 @@ const syncAndSeed = async () => {
   //   backgroundImageSix: '../RiddlezImages/backroom.jpg',
   // })
 
+  
+
   const [cody, arwinder, kate, nes, steve, roman] = users;
+  const [theWild, cafe] = themes;
   //   const [atticPuzzleOne, atticPuzzleTwo, atticPuzzleThree] = puzzles;
 };
 
 module.exports = {
   db,
   syncAndSeed,
-  models: { Puzzle, Game, GamePuzzles, User },
+  models: { Puzzle, Game, GamePuzzles, User, Theme },
 };

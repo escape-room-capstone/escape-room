@@ -31,6 +31,7 @@ import BankGameLevel3 from './components/BankGame/BankGameLevel3';
 import BankGameStart from './components/BankGame/BankGameStart';
 import BankGameVictory from './components/BankGame/BankGameVictory';
 import LetterBank from './components/HouseOfRiddlez/LetterBank';
+import Createtheme from './components/Createtheme';
 
 const App = () => {
   return (
@@ -62,6 +63,7 @@ const App = () => {
       <Route exact path="/Bankgame2" component={BankGameLevel2} />
       <Route exact path="/Bankgame3" component={BankGameLevel3} />
       <Route exact path="/BankgameVictory" component={BankGameVictory} />
+      <Route exact path="/createtheme" component={Createtheme} />
       {/* <Redirect to="/" /> */}
     </Router>
   );

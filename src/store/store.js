@@ -3,9 +3,9 @@ import thunkMiddleware from 'redux-thunk';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 // import rootReducer from '../reducers';
-import { puzzleReducer } from '../reducers/puzzles';
+import { puzzleReducer } from './puzzles';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { userReducer } from '../reducers/users';
+import { userReducer } from './users';
 import { gameReducer } from './game';
 import { themesReducer } from './theme'
 import { themeReducer } from './singleTheme';

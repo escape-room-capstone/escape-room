@@ -14,8 +14,9 @@ export const fetchThemes = () => {
   };
 };
 
+
 //reducer
-export const themesReducer = (state = {}, action) => {
+export const themesReducer = (state = [], action) => {
   if (action.type === GET_THEMES) {
     return action.themes;
   }

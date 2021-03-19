@@ -11,7 +11,7 @@ const Game = db.define('game', {
     allowNull: false,
   },
   theme: {
-    type: ENUM('haunted' || 'house' || 'bank' || 'star wars'),
+    type: STRING,
     allowNull: false,
     validate: {
       notEmpty: true,

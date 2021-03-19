@@ -88,7 +88,7 @@ const syncAndSeed = async () => {
 
   const themes = await Promise.all([
     Theme.create({
-      name: 'the wild',
+      name: 'theWild',
       backgroundImageOne : "../../public/Theme_Images/the-wild.jpg"
     }),
     Theme.create({

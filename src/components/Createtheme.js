@@ -6,23 +6,29 @@ import theWild from "../../public/Theme_Images/the-wild.jpg"
 import '../../public/css/CreateGame.css';
 import axios from "axios"
 import { fetchThemes } from "../store/theme";
+import { fetchTheme } from "../store/singleTheme";
 import { connect } from "react-redux";
 
 const Createtheme = (props) => {
 
-  useEffect(async()=>{
-    console.log(props);
-    console.log("we here", (await props.getThemes()));
-    //this.props.getThemes();    
-  })
+  useEffect(() => {
+    props.getThemes();
+  }, []);
   
 
-  const imgClickHandler = () => {
-    console.log("hello");    
+  const imgClickHandler = async(themeId, image) => {
+    // console.log(props);
+    await axios.put(`/api/themes/${themeId}`, {image})
+    await props.setTheme(themeId);
+    props.history.push(`/creategamestart/${themeId}`);
   }
   
   const defaultThemes = ["haunted", "house", "bank", "star wars"];
-  const imgSrcs = [cafe, theWild];
+  const images = {
+    cafe,
+    theWild
+  }
+  const { themes } = props;
 
   return (
     <div> 
@@ -37,9 +43,9 @@ const Createtheme = (props) => {
           }) }
         </ul>
         <h3> Or choose one of the following themes... </h3>
-          {imgSrcs.map((src, idx) => {
+          {themes.map(theme => {
             return (
-              <img key={idx} onClick={imgClickHandler} src={src} alt=""></img>
+              <img key={theme.id} onClick={()=> imgClickHandler(theme.id, images[theme.name])} src={images[theme.name]} alt=""></img>
             )
           })}
           
@@ -50,7 +56,8 @@ const Createtheme = (props) => {
 const mapState = (state) => state;
 
 const mapDispatch = {
-  getThemes : fetchThemes
+  getThemes : fetchThemes,
+  setTheme : fetchTheme
 };
 
 export default connect(mapState, mapDispatch)(Createtheme);

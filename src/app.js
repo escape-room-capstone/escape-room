@@ -18,7 +18,7 @@ import { HauntedRoom7 } from './components/Haunted/HauntedRoom7';
 import { HauntedRoom8 } from './components/Haunted/HauntedRoom8';
 import { HauntedRoom9 } from './components/Haunted/HauntedRoom9';
 import { HauntedFinal } from './components/Haunted/HauntedFinal';
-import { CustomizeGame } from './components/CustomizeGame';
+import { CreateGame } from './components/CreateGame';
 
 import HouseOfRiddlez from './components/HouseOfRiddlez/HouseOfRiddlez';
 import LivingRoom from './components/HouseOfRiddlez/LivingRoom';
@@ -64,7 +64,6 @@ const App = () => {
       <Route exact path="/Bankgame3" component={BankGameLevel3} />
       <Route exact path="/BankgameVictory" component={BankGameVictory} />
       {/* <Redirect to="/" /> */}
-      <CustomizeGame />
     </Router>
   );
 };

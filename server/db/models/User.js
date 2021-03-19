@@ -4,11 +4,6 @@ const db = require('../db');
 const { BOOLEAN, STRING, INTEGER, UUID, UUIDV4 } = Sequelize;
 
 const User = db.define('user', {
-  id: {
-    type: UUID,
-    defaultValue: UUIDV4,
-    primaryKey: true,
-  },
   firstName: {
     type: STRING,
     defaultValue: '',

@@ -13,6 +13,10 @@ const GamePuzzles = require('./models/GamePuzzles.js');
 Game.belongsToMany(Puzzle, { through: GamePuzzles, foreignKey: 'gameId' });
 Puzzle.belongsToMany(Game, { through: GamePuzzles, foreignKey: 'puzzleId' });
 
+
+Game.belongsTo(User);
+User.hasMany(Game);
+
 //define syncAndSeed function
 const syncAndSeed = async () => {
   await db.sync({ force: true });
@@ -31,6 +35,8 @@ const syncAndSeed = async () => {
   await GamePuzzles.create({ gameId: 1, puzzleId: 1 });
   await GamePuzzles.create({ gameId: 1, puzzleId: 2 });
   await GamePuzzles.create({ gameId: 1, puzzleId: 4 });
+
+
 
 
   const users = await Promise.all([
@@ -84,6 +90,24 @@ const syncAndSeed = async () => {
     }),
   ]);
 
+
+
+  const themes = await Promise.all([
+    Theme.create({
+      name: 'Forest',
+      backgroundImageOne : "/Theme_Images/Forest1.jpg",
+      themeImages : [ "/Theme_Images/Forest1.jpg", "/Theme_Images/Forest2.jpg", "/Theme_Images/Forest3.jpg" ]
+    }),
+    Theme.create({
+      name: 'Cafe',
+      backgroundImageOne : "/Theme_Images/Cafe1.jpg",
+      themeImages : [ "/Theme_Images/Cafe1.jpg", "/Theme_Images/Cafe2.jpg" ]
+    })
+  ]);
+
+
+
+
   //   const puzzles = await Promise.all([
   //     Puzzle.create({
   //       name: 'atticP1',
@@ -115,12 +139,15 @@ const syncAndSeed = async () => {
   //   backgroundImageSix: '../RiddlezImages/backroom.jpg',
   // })
 
+  
+
   const [cody, arwinder, kate, nes, steve, roman] = users;
+  const [forest, cafe] = themes;
   //   const [atticPuzzleOne, atticPuzzleTwo, atticPuzzleThree] = puzzles;
 };
 
 module.exports = {
   db,
   syncAndSeed,
-  models: { Puzzle, Game, GamePuzzles, User },
+  models: { Puzzle, Game, GamePuzzles, User, Theme },
 };

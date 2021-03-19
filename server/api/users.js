@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {
-  models: { User },
+  models: { User, Game },
 } = require('../db');
 
 module.exports = router;
@@ -36,3 +36,33 @@ router.get('/:id', async (req, res, next) => {
     next(er);
   }
 });
+
+router.get('/:id/games', async (req, res, next) => {
+  try {
+    const games = await Game.findAll({
+      where : {
+        userId : req.params.id
+      }
+    });
+    res.status(200).send(games);
+  } catch (er) {
+    next(er);
+  }
+});
+
+router.post('/:id/games', async (req, res, next) => {
+  try{
+    const game = await Game.create({
+      title: req.body.title,
+      numPuzzles: req.body.numPuzzles,
+      theme: req.body.theme,
+      userId: req.params.id
+    })
+    res.send(game);
+  }
+  catch(ex){
+    next(ex);
+  }
+})
+
+

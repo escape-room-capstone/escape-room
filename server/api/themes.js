@@ -13,6 +13,19 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+// router.put('/:id', async (req, res, next) => {
+//   try {
+//     const id = req.params.id;
+//     const theme = await Theme.findByPk(id);
+//     theme.update({
+//       backgroundImageOne: req.body.image
+//     });
+//     res.status(200).send(theme);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
 router.get('/:id', async (req, res, next) => {
   try {
     const id = req.params.id;
@@ -22,3 +35,4 @@ router.get('/:id', async (req, res, next) => {
     next(err);
   }
 });
+

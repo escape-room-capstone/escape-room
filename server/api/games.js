@@ -4,6 +4,17 @@ const {
 } = require('../db');
 
 //mounted at /api/games
+
+router.get('/', async(req, res, next) => {
+  try{
+    const games = await Game.findAll();
+
+    res.send(games);
+  }
+  catch(ex){
+    next(ex);
+  }
+})
 router.get('/:gameId', async (req, res, next) => {
   try {
     let game = await Game.findByPk(req.params.gameId);
@@ -14,5 +25,19 @@ router.get('/:gameId', async (req, res, next) => {
     next(ex);
   }
 });
+
+// router.post('/', async (req, res, next) => {
+//   try{
+//     const game = await Game.create({
+//       title: req.body.title,
+//       numPuzzles: req.body.numPuzzles,
+//       theme: req.body.theme
+//     })
+//     res.send(game);
+//   }
+//   catch(ex){
+//     next(ex);
+//   }
+// })
 
 module.exports = router;

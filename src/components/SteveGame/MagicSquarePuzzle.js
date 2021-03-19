@@ -15,7 +15,8 @@ export default function MagicSquarePuzzle({ setMagicSquarePuzzleCompleted }) {
   });
 
   let status = "Ship defenses are currently offline.";
-  if(      parseInt(square.one) === 8 &&
+  
+  if (parseInt(square.one) === 8 &&
   parseInt(square.three) === 6 &&
   parseInt(square.four) === 3 &&
   parseInt(square.five) === 5 &&

@@ -28,11 +28,3 @@ export default function BobaFett() {
     </div>
   );
 }
-
-{
-  /* <button className='boba-magic-square-button' onClick={() => setMagicSquareModalOpen(true)}></button>
-<Modal isOpen={magicSquareModalOpen}>
-  <button onClick={() => setMagicSquareModalOpen(false)}>Close Puzzle</button>
-  <MagicSquarePuzzle setMagicSquarePuzzleCompleted={setMagicSquarePuzzleCompleted}/>
-</Modal>*/
-}

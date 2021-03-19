@@ -34,6 +34,7 @@ export const _CreateGame = (props) => {
       </div>
       <h3>Or</h3> <button>Create Your Own</button>
       {theme ? <ChoosePuzzleForm theme={theme} /> : ''}
+
     </div>
   );
 };

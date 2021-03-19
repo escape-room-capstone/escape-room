@@ -1,6 +1,6 @@
 const db = require('../db');
-const { Sequelize, ENUM, INTEGER } = require('sequelize');
-const { STRING } = Sequelize;
+const { Sequelize, ENUM, INTEGER, BOOLEAN } = require('sequelize');
+const { STRING, TEXT } = Sequelize;
 
 const Game = db.define('game', {
   title: {
@@ -10,12 +10,21 @@ const Game = db.define('game', {
     type: INTEGER,
     allowNull: false,
   },
+  public: {
+    type: BOOLEAN,
+  },
   theme: {
     type: STRING,
     allowNull: false,
     validate: {
       notEmpty: true,
     },
+  },
+  description: {
+    type: TEXT,
+  },
+  imgSrc: {
+    type: STRING,
   },
 });
 

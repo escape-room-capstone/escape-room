@@ -2,7 +2,7 @@ import axios from 'axios';
 
 //action types
 const SET_GAME = 'SET_GAME';
-
+const CREATE_GAME = 'CREATE_GAME';
 //action creators
 const setGame = (game) => ({ type: SET_GAME, game });
 
@@ -13,7 +13,13 @@ export const fetchGame = (gameId) => {
     dispatch(setGame(game));
   };
 };
-
+export const createGame = (userId, theme) => {
+  return async (dispatch) => {
+    const game = (await axios.post(`/api/users/${userId}/games`, { theme }))
+      .data;
+    dispatch(setGame(game));
+  };
+};
 //reducer
 export const gameReducer = (state = {}, action) => {
   if (action.type === SET_GAME) {

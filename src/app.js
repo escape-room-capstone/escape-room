@@ -41,8 +41,8 @@ const App = () => {
   return (
     <Router history={history}>
       <Route exact path="/" component={Homepage} />
-      <Route exact path="/Bobafett" component={BobaFett} />
-      <Route exact path="/haunted/intro" component={HauntedIntro} />
+      <Route exact path="/Bobafett/4" component={BobaFett} />
+      <Route exact path="/TheHauntedHouse/1" component={HauntedIntro} />
       <Route exact path="/haunted/room1" component={HauntedRoom1} />
       <Route exact path="/haunted/room2" component={HauntedRoom2} />
       <Route exact path="/haunted/room3" component={HauntedRoom3} />
@@ -55,7 +55,7 @@ const App = () => {
       <Route exact path="/haunted/room9" component={HauntedRoom9} />
       <Route exact path="/haunted/final" component={HauntedFinal} />
 
-      <Route exact path="/houseofriddlez" component={HouseOfRiddlez} />
+      <Route exact path="/HouseofRiddlez/2" component={HouseOfRiddlez} />
       <Route exact path="/livingroom" component={LivingRoom} />
       <Route exact path="/room1" component={RoomOne} />
       <Route exact path="/room2" component={RoomTwo} />
@@ -63,7 +63,7 @@ const App = () => {
       <Route exact path="/attic" component={Attic} />
       <Route exact path="/letterbank" component={LetterBank} />
 
-      <Route exact path="/Bankgame" component={BankGameStart} />
+      <Route exact path="/BankRobbery/3" component={BankGameStart} />
       <Route exact path="/Bankgame2" component={BankGameLevel2} />
       <Route exact path="/Bankgame3" component={BankGameLevel3} />
       <Route exact path="/BankgameVictory" component={BankGameVictory} />

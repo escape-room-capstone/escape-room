@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
+import { fetchGames } from '../store/allGames';
 // import UserSignup from './UserSignup';
 
 const Homepage = (props) => {
-  console.log(props);
 
+  useEffect(() => {
+    props.getGames();
+  }, []);
+
+  const { allGames } = props;
+
+
+  const removeSpaceFromTheme = (theme) => {
+    const noSpaceTheme = theme.split(" ").join("");
+    console.log(noSpaceTheme);
+    return noSpaceTheme;
+  }
+  
+  
   return (
     <div style={{ height: '100vh' }}>
       {/* <UserSignup/>
@@ -19,13 +34,14 @@ const Homepage = (props) => {
         Welcome to escape-room
       </h3> */}
       <h1> Welcome to escape-room </h1>
-      <Link to="/game1"> Game 1 </Link>
-      <hr />
-      <Link to="/game2"> Game 2 </Link>
-      <hr />
-      <Link to="/game3"> Game 3 </Link>
-      <hr />
-      <Link to="/haunted/intro">Haunted House</Link>
+      {allGames.map(game => {
+        return (<div key={game.id}>
+          <Link to={`${removeSpaceFromTheme(game.theme)}/${game.id}`}> {game.title} </Link>
+          <hr />
+          </div>
+        )
+      })}
+      {/* <Link to="/haunted/intro">Haunted House</Link>
       <hr />
       <Link to="/houseofriddlez"> ~~House of Riddlez~~ </Link>
       <p>
@@ -43,7 +59,7 @@ const Homepage = (props) => {
           the $$$
         </p>
       </div>
-      <hr />
+      <hr /> */}
       <Link to ="/choosetheme"> Create game </Link>
       <hr />
       {/* <h3
@@ -63,4 +79,11 @@ const Homepage = (props) => {
   );
 };
 
-export default Homepage;
+
+const mapState = (state) => state;
+
+const mapDispatch = {
+  getGames : fetchGames
+};
+
+export default connect(mapState, mapDispatch)(Homepage);

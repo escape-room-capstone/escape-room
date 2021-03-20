@@ -2,6 +2,7 @@ import axios from 'axios';
 
 //action types
 const SET_GAME = 'SET_GAME';
+const CREATE_GAME = 'CREATE_GAME';
 const SET_USER_GAME = 'SET_USER_GAME';
 
 //action creators
@@ -12,6 +13,19 @@ const setUserGame = (userGame) => ({ type: SET_USER_GAME, userGame });
 export const fetchGame = (gameId) => {
   return async (dispatch) => {
     const game = (await axios.get(`/api/games/${gameId}`)).data;
+    dispatch(setGame(game));
+  };
+};
+
+export const createGame = (userId, theme, numPuzzles, title) => {
+  return async (dispatch) => {
+    const game = (
+      await axios.post(`/api/users/${userId}/games`, {
+        theme,
+        numPuzzles,
+        title,
+      })
+    ).data;
     dispatch(setGame(game));
   };
 };

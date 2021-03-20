@@ -13,6 +13,7 @@ const Game = db.define('game', {
   public: {
     type: BOOLEAN,
     defaultValue: true
+
   },
   theme: {
     type: STRING,

@@ -270,6 +270,30 @@ export const Puzzle6 = (props) => {
   }
 };
 
+const Puzzle7 = (props) => {
+  return (
+    <div>
+      THIS IS PUZZLE 7<button onClick={props.solve}>SOLVE</button>
+    </div>
+  );
+};
+const Puzzle8 = (props) => {
+  return (
+    <div>
+      THIS IS PUZZLE EIGHT
+      <button onClick={props.solve}>SOLVE</button>
+    </div>
+  );
+};
+const Puzzle9 = (props) => {
+  return (
+    <div>
+      THIS IS PUZZLE NINE
+      <button onClick={props.solve}>SOLVE</button>
+    </div>
+  );
+};
+
 export const componentMapping = {
   Puzzle1,
   Puzzle2,
@@ -277,4 +301,7 @@ export const componentMapping = {
   Puzzle4,
   Puzzle5,
   Puzzle6,
+  Puzzle7,
+  Puzzle8,
+  Puzzle9,
 };

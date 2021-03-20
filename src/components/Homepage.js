@@ -62,9 +62,12 @@ const Homepage = (props) => {
           the $$$
         </p>
       </div>
+
       <hr /> */}
       <Link to ="/choosetheme"> Create game </Link>
       <hr />
+      <hr />
+      <Link to="/customize">Customize</Link>
       {/* <h3
         style={{
           position: 'absolute',

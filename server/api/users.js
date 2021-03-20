@@ -40,9 +40,9 @@ router.get('/:id', async (req, res, next) => {
 router.get('/:id/games', async (req, res, next) => {
   try {
     const games = await Game.findAll({
-      where : {
-        userId : req.params.id
-      }
+      where: {
+        userId: req.params.id,
+      },
     });
     res.status(200).send(games);
   } catch (er) {
@@ -65,18 +65,17 @@ router.get('/:id/games/:gameId', async (req, res, next) => {
 });
 
 router.post('/:id/games', async (req, res, next) => {
-  try{
+  console.log(req.body, 'req.body');
+  try {
     const game = await Game.create({
       title: req.body.title,
       numPuzzles: req.body.numPuzzles,
       theme: req.body.theme,
-      userId: req.params.id
-    })
+      userId: req.params.id,
+    });
+    console.log(game, 'game');
     res.send(game);
-  }
-  catch(ex){
+  } catch (ex) {
     next(ex);
   }
-})
-
-
+});

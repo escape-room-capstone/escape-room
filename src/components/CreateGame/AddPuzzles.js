@@ -31,7 +31,7 @@ const AddPuzzles = (props) => {
       <hr />
       {puzzles.map(puzzle => {
         const Component = componentMapping[puzzle.name];        
-        return ( <div className="puzzle">
+        return ( <div key={puzzle.id} className="puzzle">
           <h1>{puzzle.name}</h1>
           <button onClick={()=>props.history.push(`/puzzle/${puzzle.id}`)}> Details </button>
            <Component /> 

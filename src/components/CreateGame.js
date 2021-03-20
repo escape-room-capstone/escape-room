@@ -4,7 +4,10 @@ import { connect } from 'react-redux';
 import '../../public/CSS/CustomizeGame.css';
 import { setPuzzles } from '../store/puzzles';
 import { fetchGames } from '../store/allGames.js';
+import { createGame } from '../store/game.js';
 
+//hard-coded for now
+const userId = 'f3cf8958-7044-47ab-9a66-652708c5b275';
 export const _CreateGame = (props) => {
   const [chosenPuzzles, setChosenPuzzles] = useState([]);
   const [theme, setTheme] = useState('');
@@ -28,13 +31,14 @@ export const _CreateGame = (props) => {
             {game.title}
             <img height="200" width="250" src={game.imgSrc} />
             <p>{game.description}</p>
-            {/* <button onClick={() => props.createGame()}>CUSTOMIZE</button> */}
+            <button onClick={() => props.createGame(userId, game.theme)}>
+              CUSTOMIZE
+            </button>
           </div>
         ))}
       </div>
       <h3>Or</h3> <button>Create Your Own</button>
       {theme ? <ChoosePuzzleForm theme={theme} /> : ''}
-
     </div>
   );
 };
@@ -43,6 +47,7 @@ const mapDispatch = (dispatch) => {
   return {
     fetchPuzzles: () => dispatch(setPuzzles()),
     fetchGames: () => dispatch(fetchGames()),
+    createGame: (userId, theme) => dispatch(createGame(userId, theme)),
   };
 };
 

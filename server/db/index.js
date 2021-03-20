@@ -29,7 +29,7 @@ const syncAndSeed = async () => {
   const gameId = defaultHauntedGame.id;
   //   //create 3 puzzles associated with default Haunted Game
   //seed all puzzles - which will be associated with the same named components on the front end
-  for (let i = 1; i < 10; i++) {
+  for (let i = 1; i < 7; i++) {
     await Puzzle.create({ name: `Puzzle${i}` });
   }
   await GamePuzzles.create({ gameId: 1, puzzleId: 1 });

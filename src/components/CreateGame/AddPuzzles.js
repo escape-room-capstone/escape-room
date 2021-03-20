@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import { fetchTheme } from '../../store/singleTheme';
 import axios from "axios"
 import { setPuzzles } from '../../store/puzzles';
-
+import { componentMapping } from '../Puzzles/puzzles';
+import { Puzzle1, Puzzle2, Puzzle3, Puzzle4, Puzzle5, Puzzle6 } from '../Puzzles/puzzles';
+import '../../../public/css/CreateGame.css';
 
 
 const AddPuzzles = (props) => {
@@ -13,19 +15,32 @@ const AddPuzzles = (props) => {
         props.getPuzzles();
       }, []);
 
-    
       const { puzzles } = props;
+      // const puzzleNameArray = puzzles.map(puzzle => {
+      //   return puzzle.name
+      // })
+      // const puzzleNameArray = ["Puzzle1", "Puzzle2", "Puzzle3", "Puzzle4", "Puzzle5", "Puzzle6"];
+
+      // console.log(puzzleNameArray);
+      
+
 
   return (
-    <div>
-        {puzzles.map(puzzle => {
-            return (
-                <div onClick={()=>props.history.push(`/puzzle/${puzzle.id}`)} key={puzzle.id}>
-                    {puzzle.name}
-                    <hr />
-                </div>
-            )
-        })}
+    <div className="puzzlesContainer">
+      Select all the puzzles you would like in your game...
+      <hr />
+      {puzzles.map(puzzle => {
+        const Component = componentMapping[puzzle.name];        
+        return ( <div className="puzzle">
+          <h1>{puzzle.name}</h1>
+          <button onClick={()=>props.history.push(`/puzzle/${puzzle.id}`)}> Details </button>
+           <Component /> 
+           <hr/>
+           <button> Add Puzzle </button>
+           </div>
+           
+        )
+      })}
     </div>
   );
 };

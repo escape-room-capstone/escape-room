@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Stage, Layer, Circle, Line, Image } from 'react-konva';
 import useImage from 'use-image';
 
-export default function Puzzle1(props) {
+export const Puzzle1 = (props) => {
   const [puzzle, setPuzzle] = useState({
     one: false,
     two: false,
@@ -87,7 +87,7 @@ export const Puzzle4 = (props) => {
     return <Image image={image} />;
   };
   return (
-    <div>
+    <div className="hangmanContainer">
       <Stage height={400} align="center" width={1500}>
         <Layer>
           <Hangman />
@@ -113,12 +113,12 @@ export const Puzzle4 = (props) => {
           />
         </Layer>
       </Stage>
-      <hr></hr>
+      {/* <hr></hr> */}
       <button onClick={props.solve}>SOLVE</button>
     </div>
   );
 };
-const Puzzle5 = (props) => {
+export const Puzzle5 = (props) => {
   const [input, setInput] = useState('');
   const [error, setError] = useState(false);
   const checkAnswer = () => {
@@ -136,7 +136,7 @@ const Puzzle5 = (props) => {
     </div>
   );
 };
-const Puzzle6 = (props) => {
+export const Puzzle6 = (props) => {
   {
     const [square, setSquare] = useState({
       one: 0,

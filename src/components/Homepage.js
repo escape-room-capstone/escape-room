@@ -13,10 +13,10 @@ const Homepage = (props) => {
   const { allGames } = props;
 
 
-  const removeSpaceFromTheme = (theme) => {
-    const noSpaceTheme = theme.split(" ").join("");
-    console.log(noSpaceTheme);
-    return noSpaceTheme;
+  const removeSpaceFromTheme = (title) => {
+    const noSpaceTitle = title.split(" ").join("");
+    console.log(noSpaceTitle);
+    return noSpaceTitle;
   }
   
   
@@ -32,11 +32,12 @@ const Homepage = (props) => {
         }}
       >
         Welcome to escape-room
+        /haunted/1
       </h3> */}
       <h1> Welcome to escape-room </h1>
       {allGames.map(game => {
         return (<div key={game.id}>
-          <Link to={`${removeSpaceFromTheme(game.theme)}/${game.id}`}> {game.title} </Link>
+          <Link to={`${removeSpaceFromTheme(game.title)}/${game.id}`}> {game.title} </Link>
           <hr />
           </div>
         )

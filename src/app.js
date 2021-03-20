@@ -1,7 +1,6 @@
 import BobaFett from './components/SteveGame/BobaFett';
 import { Router, Route, Redirect } from 'react-router-dom';
 import React from 'react';
-import { Provider, connect } from 'react-redux';
 import Homepage from './components/Homepage';
 import history from './history';
 
@@ -34,6 +33,9 @@ import LetterBank from './components/HouseOfRiddlez/LetterBank';
 import ChooseTheme from './components/CreateGame/ChooseTheme';
 import CreateAGame from './components/CreateGame/CreateGame';
 import ConfirmTheme from './components/CreateGame/ConfirmTheme';
+import AddPuzzles from './components/CreateGame/AddPuzzles';
+import SinglePuzzle from './components/CreateGame/SinglePuzzle';
+
 
 const App = () => {
   return (
@@ -68,6 +70,8 @@ const App = () => {
       <Route exact path="/choosetheme" component={ChooseTheme} />
       <Route exact path="/theme/:id" component={ConfirmTheme} />
       <Route exact path="/creategame/:id" component={CreateAGame} />
+      <Route exact path="/addpuzzles" component={AddPuzzles} />
+      <Route exact path="/puzzle/:id" component={SinglePuzzle} />
       {/* <Redirect to="/" /> */}
     </Router>
   );

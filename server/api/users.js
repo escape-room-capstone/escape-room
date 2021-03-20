@@ -50,6 +50,20 @@ router.get('/:id/games', async (req, res, next) => {
   }
 });
 
+router.get('/:id/games/:gameId', async (req, res, next) => {
+  try {
+    const games = await Game.findAll({
+      where : {
+        userId : req.params.id,
+        id : req.params.gameId
+      }
+    });
+    res.status(200).send(games);
+  } catch (er) {
+    next(er);
+  }
+});
+
 router.post('/:id/games', async (req, res, next) => {
   try{
     const game = await Game.create({

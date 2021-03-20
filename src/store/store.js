@@ -10,6 +10,7 @@ import { gameReducer } from './game';
 import { allGamesReducer } from './allGames';
 import { themesReducer } from './theme';
 import { themeReducer } from './singleTheme';
+import { singlePuzzleReducer } from './puzzle';
 // import dynamicGame from './dynamicGameStore';
 const initialState = {};
 
@@ -19,6 +20,7 @@ const middleware = composeWithDevTools(
 );
 const rootReducer = combineReducers({
   puzzles: puzzleReducer,
+  puzzle: singlePuzzleReducer,
   users: userReducer,
   game: gameReducer,
   themes: themesReducer,

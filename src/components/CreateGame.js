@@ -7,7 +7,7 @@ import { fetchGames } from '../store/allGames.js';
 import { createGame } from '../store/game.js';
 
 //hard-coded for now
-const userId = 'f3cf8958-7044-47ab-9a66-652708c5b275';
+const userId = 1;
 export const _CreateGame = (props) => {
   const [chosenPuzzles, setChosenPuzzles] = useState([]);
   useEffect(() => {

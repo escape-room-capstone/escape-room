@@ -51,6 +51,7 @@ router.get('/:id/games', async (req, res, next) => {
 });
 
 router.post('/:id/games', async (req, res, next) => {
+  console.log(req.body, 'req.body');
   try {
     const game = await Game.create({
       title: req.body.title,
@@ -58,21 +59,7 @@ router.post('/:id/games', async (req, res, next) => {
       theme: req.body.theme,
       userId: req.params.id,
     });
-    res.send(game);
-  } catch (ex) {
-    next(ex);
-  }
-});
-
-//Kate's testing route for customizing game we have hard-coded which is also creating a new game for a user
-router.post('/:id/games', async (req, res, next) => {
-  try {
-    const game = await Game.create({
-      title: req.body.title,
-      numPuzzles: req.body.numPuzzles,
-      theme: req.body.theme,
-      userId: req.params.id,
-    });
+    console.log(game, 'game');
     res.send(game);
   } catch (ex) {
     next(ex);

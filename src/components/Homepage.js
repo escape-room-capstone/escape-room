@@ -44,7 +44,11 @@ const Homepage = (props) => {
         </p>
       </div>
       <hr />
-      <Link to ="/choosetheme"> Create game </Link>
+      <Link to="/choosetheme"> Create game </Link>
+      <hr />
+      <hr />
+      <Link to="/customize">Customize</Link>
+
       <hr />
       {/* <h3
         style={{

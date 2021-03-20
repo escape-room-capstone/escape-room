@@ -205,7 +205,11 @@ export const Puzzle4 = (props) => {
   };
   return (
     <div>
-      <Stage height={400} align="center" width={1500}>
+      <Stage
+        height={props.display ? 100 : 400}
+        align="center"
+        width={props.display ? 150 : 1500}
+      >
         <Layer>
           <Hangman />
 

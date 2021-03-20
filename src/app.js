@@ -69,6 +69,7 @@ const App = () => {
       <Route exact path="/theme/:id" component={ConfirmTheme} />
       <Route exact path="/creategame/:id" component={CreateAGame} />
       {/* <Redirect to="/" /> */}
+      <CreateGame />
     </Router>
   );
 };

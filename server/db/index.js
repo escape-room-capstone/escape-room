@@ -64,6 +64,12 @@ const syncAndSeed = async () => {
     GamePuzzles.create({ gameId: hauntedId, puzzleId: 1 }),
     GamePuzzles.create({ gameId: hauntedId, puzzleId: 2 }),
     GamePuzzles.create({ gameId: hauntedId, puzzleId: 4 }),
+    GamePuzzles.create({ gameId: hauntedId, puzzleId: 5 }),
+    GamePuzzles.create({ gameId: hauntedId, puzzleId: 6 }),
+    GamePuzzles.create({ gameId: hauntedId, puzzleId: 7 }),
+    GamePuzzles.create({ gameId: hauntedId, puzzleId: 9 }),
+    GamePuzzles.create({ gameId: hauntedId, puzzleId: 8 }),
+    GamePuzzles.create({ gameId: hauntedId, puzzleId: 3 }),
   ]);
 
   const users = await Promise.all([

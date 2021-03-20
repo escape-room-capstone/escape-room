@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import TypeWriterEffect from 'react-typewriter-effect';
-import { componentMapping } from './Clues';
+import { componentMapping } from '../Puzzles/puzzles';
 import { connect } from 'react-redux';
 
 import { Stage, Layer, Rect, Image } from 'react-konva';
@@ -13,7 +13,7 @@ import '../../../public/css/HauntedRoom.css';
 
 // import clue components
 //previosu hard-coded puzzles for the room
-import { ClueOne, ClueTwo, ClueThree } from './HauntedRoom2Clues';
+// import { ClueOne, ClueTwo, ClueThree } from './HauntedRoom2Clues';
 
 //react modal
 import Modal from 'react-modal';

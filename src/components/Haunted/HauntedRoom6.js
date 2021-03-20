@@ -3,17 +3,7 @@ import React, { useEffect, useState } from 'react';
 import useSound from 'use-sound';
 // import { dooropen } from '../../sounds/opendoor.mp3';
 
-import {
-  Stage,
-  Layer,
-  Star,
-  Text,
-  Circle,
-  Line,
-  Group,
-  Image,
-  Rect,
-} from 'react-konva';
+import { Stage, Layer, Image } from 'react-konva';
 
 //react modal
 import Modal from 'react-modal';

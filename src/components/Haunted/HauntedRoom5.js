@@ -14,7 +14,7 @@ import useImage from 'use-image';
 import '../../../public/css/HauntedRoom.css';
 
 import TypeWriterEffect from 'react-typewriter-effect';
-
+import { componentMapping } from '../Puzzles/puzzles';
 import { Lock } from './HauntedRoom2';
 
 //import clue components
@@ -28,7 +28,7 @@ const GhostRoom = (props) => {
   const [image] = useImage('/Images/girlghost.jpg');
   return <Image image={image} />;
 };
-export const HauntedRoom5 = (props) => {
+const _HauntedRoom5 = (props) => {
   const roomClues = {
     one: { solved: false, show: false },
     two: { solved: false, show: false },
@@ -36,6 +36,24 @@ export const HauntedRoom5 = (props) => {
   };
 
   const [room, setRoom] = useState({ clues: roomClues, showModal: false });
+
+  //this is now coming from DB and is set in state and mapped to props
+  const { puzzles } = props;
+  console.log(puzzles, 'puzzles');
+  //dynamically rendering components based on which puzzles are in the array from the DB
+  const Puzzle1 = (props) => {
+    const Component = componentMapping[puzzles[3].name];
+    return <Component {...props} />;
+  };
+  const Puzzle2 = (props) => {
+    const Component = componentMapping[puzzles[4].name];
+    return <Component {...props} />;
+  };
+  const Puzzle3 = (props) => {
+    const Component = componentMapping[puzzles[5].name];
+    return <Component {...props} />;
+  };
+
   //helper function
   const show = (clue) => {
     setRoom((prevRoom) => {
@@ -193,11 +211,9 @@ export const HauntedRoom5 = (props) => {
 
       <Modal style={customStyles} isOpen={room.showModal}>
         <p>This is a modal. please close it now</p>
-        {room.clues.one.show && <Room5Clue1 solve={() => setSolved('one')} />}
-        {room.clues.two.show && <Room5Clue2 solve={() => setSolved('two')} />}
-        {room.clues.three.show && (
-          <Room5Clue3 solve={() => setSolved('three')} />
-        )}
+        {room.clues.one.show && <Puzzle1 solve={() => setSolved('one')} />}
+        {room.clues.two.show && <Puzzle2 solve={() => setSolved('two')} />}
+        {room.clues.three.show && <Puzzle3 solve={() => setSolved('three')} />}
         <button
           onClick={() =>
             setRoom((prevRoom) => {
@@ -227,3 +243,10 @@ export const HauntedRoom5 = (props) => {
     </div>
   );
 };
+
+const mapState = (state) => {
+  const { puzzles } = state.game;
+  return { puzzles };
+};
+
+export const HauntedRoom5 = connect(mapState)(_HauntedRoom5);

@@ -1,4 +1,9 @@
 #customize-game div.game {
   display: flex;
   flex-direction: column;
+  width: 14rem;
+}
+
+#puzzle-choices {
+  width: 20rem;
 }

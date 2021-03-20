@@ -16,6 +16,7 @@ import { HauntedRoom7 } from './components/Haunted/HauntedRoom7';
 import { HauntedRoom8 } from './components/Haunted/HauntedRoom8';
 import { HauntedRoom9 } from './components/Haunted/HauntedRoom9';
 import { HauntedFinal } from './components/Haunted/HauntedFinal';
+import { CreateGame } from './components/CreateGame';
 
 import HouseOfRiddlez from './components/HouseOfRiddlez/HouseOfRiddlez';
 import LivingRoom from './components/HouseOfRiddlez/LivingRoom';
@@ -30,7 +31,7 @@ import BankGameStart from './components/BankGame/BankGameStart';
 import BankGameVictory from './components/BankGame/BankGameVictory';
 import LetterBank from './components/HouseOfRiddlez/LetterBank';
 import ChooseTheme from './components/CreateGame/ChooseTheme';
-import CreateGame from './components/CreateGame/CreateGame';
+import CreateAGame from './components/CreateGame/CreateGame';
 import ConfirmTheme from './components/CreateGame/ConfirmTheme';
 import AddPuzzles from './components/CreateGame/AddPuzzles';
 import SinglePuzzle from './components/CreateGame/SinglePuzzle';
@@ -68,7 +69,7 @@ const App = () => {
       <Route exact path="/BankgameVictory" component={BankGameVictory} />
       <Route exact path="/choosetheme" component={ChooseTheme} />
       <Route exact path="/theme/:id" component={ConfirmTheme} />
-      <Route exact path="/creategame/:id" component={CreateGame} />    
+      <Route exact path="/creategame/:id" component={CreateAGame} />
       <Route exact path="/addpuzzles" component={AddPuzzles} />
       <Route exact path="/puzzle/:id" component={SinglePuzzle} />
       {/* <Redirect to="/" /> */}

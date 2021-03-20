@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+// import UserSignup from './UserSignup';
 
 const Homepage = (props) => {
   console.log(props);
 
   return (
     <div style={{ height: '100vh' }}>
+      {/* <UserSignup/>
       <h3
         style={{
           width: '100vw',
@@ -15,7 +17,8 @@ const Homepage = (props) => {
         }}
       >
         Welcome to escape-room
-      </h3>
+      </h3> */}
+      <h1> Welcome to escape-room </h1>
       <Link to="/game1"> Game 1 </Link>
       <hr />
       <Link to="/game2"> Game 2 </Link>
@@ -42,7 +45,8 @@ const Homepage = (props) => {
       </div>
       <hr />
       <Link to ="/choosetheme"> Create game </Link>
-      <h3
+      <hr />
+      {/* <h3
         style={{
           position: 'absolute',
           bottom: '0',
@@ -54,7 +58,7 @@ const Homepage = (props) => {
       >
         {' '}
         Designed by VARKS{' '}
-      </h3>
+      </h3> */}
     </div>
   );
 };

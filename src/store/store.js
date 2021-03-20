@@ -3,11 +3,12 @@ import thunkMiddleware from 'redux-thunk';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 // import rootReducer from '../reducers';
-import { puzzleReducer } from './puzzles';
+import { puzzleReducer } from '../store/puzzles';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { userReducer } from './users';
+import { userReducer } from '../store/users';
 import { gameReducer } from './game';
-import { themesReducer } from './theme'
+import { allGamesReducer } from './allGames';
+import { themesReducer } from './theme';
 import { themeReducer } from './singleTheme';
 import { singlePuzzleReducer } from './puzzle';
 // import dynamicGame from './dynamicGameStore';
@@ -23,8 +24,8 @@ const rootReducer = combineReducers({
   users: userReducer,
   game: gameReducer,
   themes: themesReducer,
-  theme: themeReducer  
-
+  theme: themeReducer,
+  allGames: allGamesReducer,
   // dynamicGame,
 
   // themes: themeReducer

@@ -1,0 +1,4 @@
+#customize-game div.game {
+  display: flex;
+  flex-direction: column;
+}

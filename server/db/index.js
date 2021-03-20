@@ -2,9 +2,9 @@
 
 const db = require('./db.js');
 
+// require all Models
 const User = require('./models/User');
 const Theme = require('./models/Theme');
-// require all Models and make asssociation here as well
 const Game = require('./models/Game');
 const Puzzle = require('./models/Puzzle.js');
 const GamePuzzles = require('./models/GamePuzzles.js');
@@ -19,6 +19,7 @@ User.hasMany(Game);
 //define syncAndSeed function
 const syncAndSeed = async () => {
   await db.sync({ force: true });
+
   //create default Haunted Game
   const defaultHauntedGame = await Game.create({
     title: 'The Haunted House',
@@ -60,6 +61,8 @@ const syncAndSeed = async () => {
   }
   //default puzzles for the Haunted Game
   const hauntedId = defaultHauntedGame.id;
+  const houseGameId = defaultHouseOfRiddlez.id;
+
   await Promise.all([
     GamePuzzles.create({ gameId: hauntedId, puzzleId: 1 }),
     GamePuzzles.create({ gameId: hauntedId, puzzleId: 2 }),
@@ -71,6 +74,52 @@ const syncAndSeed = async () => {
     GamePuzzles.create({ gameId: hauntedId, puzzleId: 8 }),
     GamePuzzles.create({ gameId: hauntedId, puzzleId: 3 }),
   ]);
+
+  //create puzzle data for house game
+  const puzzles = await Promise.all([
+    Puzzle.create({
+      number: 1,
+      prompt: 'this is attic riddle 1',
+      solution: 'this is attic solution 1',
+      name: 'atticP1',
+    }),
+    Puzzle.create({
+      number: 2,
+      prompt: 'this is attic riddle 2',
+      solution: 'this is attic solution 2',
+      name: 'atticP2',
+    }),
+    Puzzle.create({
+      number: 3,
+      prompt: 'this is attic riddle 3',
+      solution: 'this is attic solution 3',
+      name: 'atticP3',
+    }),
+  ]);
+
+  //destructure puzzle array
+  const [atticPuzzleOne, atticPuzzleTwo, atticPuzzleThree] = puzzles;
+
+  //assign puzzles to specific game (will show up in gamepuzzle through table)
+  defaultHouseOfRiddlez.addPuzzle([
+    atticPuzzleOne,
+    atticPuzzleTwo,
+    atticPuzzleThree,
+  ]);
+
+  //below does the same as the above addPuzzle method
+  // await GamePuzzles.create({
+  //   gameId: houseGameId,
+  //   puzzleId: atticPuzzleOne.id,
+  // });
+  // await GamePuzzles.create({
+  //   gameId: houseGameId,
+  //   puzzleId: atticPuzzleTwo.id,
+  // });
+  // await GamePuzzles.create({
+  //   gameId: houseGameId,
+  //   puzzleId: atticPuzzleThree.id,
+  // });
 
   const users = await Promise.all([
     User.create({
@@ -140,40 +189,19 @@ const syncAndSeed = async () => {
     }),
   ]);
 
-  //   const puzzles = await Promise.all([
-  //     Puzzle.create({
-  //       name: 'atticP1',
-  //       prompt: 'this is attic riddle 1',
-  //       solution: 'this is attic solution 1',
-  //       clue: 'i am attic puzzle 1 clue',
-  //     }),
-  //     Puzzle.create({
-  //       name: 'atticP2',
-  //       prompt: 'this is attic riddle 2',
-  //       solution: 'this is attic solution 2',
-  //       clue: 'i am attic puzzle 2 clue',
-  //     }),
-  //     Puzzle.create({
-  //       name: 'atticP3',
-  //       prompt: 'this is attic riddle 3',
-  //       solution: 'this is attic solution 3',
-  //       clue: 'i am attic puzzle 3 clue',
-  //     }),
-  //   ]);
-
   // const RiddleTheme = await Theme.create({
   //   name: 'House of Riddles Theme',
+  //   themeLabel: 'house',
   //   backgroundImageOne: '../RiddlezImages/home.jpg',
-  //   backgroundImageTwo:'../RiddlezImages/livingroom.jpg',
+  //   backgroundImageTwo: '../RiddlezImages/livingroom.jpg',
   //   backgroundImageThree: '../RiddlezImages/roomOne.jpg',
   //   backgroundImageFour: '../RiddlezImages/roomTwo.jpg',
   //   backgroundImageFive: '../RiddlezImages/attic.jpg',
   //   backgroundImageSix: '../RiddlezImages/backroom.jpg',
-  // })
+  // });
 
   const [cody, arwinder, kate, nes, steve, roman] = users;
   const [forest, cafe] = themes;
-  //   const [atticPuzzleOne, atticPuzzleTwo, atticPuzzleThree] = puzzles;
 };
 
 module.exports = {

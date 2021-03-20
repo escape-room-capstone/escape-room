@@ -12,7 +12,8 @@ const Game = db.define('game', {
   },
   public: {
     type: BOOLEAN,
-    defaultValue: false,
+    defaultValue: true
+
   },
   theme: {
     type: STRING,

@@ -55,7 +55,7 @@ const syncAndSeed = async () => {
   });
 
   //seed all puzzles - which will be associated with the same named components on the front end
-  for (let i = 1; i < 10; i++) {
+  for (let i = 1; i < 7; i++) {
     await Puzzle.create({ name: `Puzzle${i}` });
   }
   //default puzzles for the Haunted Game

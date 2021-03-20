@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import UserSignup from './UserSignup';
+import SignUp from './SignUp';
 
 const Homepage = (props) => {
   console.log(props);
 
   return (
     <div style={{ height: '100vh' }}>
-      {/* <UserSignup/>
-      <h3
+      <SignUp />
+      {/*<h3
         style={{
           width: '100vw',
           color: 'white',

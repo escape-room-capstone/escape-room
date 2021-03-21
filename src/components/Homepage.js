@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
 import { fetchGames } from '../store/allGames';
-// import UserSignup from './UserSignup';
-import SignUp from './SignUp';
 
 
 const Homepage = (props) => {
@@ -24,7 +22,6 @@ const Homepage = (props) => {
   
   return (
     <div style={{ height: '100vh' }}>
-      <SignUp />
       {/*<h3
         style={{
           width: '100vw',

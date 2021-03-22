@@ -36,11 +36,14 @@ import ConfirmTheme from './components/CreateGame/ConfirmTheme';
 import AddPuzzles from './components/CreateGame/AddPuzzles';
 import SinglePuzzle from './components/CreateGame/SinglePuzzle';
 
+import { dg_src_SingleRoom } from './components/DynamicGameSrc/';
+
 
 const App = () => {
   return (
     <Router history={history}>
       <Route exact path="/" component={Homepage} />
+
       <Route exact path="/Bobafett/4" component={BobaFett} />
       <Route exact path="/TheHauntedHouse/1" component={HauntedIntro} />
       <Route exact path="/haunted/room1" component={HauntedRoom1} />
@@ -73,9 +76,10 @@ const App = () => {
       <Route exact path="/creategame/:id" component={CreateAGame} />
       <Route exact path="/addpuzzles" component={AddPuzzles} />
       <Route exact path="/puzzle/:id" component={SinglePuzzle} />
+
+      <Route exact path="/dynamicgame" component={dg_src_SingleRoom} />
+
       {/* <Redirect to="/" /> */}
     </Router>
-  );
-};
 
 export default App;

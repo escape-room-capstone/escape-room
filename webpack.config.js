@@ -1,3 +1,4 @@
+'use strict'
 const path = require('path');
 
 module.exports = {
@@ -7,12 +8,18 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.join(__dirname, './dist'),
+    publicPath: './',
   },
   module: {
     rules: [
       {
         loader: 'babel-loader',
         exclude: /(node_modules)/,
+        options: {
+          presets: [
+            '@babel/preset-react'
+          ]
+        }
       },
       {
         test: /\.css$/,

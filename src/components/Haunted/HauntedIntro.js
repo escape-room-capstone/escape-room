@@ -11,9 +11,7 @@ const RainScene = (props) => {
 };
 
 export const _HauntedIntro = (props) => {
-  console.log(props.gameId, 'props.gameid');
   useEffect(() => {
-    //hard coded gameId for now for testing purposes
     props.getGame(props.gameId);
   }, []);
   useEffect(

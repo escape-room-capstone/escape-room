@@ -50,7 +50,6 @@ const _HauntedRoom2 = (props) => {
 
   //this is now coming from DB and is set in state and mapped to props
   const { puzzles } = props;
-  console.log(puzzles, 'puzzles');
   //dynamically rendering components based on which puzzles are in the array from the DB
   const Puzzle1 = (props) => {
     const Component = componentMapping[puzzles[0].name];

@@ -6,6 +6,7 @@ const config = {
 
 if (process.env.LOGGING === 'true') {
   delete config.logging;
+
 }
 
 // //https://stackoverflow.com/questions/61254851/heroku-postgres-sequelize-no-pg-hba-conf-entry-for-host
@@ -47,3 +48,4 @@ module.exports = db;
 //   }
 // }
 // const client = new Sequelize(dbUrl, config)
+

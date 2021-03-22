@@ -2,15 +2,20 @@ import React, { useState, useEffect } from 'react';
 import useImage from 'use-image';
 import TypeWriterEffect from 'react-typewriter-effect';
 import { Stage, Layer, Image } from 'react-konva';
-import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fetchGame } from '../../store/game.js';
 
 const RainScene = (props) => {
   const [image] = useImage('/Images/thunder.jpg');
   return <Image image={image} />;
 };
 
-export const HauntedIntro = (props) => {
-  const [advance, setAdvance] = useState(false);
+export const _HauntedIntro = (props) => {
+  console.log(props.gameId, 'props.gameid');
+  useEffect(() => {
+    //hard coded gameId for now for testing purposes
+    props.getGame(props.gameId);
+  }, []);
   useEffect(
     () => setTimeout(() => props.history.push('/haunted/room1'), 9000),
     []
@@ -40,7 +45,19 @@ export const HauntedIntro = (props) => {
           <RainScene />
         </Layer>
       </Stage>
-      {/* {advance && <Redirect push to="/haunted/room1" />} */}
     </div>
   );
 };
+
+const mapState = (state, routeProps) => {
+  const gameId = routeProps.match.params.gameId * 1;
+  return { gameId };
+};
+
+const mapDispatch = (dispatch) => {
+  return {
+    getGame: (gameId) => dispatch(fetchGame(gameId)),
+  };
+};
+
+export const HauntedIntro = connect(mapState, mapDispatch)(_HauntedIntro);

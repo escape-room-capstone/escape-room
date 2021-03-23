@@ -1,12 +1,27 @@
 
 
 const router = require('express').Router();
+const GamePuzzles = require('../db/models/GamePuzzles');
 const Puzzle = require('../db/models/Puzzle');
 
 router.get('/', async (req, res, next) => {
   try {
     const puzzles = await Puzzle.findAll();
     res.status(200).send(puzzles);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post('/gamePuzzles', async (req, res, next) => {
+  try {
+    
+    const gamePuzzle = await GamePuzzles.create({
+      gameId : req.body.gameId,
+      puzzleId : req.body.puzzleId
+    })
+
+    res.send(gamePuzzle)
   } catch (err) {
     next(err);
   }

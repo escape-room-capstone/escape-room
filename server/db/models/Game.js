@@ -9,6 +9,7 @@ const Game = db.define('game', {
   numPuzzles: {
     type: INTEGER,
     allowNull: false,
+    defaultValue: 9
   },
   public: {
     type: BOOLEAN,
@@ -31,10 +32,14 @@ const Game = db.define('game', {
 });
 
 Game.prototype.loadGame = async function () {
+  const id = this.id
   const title = this.title;
   const theme = this.theme;
   const puzzles = await this.getPuzzles();
-  return { title, theme, puzzles };
+  const numPuzzles = this.numPuzzles;
+  const public = this.public;
+  const userId = this.userId
+  return { id, title, theme, puzzles, numPuzzles, public, userId };
 };
 
 module.exports = Game;

@@ -1,5 +1,3 @@
-
-
 const router = require('express').Router();
 const Puzzle = require('../db/models/Puzzle');
 

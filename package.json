@@ -11,7 +11,7 @@
     "start:server": "node-dev --respawn server",
     "start:dev": "npm run build:watch & npm run start:server",
     "test": "mocha",
-    "test:dev": "DATABASE_URL=postgres://localhost:5432/escape_room_test npm run test -- --watch"
+    "test:dev": "JWT=shh DATABASE_URL=postgres://localhost:5432/escape_room_test npm run test -- --watch"
   },
   "repository": {
     "type": "git",
@@ -36,11 +36,13 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "bcrypt": "^5.0.1",
     "bootstrap": "^4.6.0",
     "css-loader": "^5.1.1",
     "express": "^4.17.1",
     "file-loader": "^6.2.0",
     "firebase": "^8.3.1",
+    "jsonwebtoken": "^8.5.1",
     "konva": "^7.2.5",
     "node-dev": "^6.3.0",
     "path": "^0.12.7",

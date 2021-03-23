@@ -36,13 +36,12 @@ import ConfirmTheme from './components/CreateGame/ConfirmTheme';
 import AddPuzzles from './components/CreateGame/AddPuzzles';
 import SinglePuzzle from './components/CreateGame/SinglePuzzle';
 
-
 const App = () => {
   return (
     <Router history={history}>
       <Route exact path="/" component={Homepage} />
       <Route exact path="/Bobafett/4" component={BobaFett} />
-      <Route exact path="/TheHauntedHouse/1" component={HauntedIntro} />
+      <Route path="/TheHauntedHouse/:gameId" component={HauntedIntro} />
       <Route exact path="/haunted/room1" component={HauntedRoom1} />
       <Route exact path="/haunted/room2" component={HauntedRoom2} />
       <Route exact path="/haunted/room3" component={HauntedRoom3} />

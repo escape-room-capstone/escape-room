@@ -37,7 +37,6 @@ const SinglePuzzle = (props) => {
        <h2> {puzzle.name} </h2>
        <p> INFORMATION ON THE PUZZLE, SOLUTION, PROMPTS, ETC, will add all that information to the Puzzle model in the database and then retrive it here</p>
      <Component /> 
-     <button> Add Puzzle </button>
      </div>
      : "404" }
   </div>

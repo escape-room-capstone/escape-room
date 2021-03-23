@@ -34,7 +34,7 @@ const ConfirmTheme = (props) => {
 const mapState = (state) => state;
 
 const mapDispatch = {
-  getTheme : fetchTheme
+  getTheme : fetchTheme,
 };
 
 export default connect(mapState, mapDispatch)(ConfirmTheme);

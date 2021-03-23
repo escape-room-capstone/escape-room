@@ -17,13 +17,14 @@ export const fetchGame = (gameId) => {
   };
 };
 
-export const createGame = (userId, theme, numPuzzles, title) => {
+export const createGame = (userId, theme, numPuzzles, title, puzzleArray) => {
   return async (dispatch) => {
     const game = (
       await axios.post(`/api/users/${userId}/games`, {
         theme,
         numPuzzles,
         title,
+        puzzleArray
       })
     ).data;
     dispatch(setGame(game));
@@ -32,7 +33,7 @@ export const createGame = (userId, theme, numPuzzles, title) => {
 
 export const fetchUserGame = (userId, gameId) => {
   return async (dispatch) => {
-    const userGame = (await axios.get(`/api/users/${userId}/games/${gameId}`))
+    const userGame = (await axios.get(`/api/users/${userId}/games/${gameId}`)).data
     dispatch(setUserGame(userGame));
   }
 }

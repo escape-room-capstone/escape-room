@@ -55,13 +55,21 @@ router.get('/:id/games', async (req, res, next) => {
 router.get('/:id/games/:gameId', async (req, res, next) => {
   try {
     let game = await Game.findOne({
-      where : {
-        userId : req.params.id,
-        id : req.params.gameId
-      }
-    })
-    game = await game.loadGame();    
-    res.status(200).send(game);
+      where: {
+        userId: req.params.id,
+        id: req.params.gameId,
+      },
+    });
+    const testGame = await Game.findOne({
+      where: {
+        userId: req.params.id,
+        id: req.params.gameId,
+      },
+      include: [Puzzle],
+    });
+    res.send(testGame);
+    // game = await game.loadGame();
+    // res.status(200).send(game);
   } catch (er) {
     next(er);
   }
@@ -75,17 +83,17 @@ router.post('/:id/games', async (req, res, next) => {
       numPuzzles: req.body.numPuzzles,
       theme: req.body.theme,
       userId: req.params.id,
-    });    
-    
+    });
+
     const { puzzleArray } = req.body;
 
-    if(puzzleArray.length > 0) {
-      for(let i = 0; i < puzzleArray.length; i++) {
+    if (puzzleArray.length > 0) {
+      for (let i = 0; i < puzzleArray.length; i++) {
         const puzzle = await Puzzle.findByPk(puzzleArray[i]);
-        GamePuzzles.create({ gameId: game.id, puzzleId : puzzle.id})
+        GamePuzzles.create({ gameId: game.id, puzzleId: puzzle.id });
       }
     }
-    game =  await game.loadGame();
+    game = await game.loadGame();
     console.log(game, 'game');
     res.send(game);
   } catch (ex) {

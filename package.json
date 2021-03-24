@@ -10,7 +10,6 @@
     "seed": "node server/seed/seed.js",
     "start:server": "node-dev --respawn server",
     "start:dev": "npm run build:watch & npm run start:server",
-    "start:dev:seed": "SEED=true npm run start:dev",
     "test": "mocha",
     "test:dev": "DATABASE_URL=postgres://localhost:5432/escape_room_test npm run test -- --watch"
   },

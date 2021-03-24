@@ -1,5 +1,5 @@
 // Imports
-const db = require('../db');
+const db = require('../db/db');
 const { models: { DynamicGame, Level, Room, Image } } = require('../db/models/DynamicGameModels.js')
 const { IslandGameImg, SpaceGameImg }  = require('../../public/Images/GameImages/index');
 

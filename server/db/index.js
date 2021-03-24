@@ -10,6 +10,7 @@ const Puzzle = require('./models/Puzzle.js');
 const GamePuzzles = require('./models/GamePuzzles.js');
 const bcrypt = require('bcrypt')
 const jwt = require("jsonwebtoken");
+const dg_syncAndSeed = require('../seed/dynamic')
 
 // // bcrypt User.addHook with 10 salt rounds
 // User.addHook('beforeSave', async function(user) {
@@ -60,6 +61,7 @@ User.hasMany(Game);
 //define syncAndSeed function
 const syncAndSeed = async () => {
   await db.sync({ force: true });
+  await dg_syncAndSeed();
 
   //create default Haunted Game
   const defaultHauntedGame = await Game.create({

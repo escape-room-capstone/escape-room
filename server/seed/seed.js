@@ -1,7 +1,7 @@
+'use strict'
 const { db, syncAndSeed } = require('../db/index.js');
-// const { dg_syncAndSeed } = require('./dynamic');
 
-async function seed() {
+async function seed() {  
   console.log('seeding...');
   try {
     await syncAndSeed();

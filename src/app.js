@@ -36,7 +36,7 @@ import ConfirmTheme from './components/CreateGame/ConfirmTheme';
 import AddPuzzles from './components/CreateGame/AddPuzzles';
 import SinglePuzzle from './components/CreateGame/SinglePuzzle';
 
-import { dg_src_SingleRoom } from './components/DynamicGameSrc/';
+import SingleRoom from './components/DynamicGameSrc/SingleRoom';
 
 
 const App = () => {
@@ -77,7 +77,7 @@ const App = () => {
       <Route exact path="/addpuzzles" component={AddPuzzles} />
       <Route exact path="/puzzle/:id" component={SinglePuzzle} />
 
-      <Route exact path="/dg" component={dg_src_SingleRoom} />
+      <Route exact path="/dg" component={SingleRoom} />
 
       {/* <Redirect to="/" /> */}
     </Router>

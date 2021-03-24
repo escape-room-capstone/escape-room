@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // ** SET UP NOTES **
+// DevTools - to be added into route and render above all rooms
 // The props for this helper will come from the component where it is rendered
 // They need to be standardized with as follows: 
 // - 

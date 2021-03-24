@@ -1,54 +1,60 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getActiveGame } from '../../store/dynamic.js'
-import DevTools from '../../programs/DevTools'
+import { getActiveGame, getActiveRoom } from '../../store/dynamic.js'
+// import DevTools from '../../programs/DevTools'
 
 // Fetch data -- need to connect to redux and crete corresponding api / redux-router
-const activeGameId = 1;
-const activeLevelId = 1;
-const activeRoomId = 2;
-const activeImageId = 4;
-
 
 // Dynamic game loading component
-const SingleRoom = () => {
+const SingleRoom = (props) => {
 
     // Map state to props && create a map dispatch variable 
-    const activeGame = useSelector(state => state.dg.activeGame); // -- not getting the game into the component 
+    const { activeGame } = useSelector(state => state.dg);
+    const { activeRoom } = useSelector(state => state.dg);
     const dispatch = useDispatch();
+
+    // Set local state -- for now just to use to move around the dynamic game
+    const [selectedGameId, setSelectedGame] = useState(1);
+    const [selectedRoomId, setSelectedRoom] = useState(3);
+   
+    let gameId = 1;
+    let roomId = selectedRoomId;
+
 
     // Fetch the game from DynamincGame redux 
     useEffect(() => {
-        dispatch(getActiveGame(activeGameId))
-    }, []);
+        dispatch(getActiveGame(gameId)),
+        dispatch(getActiveRoom(gameId, roomId))
+    }, [gameId, roomId]);
 
-    console.log(activeGame); // -- DELETE
+    console.log(activeRoom);
+
+    const handleRoomChange = (e) => {
+        setSelectedRoom(e.target.value)
+    }
+
 
     return (
         <div className='dg-singleroom'>
-
-            {/* <Programs /> -- willhave the in-game programs appearing here (timer, clicker, etc) */}
-            <hr />
+            
             {/* logic below prevents the code to render before the state is filled with data */}
-            { activeGame && (
+            { activeRoom.id && (
                 <div className='dg-singleroom'>
-                    {/* DevTools -- to be added into route and takwen out of here */}
-                    <DevTools
-                        // activeGame={activeGame}
-                        // activeLevel={levels[activeLevelId]}
-                        // activeRoom={dg.rooms[activeRoomId]}
-                        // activeImage={dg.images[activeImageId]}
-                    />
+                    
+                    <div id='room-selector'>
+                        Active Game: {activeGame.title} | ActiveRoom: {activeRoom.name} 
+                        <input id='select-room' type='number' value={roomId} min='1' max={activeGame.rooms.length} onChange={(e) => handleRoomChange(e)}></input>
+                    </div>
                     <hr />
 
-                    <div className='dg-singleroom-programs'>In-game programs will appear here</div>
+                    <div className='dg-singleroom-programs'>[ In-game programs will appear here ]</div>
                     <hr />
 
-                    <div className='dg-singleroom-title-text'>Text generated for the room will be rendered here</div>
+                    <div className='dg-singleroom-title-text'>[ Text generated for the room will be rendered here] </div>
                     <hr />
 
                     <div className='dg-singleroom-body'>
-                        {/* <img src={activeGame.images[activeImageId].src}></img> */}
+                        <img src={activeRoom.images[0].src}></img>
                     </div>
                 </div>
             )}

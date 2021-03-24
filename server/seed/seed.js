@@ -1,4 +1,5 @@
 const { db, syncAndSeed } = require('../db/index.js');
+// const { dg_syncAndSeed } = require('./dynamic');
 
 async function seed() {
   console.log('seeding...');

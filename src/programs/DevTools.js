@@ -10,10 +10,10 @@ const DevTools = ({ activeGame, activeLevel, activeRoom, activeImage }) => {
     return (
         <div>
             <p>DevTools</p>
-            <p>Current Game: id {activeGame.id} - name {activeGame.title}</p>
+            {/* <p>Current Game: id {activeGame.id} - name {activeGame.title}</p>
             <p>Current Level: id {activeLevel.id} - name {activeLevel.name}</p>
             <p>Current Room: id {activeRoom.id} - name {activeRoom.name}</p>
-            <p>Current Image: id {activeImage.id} - name {activeImage.name}</p>
+            <p>Current Image: id {activeImage.id} - name {activeImage.name}</p> */}
         </div>
     )
 }

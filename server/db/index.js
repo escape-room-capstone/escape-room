@@ -8,6 +8,47 @@ const Theme = require('./models/Theme');
 const Game = require('./models/Game');
 const Puzzle = require('./models/Puzzle.js');
 const GamePuzzles = require('./models/GamePuzzles.js');
+const bcrypt = require('bcrypt')
+const jwt = require("jsonwebtoken");
+
+// // bcrypt User.addHook with 10 salt rounds
+// User.addHook('beforeSave', async function(user) {
+//   if(user._changed.has("password")) {
+//     user.password = await bcrypt.hash(user.password, 10);
+//   }
+// })
+
+// // User.authenticate method
+// User.authenticate = async function ({ username, password }) {
+//   const user = await User.findOne({
+//     where: { username },
+//   });
+//   // this gets slower because of the 10 salt rounds
+//   if (user && await bcrypt.compare(password, user.password)) {
+//     return jwt.sign({ id: user.id }, process.env.JWT);
+//   }
+//   const error = Error("bad credentials");
+//   error.status = 401;
+//   throw error;
+// };
+
+// // User.byToken method
+// User.byToken = async function (token) {
+//   try {
+//     const { id } = await jwt.verify(token, process.env.JWT);
+//     const user = await User.findByPk(id);
+//     if(user) {
+//         return user;
+//     }
+//     const error = Error("bad credentials");
+//     error.status = 401;
+//     throw error;
+//   } catch (ex) {
+//     const error = Error("bad credentials");
+//     error.status = 401;
+//     throw error;
+//   }
+// };
 
 // Model associations
 Game.belongsToMany(Puzzle, { through: GamePuzzles, foreignKey: 'gameId' });
@@ -202,6 +243,7 @@ const syncAndSeed = async () => {
 
   const [cody, arwinder, kate, nes, steve, roman] = users;
   const [forest, cafe] = themes;
+  return users
 };
 
 module.exports = {

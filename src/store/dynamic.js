@@ -10,15 +10,15 @@ const initialState = {
 export const GET_GAME = 'GET_GAME'
 
 // Action Creators
-export const _getActiveGame = (game) => ({ type: GET_GAME, game });
+export const _getActiveGame = (dg) => ({ type: GET_GAME, dg });
 
 
 // ** Thunks **
 // Fetch active game
 export const getActiveGame = (id) => {
     return async (dispatch) => {
-        const game = (await axios.get(`/api/dg/${id}`)).data
-        dispatch(_getActiveGame(game))
+        const dg = (await axios.get(`/api/dg/${id}`)).data
+        dispatch(_getActiveGame(dg))
     }
 }
 

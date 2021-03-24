@@ -63,7 +63,7 @@ const Homepage = (props) => {
 
       <hr /> */}
       
-      <Link to="/dynamicgame">Dynamic Room</Link>
+      <Link to="/dg">Dynamic Game</Link>
       <hr />
 
       <Link to ="/choosetheme"> Create game </Link>

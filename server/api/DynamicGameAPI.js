@@ -1,15 +1,7 @@
 const router = require('express').Router()
-const { models: { DynamicGame, Level, Room, Image } } = require('../db/models/DynamicGameModels')
+const { models: { DynamicGame, DynamicLevel, DynamicRoom, DynamicImage } } = require('../db/models/DynamicGameModels')
 
-// Game GET routes
-router.get('/', async (req, res, next) => {
-    try {
-        res.send(await DynamicGame.findAll());
-    } catch (err) {
-        next(err)
-    }
-});
-
+// DynamicGame GET routes
 router.get('/:id', async (req, res, next) => {
     try {
         res.send(await DynamicGame.findOne({

@@ -77,9 +77,11 @@ const App = () => {
       <Route exact path="/addpuzzles" component={AddPuzzles} />
       <Route exact path="/puzzle/:id" component={SinglePuzzle} />
 
-      <Route exact path="/dynamicgame" component={dg_src_SingleRoom} />
+      <Route exact path="/dg" component={dg_src_SingleRoom} />
 
       {/* <Redirect to="/" /> */}
     </Router>
+  )
+}
 
 export default App;

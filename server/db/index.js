@@ -12,9 +12,9 @@ const GamePuzzles = require('./models/GamePuzzles.js');
 const Room = require('./models/Room.js');
 const RoomData = require('./models/RoomData');
 
-const bcrypt = require('bcrypt')
-const jwt = require("jsonwebtoken");
-const dg_syncAndSeed = require('../seed/dynamic')
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const dg_syncAndSeed = require('../seed/dynamic');
 
 // // bcrypt User.addHook with 10 salt rounds
 // User.addHook('beforeSave', async function(user) {
@@ -54,7 +54,6 @@ const dg_syncAndSeed = require('../seed/dynamic')
 //     throw error;
 //   }
 // };
-
 
 // Model associations
 Game.belongsToMany(Puzzle, { through: GamePuzzles, foreignKey: 'gameId' });
@@ -208,12 +207,24 @@ const syncAndSeed = async () => {
       ],
       type: 'custom',
     }),
-
     Theme.create({
       name: 'Cafe',
       type: 'custom',
       backgroundImageOne: '/Theme_Images/Cafe1.jpg',
       images: ['/Theme_Images/Cafe1.jpg', '/Theme_Images/Cafe2.jpg'],
+    }),
+    Theme.create({
+      name: 'House',
+      backgroundImageOne: '../RiddlezImages/home.jpg',
+      images: [
+        '../RiddlezImages/home.jpg',
+        '../RiddlezImages/livingroom.jpg',
+        '../RiddlezImages/roomOne.jpg',
+        '../RiddlezImages/roomTwo.jpg',
+        '../RiddlezImages/attic.jpg',
+        '../RiddlezImages/backroom.jpg',
+      ],
+      type: 'default',
     }),
     Theme.create({
       name: 'Haunted',
@@ -225,30 +236,16 @@ const syncAndSeed = async () => {
       numPuzzles: 9,
       type: 'default',
     }),
-    Theme.create({
-      name: 'Riddles',
-      numPuzzles: 9,
-      type: 'default',
-    }),
-
-    Theme.create({
-      name: 'House',
-      backgroundImageOne: '../RiddlezImages/home.jpg',
-      themeImages: [
-        '../RiddlezImages/home.jpg',
-        '../RiddlezImages/livingroom.jpg',
-        '../RiddlezImages/roomOne.jpg',
-        '../RiddlezImages/roomTwo.jpg',
-        '../RiddlezImages/attic.jpg',
-        '../RiddlezImages/backroom.jpg',
-      ],
-    }),
+    // Theme.create({
+    //   name: 'Riddles',
+    //   numPuzzles: 9,
+    //   type: 'default',
+    // }),
   ]);
 
   const [cody, arwinder, kate, nes, steve, roman] = users;
-  const [forest, cafe, house] = themes;
-  return users
-
+  const [forest, cafe, house, haunted, bank] = themes;
+  return users;
 };
 
 module.exports = {
@@ -257,5 +254,3 @@ module.exports = {
 
   models: { Puzzle, Game, GamePuzzles, User, Theme, Room, RoomData },
 };
-
-

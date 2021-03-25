@@ -70,8 +70,15 @@ const Homepage = (props) => {
         </p>
       </div>
 
+
       <hr /> */}
-      <Link to="/choosetheme"> Create game </Link>
+
+      
+      <Link to="/dg">Dynamic Game</Link>
+      <hr />
+
+      <Link to ="/choosetheme"> Create game </Link>
+
       <hr />
       <hr />
       <Link to="/customize">Customize</Link>

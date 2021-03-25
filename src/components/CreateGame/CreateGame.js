@@ -52,10 +52,7 @@ const CreateGame = (props) => {
         );
       }
     }
-    //We are only creating the game above... need a gameId...
-
-    //props.history.push(`/gameintro/${game.id}`)
-
+    //We are only creating the game above... need a gameId..
     //find all the games associated to this user... : this returns an array of all this users games...
     //2 is userId, for now hard-coded...
     // let game = (await axios.get('/api/users/2/games')).data;

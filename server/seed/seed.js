@@ -1,6 +1,7 @@
+'use strict'
 const { db, syncAndSeed } = require('../db/index.js');
 
-async function seed() {
+async function seed() {  
   console.log('seeding...');
   try {
     await syncAndSeed();

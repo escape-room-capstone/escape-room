@@ -35,12 +35,14 @@ import ChooseTheme from './components/CreateGame/ChooseTheme';
 import CreateAGame from './components/CreateGame/CreateGame';
 import ConfirmTheme from './components/CreateGame/ConfirmTheme';
 import SinglePuzzle from './components/CreateGame/SinglePuzzle';
+import SingleRoom from './components/DynamicGameSrc/SingleRoom';
 import GameIntro from './components/CreateGame/GameIntro';
 
 const App = () => {
   return (
     <Router history={history}>
       <Route exact path="/" component={Homepage} />
+
       <Route exact path="/Bobafett/4" component={BobaFett} />
       <Route path="/TheHauntedHouse/:gameId" component={HauntedIntro} />
       <Route exact path="/haunted/room1" component={HauntedRoom1} />
@@ -72,12 +74,16 @@ const App = () => {
       <Route exact path="/theme/:id" component={ConfirmTheme} />
       <Route exact path="/creategame/:id" component={CreateAGame} />
       <Route exact path="/puzzle/:id" component={SinglePuzzle} />
+
+      <Route exact path="/dg" component={SingleRoom} />
       <Route exact path="/gameintro/:id" component={GameIntro} />
+
       <Route exact path="/games/:gameId/:roomNum" component={CustomGame} />
+
 
       {/* <Redirect to="/" /> */}
     </Router>
-  );
-};
+  )
+}
 
 export default App;

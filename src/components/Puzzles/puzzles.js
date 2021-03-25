@@ -64,7 +64,7 @@ export const Puzzle1 = (props) => {
       </div>
     </div>
   );
-}
+};
 export const Puzzle2 = (props) => {
   return (
     <div>
@@ -88,7 +88,7 @@ export const Puzzle4 = (props) => {
   };
   return (
     <div className="hangmanContainer">
-      <Stage height={400} align="center" width={1500}>
+      <Stage height={100} align="center" width={200}>
         <Layer>
           <Hangman />
 
@@ -293,6 +293,30 @@ const Puzzle9 = (props) => {
     </div>
   );
 };
+const Puzzle10 = (props) => {
+  return (
+    <div>
+      THIS IS PUZZLE NINE
+      <button onClick={props.solve}>SOLVE</button>
+    </div>
+  );
+};
+const Puzzle11 = (props) => {
+  return (
+    <div>
+      THIS IS PUZZLE NINE
+      <button onClick={props.solve}>SOLVE</button>
+    </div>
+  );
+};
+const Puzzle12 = (props) => {
+  return (
+    <div>
+      THIS IS PUZZLE NINE
+      <button onClick={props.solve}>SOLVE</button>
+    </div>
+  );
+};
 
 export const componentMapping = {
   Puzzle1,
@@ -304,4 +328,7 @@ export const componentMapping = {
   Puzzle7,
   Puzzle8,
   Puzzle9,
+  Puzzle10,
+  Puzzle11,
+  Puzzle12,
 };

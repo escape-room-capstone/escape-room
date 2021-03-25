@@ -17,6 +17,7 @@ export const _CreateGame = (props) => {
     };
     fetchPuzzles();
   }, []);
+
   console.log(props, 'props');
   console.log(props.puzzles, 'props.puzzles');
   if (!props.game.id) {

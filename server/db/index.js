@@ -8,6 +8,8 @@ const Theme = require('./models/Theme');
 const Game = require('./models/Game');
 const Puzzle = require('./models/Puzzle.js');
 const GamePuzzles = require('./models/GamePuzzles.js');
+const Room = require('./models/Room.js');
+const RoomData = require('./models/RoomData');
 
 // Model associations
 Game.belongsToMany(Puzzle, { through: GamePuzzles, foreignKey: 'gameId' });
@@ -15,6 +17,12 @@ Puzzle.belongsToMany(Game, { through: GamePuzzles, foreignKey: 'puzzleId' });
 
 Game.belongsTo(User);
 User.hasMany(Game);
+
+Puzzle.belongsToMany(Room, { through: RoomData });
+Room.belongsToMany(Puzzle, { through: RoomData });
+
+Room.belongsTo(Game);
+Game.hasMany(Room);
 
 //define syncAndSeed function
 const syncAndSeed = async () => {
@@ -56,13 +64,14 @@ const syncAndSeed = async () => {
   });
 
   //seed all puzzles - which will be associated with the same named components on the front end
-  for (let i = 1; i < 10; i++) {
+  for (let i = 1; i < 13; i++) {
     await Puzzle.create({ name: `Puzzle${i}` });
   }
   //default puzzles for the Haunted Game
   const hauntedId = defaultHauntedGame.id;
   const houseGameId = defaultHouseOfRiddlez.id;
 
+  //seed puzzles for default Haunted Game
   await Promise.all([
     GamePuzzles.create({ gameId: hauntedId, puzzleId: 1 }),
     GamePuzzles.create({ gameId: hauntedId, puzzleId: 2 }),
@@ -75,37 +84,41 @@ const syncAndSeed = async () => {
     GamePuzzles.create({ gameId: hauntedId, puzzleId: 3 }),
   ]);
 
+  //create 4 rooms for customized games - to be reused
+  //   for (let i = 1; i < 5; i++) {
+  //     await Room.create({ number: i });
+  //   }
   //create puzzle data for house game
-  const puzzles = await Promise.all([
-    Puzzle.create({
-      number: 1,
-      prompt: 'this is attic riddle 1',
-      solution: 'this is attic solution 1',
-      name: 'atticP1',
-    }),
-    Puzzle.create({
-      number: 2,
-      prompt: 'this is attic riddle 2',
-      solution: 'this is attic solution 2',
-      name: 'atticP2',
-    }),
-    Puzzle.create({
-      number: 3,
-      prompt: 'this is attic riddle 3',
-      solution: 'this is attic solution 3',
-      name: 'atticP3',
-    }),
-  ]);
+  //   const puzzles = await Promise.all([
+  //     Puzzle.create({
+  //       number: 1,
+  //       prompt: 'this is attic riddle 1',
+  //       solution: 'this is attic solution 1',
+  //       name: 'atticP1',
+  //     }),
+  //     Puzzle.create({
+  //       number: 2,
+  //       prompt: 'this is attic riddle 2',
+  //       solution: 'this is attic solution 2',
+  //       name: 'atticP2',
+  //     }),
+  //     Puzzle.create({
+  //       number: 3,
+  //       prompt: 'this is attic riddle 3',
+  //       solution: 'this is attic solution 3',
+  //       name: 'atticP3',
+  //     }),
+  //   ]);
 
   //destructure puzzle array
-  const [atticPuzzleOne, atticPuzzleTwo, atticPuzzleThree] = puzzles;
+  //   const [atticPuzzleOne, atticPuzzleTwo, atticPuzzleThree] = puzzles;
 
   //assign puzzles to specific game (will show up in gamepuzzle through table)
-  defaultHouseOfRiddlez.addPuzzle([
-    atticPuzzleOne,
-    atticPuzzleTwo,
-    atticPuzzleThree,
-  ]);
+  //   defaultHouseOfRiddlez.addPuzzle([
+  //     atticPuzzleOne,
+  //     atticPuzzleTwo,
+  //     atticPuzzleThree,
+  //   ]);
 
   //below does the same as the above addPuzzle method
   // await GamePuzzles.create({
@@ -176,16 +189,34 @@ const syncAndSeed = async () => {
     Theme.create({
       name: 'Forest',
       backgroundImageOne: '/Theme_Images/Forest1.jpg',
-      themeImages: [
+      images: [
         '/Theme_Images/Forest1.jpg',
         '/Theme_Images/Forest2.jpg',
         '/Theme_Images/Forest3.jpg',
+        '/Theme_Images/Forest4.jpeg',
       ],
+      type: 'custom',
     }),
     Theme.create({
       name: 'Cafe',
+      type: 'custom',
       backgroundImageOne: '/Theme_Images/Cafe1.jpg',
-      themeImages: ['/Theme_Images/Cafe1.jpg', '/Theme_Images/Cafe2.jpg'],
+      images: ['/Theme_Images/Cafe1.jpg', '/Theme_Images/Cafe2.jpg'],
+    }),
+    Theme.create({
+      name: 'Haunted',
+      numPuzzles: 9,
+      type: 'default',
+    }),
+    Theme.create({
+      name: 'Bank',
+      numPuzzles: 9,
+      type: 'default',
+    }),
+    Theme.create({
+      name: 'Riddles',
+      numPuzzles: 9,
+      type: 'default',
     }),
   ]);
 
@@ -207,5 +238,5 @@ const syncAndSeed = async () => {
 module.exports = {
   db,
   syncAndSeed,
-  models: { Puzzle, Game, GamePuzzles, User, Theme },
+  models: { Puzzle, Game, GamePuzzles, User, Theme, Room, RoomData },
 };

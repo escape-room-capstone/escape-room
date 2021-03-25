@@ -10,9 +10,11 @@ import { createGame } from '../../store/game';
 
 const CreateGame = (props) => {
   const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  //need a public/private variable to pass in when game is created
   const [puzzleArray, setPuzzleArray] = useState([]);
-
-  console.log('THIS COMPONENT PROPS', props);
+  const [error, setError] = useState('');
+  // console.log('THIS COMPONENT PROPS', props);
 
   useEffect(() => {
     props.getTheme(props.match.params.id);
@@ -20,14 +22,36 @@ const CreateGame = (props) => {
   }, []);
 
   const { puzzles, theme } = props;
-  console.log(puzzles, theme);
+  // console.log(puzzles, theme);
   //USING hard-coded user#2 for axios call...
   const submitCreateGame = async () => {
     const numPuzzles = puzzleArray.length;
-    console.log(puzzleArray, title, numPuzzles, theme.name);
-    //just send themeId - can find theme on back end?
-    await props.makeGame(2, theme.name, numPuzzles, title, puzzleArray);
-
+    //check if puzzleArray has the right number of puzzles
+    if (numPuzzles === theme.numPuzzles) {
+      // console.log(puzzleArray, title, numPuzzles, theme.name);
+      //just send themeId - can find theme on back end?
+      props.makeGame(
+        2,
+        theme.name,
+        theme.id,
+        theme.numPuzzles,
+        title,
+        description,
+        puzzleArray,
+        theme.type
+      );
+    } else {
+      const difference = theme.numPuzzles - numPuzzles;
+      if (difference > 0) {
+        setError(`Please choose ${difference} more puzzles`);
+      } else {
+        setError(
+          `Oops - too many puzzles. Please remove ${Math.abs(
+            difference
+          )} puzzles from your list`
+        );
+      }
+    }
     //We are only creating the game above... need a gameId...
 
     //props.history.push(`/gameintro/${game.id}`)
@@ -67,13 +91,23 @@ const CreateGame = (props) => {
           type="text"
         />
       </label>
+      <label>
+        Description :
+        <input
+          style={{ width: '200px', marginLeft: '10px' }}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          type="text"
+        />
+      </label>
       <div className="puzzlesContainer">
         Select all the puzzles you would like in your game...
         <hr />
-        {puzzles.map((puzzle) => {
+        {puzzles.map((puzzle, idx) => {
           const Component = componentMapping[puzzle.name];
           return (
             <div key={puzzle.id} className="puzzle">
+              {/* puzzle.nickname instead, like "Magic Squares, etc"  ???*/}
               <h1>{puzzle.name}</h1>
               <label> Add Puzzle </label>
               <input
@@ -88,15 +122,15 @@ const CreateGame = (props) => {
                 {' '}
                 Details{' '}
               </button>
-              <div>
-                <Component />
-              </div>
+              <Component />
               <hr />
             </div>
           );
         })}
       </div>
+      {/* may want to add if/else here to check for theme.type -- if it is default, use defaultgamereducer, else use customgamereducer */}
       <button onClick={() => submitCreateGame()}> Submit </button>
+      <div>{error}</div>
     </div>
   );
 };

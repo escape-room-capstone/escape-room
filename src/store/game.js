@@ -10,6 +10,8 @@ const setGame = (game) => ({ type: SET_GAME, game });
 const setUserGame = (userGame) => ({ type: SET_USER_GAME, userGame });
 
 //thunk creators
+
+//for fetching a default game - not customized
 export const fetchGame = (gameId) => {
   return async (dispatch) => {
     const game = (await axios.get(`/api/games/${gameId}`)).data;
@@ -17,31 +19,52 @@ export const fetchGame = (gameId) => {
   };
 };
 
-export const createGame = (userId, theme, numPuzzles, title, puzzleArray) => {
+export const createGame = (
+  userId,
+  theme,
+  themeId,
+  numPuzzles,
+  title,
+  description,
+  puzzleArray,
+  type
+) => {
   return async (dispatch) => {
+    console.log(theme, title, description, 'theme title description');
     const game = (
       await axios.post(`/api/users/${userId}/games`, {
         theme,
+        themeId,
         numPuzzles,
         title,
-        puzzleArray
+        puzzleArray,
+        type,
+        description,
       })
     ).data;
     dispatch(setGame(game));
   };
 };
-
-export const fetchUserGame = (userId, gameId) => {
+//make different axios call depending on whether a game is a default or custom (from scratch) type
+export const fetchUserGame = (userId, gameId, type) => {
   return async (dispatch) => {
-    const userGame = (await axios.get(`/api/users/${userId}/games/${gameId}`)).data
+    let userGame;
+    if (type === 'custom') {
+      userGame = (
+        await axios.get(`/api/users/${userId}/games/custom/${gameId}`)
+      ).data;
+    } else {
+      userGame = (await axios.get(`/api/users/${userId}/games/${gameId}`, {}))
+        .data;
+    }
     dispatch(setUserGame(userGame));
-  }
-}
+  };
+};
 
 //reducer
 export const gameReducer = (state = {}, action) => {
-  if(action.type === SET_USER_GAME) {
-    return action.userGame
+  if (action.type === SET_USER_GAME) {
+    return action.userGame;
   }
   if (action.type === SET_GAME) {
     return action.game;

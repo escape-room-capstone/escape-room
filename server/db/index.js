@@ -100,7 +100,7 @@ const syncAndSeed = async () => {
   });
   const defaultStarWars = await Game.create({
     title: 'BobaFett',
-    theme: 'Star Wars',
+    theme: 'starwars',
     public: true,
     numPuzzles: 12,
     imgSrc:

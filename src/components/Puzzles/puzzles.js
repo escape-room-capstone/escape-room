@@ -293,30 +293,6 @@ const Puzzle9 = (props) => {
     </div>
   );
 };
-const Puzzle10 = (props) => {
-  return (
-    <div>
-      THIS IS PUZZLE NINE
-      <button onClick={props.solve}>SOLVE</button>
-    </div>
-  );
-};
-const Puzzle11 = (props) => {
-  return (
-    <div>
-      THIS IS PUZZLE NINE
-      <button onClick={props.solve}>SOLVE</button>
-    </div>
-  );
-};
-const Puzzle12 = (props) => {
-  return (
-    <div>
-      THIS IS PUZZLE NINE
-      <button onClick={props.solve}>SOLVE</button>
-    </div>
-  );
-};
 
 const Puzzle10 = (props) => {
   return (

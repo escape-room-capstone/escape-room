@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getActiveGame, getActiveRoom } from '../../store/dynamic.js'
 // import DevTools from '../../programs/DevTools'
 
-// Fetch data -- need to connect to redux and crete corresponding api / redux-router
-
 // Dynamic game loading component
 const SingleRoom = (props) => {
 
@@ -17,7 +15,7 @@ const SingleRoom = (props) => {
     const [selectedGameId, setSelectedGame] = useState(1);
     const [selectedRoomId, setSelectedRoom] = useState(1);
    
-    let gameId = 1;
+    let gameId = 1; // -- for now just 
     let roomId = selectedRoomId;
 
 

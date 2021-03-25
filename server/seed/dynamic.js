@@ -119,10 +119,6 @@ const dg_syncAndSeed = async () => {
         Image.create({ name: IslandGameImg[5].split('/').pop(), imgType: 'background', src: IslandGameImg[5], dgId: 1, roomId: 7 }),
     ]);
 
-    // const IslandImages = await Promise.all([
-    //     Image.create({ name: IslandGameImg[0].split('/').pop(), imgType: 'background', src: IslandGameImg[0], dgId: 1, roomId: 3 }), // -- id: 7
-    // ]);
-
     // --
 
     // Create SpaceGame seed data

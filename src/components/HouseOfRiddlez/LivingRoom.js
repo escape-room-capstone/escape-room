@@ -43,7 +43,6 @@ const LivingRoom = (props) => {
 
   return (
     <div className="container">
-      <LetterBank props={props} />
       <ReactModal
         overlayClassName="OverlayLivingRoom"
         className="modal"

@@ -64,7 +64,7 @@ export const Puzzle1 = (props) => {
       </div>
     </div>
   );
-}
+};
 export const Puzzle2 = (props) => {
   return (
     <div>
@@ -294,6 +294,57 @@ const Puzzle9 = (props) => {
   );
 };
 
+const Puzzle10 = (props) => {
+  return (
+    <div>
+      THIS IS PUZZLE 10
+      <button onClick={props.solve}>SOLVE</button>
+    </div>
+  );
+};
+const Puzzle11 = (props) => {
+  return (
+    <div>
+      THIS IS PUZZLE 11
+      <button onClick={props.solve}>SOLVE</button>
+    </div>
+  );
+};
+const Puzzle12 = (props) => {
+  return (
+    <div>
+      THIS IS PUZZLE 12
+      <button onClick={props.solve}>SOLVE</button>
+    </div>
+  );
+};
+const Puzzle13 = (props) => {
+  return (
+    <div>
+      THIS IS PUZZLE 13
+      <button onClick={props.solve}>SOLVE</button>
+    </div>
+  );
+};
+
+const Puzzle14 = (props) => {
+  return (
+    <div>
+      THIS IS PUZZLE 14
+      <button onClick={props.solve}>SOLVE</button>
+    </div>
+  );
+};
+
+const Puzzle15 = (props) => {
+  return (
+    <div>
+      THIS IS PUZZLE 15
+      <button onClick={props.solve}>SOLVE</button>
+    </div>
+  );
+};
+
 export const componentMapping = {
   Puzzle1,
   Puzzle2,
@@ -304,4 +355,10 @@ export const componentMapping = {
   Puzzle7,
   Puzzle8,
   Puzzle9,
+  Puzzle10,
+  Puzzle11,
+  Puzzle12,
+  Puzzle13,
+  Puzzle14,
+  Puzzle15,
 };

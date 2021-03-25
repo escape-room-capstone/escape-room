@@ -24,15 +24,3 @@ export const puzzleReducer = (state = [], action) => {
   }
   return state;
 };
-
-// export const puzzleReducer = (state = [], action) => {
-//   //would the above state be state = { puzzles: [] } instead???
-//   switch (action.type) {
-//       case SET_PUZZLES:
-//         return {
-//           //what do i return here???
-//           puzzles: (await axios.get('/api/puzzles')).data
-//         }
-//       default:
-//       return state
-//   }

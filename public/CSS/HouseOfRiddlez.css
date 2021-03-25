@@ -53,25 +53,26 @@ body {
 .secretButton {
   background-color: transparent;
   border: none;
+  outline: none;
   cursor: pointer;
 }
 
 /* secretbutton location */
 #roomOneButton {
-  height: 7.5rem;
-  width: 14.4rem;
+  height: 5.5rem;
+  width: 11.5rem;
   position: relative;
-  top: 220px;
-  left: 120px;
+  top: 215px;
+  left: 250px;
   margin-right: 0;
 }
 
 #roomTwoButton {
-  height: 12.5rem;
-  width: 7rem;
+  height: 9rem;
+  width: 5rem;
   position: relative;
-  top: 75px;
-  left: 230px;
+  top: 50px;
+  left: 280px;
   margin-right: 0;
 }
 
@@ -79,26 +80,26 @@ body {
   height: 5rem;
   width: 4rem;
   position: relative;
-  top: 55px;
-  left: 500px;
+  top: 35px;
+  left: 630px;
   margin-right: 0;
 }
 
 #livingRoomButton {
-  height: 17rem;
-  width: 10rem;
+  height: 12rem;
+  width: 8rem;
   position: relative;
-  top: 215px;
+  top: 340px;
   left: 95px;
   margin-right: 0;
 }
 
 #backRoomButton {
-  height: 16rem;
-  width: 7rem;
+  height: 11rem;
+  width: 5rem;
   position: relative;
-  top: 320px;
-  left: 220px;
+  top: 340px;
+  left: 390px;
   margin-right: 0;
 }
 
@@ -236,12 +237,24 @@ body {
 }
 
 /* LETTERS BANK COMPONENT CSS */
+
+.returnHomeButtonDiv {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* style button later  */
+.returnHomeButton {
+}
+
 .bankContainer {
   margin: auto;
   display: flex;
   flex-direction: column;
   width: 60rem;
-  /* justify-content: center; */
+  justify-content: center;
+  align-content: center;
 }
 .bankRow {
   display: flex;

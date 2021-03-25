@@ -2,55 +2,88 @@ import React, { useState, useEffect } from 'react';
 import '../../../public/CSS/HouseOfRiddlez.css';
 import { Link } from 'react-router-dom';
 import LetterBank from './LetterBank';
+import RoomTwo from './RoomTwo';
+import Attic from './Attic';
+import { connect, useSelector, useDispatch } from 'react-redux';
+import { setPuzzles } from '../../store/puzzles.js';
+import { fetchGame } from '../../store/game';
 
-const HouseOfRiddlez = () => {
-  const [puzzle1, setPuzzle1] = useState({
-    riddle: '',
-    solution: '',
-    clue: '',
-    letter: '',
-    solved: false,
-    showModal: false,
-  });
-
+const HouseOfRiddlez = (props) => {
   const [mainRoom, setMainRoom] = useState({
     mainRoomBank: 'CLUESSSSSS',
+    atticClues: 'Im attic clues from main room',
     completed: false,
   });
 
   return (
     <div className="houseContainer">
-      <LetterBank mainRoom={mainRoom.mainRoomBank} />
+      {/* <LetterBank mainRoomBank={mainRoom.mainRoomBank} /> */}
 
       <div className="background" id="home">
-        <Link to="/room2">
-          <button className="secretButton" id="roomTwoButton">
-            room 2
-          </button>
-        </Link>
-        <Link to="/attic">
-          <button className="secretButton" id="atticButton">
-            attic
-          </button>
-        </Link>
-        <Link to="/livingroom">
-          <button className="secretButton" id="livingRoomButton">
-            living room
-          </button>
-        </Link>
-        <Link to="/room1">
-          <button className="secretButton" id="roomOneButton">
-            room 1
-          </button>
-        </Link>
-        <Link to="/backroom">
-          <button className="secretButton" id="backRoomButton">
-            backroom
-          </button>
-        </Link>
+        <button
+          className="secretButton"
+          id="roomTwoButton"
+          onClick={() => {
+            props.history.push('/HouseofRiddlez/roomtwo');
+          }}
+        >
+          {/* <Link to="/HouseofRiddlez/room2"></Link> */}
+        </button>
+
+        <button
+          className="secretButton"
+          id="atticButton"
+          onClick={() => {
+            props.history.push('/HouseofRiddlez/attic');
+          }}
+        >
+          {/* <Link to="/HouseofRiddlez/attic"></Link> */}
+        </button>
+
+        <button
+          className="secretButton"
+          id="livingRoomButton"
+          onClick={() => {
+            props.history.push('/HouseofRiddlez/livingroom');
+          }}
+        >
+          {/* <Link to="/HouseofRiddlez/livingroom"> </Link> */}
+        </button>
+
+        <button
+          className="secretButton"
+          id="roomOneButton"
+          onClick={() => {
+            props.history.push('/HouseofRiddlez/roomone');
+          }}
+        >
+          {/* <Link to="/HouseofRiddlez/room1"> </Link> */}
+        </button>
+
+        <button
+          className="secretButton"
+          id="backRoomButton"
+          onClick={() => {
+            props.history.push('/HouseofRiddlez/backroom');
+          }}
+        >
+          {/* <Link to="/HouseofRiddlez/backroom"></Link> */}
+        </button>
       </div>
     </div>
   );
 };
 
-export default HouseOfRiddlez;
+const mapToState = (state) => {
+  return state;
+};
+
+const mapToDispatch = (dispatch) => {
+  return {
+    getGame: (gameId) => dispatch(fetchGame(gameId)),
+    getPuzzles: () => dispatch(setPuzzles()),
+  };
+};
+
+export default connect(mapToState, mapToDispatch)(HouseOfRiddlez);
+//export default HouseOfRiddlez;

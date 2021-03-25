@@ -27,8 +27,6 @@ const rootReducer = combineReducers({
   theme: themeReducer,
   allGames: allGamesReducer,
   // dynamicGame,
-
-  // themes: themeReducer
 });
 
 const store = createStore(rootReducer, initialState, middleware);

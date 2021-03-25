@@ -1,3 +1,4 @@
+const { INTEGER, ENUM } = require('sequelize');
 const Sequelize = require('sequelize');
 const db = require('../db');
 
@@ -15,9 +16,16 @@ const Theme = db.define('theme', {
   backgroundImageOne: {
     type: STRING,
   },
-  themeImages: {
-    type: Sequelize.ARRAY(Sequelize.TEXT) 
-  }
+  images: {
+    type: Sequelize.ARRAY(Sequelize.TEXT),
+  },
+  numPuzzles: {
+    type: INTEGER,
+    defaultValue: 12,
+  },
+  type: {
+    type: ENUM('default', 'custom'),
+  },
 
   // backgroundImageTwo: {
   //   type: STRING,

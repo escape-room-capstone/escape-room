@@ -9,9 +9,9 @@
     "build:watch": "webpack --watch",
     "seed": "node server/seed/seed.js",
     "start:server": "node-dev --respawn server",
-    "start:dev": "npm run build:watch & npm run start:server",
+    "start:dev": "JWT=shh npm run build:watch & npm run start:server",
     "test": "mocha",
-    "test:dev": "DATABASE_URL=postgres://localhost:5432/escape_room_test npm run test -- --watch"
+    "test:dev": "JWT=shh DATABASE_URL=postgres://localhost:5432/escape_room_test npm run test -- --watch"
   },
   "repository": {
     "type": "git",

@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import "../../../public/CSS/BobaFett.css";
 import LeverPuzzle from "./LeverPuzzle";
 import MagicSquarePuzzle from "./MagicSquarePuzzle";
+import AnnoyingPuzzle from "./AnnoyingPuzzle";
 
 export default function BobaFett() {
   const [leverModalOpen, setLeverModalOpen] = useState(false);
@@ -22,7 +23,8 @@ export default function BobaFett() {
         <button className='boba-magic-square-button' onClick={() => setMagicSquareModalOpen(true)}></button>
         <Modal isOpen={magicSquareModalOpen}>
           <button onClick={() => setMagicSquareModalOpen(false)}>Close Puzzle</button>
-          <MagicSquarePuzzle setMagicSquarePuzzleCompleted={setMagicSquarePuzzleCompleted}/>
+          {/* <MagicSquarePuzzle setMagicSquarePuzzleCompleted={setMagicSquarePuzzleCompleted}/> */}
+          <AnnoyingPuzzle/>
         </Modal>
       </div>
     </div>

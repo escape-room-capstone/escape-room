@@ -15,7 +15,7 @@ const SingleRoom = (props) => {
 
     // Set local state -- for now just to use to move around the dynamic game
     const [selectedGameId, setSelectedGame] = useState(1);
-    const [selectedRoomId, setSelectedRoom] = useState(3);
+    const [selectedRoomId, setSelectedRoom] = useState(1);
    
     let gameId = 1;
     let roomId = selectedRoomId;

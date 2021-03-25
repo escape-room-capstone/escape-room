@@ -32,7 +32,7 @@ const roomTypes = [
     'victoryPage'
 ];
 
-const Room = db.define('room', {
+const DynamicRoom = db.define('room', {
     name: {
         type: Sequelize.STRING,
     },
@@ -78,11 +78,11 @@ const Image = db.define('image', {
 
 
 // DynamicGame model associations
-DynamicGame.hasMany(Room);
+DynamicGame.hasMany(DynamicRoom);
 DynamicGame.hasMany(Level);
 DynamicGame.hasMany(Image);
-Room.hasMany(Image);
-Room.belongsTo(Level);
+DynamicRoom.hasMany(Image);
+DynamicRoom.belongsTo(Level);
 Level.belongsTo(DynamicGame);
 
 
@@ -90,7 +90,7 @@ module.exports = {
     models: {
         DynamicGame,
         Level,
-        Room,
+        DynamicRoom,
         Image
     },
     modelConst: {

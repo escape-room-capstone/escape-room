@@ -1,6 +1,6 @@
 // Imports
 const db = require('../db/db');
-const { models: { DynamicGame, Level, Room, Image } } = require('../db/models/DynamicGameModels.js')
+const { models: { DynamicGame, Level, DynamicRoom, Image } } = require('../db/models/DynamicGameModels.js')
 const { IslandGameImg, SpaceGameImg }  = require('../../public/Images/GameImages/index');
 
 
@@ -25,7 +25,7 @@ const dg_syncAndSeed = async () => {
     ]);
 
     const IslandRooms = await Promise.all([
-        Room.create({
+        DynamicRoom.create({
             // roomId = 1
             name: 'landingPage',
             roomType: 'landingPage',
@@ -34,7 +34,7 @@ const dg_syncAndSeed = async () => {
             dgId: 1,
             levelId: 1
         }),
-        Room.create({
+        DynamicRoom.create({
             // roomId = 2
             name: 'islandMap',
             roomtype: 'lobbyRoom',
@@ -44,7 +44,7 @@ const dg_syncAndSeed = async () => {
             dgId: 1,
             levelId: 2
         }),
-        Room.create({
+        DynamicRoom.create({
             // roomId = 3
             name: 'crashsite',
             roomType: 'singleRoom',
@@ -55,7 +55,7 @@ const dg_syncAndSeed = async () => {
             dgId: 1,
             levelId: 2
         }), 
-        Room.create({
+        DynamicRoom.create({
             // roomId = 4
             name: 'village',
             roomType: 'singleRoom',
@@ -66,7 +66,7 @@ const dg_syncAndSeed = async () => {
             dgId: 1,
             levelId: 2
         }),
-        Room.create({
+        DynamicRoom.create({
             // roomId = 5
             name: 'boat',
             roomType: 'singleRoom',
@@ -77,7 +77,7 @@ const dg_syncAndSeed = async () => {
             dgId: 1,
             levelId: 3
         }),
-        Room.create({
+        DynamicRoom.create({
             // roomId = 6
             name: 'islandMap',
             roomtype: 'lobbyRoom',
@@ -87,7 +87,7 @@ const dg_syncAndSeed = async () => {
             dgId: 1,
             levelId: 3
         }),
-        Room.create({
+        DynamicRoom.create({
             // roomId = 7
             name: 'crashsite',
             roomType: 'singleRoom',
@@ -98,7 +98,7 @@ const dg_syncAndSeed = async () => {
             dgId: 1,
             levelId: 3
         }),
-        Room.create({
+        DynamicRoom.create({
             // roomId = 8
             name: 'victory',
             roomType: 'victoryPage',
@@ -110,14 +110,18 @@ const dg_syncAndSeed = async () => {
     ]);
 
     const IslandImages = await Promise.all([
-        Image.create({ name: IslandGameImg[0].split('/').pop(), imgType: 'background', src: IslandGameImg[0], dgId: 1, roomId: 1 }),
-        Image.create({ name: IslandGameImg[1].split('/').pop(), imgType: 'background', src: IslandGameImg[1], dgId: 1, roomId: 2 }),
+        Image.create({ name: IslandGameImg[0].split('/').pop(), imgType: 'background', src: IslandGameImg[0], dgId: 1, roomId: 1 }), // -- id: 1
+        Image.create({ name: IslandGameImg[0].split('/').pop(), imgType: 'background', src: IslandGameImg[0], dgId: 1, roomId: 2 }), // -- id: 2
         Image.create({ name: IslandGameImg[2].split('/').pop(), imgType: 'background', src: IslandGameImg[2], dgId: 1, roomId: 3 }),
         Image.create({ name: IslandGameImg[3].split('/').pop(), imgType: 'background', src: IslandGameImg[3], dgId: 1, roomId: 4 }),
         Image.create({ name: IslandGameImg[4].split('/').pop(), imgType: 'background', src: IslandGameImg[4], dgId: 1, roomId: 5 }),
         Image.create({ name: IslandGameImg[5].split('/').pop(), imgType: 'background', src: IslandGameImg[5], dgId: 1, roomId: 6 }),
         Image.create({ name: IslandGameImg[5].split('/').pop(), imgType: 'background', src: IslandGameImg[5], dgId: 1, roomId: 7 }),
     ]);
+
+    // const IslandImages = await Promise.all([
+    //     Image.create({ name: IslandGameImg[0].split('/').pop(), imgType: 'background', src: IslandGameImg[0], dgId: 1, roomId: 3 }), // -- id: 7
+    // ]);
 
     // --
 
@@ -133,11 +137,11 @@ const dg_syncAndSeed = async () => {
 //     ]);
 
 //     const SpaceRooms = await Promise.all([
-//         Room.create({ name: 'landingPage', roomType: 'landingPage', isOpen: true, prevRoomId: , gameId: 2, levelId: 1 }), // id = 1
-//         Room.create({ name: 'planets', roomtype: 'lobbyRoom', isOpen: true, prevRoomId: , gameId: 2, levelId: 2 }), // id = 2
-//         Room.create({ name: 'earth', roomType: 'singleRoom', isOpen: true, prevRoomId: , gameId: 2, levelId: 2 }), // id = 3
-//         Room.create({ name: 'jupiter', roomType: 'singleRoom', isOpen: true, prevRoomId: , gameId: 2, levelId: 2 }), // id = 4
-//         Room.create({ name: 'victory', roomType: 'victoryPage', isOpen: true, prevRoomId: , gameId: 2, levelId: 3 }), // id = 5
+//         DynamicRoom.create({ name: 'landingPage', roomType: 'landingPage', isOpen: true, prevRoomId: , gameId: 2, levelId: 1 }), // id = 1
+//         DynamicRoom.create({ name: 'planets', roomtype: 'lobbyRoom', isOpen: true, prevRoomId: , gameId: 2, levelId: 2 }), // id = 2
+//         DynamicRoom.create({ name: 'earth', roomType: 'singleRoom', isOpen: true, prevRoomId: , gameId: 2, levelId: 2 }), // id = 3
+//         DynamicRoom.create({ name: 'jupiter', roomType: 'singleRoom', isOpen: true, prevRoomId: , gameId: 2, levelId: 2 }), // id = 4
+//         DynamicRoom.create({ name: 'victory', roomType: 'victoryPage', isOpen: true, prevRoomId: , gameId: 2, levelId: 3 }), // id = 5
 //     ]);
 
 //     const SpaceImages = await Promise.all([

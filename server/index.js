@@ -3,8 +3,6 @@ const express = require('express');
 const app = express();
 const db = require('./db/db')
 
-
-
 const PORT = process.env.PORT || 8080;
 const PUBLIC_PATH = path.join(__dirname, '../public');
 const DIST_PATH = path.join(__dirname, '../dist');

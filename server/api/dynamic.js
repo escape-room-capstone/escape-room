@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { models: { DynamicGame, Level, Room, Image } } = require('../db/models/DynamicGameModels')
+const { models: { DynamicGame, Level, DynamicRoom, Image } } = require('../db/models/DynamicGameModels')
 
 // DynamicGame GET routes
 router.get('/game:id', async (req, res, next) => {
@@ -21,7 +21,7 @@ router.get('/game:id', async (req, res, next) => {
 router.get('/game:gid/room:rid', async (req, res, next) => {
     try {
         console.log(req.params);
-        res.send(await Room.findOne({
+        res.send(await DynamicRoom.findOne({
             where: {
                 id: req.params.rid
             },

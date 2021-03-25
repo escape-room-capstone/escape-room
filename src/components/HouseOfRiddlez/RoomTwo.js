@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import '../../../public/CSS/HouseOfRiddlez.css';
 import ReactModal from 'react-modal';
-import { Link } from 'react-router-dom';
 import LetterBank from './LetterBank';
+import { connect, useSelector, useDispatch } from 'react-redux';
+import { setPuzzles } from '../../store/puzzles.js';
+import { fetchGame } from '../../store/game';
 
 const RoomTwo = (props) => {
   const [puzzle1, setPuzzle1] = useState({
@@ -43,7 +45,6 @@ const RoomTwo = (props) => {
 
   return (
     <div className="container">
-      <LetterBank props={props} />
       <ReactModal
         overlayClassName="OverlayRoomTwo"
         className="modal"
@@ -109,4 +110,16 @@ const RoomTwo = (props) => {
   );
 };
 
-export default RoomTwo;
+const mapToState = (state) => {
+  return state;
+};
+
+const mapToDispatch = (dispatch) => {
+  return {
+    getGame: (gameId) => dispatch(fetchGame(gameId)),
+    getPuzzles: () => dispatch(setPuzzles()),
+  };
+};
+
+export default connect(mapToState, mapToDispatch)(RoomTwo);
+//export default RoomTwo;

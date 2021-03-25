@@ -36,9 +36,8 @@ const Homepage = (props) => {
       {defaultGames.map((game) => {
         return (
           <div key={game.id}>
-            <Link to={`${removeSpaceFromTheme(game.title)}/${game.id}`}>
-              {' '}
-              {game.title}{' '}
+            <Link to={`${removeSpaceFromTheme(game.title)}/${game.id}`}>  
+              {game.title}
             </Link>
             <hr />
           </div>

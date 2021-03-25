@@ -1,20 +1,20 @@
 const db = require('../db');
-const { Sequelize, INTEGER } = require('sequelize');
-const { STRING, TEXT } = Sequelize;
+const { Sequelize } = require('sequelize');
+const { STRING, BOOLEAN, TEXT, INTEGER } = Sequelize;
 
 const Puzzle = db.define('puzzle', {
-  type: {
-    type: STRING,
-  },
-  number: {
-    type: INTEGER,
-  },
-  description: {
-    type: TEXT,
-  },
-  nickname: {
-    type: STRING,
-  },
+  // type: {
+  //   type: STRING,
+  // },
+  // number: {
+  //   type: INTEGER,
+  // },
+  // description: {
+  //   type: TEXT,
+  // },
+  // nickname: {
+  //   type: STRING,
+  // },
   prompt: {
     type: STRING,
     allowNull: true,
@@ -31,6 +31,10 @@ const Puzzle = db.define('puzzle', {
   },
   name: {
     type: STRING,
+  },
+  isSolved: {
+    type: BOOLEAN,
+    defaultValue: false,
   },
 });
 

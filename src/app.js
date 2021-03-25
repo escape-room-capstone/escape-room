@@ -58,13 +58,13 @@ const App = () => {
       <Route exact path="/haunted/final" component={HauntedFinal} />
       <Route exact path="/customize" component={CreateGame} />
 
+      <Route path="/HouseOfRiddlez/" component={LetterBank} />
       <Route exact path="/HouseofRiddlez/2" component={HouseOfRiddlez} />
-      <Route exact path="/livingroom" component={LivingRoom} />
-      <Route exact path="/room1" component={RoomOne} />
-      <Route exact path="/room2" component={RoomTwo} />
-      <Route exact path="/backroom" component={BackRoom} />
-      <Route exact path="/attic" component={Attic} />
-      <Route exact path="/letterbank" component={LetterBank} />
+      <Route exact path="/HouseofRiddlez/livingroom" component={LivingRoom} />
+      <Route exact path="/HouseofRiddlez/roomone" component={RoomOne} />
+      <Route exact path="/HouseofRiddlez/roomtwo" component={RoomTwo} />
+      <Route exact path="/HouseofRiddlez/backroom" component={BackRoom} />
+      <Route exact path="/HouseofRiddlez/attic" component={Attic} />
 
       <Route exact path="/BankRobbery/3" component={BankGameStart} />
       <Route exact path="/Bankgame2" component={BankGameLevel2} />

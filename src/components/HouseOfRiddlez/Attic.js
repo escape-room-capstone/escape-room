@@ -32,10 +32,10 @@ const Attic = (props) => {
   }, []);
 
   console.log('atticProps=>', props);
+  // console.log('atticmainRoom=>', mainRoomBank);
 
   return (
     <div className="container">
-      <LetterBank atticClue1={atticClues.clue1} />
       <ReactModal
         overlayClassName="OverlayAttic"
         className="modal"
@@ -57,13 +57,6 @@ const Attic = (props) => {
         <button onClick={() => setAtticPuzzle1({ showModal: true })}>
           Puzzle 1
         </button>
-
-        {/* <button onClick={() => setPuzzle2({ showModal: true })}>
-          Puzzle 2
-        </button>
-        <button onClick={() => setPuzzle3({ showModal: true })}>
-          Puzzle 3
-        </button> */}
       </div>
     </div>
   );

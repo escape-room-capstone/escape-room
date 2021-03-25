@@ -7,8 +7,7 @@ const {
 
 router.get('/', async (req, res, next) => {
   try {
-    const games = await Game.findAll({ include: [User] });
-
+    const games = await Game.findAll();
     res.send(games);
   } catch (ex) {
     next(ex);

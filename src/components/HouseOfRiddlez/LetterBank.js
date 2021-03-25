@@ -1,16 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import '../../../public/CSS/HouseOfRiddlez.css';
+import { connect, useSelector, useDispatch } from 'react-redux';
+import { setPuzzles } from '../../store/puzzles.js';
+import { fetchGame } from '../../store/game';
 
 const LetterBank = (props) => {
-  const [bank, setBank] = useState([{ livingRoomClues: 'clues' }]);
+  const [location, setLocation] = useState(true);
+  const [bank, setBank] = useState([
+    {
+      atticClues: {
+        clue1: 'i am attic clue 1',
+        clue2: 'i am attic clue2',
+        clue3: 'I am attic clue 3',
+      },
+    },
+    {
+      roomTwoClues: {
+        clue1: 'i am room2 clue 1',
+        clue2: 'i am room2 clue2',
+        clue3: 'I am room2 clue 3',
+      },
+    },
+  ]);
+
+  useEffect(() => {
+    if (props.location.pathname === `/HouseofRiddlez/2`) {
+      setLocation(true);
+    }
+    if (props.location.pathname !== `/HouseofRiddlez/2`) {
+      setLocation(false);
+    }
+  });
 
   // useEffect(() => {
-  //   if (atticClues !== '') {
-  //     setBank({ atticClues: atticClues });
-  //   }
-  // }, [atticClues]);
+  //   props.getGame(props.gameId);
+  // }, []);
 
-  console.log(props);
+  // useEffect(() => {
+  //   if (props.history.location.pathname === `/HouseofRiddlez/${props.gameId}`) {
+  //     setLocation(true);
+  //   }
+  //   if (props.history.location.pathname !== `/HouseofRiddlez/${props.gameId}`) {
+  //     setLocation(false);
+  //   }
+  // });
+
+  console.log('letterBank=>', props);
 
   return (
     <div className="bankContainer">
@@ -38,14 +73,52 @@ const LetterBank = (props) => {
         </div>
         <div className="bankDivs">
           <h3 className="bankHeadings">Clues Bank</h3>
-          <p className="bankParagraphs">Main Room = {props.mainRoom} </p>
-          {/* not sure how to pass local state from one component to another */}
-          <p className="bankParagraphs">Living Room = {}</p>
-          <p className="bankParagraphs">Attic ={` ${props.atticClue1}`}</p>
+          <p className="bankParagraphs">Main Room = {} </p>
+          <p className="bankParagraphs">Living Room = </p>
+          <p className="bankParagraphs">Attic =</p>
+          <p className="bankParagraphs">Upstairs Bedroom =</p>
+          <p className="bankParagraphs">Downstairs Bedroom =</p>
         </div>
+      </div>
+      <div className="returnHomeButtonDiv">
+        {location ? (
+          ''
+        ) : (
+          <button
+            className="returnHomeButton"
+            onClick={() => {
+              props.history.push('/HouseofRiddlez/2');
+            }}
+          >
+            Back to Main Room
+          </button>
+        )}
       </div>
     </div>
   );
 };
 
-export default LetterBank;
+const mapState = (state, routeProps) => {
+  const gameId = routeProps.match.params.gameId * 1;
+  return { gameId };
+};
+
+const mapDispatch = (dispatch) => {
+  return {
+    getGame: (gameId) => dispatch(fetchGame(gameId)),
+  };
+};
+
+// const mapToState = (state) => {
+//   return state;
+// };
+
+// const mapToDispatch = (dispatch) => {
+//   return {
+//     getGame: (gameId) => dispatch(fetchGame(gameId)),
+//     getPuzzles: () => dispatch(setPuzzles()),
+//   };
+// };
+
+export default connect(mapState, mapDispatch)(LetterBank);
+//export default LetterBank;

@@ -88,7 +88,7 @@ const syncAndSeed = async () => {
     theme: 'riddlez',
     public: true,
     imgSrc: '/RiddlezImages/home.jpg',
-    numPuzzles: 12,
+    numPuzzles: 15,
     description: `You wake up one morning only to find out that you are trapped in a House of Riddles. The only way out is to solve every riddle! But there's a catch...`,
   });
   const defaultBank = await Game.create({
@@ -110,7 +110,7 @@ const syncAndSeed = async () => {
   });
 
   //seed all puzzles - which will be associated with the same named components on the front end
-  for (let i = 1; i < 13; i++) {
+  for (let i = 1; i < 16; i++) {
     await Puzzle.create({ name: `Puzzle${i}` });
   }
   //default puzzles for the Haunted Game
@@ -121,21 +121,29 @@ const syncAndSeed = async () => {
   await Promise.all([
     GamePuzzles.create({ gameId: hauntedId, puzzleId: 1 }),
     GamePuzzles.create({ gameId: hauntedId, puzzleId: 2 }),
+    GamePuzzles.create({ gameId: hauntedId, puzzleId: 3 }),
     GamePuzzles.create({ gameId: hauntedId, puzzleId: 4 }),
     GamePuzzles.create({ gameId: hauntedId, puzzleId: 5 }),
     GamePuzzles.create({ gameId: hauntedId, puzzleId: 6 }),
     GamePuzzles.create({ gameId: hauntedId, puzzleId: 7 }),
-    GamePuzzles.create({ gameId: hauntedId, puzzleId: 9 }),
     GamePuzzles.create({ gameId: hauntedId, puzzleId: 8 }),
-    GamePuzzles.create({ gameId: hauntedId, puzzleId: 3 }),
+    GamePuzzles.create({ gameId: hauntedId, puzzleId: 9 }),
+    GamePuzzles.create({ gameId: houseGameId, puzzleId: 1 }),
+    GamePuzzles.create({ gameId: houseGameId, puzzleId: 2 }),
+    GamePuzzles.create({ gameId: houseGameId, puzzleId: 3 }),
+    GamePuzzles.create({ gameId: houseGameId, puzzleId: 4 }),
+    GamePuzzles.create({ gameId: houseGameId, puzzleId: 5 }),
+    GamePuzzles.create({ gameId: houseGameId, puzzleId: 6 }),
+    GamePuzzles.create({ gameId: houseGameId, puzzleId: 7 }),
+    GamePuzzles.create({ gameId: houseGameId, puzzleId: 8 }),
+    GamePuzzles.create({ gameId: houseGameId, puzzleId: 9 }),
+    GamePuzzles.create({ gameId: houseGameId, puzzleId: 10 }),
+    GamePuzzles.create({ gameId: houseGameId, puzzleId: 11 }),
+    GamePuzzles.create({ gameId: houseGameId, puzzleId: 12 }),
+    GamePuzzles.create({ gameId: houseGameId, puzzleId: 13 }),
+    GamePuzzles.create({ gameId: houseGameId, puzzleId: 14 }),
+    GamePuzzles.create({ gameId: houseGameId, puzzleId: 15 }),
   ]);
-
-  //create 4 rooms for customized games - to be reused
-  //   for (let i = 1; i < 5; i++) {
-  //     await Room.create({ number: i });
-  //   }
-  //create puzzle data for house game
-
 
   const users = await Promise.all([
     User.create({
@@ -200,6 +208,7 @@ const syncAndSeed = async () => {
       ],
       type: 'custom',
     }),
+
     Theme.create({
       name: 'Cafe',
       type: 'custom',
@@ -221,22 +230,25 @@ const syncAndSeed = async () => {
       numPuzzles: 9,
       type: 'default',
     }),
+
+    Theme.create({
+      name: 'House',
+      backgroundImageOne: '../RiddlezImages/home.jpg',
+      themeImages: [
+        '../RiddlezImages/home.jpg',
+        '../RiddlezImages/livingroom.jpg',
+        '../RiddlezImages/roomOne.jpg',
+        '../RiddlezImages/roomTwo.jpg',
+        '../RiddlezImages/attic.jpg',
+        '../RiddlezImages/backroom.jpg',
+      ],
+    }),
   ]);
 
-  // const RiddleTheme = await Theme.create({
-  //   name: 'House of Riddles Theme',
-  //   themeLabel: 'house',
-  //   backgroundImageOne: '../RiddlezImages/home.jpg',
-  //   backgroundImageTwo: '../RiddlezImages/livingroom.jpg',
-  //   backgroundImageThree: '../RiddlezImages/roomOne.jpg',
-  //   backgroundImageFour: '../RiddlezImages/roomTwo.jpg',
-  //   backgroundImageFive: '../RiddlezImages/attic.jpg',
-  //   backgroundImageSix: '../RiddlezImages/backroom.jpg',
-  // });
-
   const [cody, arwinder, kate, nes, steve, roman] = users;
-  const [forest, cafe] = themes;
+  const [forest, cafe, house] = themes;
   return users
+
 };
 
 module.exports = {

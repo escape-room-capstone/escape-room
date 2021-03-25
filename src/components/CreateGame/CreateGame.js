@@ -27,7 +27,7 @@ const CreateGame = (props) => {
     //USING hard-coded user#2 for axios call...
       const submitCreateGame = async() => {
           
-          const numPuzzles = puzzleArray.length;
+        const numPuzzles = puzzleArray.length;
         console.log(puzzleArray, title, numPuzzles, theme.name);
         await props.makeGame(2, theme.name, numPuzzles, title, puzzleArray);  
 

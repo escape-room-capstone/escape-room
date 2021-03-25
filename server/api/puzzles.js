@@ -4,22 +4,24 @@ const Puzzle = require('../db/models/Puzzle');
 
 router.get('/', async (req, res, next) => {
   try {
+    console.log('before puzzle.findall');
     const puzzles = await Puzzle.findAll();
+    console.log(puzzles, 'puzzles');
     res.status(200).send(puzzles);
   } catch (err) {
+    console.log(err, 'err');
     next(err);
   }
 });
 
 router.post('/gamePuzzles', async (req, res, next) => {
   try {
-    
     const gamePuzzle = await GamePuzzles.create({
-      gameId : req.body.gameId,
-      puzzleId : req.body.puzzleId
-    })
+      gameId: req.body.gameId,
+      puzzleId: req.body.puzzleId,
+    });
 
-    res.send(gamePuzzle)
+    res.send(gamePuzzle);
   } catch (err) {
     next(err);
   }
@@ -35,7 +37,4 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-
-
 module.exports = router;
-

@@ -52,9 +52,8 @@ router.get('/:userId/games', async (req, res, next) => {
   }
 });
 
-//fetch a default(one of our games)game that a user created
+//fetch a default(one of our games like haunted, bank, etc)game that a user created
 router.get('/:userId/games/:gameId', async (req, res, next) => {
-  //if it is one of our pre-made games
   try {
     let game = await Game.findOne({
       where: {
@@ -76,6 +75,7 @@ router.get('/:userId/games/:gameId', async (req, res, next) => {
     next(er);
   }
 });
+//fetch a custom dynamic game
 router.get('/:userId/games/custom/:gameId', async (req, res, next) => {
   try {
     let game = await Game.findOne({
@@ -87,36 +87,39 @@ router.get('/:userId/games/custom/:gameId', async (req, res, next) => {
     next(er);
   }
 });
-
-//a user creates a new custom game from scratch/api/users/:userId/games
+//route to customize a default type (bank, haunted, etc)game
 router.post('/:userId/games', async (req, res, next) => {
   console.log(req.body, 'req.body');
   console.log(req.params.userId);
   try {
-    //if req.body.gameType === 'default' -- will use this method when creating a game from one of our pre-made games
-    // let game = await Game.create({
-    //   title: req.body.title,
-    //   numPuzzles: req.body.numPuzzles,
-    //   theme: req.body.theme,
-    //   userId: req.params.userId,
-    // });
+    let game = await Game.create({
+      title: req.body.title,
+      numPuzzles: req.body.numPuzzles,
+      theme: req.body.theme,
+      userId: req.params.userId,
+      description: req.body.description,
+    });
 
-    //   const { puzzleArray } = req.body;
+    const { puzzleArray } = req.body;
+    //there is a check on the front end regarding puzzle length -- may not need this if condition here on line 105
+    // if (puzzleArray.length > 0) {
+    for (let i = 0; i < puzzleArray.length; i++) {
+      // just need puzzleId here - can use use puzzleArray bc it's an array of puzzle Ids right?
+      // const puzzle = await Puzzle.findByPk(puzzleArray[i]);
+      GamePuzzles.create({ gameId: game.id, puzzleId: puzzleArray[i].id });
+    }
+    // }
+    game = await game.loadGame();
+    console.log(game, 'game');
+    res.send(game);
+  } catch (ex) {
+    console.log(ex);
+  }
+});
 
-    //   if (puzzleArray.length > 0) {
-    //     for (let i = 0; i < puzzleArray.length; i++) {
-    // just need puzzleId here - can use use puzzleArray bc it's an array of puzzle Ids right?
-    //       const puzzle = await Puzzle.findByPk(puzzleArray[i]);
-    //       GamePuzzles.create({ gameId: game.id, puzzleId: puzzle.id });
-    //     }
-    //   }
-    //   game = await game.loadGame();
-    //   console.log(game, 'game');
-    //   res.send(game);
-
-    //else if req.body.type === 'custom'
-    // aka if game is from scratch,
-
+//route to create a dynamic game from scratch
+router.post('/:userId/games/custom', async (req, res, next) => {
+  try {
     let {
       title,
       description,
@@ -137,7 +140,7 @@ router.post('/:userId/games', async (req, res, next) => {
     //find theme and corresponding images
     theme = await Theme.findOne({ where: { name: req.body.theme } });
     const { images } = theme;
-
+    console.log('before creating rooms');
     // create 4 rooms associated with the new gameId with a number of 1-4 and assign an imgSrc from images array
     for (let i = 1; i < 5; i++) {
       await Room.create({
@@ -146,6 +149,7 @@ router.post('/:userId/games', async (req, res, next) => {
         imgSrc: images[i - 1],
       });
     }
+    console.log('created rooms');
     //find rooms 1, 2, 3, 4 instances
     const room1 = await Room.findOne({ where: { gameId: game.id, number: 1 } });
     const room2 = await Room.findOne({ where: { gameId: game.id, number: 2 } });

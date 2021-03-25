@@ -12,8 +12,10 @@ const _destroyPuzzle = (id) => ({ type: DESTROY_PUZZLE, id });
 
 //THUNK CREATOR
 export const setPuzzles = () => {
+  console.log('making axios callign to get puzzles');
   return async (dispatch) => {
     const puzzles = (await axios.get('/api/puzzles')).data;
+    console.log(puzzles, 'puzzles');
     dispatch(_setPuzzles(puzzles));
   };
 };

@@ -12,9 +12,9 @@ const GamePuzzles = require('./models/GamePuzzles.js');
 const Room = require('./models/Room.js');
 const RoomData = require('./models/RoomData');
 
-const bcrypt = require('bcrypt')
-const jwt = require("jsonwebtoken");
-const dg_syncAndSeed = require('../seed/dynamic')
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+// const dg_syncAndSeed = require('../seed/dynamic');
 
 // // bcrypt User.addHook with 10 salt rounds
 // User.addHook('beforeSave', async function(user) {
@@ -55,7 +55,6 @@ const dg_syncAndSeed = require('../seed/dynamic')
 //   }
 // };
 
-
 // Model associations
 Game.belongsToMany(Puzzle, { through: GamePuzzles, foreignKey: 'gameId' });
 Puzzle.belongsToMany(Game, { through: GamePuzzles, foreignKey: 'puzzleId' });
@@ -72,7 +71,7 @@ Game.hasMany(Room);
 //define syncAndSeed function
 const syncAndSeed = async () => {
   await db.sync({ force: true });
-  await dg_syncAndSeed();
+  //   await dg_syncAndSeed();
 
   //create default Haunted Game
   const defaultHauntedGame = await Game.create({
@@ -247,8 +246,7 @@ const syncAndSeed = async () => {
 
   const [cody, arwinder, kate, nes, steve, roman] = users;
   const [forest, cafe, house] = themes;
-  return users
-
+  return users;
 };
 
 module.exports = {
@@ -257,5 +255,3 @@ module.exports = {
 
   models: { Puzzle, Game, GamePuzzles, User, Theme, Room, RoomData },
 };
-
-

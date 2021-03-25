@@ -1,0 +1,16 @@
+.landingPage {
+  background: url('../assets/RomanGame/landing-page.png') center no-repeat;
+  background-color: black;
+}
+.map-A {
+  background: url('../assets/RomanGame/island-map.png') center no-repeat;
+  background-color: black
+}
+.level-A {
+  background: url('../assets/RomanGame/crash-site.png') center no-repeat;
+  background-color: black;
+}
+.level-B {
+  background: url('../assets/RomanGame/village.png') center no-repeat;
+  background-color: black
+}

@@ -9,10 +9,13 @@ const Homepage = (props) => {
   }, []);
 
   const { allGames } = props;
-
+  const defaultGames = allGames.filter((game) => !game.userId);
+  //will eventually need a check for if a game is public/private
+  const customGames = allGames.filter((game) => game.userId);
+  console.log(customGames, 'customGames');
   const removeSpaceFromTheme = (title) => {
     const noSpaceTitle = title.split(' ').join('');
-    // console.log(noSpaceTitle);
+    console.log(noSpaceTitle);
     return noSpaceTitle;
   };
 
@@ -30,16 +33,23 @@ const Homepage = (props) => {
         /haunted/1
       </h3> */}
       <h1> Welcome to escape-room </h1>
-      {allGames.map((game) => {
+      {defaultGames.map((game) => {
         return (
           <div key={game.id}>
-            <Link to={`${removeSpaceFromTheme(game.title)}/${game.id}`}>
+            <Link to={`${removeSpaceFromTheme(game.title)}/${game.id}`}>  
               {game.title}
             </Link>
             <hr />
           </div>
         );
       })}
+      {customGames.map((game, idx) => (
+        <div key={idx}>
+          <Link to={`/games/${game.id}/1`}>{game.title}</Link>
+          <hr />
+        </div>
+      ))}
+
       {/* <Link to="/haunted/intro">Haunted House</Link>
       <hr />
       <Link to="/houseofriddlez"> ~~House of Riddlez~~ </Link>
@@ -59,8 +69,15 @@ const Homepage = (props) => {
         </p>
       </div>
 
+
       <hr /> */}
-      <Link to="/choosetheme"> Create game </Link>
+
+      
+      <Link to="/dg">Dynamic Game</Link>
+      <hr />
+
+      <Link to ="/choosetheme"> Create game </Link>
+
       <hr />
       <hr />
       <Link to="/customize">Customize</Link>

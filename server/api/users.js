@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const {
-  models: { User, Game },
+  models: { User, Game, Puzzle, Room, Theme, RoomData },
 } = require('../db');
 const GamePuzzles = require('../db/models/GamePuzzles');
-const Puzzle = require('../db/models/Puzzle');
+// const Puzzle = require('../db/models/Puzzle');
 
 module.exports = router;
 
@@ -39,11 +39,11 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.get('/:id/games', async (req, res, next) => {
+router.get('/:userId/games', async (req, res, next) => {
   try {
     const games = await Game.findAll({
       where: {
-        userId: req.params.id,
+        userId: req.params.userId,
       },
     });
     res.status(200).send(games);
@@ -52,40 +52,124 @@ router.get('/:id/games', async (req, res, next) => {
   }
 });
 
-router.get('/:id/games/:gameId', async (req, res, next) => {
+//fetch a default(one of our games)game that a user created
+router.get('/:userId/games/:gameId', async (req, res, next) => {
+  //if it is one of our pre-made games
   try {
     let game = await Game.findOne({
-      where : {
-        userId : req.params.id,
-        id : req.params.gameId
-      }
-    })
-    game = await game.loadGame();    
-    res.status(200).send(game);
+      where: {
+        userId: req.params.userId,
+        id: req.params.gameId,
+      },
+    });
+    const testGame = await Game.findOne({
+      where: {
+        userId: req.params.userId,
+        id: req.params.gameId,
+      },
+      include: [Puzzle],
+    });
+    res.send(testGame);
+    // game = await game.loadGame();
+    // res.status(200).send(game);
+  } catch (er) {
+    next(er);
+  }
+});
+router.get('/:userId/games/custom/:gameId', async (req, res, next) => {
+  try {
+    let game = await Game.findOne({
+      where: { id: req.params.gameId },
+      include: { model: Room, include: [Puzzle] },
+    });
+    res.send(game);
   } catch (er) {
     next(er);
   }
 });
 
-router.post('/:id/games', async (req, res, next) => {
+//a user creates a new custom game from scratch/api/users/:userId/games
+router.post('/:userId/games', async (req, res, next) => {
   console.log(req.body, 'req.body');
+  console.log(req.params.userId);
   try {
-    let game = await Game.create({
-      title: req.body.title,
-      numPuzzles: req.body.numPuzzles,
-      theme: req.body.theme,
-      userId: req.params.id,
-    });    
-    
-    const { puzzleArray } = req.body;
+    //if req.body.gameType === 'default' -- will use this method when creating a game from one of our pre-made games
+    // let game = await Game.create({
+    //   title: req.body.title,
+    //   numPuzzles: req.body.numPuzzles,
+    //   theme: req.body.theme,
+    //   userId: req.params.userId,
+    // });
 
-    if(puzzleArray.length > 0) {
-      for(let i = 0; i < puzzleArray.length; i++) {
-        const puzzle = await Puzzle.findByPk(puzzleArray[i]);
-        GamePuzzles.create({ gameId: game.id, puzzleId : puzzle.id})
-      }
+    //   const { puzzleArray } = req.body;
+
+    //   if (puzzleArray.length > 0) {
+    //     for (let i = 0; i < puzzleArray.length; i++) {
+    // just need puzzleId here - can use use puzzleArray bc it's an array of puzzle Ids right?
+    //       const puzzle = await Puzzle.findByPk(puzzleArray[i]);
+    //       GamePuzzles.create({ gameId: game.id, puzzleId: puzzle.id });
+    //     }
+    //   }
+    //   game = await game.loadGame();
+    //   console.log(game, 'game');
+    //   res.send(game);
+
+    //else if req.body.type === 'custom'
+    // aka if game is from scratch,
+
+    let {
+      title,
+      description,
+      theme,
+      themeId,
+      numPuzzles,
+      puzzleArray,
+    } = req.body;
+    let game = await Game.create({
+      title,
+      description,
+      theme,
+      numPuzzles,
+      themeId,
+      userId: req.params.userId,
+    });
+
+    //find theme and corresponding images
+    theme = await Theme.findOne({ where: { name: req.body.theme } });
+    const { images } = theme;
+
+    // create 4 rooms associated with the new gameId with a number of 1-4 and assign an imgSrc from images array
+    for (let i = 1; i < 5; i++) {
+      await Room.create({
+        gameId: game.id,
+        number: i,
+        imgSrc: images[i - 1],
+      });
     }
-    game =  await game.loadGame();
+    //find rooms 1, 2, 3, 4 instances
+    const room1 = await Room.findOne({ where: { gameId: game.id, number: 1 } });
+    const room2 = await Room.findOne({ where: { gameId: game.id, number: 2 } });
+    const room3 = await Room.findOne({ where: { gameId: game.id, number: 3 } });
+    const room4 = await Room.findOne({ where: { gameId: game.id, number: 4 } });
+
+    //add 3 puzzles to each room instance for the newly created game
+    for (let i = 0; i < 3; i++) {
+      await RoomData.create({ roomId: room1.id, puzzleId: puzzleArray[i] });
+    }
+    for (let i = 3; i < 6; i++) {
+      await RoomData.create({ roomId: room2.id, puzzleId: puzzleArray[i] });
+    }
+    for (let i = 6; i < 9; i++) {
+      await RoomData.create({ roomId: room3.id, puzzleId: puzzleArray[i] });
+    }
+    for (let i = 9; i < 12; i++) {
+      await RoomData.create({ roomId: room4.id, puzzleId: puzzleArray[i] });
+    }
+    //find the game with id of newly created game, include Room model (with Puzzle model)
+    game = await Game.findOne({
+      where: { id: game.id },
+      include: { model: Room, include: [Puzzle] },
+    });
     console.log(game, 'game');
     res.send(game);
   } catch (ex) {

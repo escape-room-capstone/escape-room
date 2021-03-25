@@ -9,6 +9,53 @@ const Game = require('./models/Game');
 const Puzzle = require('./models/Puzzle.js');
 const GamePuzzles = require('./models/GamePuzzles.js');
 
+const Room = require('./models/Room.js');
+const RoomData = require('./models/RoomData');
+
+const bcrypt = require('bcrypt')
+const jwt = require("jsonwebtoken");
+const dg_syncAndSeed = require('../seed/dynamic')
+
+// // bcrypt User.addHook with 10 salt rounds
+// User.addHook('beforeSave', async function(user) {
+//   if(user._changed.has("password")) {
+//     user.password = await bcrypt.hash(user.password, 10);
+//   }
+// })
+
+// // User.authenticate method
+// User.authenticate = async function ({ username, password }) {
+//   const user = await User.findOne({
+//     where: { username },
+//   });
+//   // this gets slower because of the 10 salt rounds
+//   if (user && await bcrypt.compare(password, user.password)) {
+//     return jwt.sign({ id: user.id }, process.env.JWT);
+//   }
+//   const error = Error("bad credentials");
+//   error.status = 401;
+//   throw error;
+// };
+
+// // User.byToken method
+// User.byToken = async function (token) {
+//   try {
+//     const { id } = await jwt.verify(token, process.env.JWT);
+//     const user = await User.findByPk(id);
+//     if(user) {
+//         return user;
+//     }
+//     const error = Error("bad credentials");
+//     error.status = 401;
+//     throw error;
+//   } catch (ex) {
+//     const error = Error("bad credentials");
+//     error.status = 401;
+//     throw error;
+//   }
+// };
+
+
 // Model associations
 Game.belongsToMany(Puzzle, { through: GamePuzzles, foreignKey: 'gameId' });
 Puzzle.belongsToMany(Game, { through: GamePuzzles, foreignKey: 'puzzleId' });
@@ -16,9 +63,16 @@ Puzzle.belongsToMany(Game, { through: GamePuzzles, foreignKey: 'puzzleId' });
 Game.belongsTo(User);
 User.hasMany(Game);
 
+Puzzle.belongsToMany(Room, { through: RoomData });
+Room.belongsToMany(Puzzle, { through: RoomData });
+
+Room.belongsTo(Game);
+Game.hasMany(Room);
+
 //define syncAndSeed function
 const syncAndSeed = async () => {
   await db.sync({ force: true });
+  await dg_syncAndSeed();
 
   //create default Haunted Game
   const defaultHauntedGame = await Game.create({
@@ -63,6 +117,7 @@ const syncAndSeed = async () => {
   const hauntedId = defaultHauntedGame.id;
   const houseGameId = defaultHouseOfRiddlez.id;
 
+  //seed puzzles for default Haunted Game
   await Promise.all([
     GamePuzzles.create({ gameId: hauntedId, puzzleId: 1 }),
     GamePuzzles.create({ gameId: hauntedId, puzzleId: 2 }),
@@ -145,17 +200,35 @@ const syncAndSeed = async () => {
     Theme.create({
       name: 'Forest',
       backgroundImageOne: '/Theme_Images/Forest1.jpg',
-      themeImages: [
+      images: [
         '/Theme_Images/Forest1.jpg',
         '/Theme_Images/Forest2.jpg',
         '/Theme_Images/Forest3.jpg',
+        '/Theme_Images/Forest4.jpeg',
       ],
+      type: 'custom',
     }),
 
     Theme.create({
       name: 'Cafe',
+      type: 'custom',
       backgroundImageOne: '/Theme_Images/Cafe1.jpg',
-      themeImages: ['/Theme_Images/Cafe1.jpg', '/Theme_Images/Cafe2.jpg'],
+      images: ['/Theme_Images/Cafe1.jpg', '/Theme_Images/Cafe2.jpg'],
+    }),
+    Theme.create({
+      name: 'Haunted',
+      numPuzzles: 9,
+      type: 'default',
+    }),
+    Theme.create({
+      name: 'Bank',
+      numPuzzles: 9,
+      type: 'default',
+    }),
+    Theme.create({
+      name: 'Riddles',
+      numPuzzles: 9,
+      type: 'default',
     }),
 
     Theme.create({
@@ -174,10 +247,15 @@ const syncAndSeed = async () => {
 
   const [cody, arwinder, kate, nes, steve, roman] = users;
   const [forest, cafe, house] = themes;
+  return users
+
 };
 
 module.exports = {
   db,
   syncAndSeed,
-  models: { Puzzle, Game, GamePuzzles, User, Theme },
+
+  models: { Puzzle, Game, GamePuzzles, User, Theme, Room, RoomData },
 };
+
+

@@ -1,23 +1,30 @@
+const { INTEGER, ENUM } = require('sequelize');
 const Sequelize = require('sequelize');
 const db = require('../db');
 
 const { STRING, UUID, UUIDV4 } = Sequelize;
 
 const Theme = db.define('theme', {
-  // id: {
-  //   type: UUID,
-  //   defaultValue: UUIDV4,
-  //   primaryKey: true,
-  // },
   name: {
     type: STRING,
   },
   backgroundImageOne: {
     type: STRING,
   },
-  themeImages: {
+//   themeImages: {
+//     type: Sequelize.ARRAY(Sequelize.TEXT),
+//   },
+  images: {
     type: Sequelize.ARRAY(Sequelize.TEXT),
   },
+  numPuzzles: {
+    type: INTEGER,
+    defaultValue: 12,
+  },
+  type: {
+    type: ENUM('default', 'custom'),
+  },
+
 });
 
 module.exports = Theme;

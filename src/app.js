@@ -17,6 +17,7 @@ import { HauntedRoom8 } from './components/Haunted/HauntedRoom8';
 import { HauntedRoom9 } from './components/Haunted/HauntedRoom9';
 import { HauntedFinal } from './components/Haunted/HauntedFinal';
 import { CreateGame } from './components/CreateGame';
+import { CustomGame } from './components/CustomGame';
 
 import HouseOfRiddlez from './components/HouseOfRiddlez/HouseOfRiddlez';
 import LivingRoom from './components/HouseOfRiddlez/LivingRoom';
@@ -34,12 +35,14 @@ import ChooseTheme from './components/CreateGame/ChooseTheme';
 import CreateAGame from './components/CreateGame/CreateGame';
 import ConfirmTheme from './components/CreateGame/ConfirmTheme';
 import SinglePuzzle from './components/CreateGame/SinglePuzzle';
+import SingleRoom from './components/DynamicGameSrc/SingleRoom';
 import GameIntro from './components/CreateGame/GameIntro';
 
 const App = () => {
   return (
     <Router history={history}>
       <Route exact path="/" component={Homepage} />
+
       <Route exact path="/Bobafett/4" component={BobaFett} />
       <Route path="/TheHauntedHouse/:gameId" component={HauntedIntro} />
       <Route exact path="/haunted/room1" component={HauntedRoom1} />
@@ -71,10 +74,16 @@ const App = () => {
       <Route exact path="/theme/:id" component={ConfirmTheme} />
       <Route exact path="/creategame/:id" component={CreateAGame} />
       <Route exact path="/puzzle/:id" component={SinglePuzzle} />
+
+      <Route exact path="/dg" component={SingleRoom} />
       <Route exact path="/gameintro/:id" component={GameIntro} />
+
+      <Route exact path="/games/:gameId/:roomNum" component={CustomGame} />
+
+
       {/* <Redirect to="/" /> */}
     </Router>
-  );
-};
+  )
+}
 
 export default App;

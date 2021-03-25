@@ -9,24 +9,25 @@ export default function MagicSquarePuzzle({ setMagicSquarePuzzleCompleted }) {
     four: 0,
     five: 0,
     six: 0,
-    seven: 0,
+    seven: 4,
     eight: 0,
-    nine: 0,
+    nine: 2,
   });
 
-  let status = "Ship defenses are currently offline.";
-  
-  if (parseInt(square.one) === 8 &&
+  let status = "All numbers horizontally, vertically and diagonally must sum to 15 using numbers 1-9. Numbers cannot repeat."
+
+  if (
+    parseInt(square.one) === 8 &&
   parseInt(square.three) === 6 &&
   parseInt(square.four) === 3 &&
   parseInt(square.five) === 5 &&
   parseInt(square.six) === 7 &&
   parseInt(square.seven) === 4 &&
   parseInt(square.eight) === 9 &&
-  parseInt(square.nine) === 2) {
-      status = 'Ship defenses have been restored. You may exit this menu.'
+  parseInt(square.nine) === 2
+  ) {
+    status = "Congratulations!"
   }
-
 
   useEffect(() => {
     if (
@@ -104,7 +105,7 @@ export default function MagicSquarePuzzle({ setMagicSquarePuzzleCompleted }) {
         <div className="sq">
           <input
             value={square.seven}
-            onChange={(e) => setSquare({ ...square, seven: e.target.value })}
+            readOnly
             type="number"
             name="sqSeven"
             required
@@ -122,7 +123,7 @@ export default function MagicSquarePuzzle({ setMagicSquarePuzzleCompleted }) {
         <div className="sq">
           <input
             value={square.nine}
-            onChange={(e) => setSquare({ ...square, nine: e.target.value })}
+            readOnly
             type="number"
             name="sqNine"
             required

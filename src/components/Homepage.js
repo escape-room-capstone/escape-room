@@ -33,6 +33,10 @@ const Homepage = (props) => {
         /haunted/1
       </h3> */}
       <h1> Welcome to escape-room </h1>
+      <div>
+        <Link to="/login">LOGIN</Link>
+        <hr />
+      </div>
       {defaultGames.map((game) => {
         return (
           <div key={game.id}>

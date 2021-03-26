@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
-
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const { BOOLEAN, STRING, INTEGER, UUID, UUIDV4 } = Sequelize;
 
 const User = db.define('user', {
@@ -40,5 +41,53 @@ const User = db.define('user', {
     defaultValue: false,
   },
 });
+
+// bcrypt User.addHook with 10 salt rounds
+// User.addHook('beforeSave', async function (user) {
+//   if (user._changed.has('password')) {
+//     user.password = await bcrypt.hash(user.password, 10);
+//   }
+// });
+User.addHook('beforeSave', async (user) => {
+  if (user.changed('password')) {
+    user.password = await bcrypt.hash(user.password, 5);
+  }
+});
+// User.authenticate method
+User.authenticate = async function (email, password) {
+  const user = await User.findOne({
+    where: { email },
+  });
+  // this gets slower because of the 10 salt rounds
+
+  if (user && (await bcrypt.compare(password, user.password))) {
+    return jwt.sign({ id: user.id }, process.env.JWT);
+  }
+  const error = Error('bad credentials');
+  error.status = 401;
+  throw error;
+};
+
+// pass in a token and get the user associtated with that token
+User.byToken = async function (token) {
+  console.log('in the user by token function');
+  try {
+    const { id } = await jwt.verify(token, process.env.JWT);
+    const user = await User.findByPk(id, {
+      attributes: { exclude: ['password'] },
+    });
+    if (user) {
+      console.log(user, 'user');
+      return user;
+    }
+    const error = Error('bad credentials');
+    error.status = 401;
+    throw error;
+  } catch (ex) {
+    const error = Error('bad credentials');
+    error.status = 401;
+    throw error;
+  }
+};
 
 module.exports = User;

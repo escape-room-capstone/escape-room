@@ -19,6 +19,7 @@ import { HauntedFinal } from './components/Haunted/HauntedFinal';
 import { CreateGame } from './components/CreateGame';
 import { CustomGame } from './components/CustomGame';
 import { UserGames } from './components/UserGames';
+import { Login } from './components/AuthForm';
 
 import HouseOfRiddlez from './components/HouseOfRiddlez/HouseOfRiddlez';
 import LivingRoom from './components/HouseOfRiddlez/LivingRoom';
@@ -43,6 +44,8 @@ const App = () => {
   return (
     <Router history={history}>
       <Route exact path="/" component={Homepage} />
+
+      <Route exact path="/login" component={Login} />
 
       <Route exact path="/Bobafett/4" component={BobaFett} />
       <Route path="/haunted/:gameId" component={HauntedIntro} />

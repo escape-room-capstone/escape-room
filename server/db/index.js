@@ -16,6 +16,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 // const dg_syncAndSeed = require('../seed/dynamic');
 
+
 // // bcrypt User.addHook with 10 salt rounds
 // User.addHook('beforeSave', async function(user) {
 //   if(user._changed.has("password")) {
@@ -207,7 +208,6 @@ const syncAndSeed = async () => {
       ],
       type: 'custom',
     }),
-
     Theme.create({
       name: 'Cafe',
       type: 'custom',
@@ -241,7 +241,7 @@ const syncAndSeed = async () => {
     Theme.create({
       name: 'House',
       backgroundImageOne: '../RiddlezImages/home.jpg',
-      themeImages: [
+      images: [
         '../RiddlezImages/home.jpg',
         '../RiddlezImages/livingroom.jpg',
         '../RiddlezImages/roomOne.jpg',
@@ -249,11 +249,19 @@ const syncAndSeed = async () => {
         '../RiddlezImages/attic.jpg',
         '../RiddlezImages/backroom.jpg',
       ],
+      type: 'default',
     }),
+    // Theme.create({
+    //   name: 'Riddles',
+    //   numPuzzles: 9,
+    //   type: 'default',
+    // }),
   ]);
 
   const [cody, arwinder, kate, nes, steve, roman] = users;
-  const [forest, cafe, house] = themes;
+
+  const [forest, cafe, house, haunted, bank] = themes;
+
   return users;
 };
 

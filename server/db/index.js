@@ -218,7 +218,13 @@ const syncAndSeed = async () => {
       name: 'Haunted',
       numPuzzles: 9,
       type: 'default',
-      backgroundImageOne: '/Theme_Images/Haunted1.jpg',
+      backgroundImageOne: '/Theme_Images/Haunted/Haunted1.jpg',
+      images: [
+        '/Theme_Images/Haunted/Haunted1.jpg',
+        '/Theme_Images/Haunted/Haunted2.jpg',
+        '/Theme_Images/Haunted/Haunted3.jpg',
+        'Theme_Images/Haunted/Haunted4.jpg',
+      ],
     }),
     Theme.create({
       name: 'Bank',

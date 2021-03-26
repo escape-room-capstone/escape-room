@@ -11,10 +11,6 @@ import { customStyles } from '../../utils/helpers';
 //import css file
 import '../../../public/css/HauntedRoom.css';
 
-// import clue components
-//previosu hard-coded puzzles for the room
-// import { ClueOne, ClueTwo, ClueThree } from './HauntedRoom2Clues';
-
 //react modal
 import Modal from 'react-modal';
 
@@ -29,7 +25,6 @@ export const Lock = (props) => {
   const [greenCheck] = useImage('/Images/check.png');
   return (
     <Image
-      onClick={props.showClue}
       x={props.x}
       y={props.y}
       height={35}

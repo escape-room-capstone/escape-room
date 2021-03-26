@@ -11,6 +11,7 @@ export const fetchRoom = (gameId, roomNum) => {
   return async (dispatch) => {
     //does this endpoint make sense?
     const room = (await axios.get(`/api/games/${gameId}/${roomNum}`)).data;
+    console.log(room, 'room');
     dispatch(setRoom(room));
   };
 };

@@ -18,6 +18,7 @@ import { HauntedRoom9 } from './components/Haunted/HauntedRoom9';
 import { HauntedFinal } from './components/Haunted/HauntedFinal';
 import { CreateGame } from './components/CreateGame';
 import { CustomGame } from './components/CustomGame';
+import { UserGames } from './components/UserGames';
 
 import HouseOfRiddlez from './components/HouseOfRiddlez/HouseOfRiddlez';
 import LivingRoom from './components/HouseOfRiddlez/LivingRoom';
@@ -44,7 +45,7 @@ const App = () => {
       <Route exact path="/" component={Homepage} />
 
       <Route exact path="/Bobafett/4" component={BobaFett} />
-      <Route path="/TheHauntedHouse/:gameId" component={HauntedIntro} />
+      <Route path="/haunted/:gameId" component={HauntedIntro} />
       <Route exact path="/haunted/room1" component={HauntedRoom1} />
       <Route exact path="/haunted/room2" component={HauntedRoom2} />
       <Route exact path="/haunted/room3" component={HauntedRoom3} />
@@ -57,6 +58,7 @@ const App = () => {
       <Route exact path="/haunted/room9" component={HauntedRoom9} />
       <Route exact path="/haunted/final" component={HauntedFinal} />
       <Route exact path="/customize" component={CreateGame} />
+      <Route exact path="/users/:userId/account/games" component={UserGames} />
 
       <Route path="/HouseOfRiddlez/" component={LetterBank} />
       <Route exact path="/HouseofRiddlez/2" component={HouseOfRiddlez} />
@@ -80,10 +82,9 @@ const App = () => {
 
       <Route exact path="/games/:gameId/:roomNum" component={CustomGame} />
 
-
       {/* <Redirect to="/" /> */}
     </Router>
-  )
-}
+  );
+};
 
 export default App;

@@ -20,7 +20,6 @@ const _HauntedRoom1 = (props) => {
     //hard coded gameId for now for testing purposes
     props.getGame(1);
   }, []);
-  console.log(props, 'props of hauntedroom1');
   return (
     <div className="game-room">
       <div className="narrative">

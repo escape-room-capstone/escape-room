@@ -25,7 +25,6 @@ const _CustomGame = (props) => {
   }, []);
   const { room } = props;
   const { puzzles } = room;
-  console.log(props, 'props');
   console.log(room, 'room');
   //dynamically rendering components based on which puzzles are in the array from the DB
   const Puzzle1 = (props) => {
@@ -133,8 +132,7 @@ const mapState = (state) => state;
 const mapDispatch = (dispatch) => {
   return {
     getRoom: (gameId, roomNum) => dispatch(fetchRoom(gameId, roomNum)),
-    getGame: (userId, gameId, type) =>
-      dispatch(fetchUserGame(userId, gameId, type)),
+    getGame: (userId, gameId) => dispatch(fetchUserGame(userId, gameId)),
   };
 };
 

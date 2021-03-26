@@ -6,6 +6,7 @@ import { puzzleReducer } from '../store/puzzles';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { userReducer } from '../store/users';
 import { gameReducer } from './game';
+import { customGameReducer } from './customGame';
 import { allGamesReducer } from './allGames';
 import { themesReducer } from './theme';
 import { themeReducer } from './singleTheme';
@@ -31,7 +32,8 @@ const rootReducer = combineReducers({
   theme: themeReducer,
   allGames: allGamesReducer,
   room: singleRoomReducer,
-  dg: dynamicGame
+  customGame: customGameReducer,
+  dg: dynamicGame,
 });
 
 const store = createStore(rootReducer, initialState, middleware);

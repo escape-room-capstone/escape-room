@@ -11,26 +11,28 @@ const setGame = (game) => ({ type: SET_GAME, game });
 
 //thunk creators
 
-//for fetching a default game with no associated userId
-export const fetchGame = (gameId) => {
-  return async (dispatch) => {
-    const game = (await axios.get(`/api/games/${gameId}`)).data;
-    dispatch(setGame(game));
-  };
-};
-//customize game in style of default game - haunted, bank, riddles, etc
-export const createGame = (
+//for fetching a default game - not customized
+// export const fetchGame = (gameId) => {
+//   return async (dispatch) => {
+//     const game = (await axios.get(`/api/games/${gameId}`)).data;
+//     dispatch(setGame(game));
+//   };
+// };
+
+//create a game
+export const createCustomGame = (
   userId,
   theme,
   themeId,
   numPuzzles,
   title,
   description,
-  puzzleArray
+  puzzleArray,
+  history
 ) => {
   return async (dispatch) => {
     const game = (
-      await axios.post(`/api/users/${userId}/games`, {
+      await axios.post(`/api/users/${userId}/games/custom`, {
         theme,
         themeId,
         numPuzzles,
@@ -40,20 +42,20 @@ export const createGame = (
       })
     ).data;
     dispatch(setGame(game));
+    history.push(`/users/${userId}/account/games`);
   };
 };
-
-//fetch default-style user game
-export const fetchUserGame = (userId, gameId) => {
+export const fetchUserGame = (userId, gameId, type) => {
   return async (dispatch) => {
-    let userGame = (await axios.get(`/api/users/${userId}/games/${gameId}`, {}))
-      .data;
+    let userGame = (
+      await axios.get(`/api/users/${userId}/games/custom/${gameId}`)
+    ).data;
     dispatch(setGame(userGame));
   };
 };
 
 //reducer
-export const gameReducer = (state = {}, action) => {
+export const customGameReducer = (state = {}, action) => {
   if (action.type === SET_GAME) {
     return action.game;
   }

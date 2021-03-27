@@ -41,11 +41,13 @@ import SinglePuzzle from './components/CreateGame/SinglePuzzle';
 import SingleRoom from './components/DynamicGameSrc/SingleRoom';
 import GameIntro from './components/CreateGame/GameIntro';
 
+import { Landing } from './components/Landing';
+
 const App = () => {
   return (
     <Router history={history}>
-      <Route exact path="/" component={Homepage} />
-
+      {/* <Route exact path="/" component={Homepage} /> */}
+      <Route exact path="/" component={Landing} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={Signup} />
 

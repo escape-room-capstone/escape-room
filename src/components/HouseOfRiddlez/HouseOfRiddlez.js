@@ -9,10 +9,65 @@ import { setPuzzles } from '../../store/puzzles.js';
 import { fetchGame } from '../../store/game';
 
 const HouseOfRiddlez = (props) => {
-  const [mainRoom, setMainRoom] = useState({
-    mainRoomBank: 'CLUESSSSSS',
-    atticClues: 'Im attic clues from main room',
-    completed: false,
+  console.log('houseRiddlezProps=>', props);
+
+  const [_isRoomTwo, setRoomTwo] = useState(false);
+  const [_isRoomOne, setRoomOne] = useState(false);
+  const [_isAttic, setAttic] = useState(false);
+  const [_isLivingRoom, setLivingRoom] = useState(false);
+  const [_isBackroom, setBackroom] = useState(false);
+
+  useEffect(() => {
+    if (_isRoomTwo) {
+      props.setRouteLocation(
+        {
+          ...props.routeLocation,
+          isHome: false,
+          isRoomTwo: true,
+        },
+        [_isRoomTwo]
+      );
+    }
+    if (_isRoomOne) {
+      props.setRouteLocation(
+        {
+          ...props.routeLocation,
+          isHome: false,
+          isRoomOne: true,
+        },
+        [_isRoomOne]
+      );
+    }
+    if (_isAttic) {
+      props.setRouteLocation(
+        {
+          ...props.routeLocation,
+          isHome: false,
+          isAttic: true,
+        },
+        [_isAttic]
+      );
+    }
+    if (_isLivingRoom) {
+      props.setRouteLocation(
+        {
+          ...props.routeLocation,
+          isHome: false,
+          isLivingRoom: true,
+        },
+        [_isLivingRoom]
+      );
+    }
+    if (_isBackroom) {
+      props.setRouteLocation(
+        {
+          ...props.routeLocation,
+          isHome: false,
+          isBackroom: true,
+        },
+        [_isBackroom]
+      );
+    }
   });
 
   return (
@@ -24,7 +79,8 @@ const HouseOfRiddlez = (props) => {
           className="secretButton"
           id="roomTwoButton"
           onClick={() => {
-            props.history.push('/HouseofRiddlez/roomtwo');
+            setRoomTwo(true);
+            //   props.history.push('/HouseofRiddlez/roomtwo');
           }}
         >
           {/* <Link to="/HouseofRiddlez/room2"></Link> */}
@@ -34,7 +90,8 @@ const HouseOfRiddlez = (props) => {
           className="secretButton"
           id="atticButton"
           onClick={() => {
-            props.history.push('/HouseofRiddlez/attic');
+            setAttic(true);
+            // props.history.push('/HouseofRiddlez/attic');
           }}
         >
           {/* <Link to="/HouseofRiddlez/attic"></Link> */}
@@ -44,7 +101,8 @@ const HouseOfRiddlez = (props) => {
           className="secretButton"
           id="livingRoomButton"
           onClick={() => {
-            props.history.push('/HouseofRiddlez/livingroom');
+            setLivingRoom(true);
+            // props.history.push('/HouseofRiddlez/livingroom');
           }}
         >
           {/* <Link to="/HouseofRiddlez/livingroom"> </Link> */}
@@ -54,7 +112,8 @@ const HouseOfRiddlez = (props) => {
           className="secretButton"
           id="roomOneButton"
           onClick={() => {
-            props.history.push('/HouseofRiddlez/roomone');
+            setRoomOne(true);
+            // props.history.push('/HouseofRiddlez/roomone');
           }}
         >
           {/* <Link to="/HouseofRiddlez/room1"> </Link> */}
@@ -64,7 +123,8 @@ const HouseOfRiddlez = (props) => {
           className="secretButton"
           id="backRoomButton"
           onClick={() => {
-            props.history.push('/HouseofRiddlez/backroom');
+            setBackroom(true);
+            // props.history.push('/HouseofRiddlez/backroom');
           }}
         >
           {/* <Link to="/HouseofRiddlez/backroom"></Link> */}
@@ -78,12 +138,13 @@ const mapToState = (state) => {
   return state;
 };
 
-const mapToDispatch = (dispatch) => {
-  return {
-    getGame: (gameId) => dispatch(fetchGame(gameId)),
-    getPuzzles: () => dispatch(setPuzzles()),
-  };
-};
+// const mapToDispatch = (dispatch) => {
+//   return {
+//     getGame: (gameId) => dispatch(fetchGame(gameId)),
+//     getPuzzles: () => dispatch(setPuzzles()),
+//   };
+// };
 
-export default connect(mapToState, mapToDispatch)(HouseOfRiddlez);
+// mapToDispatch
+export default connect(mapToState)(HouseOfRiddlez);
 //export default HouseOfRiddlez;

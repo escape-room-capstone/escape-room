@@ -58,8 +58,8 @@ const App = () => {
       <Route exact path="/haunted/final" component={HauntedFinal} />
       <Route exact path="/customize" component={CreateGame} />
 
-      <Route path="/HouseOfRiddlez/" component={LetterBank} />
-      <Route exact path="/HouseofRiddlez/2" component={HouseOfRiddlez} />
+      <Route exact path="/HouseofRiddlez/:gameId" component={LetterBank} />
+      <Route exact path="/HouseofRiddlez/mainroom" component={HouseOfRiddlez} />
       <Route exact path="/HouseofRiddlez/livingroom" component={LivingRoom} />
       <Route exact path="/HouseofRiddlez/roomone" component={RoomOne} />
       <Route exact path="/HouseofRiddlez/roomtwo" component={RoomTwo} />
@@ -80,10 +80,9 @@ const App = () => {
 
       <Route exact path="/games/:gameId/:roomNum" component={CustomGame} />
 
-
       {/* <Redirect to="/" /> */}
     </Router>
-  )
-}
+  );
+};
 
 export default App;

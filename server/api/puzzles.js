@@ -13,13 +13,12 @@ router.get('/', async (req, res, next) => {
 
 router.post('/gamePuzzles', async (req, res, next) => {
   try {
-    
     const gamePuzzle = await GamePuzzles.create({
-      gameId : req.body.gameId,
-      puzzleId : req.body.puzzleId
-    })
+      gameId: req.body.gameId,
+      puzzleId: req.body.puzzleId,
+    });
 
-    res.send(gamePuzzle)
+    res.send(gamePuzzle);
   } catch (err) {
     next(err);
   }
@@ -35,7 +34,13 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-
+router.put('/:id', async (req, res, next) => {
+  try {
+    const puzzle = await Puzzle.findByPk(req.params.id);
+    res.status(201).send(await puzzle.update(req.body));
+  } catch (er) {
+    next(er);
+  }
+});
 
 module.exports = router;
-

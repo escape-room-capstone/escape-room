@@ -17,45 +17,6 @@ const jwt = require('jsonwebtoken');
 // const dg_syncAndSeed = require('../seed/dynamic');
 
 
-// // bcrypt User.addHook with 10 salt rounds
-// User.addHook('beforeSave', async function(user) {
-//   if(user._changed.has("password")) {
-//     user.password = await bcrypt.hash(user.password, 10);
-//   }
-// })
-
-// // User.authenticate method
-// User.authenticate = async function ({ username, password }) {
-//   const user = await User.findOne({
-//     where: { username },
-//   });
-//   // this gets slower because of the 10 salt rounds
-//   if (user && await bcrypt.compare(password, user.password)) {
-//     return jwt.sign({ id: user.id }, process.env.JWT);
-//   }
-//   const error = Error("bad credentials");
-//   error.status = 401;
-//   throw error;
-// };
-
-// // User.byToken method
-// User.byToken = async function (token) {
-//   try {
-//     const { id } = await jwt.verify(token, process.env.JWT);
-//     const user = await User.findByPk(id);
-//     if(user) {
-//         return user;
-//     }
-//     const error = Error("bad credentials");
-//     error.status = 401;
-//     throw error;
-//   } catch (ex) {
-//     const error = Error("bad credentials");
-//     error.status = 401;
-//     throw error;
-//   }
-// };
-
 // Model associations
 Game.belongsToMany(Puzzle, { through: GamePuzzles, foreignKey: 'gameId' });
 Puzzle.belongsToMany(Game, { through: GamePuzzles, foreignKey: 'puzzleId' });
@@ -231,11 +192,6 @@ const syncAndSeed = async () => {
       numPuzzles: 9,
       type: 'default',
       backgroundImageOne: '/Theme_Images/Bank1.jpg',
-    }),
-    Theme.create({
-      name: 'Riddles',
-      numPuzzles: 9,
-      type: 'default',
     }),
 
     Theme.create({

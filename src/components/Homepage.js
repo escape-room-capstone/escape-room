@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchGames } from '../store/allGames';
-
+import { logout } from '../store/auth';
 const Homepage = (props) => {
   useEffect(() => {
     props.getGames();
@@ -33,6 +33,14 @@ const Homepage = (props) => {
         /haunted/1
       </h3> */}
       <h1> Welcome to escape-room </h1>
+      <div>
+        <Link to="/login">LOGIN</Link> <br></br>
+        {props.auth.id && <div>Hello, {props.auth.email}</div>}
+        <Link to="/signup">SIGN UP</Link>
+        <br></br>
+        <button onClick={() => props.logout()}>LOGOUT</button>
+        <hr />
+      </div>
       {defaultGames.map((game) => {
         return (
           <div key={game.id}>
@@ -77,8 +85,8 @@ const Homepage = (props) => {
       <Link to="/choosetheme"> Create game </Link>
 
       <hr />
-      <hr />
-      <Link to="/customize">Customize</Link>
+      {/* <hr />
+      <Link to="/customize">Customize</Link> */}
       {/* <h3
         style={{
           position: 'absolute',
@@ -100,6 +108,7 @@ const mapState = (state) => state;
 
 const mapDispatch = {
   getGames: fetchGames,
+  logout: logout,
 };
 
 export default connect(mapState, mapDispatch)(Homepage);

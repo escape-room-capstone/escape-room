@@ -42,7 +42,8 @@ export const createCustomGame = (
       })
     ).data;
     dispatch(setGame(game));
-    history.push(`/users/${userId}/account/games`);
+    // history.push(`/users/${userId}/account/games`);
+    history.push(`/users/${userId}/assignpuzzles/${game.id}`)
   };
 };
 export const fetchUserGame = (userId, gameId, type) => {

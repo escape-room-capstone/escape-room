@@ -1,7 +1,7 @@
 const path = require('path');
 const express = require('express');
 const app = express();
-const db = require('./db/db')
+const db = require('./db/db');
 
 const PORT = process.env.PORT || 8080;
 const PUBLIC_PATH = path.join(__dirname, '../public');
@@ -18,11 +18,18 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
+// error handling endware
+app.use((err, req, res, next) => {
+  console.error(err);
+  console.error(err.stack);
+  res.status(err.status || 500).send(err.message || 'Internal server error.');
+});
+
 const init = async () => {
   try {
     await db.sync();
   } catch (err) {
-    console.log(rr)
+    console.log(rr);
   }
   app.listen(PORT, () => {
     console.log(`Server listening on PORT: ${PORT}`);

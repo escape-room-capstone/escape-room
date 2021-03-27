@@ -16,9 +16,11 @@ import { HauntedRoom7 } from './components/Haunted/HauntedRoom7';
 import { HauntedRoom8 } from './components/Haunted/HauntedRoom8';
 import { HauntedRoom9 } from './components/Haunted/HauntedRoom9';
 import { HauntedFinal } from './components/Haunted/HauntedFinal';
-import { CreateGame } from './components/CreateGame';
+// import { CreateGame } from './components/CreateGame';
 import { CustomGame } from './components/CustomGame';
 import { UserGames } from './components/UserGames';
+import { Login } from './components/AuthForm';
+import { Signup } from './components/AuthForm';
 
 import HouseOfRiddlez from './components/HouseOfRiddlez/HouseOfRiddlez';
 import LivingRoom from './components/HouseOfRiddlez/LivingRoom';
@@ -44,7 +46,10 @@ const App = () => {
     <Router history={history}>
       <Route exact path="/" component={Homepage} />
 
-      <Route exact path="/Bobafett/4" component={BobaFett} />
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/signup" component={Signup} />
+
+      <Route exact path="/starwars/4" component={BobaFett} />
       <Route path="/haunted/:gameId" component={HauntedIntro} />
       <Route exact path="/haunted/room1" component={HauntedRoom1} />
       <Route exact path="/haunted/room2" component={HauntedRoom2} />
@@ -57,7 +62,7 @@ const App = () => {
       <Route exact path="/haunted/room8" component={HauntedRoom8} />
       <Route exact path="/haunted/room9" component={HauntedRoom9} />
       <Route exact path="/haunted/final" component={HauntedFinal} />
-      <Route exact path="/customize" component={CreateGame} />
+      {/* <Route exact path="/customize" component={CreateGame} /> */}
       <Route exact path="/users/:userId/account/games" component={UserGames} />
 
       <Route exact path="/HouseofRiddlez/:gameId" component={LetterBank} />

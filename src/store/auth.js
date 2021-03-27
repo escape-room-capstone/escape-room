@@ -16,7 +16,7 @@ const setAuth = (auth) => ({ type: SET_AUTH, auth });
 /**
  * THUNK CREATORS
  */
-export const getUserByToken = () => async (dispatch) => {
+export const getUserByToken = (history) => async (dispatch) => {
   const token = storage().getItem(TOKEN);
   if (token) {
     //send the token with returns the user in our DB associated with the JWT token in localStorage
@@ -27,11 +27,14 @@ export const getUserByToken = () => async (dispatch) => {
         },
       })
     ).data;
-    return dispatch(setAuth(user));
+    dispatch(setAuth(user));
+    history.push('/');
   }
 };
 
-export const authenticate = (email, password, method) => async (dispatch) => {
+export const authenticate = (email, password, method, history) => async (
+  dispatch
+) => {
   try {
     console.log('in the authenticate function');
     // send user credentials to api to check credentials and then receive a JWT token
@@ -39,7 +42,7 @@ export const authenticate = (email, password, method) => async (dispatch) => {
       .data;
     console.log(res, 'response - should be token: token');
     storage().setItem(TOKEN, res.token);
-    dispatch(getUserByToken());
+    dispatch(getUserByToken(history));
   } catch (authError) {
     return dispatch(setAuth({ error: authError }));
   }

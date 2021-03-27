@@ -35,15 +35,15 @@ const AuthForm = (props) => {
       >
         <div>
           <TextField label="Email" margin="normal" name="email" type="text" />
-          <label htmlFor="email">
+          {/* <label htmlFor="email">
             <small>Email</small>
-          </label>{' '}
+          </label>{' '} */}
         </div>
         <div>
           <TextField label="Password" name="password" type="password" />
-          <label htmlFor="password">
+          {/* <label htmlFor="password">
             <small>Password</small>
-          </label>
+          </label> */}
         </div>
         <div>
           <ThemeProvider theme={buttonTheme}>
@@ -79,10 +79,10 @@ const mapSignup = (state) => {
   };
 };
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = (dispatch, { history }) => {
   return {
     authenticate: (email, password, formName) =>
-      dispatch(authenticate(email, password, formName)),
+      dispatch(authenticate(email, password, formName, history)),
   };
 };
 

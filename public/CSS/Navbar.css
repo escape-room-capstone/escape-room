@@ -1,0 +1,27 @@
+#navbar {
+  /* background-color: black; */
+  height: 5rem;
+  display: flex;
+  font-size: 1.4rem;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 2rem;
+}
+
+#navbar span {
+  color: white;
+  margin: 1rem 2rem;
+  font-weight: 100;
+}
+
+#navbar > div span#welcome {
+  margin-right: auto;
+}
+
+#navbar a {
+  text-decoration: none;
+}
+#navbar a:visited {
+  color: white;
+}

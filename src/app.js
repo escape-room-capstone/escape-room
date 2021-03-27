@@ -82,7 +82,7 @@ const App = () => {
       <Route exact path="/dg" component={SingleRoom} />
       <Route exact path="/gameintro/:id" component={GameIntro} />
 
-      <Route exact path="/games/:gameId/:roomId" component={CustomGame} />
+      <Route exact path="/games/customize/:gameId/:roomId" component={CustomGame} />
 
       {/* <Redirect to="/" /> */}
     </Router>

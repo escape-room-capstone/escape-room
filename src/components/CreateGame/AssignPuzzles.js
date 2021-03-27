@@ -31,7 +31,7 @@ const AssignPuzzles = (props) => {
   return (
     <div>
       <h1>Rooms for your game</h1>
-      <h2> Remaining Puzzles : {unassignedPuzzles.map(puzzleId => {
+      <h2> Unassigned Puzzles : {unassignedPuzzles.map(puzzleId => {
           return (
           <small key={puzzleId}> Puzzle{puzzleId} </small>
           )

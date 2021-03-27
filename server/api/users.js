@@ -180,6 +180,13 @@ router.post('/:userId/games/custom', async (req, res, next) => {
       rooms[`room${currentRoom.number}`] = (await Room.findOne({ where : { gameId : game.id, number: currentRoom.number }} )).dataValues
     }
 
+    //now rooms object looks something like ....
+    //rooms = {
+    //        room1 : (all data for first room we created),
+    //        room2 : (all data for second room we created),
+    //        etc
+    //       }
+
     
     //This code below was previous code where we were grabbing our hard-coded rooms. Below it is some logic to grab rooms dynamically ...
 
@@ -188,9 +195,8 @@ router.post('/:userId/games/custom', async (req, res, next) => {
     // const room3 = await Room.findOne({ where: { gameId: game.id, number: 3 } });
     // const room4 = await Room.findOne({ where: { gameId: game.id, number: 4 } });
 
-    //console.log("ROOM OBJECT HERE", rooms);
+    
 
-    //add 3 puzzles to each room instance for the newly created game
 
     //we will use this value in our while loop...
     let roomNumber = 1;
@@ -202,7 +208,13 @@ router.post('/:userId/games/custom', async (req, res, next) => {
         //assign a room a puzzle one at a time...
         //for example Room 1 gets assigned the first puzzle in our puzzleArray. Then we use puzzleArray.shift() which removes the first index 
         //out of puzzleArray.
+        
+        // The roomId for this RoomData would be whatever the id the room inside room[room1] contains.
+        // Look at line 185 to see what the roomId would be for this RoomData...
+        // Then we assign the first puzzle in our puzzleArray to this room
         await RoomData.create({ roomId: rooms[`room${roomNumber}`].id, puzzleId: puzzleArray[0]});
+
+        //after assigning the puzzle, we remove it off the array
         puzzleArray.shift();
 
 
@@ -210,12 +222,14 @@ router.post('/:userId/games/custom', async (req, res, next) => {
         roomNumber++
 
         //If our room number is bigger than the amount of rooms we have... We will add a second puzzle to room 1.
-        if(roomNumber >= allRoomsArray.length + 1){
+        if(roomNumber > allRoomsArray.length){
           roomNumber = 1;
         }
       }                
     }
 
+
+    //add 3 puzzles to each room instance for the newly created game
     // for (let i = 0; i < 3; i++) {
     //   await RoomData.create({ roomId: room1.id, puzzleId: puzzleArray[i] });
     // }

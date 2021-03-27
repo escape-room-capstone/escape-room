@@ -12,6 +12,23 @@ import { fetchUserGame } from '../store/game';
 //Thinking maybe we could make roomClues 1 - 10, and use a ternary to render a button for the puzzle only if the puzzle exists in props.room.puzzles
 //Have to think about this one...
 const _CustomGame = (props) => {
+
+  const { room } = props;
+  const { puzzles } = room;
+  console.log("Our Puzzles", puzzles);
+
+
+  //Work in progress...
+  //Creates the room clues dynamically based on how many puzzles we have in this room... 
+  const _roomClues = puzzles ? puzzles.reduce((cluesObj, currentPuzzle) => {
+    if(currentPuzzle){
+    cluesObj[currentPuzzle.id] = { solved : false, show : false }
+    }
+    return cluesObj
+  }, {} ) : {} 
+
+  console.log("Room clues using .reduce", _roomClues);  
+
   const roomClues = {
     1: { solved: false, show: false },
     2: { solved: false, show: false },
@@ -30,8 +47,7 @@ const _CustomGame = (props) => {
     props.getGame(2, gameId, 'custom');
     props.getRoom(gameId, roomId);
   }, []);
-  const { room } = props;
-  const { puzzles } = room;
+  
   //console.log(room, 'room');
   //dynamically rendering components based on which puzzles are in the array from the DB
 
@@ -53,12 +69,12 @@ const _CustomGame = (props) => {
 
   //Have to use ternary operator because on first render, room is an EMPTY OBJECT
   //map over puzzle array inside of room to dynamically render amount of puzzles in array.
-  const CMPuzzles = room.puzzles ? room.puzzles.map(puzzle => {
-    const Component = componentMapping[puzzle.name];
-    return <Component {...props} />
-  }) : [];
+  // const CMPuzzles = room.puzzles ? room.puzzles.map(puzzle => {
+  //   const Component = componentMapping[puzzle.name];
+  //   return <Component {...props} />
+  // }) : [];
 
-  //console.log("CM PUZZLES", CMPuzzles);
+  // console.log("CM PUZZLES", CMPuzzles);
 
 
   //helper function that takes a clueNumber and sets it as solved and updates local state

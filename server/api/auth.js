@@ -26,5 +26,22 @@ router.post('/login', async (req, res, next) => {
     next(ex);
   }
 });
+router.post('/signup', async (req, res, next) => {
+  try {
+    console.log('at api/auth/signup');
+    const { email, password } = req.body;
+    let user = await User.findOne({ where: { email } });
+    if (user) {
+      const error = Error('email already exists');
+      error.status = 401;
+      throw error;
+    }
+    user = await User.create({ email, password });
+    const token = await User.authenticate(email, password);
+    res.send({ token });
+  } catch (ex) {
+    next(ex);
+  }
+});
 
 module.exports = router;

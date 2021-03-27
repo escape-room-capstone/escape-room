@@ -36,10 +36,10 @@ const User = db.define('user', {
       notEmpty: true,
     },
   },
-  isAdmin: {
-    type: BOOLEAN,
-    defaultValue: false,
-  },
+  // isAdmin: {
+  //   type: BOOLEAN,
+  //   defaultValue: false,
+  // },
 });
 
 // bcrypt User.addHook with 10 salt rounds
@@ -53,6 +53,14 @@ User.addHook('beforeSave', async (user) => {
     user.password = await bcrypt.hash(user.password, 5);
   }
 });
+User.prototype.correctPassword = function (candidatePwd) {
+  return bcrypt.compare(candidatePwd, this.password);
+};
+
+// //instance method that generates a JWT token for a user - using the user instance
+// User.prototype.generateToken = function () {
+//   return jwt.sign({ id: this.id }, process.env.JWT);
+// };
 // User.authenticate method
 User.authenticate = async function (email, password) {
   const user = await User.findOne({

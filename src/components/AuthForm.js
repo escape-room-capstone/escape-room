@@ -52,7 +52,12 @@ const AuthForm = (props) => {
             </Button>
           </ThemeProvider>
         </div>
-        {error && error.response && <div> {error.response.data} </div>}
+        {error && error.response && (
+          <div style={{ color: 'red', fontStyle: 'italic', margin: '1rem' }}>
+            {' '}
+            {error.response.data}{' '}
+          </div>
+        )}
       </form>
     </div>
   );
@@ -82,3 +87,4 @@ const mapDispatch = (dispatch) => {
 };
 
 export const Login = connect(mapLogin, mapDispatch)(AuthForm);
+export const Signup = connect(mapSignup, mapDispatch)(AuthForm);

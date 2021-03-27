@@ -34,7 +34,8 @@ const Homepage = (props) => {
       </h3> */}
       <h1> Welcome to escape-room </h1>
       <div>
-        <Link to="/login">LOGIN</Link>
+        <Link to="/login">LOGIN</Link> <br></br>
+        <Link to="/signup">SIGN UP</Link>
         <hr />
       </div>
       {defaultGames.map((game) => {

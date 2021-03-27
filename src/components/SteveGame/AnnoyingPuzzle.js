@@ -18,7 +18,7 @@ export default function AnnoyingPuzzle({ setAnnoyingPuzzleCompleted, setAnnoying
     firstFour: Math.floor(Math.random() * 4) + 6,
     secondFour: Math.floor(Math.random() * 5) + 1,
     thirdFour: Math.floor(Math.random() * 4) + 1,
-    resultFour: 1337,
+    resultFour: 0,
   });
 
   // flip the status message so user knows they solved it

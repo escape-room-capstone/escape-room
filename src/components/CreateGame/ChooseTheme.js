@@ -25,7 +25,7 @@ const ChooseTheme = (props) => {
           return <li key={idx}>{theme}</li>;
         })} */}
         {defaultThemes.map((theme, idx) => (
-          <div>
+          <div key={theme.id}>
             <h2>{theme.name}</h2>{' '}
             <img
               className="createGameImg"

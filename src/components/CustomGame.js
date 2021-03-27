@@ -6,12 +6,16 @@ import Modal from 'react-modal';
 import { customStyles } from '../utils/helpers';
 import { fetchUserGame } from '../store/game';
 
-//url will be /games/:gameId/:roomNum
+//url will be /games/:gameId/:roomId/:roomNum
+//What limit do we want on amount of puzzles in one room? 
+//for example if we want a max of 10 puzzles in a room, 
+//Thinking maybe we could make roomClues 1 - 10, and use a ternary to render a button for the puzzle only if the puzzle exists in props.room.puzzles
+//Have to think about this one...
 const _CustomGame = (props) => {
   const roomClues = {
-    one: { solved: false, show: false },
-    two: { solved: false, show: false },
-    three: { solved: false, show: false },
+    1: { solved: false, show: false },
+    2: { solved: false, show: false },
+    3: { solved: false, show: false },
   };
   const [roomStatus, setRoomStatus] = useState({
     clues: roomClues,
@@ -19,29 +23,44 @@ const _CustomGame = (props) => {
   });
   // const { gameId, roomNum } = props.match.params;
   
-  const { gameId, roomId, roomNum } = props.match.params;
+  const { gameId, roomId } = props.match.params;
 
   useEffect(() => {
     //hard-coded userId of 2 for now until auth is set up
     props.getGame(2, gameId, 'custom');
-    props.getRoom(gameId, roomNum);
+    props.getRoom(gameId, roomId);
   }, []);
   const { room } = props;
   const { puzzles } = room;
   //console.log(room, 'room');
   //dynamically rendering components based on which puzzles are in the array from the DB
+
+  //Put some very simple logic in place for now... 
+  //if statement to see if the puzzle is in our puzzlesarray so we don't get an error for now...
+  //Need to find a way to dynamically render puzzle/modals based on amount of puzzles in game... will do later
   const Puzzle1 = (props) => {
     const Component = componentMapping[puzzles[0].name];
     return <Component {...props} />;
   };
-  const Puzzle2 = (props) => {
+  const Puzzle2 = (props) => {    
     const Component = componentMapping[puzzles[1].name];
-    return <Component {...props} />;
+    return <Component {...props} />;        
   };
-  const Puzzle3 = (props) => {
+  const Puzzle3 = (props) => {    
     const Component = componentMapping[puzzles[2].name];
-    return <Component {...props} />;
+    return <Component {...props} />;        
   };
+
+  //Have to use ternary operator because on first render, room is an EMPTY OBJECT
+  //map over puzzle array inside of room to dynamically render amount of puzzles in array.
+  const CMPuzzles = room.puzzles ? room.puzzles.map(puzzle => {
+    const Component = componentMapping[puzzle.name];
+    return <Component {...props} />
+  }) : [];
+
+  //console.log("CM PUZZLES", CMPuzzles);
+
+
   //helper function that takes a clueNumber and sets it as solved and updates local state
   const setSolved = (puzzleNum) => {
     setRoomStatus((prevRoom) => {
@@ -74,6 +93,7 @@ const _CustomGame = (props) => {
       };
     });
   };
+
   return (
     <div
       id="game-room"
@@ -86,24 +106,24 @@ const _CustomGame = (props) => {
       }}
     >
       <div>
-        <button onClick={() => show('one')}>1st Puzzle</button>
+        <button onClick={() => show(1)}>1st Puzzle</button>
       </div>
       <div>
-        <button onClick={() => show('two')}>2nd Puzzle</button>
+        <button onClick={() => show(2)}>2nd Puzzle</button>
       </div>
       <div>
-        <button onClick={() => show('three')}>3rd Puzzle</button>
+        <button onClick={() => show(3)}>3rd Puzzle</button>
       </div>
 
       <div>
         <Modal style={customStyles} isOpen={roomStatus.showModal}>
-          {roomStatus.clues.one.show && (
+          {roomStatus.clues[1].show && (
             <Puzzle1 solve={() => setSolved('one')} />
           )}
-          {roomStatus.clues.two.show && (
+          {roomStatus.clues[2].show && (
             <Puzzle2 solve={() => setSolved('two')} />
           )}
-          {roomStatus.clues.three.show && (
+          {roomStatus.clues[3].show && (
             <Puzzle3 solve={() => setSolved('three')} />
           )}
           <button

@@ -32,7 +32,7 @@ const _UserGames = (props) => {
             to={
               game.theme.type === 'default'
                 ? `/${game.theme}/${game.id}`
-                : `/games/${game.id}/${game.rooms[0].id}/1`
+                : `/games/${game.id}/${game.rooms[0].id}`
             }
           >
             <button>PLAY</button>

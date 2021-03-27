@@ -20,18 +20,18 @@ import { CreateGame } from './components/CreateGame';
 import { CustomGame } from './components/CustomGame';
 import { UserGames } from './components/UserGames';
 
-import HouseOfRiddlez from './components/HouseOfRiddlez/HouseOfRiddlez';
-import LivingRoom from './components/HouseOfRiddlez/LivingRoom';
-import BackRoom from './components/HouseOfRiddlez/BackRoom';
-import Attic from './components/HouseOfRiddlez/Attic';
-import RoomOne from './components/HouseOfRiddlez/RoomOne';
-import RoomTwo from './components/HouseOfRiddlez/RoomTwo';
+import HouseOfRiddlez from './components/riddlez/HouseOfRiddlez';
+import LivingRoom from './components/riddlez/LivingRoom';
+import BackRoom from './components/riddlez/BackRoom';
+import Attic from './components/riddlez/Attic';
+import RoomOne from './components/riddlez/RoomOne';
+import RoomTwo from './components/riddlez/RoomTwo';
 
 import BankGameLevel2 from './components/BankGame/BankGameLevel2';
 import BankGameLevel3 from './components/BankGame/BankGameLevel3';
 import BankGameStart from './components/BankGame/BankGameStart';
 import BankGameVictory from './components/BankGame/BankGameVictory';
-import LetterBank from './components/HouseOfRiddlez/LetterBank';
+import LetterBank from './components/riddlez/LetterBank';
 import ChooseTheme from './components/CreateGame/ChooseTheme';
 import CreateAGame from './components/CreateGame/CreateGame';
 import ConfirmTheme from './components/CreateGame/ConfirmTheme';
@@ -60,13 +60,13 @@ const App = () => {
       <Route exact path="/customize" component={CreateGame} />
       <Route exact path="/users/:userId/account/games" component={UserGames} />
 
-      <Route exact path="/HouseofRiddlez/:gameId" component={LetterBank} />
-      <Route exact path="/HouseofRiddlez/mainroom" component={HouseOfRiddlez} />
-      <Route exact path="/HouseofRiddlez/livingroom" component={LivingRoom} />
-      <Route exact path="/HouseofRiddlez/roomone" component={RoomOne} />
-      <Route exact path="/HouseofRiddlez/roomtwo" component={RoomTwo} />
-      <Route exact path="/HouseofRiddlez/backroom" component={BackRoom} />
-      <Route exact path="/HouseofRiddlez/attic" component={Attic} />
+      <Route exact path="/riddlez/:gameId" component={LetterBank} />
+      <Route exact path="/riddlez/mainroom" component={HouseOfRiddlez} />
+      <Route exact path="/riddlez/livingroom" component={LivingRoom} />
+      <Route exact path="/riddlez/roomone" component={RoomOne} />
+      <Route exact path="/riddlez/roomtwo" component={RoomTwo} />
+      <Route exact path="/riddlez/backroom" component={BackRoom} />
+      <Route exact path="/riddlez/attic" component={Attic} />
 
       <Route exact path="/BankRobbery/3" component={BankGameStart} />
       <Route exact path="/Bankgame2" component={BankGameLevel2} />

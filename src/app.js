@@ -47,7 +47,6 @@ const App = () => {
     <Router history={history}>
       <Route exact path="/" component={Homepage} />
 
-
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={Signup} />
       <Route exact path="/starwars/4" component={BobaFett} />
@@ -65,13 +64,11 @@ const App = () => {
       <Route exact path="/haunted/final" component={HauntedFinal} />
 
       {/* <Route exact path="/customize" component={CreateGame} /> */}
-      <Route exact path="/users/:userId/assignpuzzles/:gameId" component={AssignPuzzles} />
-      <Route exact path="/users/:userId/account/games" component={UserGames} />
-
-      <Route path="/riddlez/" component={LetterBank} />
-      <Route exact path="/riddlez/2" component={HouseOfRiddlez} />
-
-      {/* <Route exact path="/customize" component={CreateGame} /> */}
+      <Route
+        exact
+        path="/users/:userId/assignpuzzles/:gameId"
+        component={AssignPuzzles}
+      />
       <Route exact path="/users/:userId/account/games" component={UserGames} />
 
       <Route exact path="/riddlez/:gameId" component={LetterBank} />
@@ -94,7 +91,11 @@ const App = () => {
       <Route exact path="/dg" component={SingleRoom} />
       <Route exact path="/gameintro/:id" component={GameIntro} />
 
-      <Route exact path="/games/customize/:gameId/:roomId" component={CustomGame} />
+      <Route
+        exact
+        path="/games/customize/:gameId/:roomId"
+        component={CustomGame}
+      />
 
       {/* <Redirect to="/" /> */}
     </Router>

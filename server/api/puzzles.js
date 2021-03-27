@@ -4,9 +4,12 @@ const Puzzle = require('../db/models/Puzzle');
 
 router.get('/', async (req, res, next) => {
   try {
+    console.log('before puzzle.findall');
     const puzzles = await Puzzle.findAll();
+    console.log(puzzles, 'puzzles');
     res.status(200).send(puzzles);
   } catch (err) {
+    console.log(err, 'err');
     next(err);
   }
 });

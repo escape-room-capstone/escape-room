@@ -264,6 +264,7 @@ export const Puzzle6 = (props) => {
               required
             />
           </div>
+          <button onClick={props.solve}>SOLVE</button>
         </div>
       </>
     );

@@ -17,9 +17,6 @@ import TypeWriterEffect from 'react-typewriter-effect';
 import { componentMapping } from '../Puzzles/puzzles';
 import { Lock } from './HauntedRoom2';
 
-//import clue components
-import { Room5Clue1, Room5Clue2, Room5Clue3 } from './Clues';
-
 //custom modal styles
 import { customStyles } from '../../utils/helpers';
 

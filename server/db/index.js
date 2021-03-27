@@ -14,7 +14,8 @@ const RoomData = require('./models/RoomData');
 
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const dg_syncAndSeed = require('../seed/dynamic');
+// const dg_syncAndSeed = require('../seed/dynamic');
+
 
 // // bcrypt User.addHook with 10 salt rounds
 // User.addHook('beforeSave', async function(user) {
@@ -71,7 +72,7 @@ Game.hasMany(Room);
 //define syncAndSeed function
 const syncAndSeed = async () => {
   await db.sync({ force: true });
-  await dg_syncAndSeed();
+  //   await dg_syncAndSeed();
 
   //create default Haunted Game
   const defaultHauntedGame = await Game.create({
@@ -100,7 +101,7 @@ const syncAndSeed = async () => {
   });
   const defaultStarWars = await Game.create({
     title: 'BobaFett',
-    theme: 'Star Wars',
+    theme: 'starwars',
     public: true,
     numPuzzles: 12,
     imgSrc:
@@ -214,6 +215,30 @@ const syncAndSeed = async () => {
       images: ['/Theme_Images/Cafe1.jpg', '/Theme_Images/Cafe2.jpg'],
     }),
     Theme.create({
+      name: 'Haunted',
+      numPuzzles: 9,
+      type: 'default',
+      backgroundImageOne: '/Theme_Images/Haunted/Haunted1.jpg',
+      images: [
+        '/Theme_Images/Haunted/Haunted1.jpg',
+        '/Theme_Images/Haunted/Haunted2.jpg',
+        '/Theme_Images/Haunted/Haunted3.jpg',
+        'Theme_Images/Haunted/Haunted4.jpg',
+      ],
+    }),
+    Theme.create({
+      name: 'Bank',
+      numPuzzles: 9,
+      type: 'default',
+      backgroundImageOne: '/Theme_Images/Bank1.jpg',
+    }),
+    Theme.create({
+      name: 'Riddles',
+      numPuzzles: 9,
+      type: 'default',
+    }),
+
+    Theme.create({
       name: 'House',
       backgroundImageOne: '../RiddlezImages/home.jpg',
       images: [
@@ -226,16 +251,6 @@ const syncAndSeed = async () => {
       ],
       type: 'default',
     }),
-    Theme.create({
-      name: 'Haunted',
-      numPuzzles: 9,
-      type: 'default',
-    }),
-    Theme.create({
-      name: 'Bank',
-      numPuzzles: 9,
-      type: 'default',
-    }),
     // Theme.create({
     //   name: 'Riddles',
     //   numPuzzles: 9,
@@ -244,7 +259,9 @@ const syncAndSeed = async () => {
   ]);
 
   const [cody, arwinder, kate, nes, steve, roman] = users;
+
   const [forest, cafe, house, haunted, bank] = themes;
+
   return users;
 };
 

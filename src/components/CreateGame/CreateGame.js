@@ -7,11 +7,12 @@ import { setPuzzles } from '../../store/puzzles';
 import { componentMapping } from '../Puzzles/puzzles';
 import '../../../public/css/CreateGame.css';
 import { createGame } from '../../store/game';
+import { createCustomGame } from '../../store/customGame';
 
 const CreateGame = (props) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  //need a public/private variable to pass in when game is created
+  //need a public/private variable to pass in when game is created as well
   const [puzzleArray, setPuzzleArray] = useState([]);
   const [error, setError] = useState('');
   // console.log('THIS COMPONENT PROPS', props);
@@ -22,12 +23,23 @@ const CreateGame = (props) => {
   }, []);
 
   const { puzzles, theme } = props;
-  // console.log(puzzles, theme);
+  console.log(puzzles, theme);
   //USING hard-coded user#2 for axios call...
   const submitCreateGame = async () => {
     const numPuzzles = puzzleArray.length;
-    //check if puzzleArray has the right number of puzzles
-    if (numPuzzles === theme.numPuzzles) {
+    const difference = theme.numPuzzles - numPuzzles;
+
+    if (difference > 0) {
+      setError(`Please choose ${difference} more puzzles`);
+    }
+    if (difference < 0) {
+      setError(
+        `Oops - too many puzzles. Please remove ${Math.abs(
+          difference
+        )} puzzles from your list`
+      );
+    }
+    if (difference === 0 && theme.type === 'default') {
       // console.log(puzzleArray, title, numPuzzles, theme.name);
       //just send themeId - can find theme on back end?
       props.makeGame(
@@ -37,20 +49,18 @@ const CreateGame = (props) => {
         theme.numPuzzles,
         title,
         description,
-        puzzleArray,
-        theme.type
+        puzzleArray
       );
-    } else {
-      const difference = theme.numPuzzles - numPuzzles;
-      if (difference > 0) {
-        setError(`Please choose ${difference} more puzzles`);
-      } else {
-        setError(
-          `Oops - too many puzzles. Please remove ${Math.abs(
-            difference
-          )} puzzles from your list`
-        );
-      }
+    } else if (difference === 0 && theme.type === 'custom') {
+      props.makeCustomGame(
+        2,
+        theme.name,
+        theme.id,
+        theme.numPuzzles,
+        title,
+        description,
+        puzzleArray
+      );
     }
     //We are only creating the game above... need a gameId..
     //find all the games associated to this user... : this returns an array of all this users games...
@@ -125,7 +135,6 @@ const CreateGame = (props) => {
           );
         })}
       </div>
-      {/* may want to add if/else here to check for theme.type -- if it is default, use defaultgamereducer, else use customgamereducer */}
       <button onClick={() => submitCreateGame()}> Submit </button>
       <div>{error}</div>
     </div>
@@ -134,10 +143,53 @@ const CreateGame = (props) => {
 
 const mapState = (state) => state;
 
-const mapDispatch = {
-  getTheme: fetchTheme,
-  getPuzzles: setPuzzles,
-  makeGame: createGame,
+const mapDispatch = (dispatch, { history }) => {
+  return {
+    getTheme: (themeId) => dispatch(fetchTheme(themeId)),
+    getPuzzles: () => dispatch(setPuzzles()),
+    makeGame: (
+      gameId,
+      theme,
+      themeId,
+      numPuzzles,
+      title,
+      description,
+      puzzleArray
+    ) =>
+      dispatch(
+        createGame(
+          gameId,
+          theme,
+          themeId,
+          numPuzzles,
+          title,
+          description,
+          puzzleArray,
+          history
+        )
+      ),
+    makeCustomGame: (
+      gameId,
+      theme,
+      themeId,
+      numPuzzles,
+      title,
+      description,
+      puzzleArray
+    ) =>
+      dispatch(
+        createCustomGame(
+          gameId,
+          theme,
+          themeId,
+          numPuzzles,
+          title,
+          description,
+          puzzleArray,
+          history
+        )
+      ),
+  };
 };
 
 export default connect(mapState, mapDispatch)(CreateGame);

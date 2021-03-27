@@ -36,9 +36,8 @@ const Homepage = (props) => {
       {defaultGames.map((game) => {
         return (
           <div key={game.id}>
-            <Link to={`${removeSpaceFromTheme(game.title)}/${game.id}`}>  
-              {game.title}
-            </Link>
+            {/* <Link to={`${removeSpaceFromTheme(game.title)}/${game.id}`}>   */}
+            <Link to={`/${game.theme}/${game.id}`}>{game.title}</Link>
             <hr />
           </div>
         );
@@ -72,11 +71,10 @@ const Homepage = (props) => {
 
       <hr /> */}
 
-      
       <Link to="/dg">Dynamic Game</Link>
       <hr />
 
-      <Link to ="/choosetheme"> Create game </Link>
+      <Link to="/choosetheme"> Create game </Link>
 
       <hr />
       <hr />

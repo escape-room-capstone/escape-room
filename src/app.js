@@ -60,8 +60,8 @@ const App = () => {
       <Route exact path="/customize" component={CreateGame} />
       <Route exact path="/users/:userId/account/games" component={UserGames} />
 
-      <Route path="/HouseOfRiddlez/" component={LetterBank} />
-      <Route exact path="/HouseofRiddlez/2" component={HouseOfRiddlez} />
+      <Route exact path="/HouseofRiddlez/:gameId" component={LetterBank} />
+      <Route exact path="/HouseofRiddlez/mainroom" component={HouseOfRiddlez} />
       <Route exact path="/HouseofRiddlez/livingroom" component={LivingRoom} />
       <Route exact path="/HouseofRiddlez/roomone" component={RoomOne} />
       <Route exact path="/HouseofRiddlez/roomtwo" component={RoomTwo} />

@@ -37,4 +37,13 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
+router.put('/:id', async (req, res, next) => {
+  try {
+    const puzzle = await Puzzle.findByPk(req.params.id);
+    res.status(201).send(await puzzle.update(req.body));
+  } catch (er) {
+    next(er);
+  }
+});
+
 module.exports = router;

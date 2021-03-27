@@ -17,7 +17,10 @@ const _CustomGame = (props) => {
     clues: roomClues,
     showModal: false,
   });
-  const { gameId, roomNum } = props.match.params;
+  // const { gameId, roomNum } = props.match.params;
+  
+  const { gameId, roomId, roomNum } = props.match.params;
+
   useEffect(() => {
     //hard-coded userId of 2 for now until auth is set up
     props.getGame(2, gameId, 'custom');
@@ -25,7 +28,7 @@ const _CustomGame = (props) => {
   }, []);
   const { room } = props;
   const { puzzles } = room;
-  console.log(room, 'room');
+  //console.log(room, 'room');
   //dynamically rendering components based on which puzzles are in the array from the DB
   const Puzzle1 = (props) => {
     const Component = componentMapping[puzzles[0].name];

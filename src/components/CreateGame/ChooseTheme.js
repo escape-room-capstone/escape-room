@@ -45,7 +45,7 @@ const ChooseTheme = (props) => {
               className="createGameImg"
               onClick={() => imgClickHandler(theme.id)}
               src={theme.backgroundImageOne}
-              alt=""
+              alt="theme background image"
             ></img>
           </div>
         );

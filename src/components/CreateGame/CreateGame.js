@@ -29,17 +29,39 @@ const CreateGame = (props) => {
     const numPuzzles = puzzleArray.length;
     const difference = theme.numPuzzles - numPuzzles;
 
-    if (difference > 0) {
+
+//I decided that a room should have ATLEAST 1 puzzle, otherwise what's the point of a room... 
+//Each ROOM will have an IMAGE. for example Forest theme has 4 images, therefore 4 rooms.
+
+//I will check to see if puzzleArray has a minimum of the amount of ROOMS we have. theme.images.length will be the amount of IMAGES we have, which
+//is also the amount of ROOMS we have.
+if(puzzleArray.length < theme.images.length) {
+  setError(`Please select a total of ${theme.images.length} puzzles.`);
+}
+
+    else if (theme.type === 'custom') {
+      props.makeCustomGame(
+        2,
+        theme.name,
+        theme.id,
+        theme.numPuzzles,
+        title,
+        description,
+        puzzleArray
+      );
+    }
+
+    else if (difference > 0) {
       setError(`Please choose ${difference} more puzzles`);
     }
-    if (difference < 0) {
+    else if (difference < 0) {
       setError(
         `Oops - too many puzzles. Please remove ${Math.abs(
           difference
         )} puzzles from your list`
       );
     }
-    if (difference === 0 && theme.type === 'default') {
+    else if (difference === 0 && theme.type === 'default') {
       // console.log(puzzleArray, title, numPuzzles, theme.name);
       //just send themeId - can find theme on back end?
       props.makeGame(
@@ -51,26 +73,8 @@ const CreateGame = (props) => {
         description,
         puzzleArray
       );
-    } else if (difference === 0 && theme.type === 'custom') {
-      props.makeCustomGame(
-        2,
-        theme.name,
-        theme.id,
-        theme.numPuzzles,
-        title,
-        description,
-        puzzleArray
-      );
-    }
-    //We are only creating the game above... need a gameId..
-    //find all the games associated to this user... : this returns an array of all this users games...
-    //2 is userId, for now hard-coded...
-    // let game = (await axios.get('/api/users/2/games')).data;
-
-    //set game equal to the most recently created game...
-    // game = game[game.length - 1];
-
-    // props.history.push(`/gameintro/${game.id}`);
+    } 
+    //else if (difference === 0 && theme.type === 'custom') {
   };
 
   const handleChange = (e, puzzleId) => {

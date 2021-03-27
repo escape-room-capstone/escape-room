@@ -232,11 +232,6 @@ const syncAndSeed = async () => {
       type: 'default',
       backgroundImageOne: '/Theme_Images/Bank1.jpg',
     }),
-    Theme.create({
-      name: 'Riddles',
-      numPuzzles: 9,
-      type: 'default',
-    }),
 
     Theme.create({
       name: 'House',

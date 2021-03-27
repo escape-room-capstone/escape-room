@@ -34,6 +34,7 @@ import BankGameVictory from './components/BankGame/BankGameVictory';
 import LetterBank from './components/HouseOfRiddlez/LetterBank';
 import ChooseTheme from './components/CreateGame/ChooseTheme';
 import CreateAGame from './components/CreateGame/CreateGame';
+import AssignPuzzles from './components/CreateGame/AssignPuzzles';
 import ConfirmTheme from './components/CreateGame/ConfirmTheme';
 import SinglePuzzle from './components/CreateGame/SinglePuzzle';
 import SingleRoom from './components/DynamicGameSrc/SingleRoom';
@@ -44,7 +45,7 @@ const App = () => {
     <Router history={history}>
       <Route exact path="/" component={Homepage} />
 
-      <Route exact path="/Bobafett/4" component={BobaFett} />
+      <Route exact path="/starwars/4" component={BobaFett} />
       <Route path="/haunted/:gameId" component={HauntedIntro} />
       <Route exact path="/haunted/room1" component={HauntedRoom1} />
       <Route exact path="/haunted/room2" component={HauntedRoom2} />
@@ -58,10 +59,11 @@ const App = () => {
       <Route exact path="/haunted/room9" component={HauntedRoom9} />
       <Route exact path="/haunted/final" component={HauntedFinal} />
       <Route exact path="/customize" component={CreateGame} />
+      <Route exact path="/users/:userId/assignpuzzles/:gameId" component={AssignPuzzles} />
       <Route exact path="/users/:userId/account/games" component={UserGames} />
 
-      <Route path="/HouseOfRiddlez/" component={LetterBank} />
-      <Route exact path="/HouseofRiddlez/2" component={HouseOfRiddlez} />
+      <Route path="/riddlez/" component={LetterBank} />
+      <Route exact path="/riddlez/2" component={HouseOfRiddlez} />
       <Route exact path="/HouseofRiddlez/livingroom" component={LivingRoom} />
       <Route exact path="/HouseofRiddlez/roomone" component={RoomOne} />
       <Route exact path="/HouseofRiddlez/roomtwo" component={RoomTwo} />
@@ -80,7 +82,7 @@ const App = () => {
       <Route exact path="/dg" component={SingleRoom} />
       <Route exact path="/gameintro/:id" component={GameIntro} />
 
-      <Route exact path="/games/:gameId/:roomNum" component={CustomGame} />
+      <Route exact path="/games/:gameId/:roomId/:roomNum" component={CustomGame} />
 
       {/* <Redirect to="/" /> */}
     </Router>

@@ -6,6 +6,7 @@ router.use('/themes', require('./themes'));
 router.use('/games', require('./games.js'));
 router.use('/puzzles', require('./puzzles'));
 router.use('/dg', require('./dynamic'));
+router.use('/rooms', require('./rooms'));
 
 
 //any other request to /api/? is not defined in our routes so express will throw a 404 error

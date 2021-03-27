@@ -1,2 +1,87 @@
+.wrapper * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+#divBody {
+  display: flex;
+  background-color: #114b5f;
+  text-align: center;
+  flex-direction: column;
+  padding-top: 2%;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 #puzzleContainer {
+  width: 500px;
+  height: 500px;
+  background: #e4fde1;
+  margin: 10px auto;
+}
+
+ul.puzzleUL {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  justify-content: space-evenly;
+  font-family: 'Audiowide';
+  color: #e4fde1;
+}
+
+.puzzleUL * {
+  background: #456990;
+  width: 30%;
+  height: 150px;
+  border: 1px solid #028090;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 2rem;
+  padding-top: 3rem;
+}
+
+.puzzleUL .empty {
+  background: #dad4ef;
+  border: 2px solid #114b5f;
+}
+
+#puzzleH1 {
+  color: #e4fde1;
+  font-family: 'Sofia';
+  text-align: center;
+}
+
+/* Modal styles */
+#modal {
+  width: 40%;
+  height: 300px;
+  background: #de5360;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Sofia';
+}
+
+#modal #message {
+  color: #fde1e3;
+  margin: 0;
+  font-size: 4rem;
+}
+
+.hide {
+  display: none;
+}
+#modal #header {
+  text-align: right;
+  padding: 5px 10px;
+}
+#modal #header button {
+  padding: 10px;
+  border: 0px;
+  background: #456990;
+  color: #e4fde1;
+  cursor: pointer;
 }

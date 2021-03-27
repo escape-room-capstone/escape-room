@@ -193,14 +193,6 @@ const _HauntedRoom2 = (props) => {
         {room.clues.one.show && <Puzzle1 solve={() => setSolved('one')} />}
         {room.clues.two.show && <Puzzle2 solve={() => setSolved('two')} />}
         {room.clues.three.show && <Puzzle3 solve={() => setSolved('three')} />}
-
-        {/* hard-coded */}
-        {/* {room.clues.one.show && <ClueOne solve={() => setSolved('one')} />}
-        {room.clues.two.show && <ClueTwo solve={() => setSolved('two')} />}
-        {room.clues.three.show && (
-          <ClueThree solve={() => setSolved('three')} />
-        )} */}
-
         <button
           onClick={() =>
             setRoom((prevRoom) => {

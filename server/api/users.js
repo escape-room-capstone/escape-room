@@ -142,7 +142,6 @@ router.post('/:userId/games/custom', async (req, res, next) => {
     //find theme and corresponding images
     theme = await Theme.findOne({ where: { name: req.body.theme } });
     const { images } = theme;
-    console.log('before creating rooms');
     // create 4 rooms associated with the new gameId with a number of 1-4 and assign an imgSrc from images array
 
 
@@ -154,7 +153,6 @@ router.post('/:userId/games/custom', async (req, res, next) => {
         imgSrc: images[i - 1],
       });
     }
-    console.log('created rooms');
     //find rooms 1, 2, 3, 4 instances
 
 

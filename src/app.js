@@ -64,7 +64,7 @@ const App = () => {
       <Route exact path="/haunted/room9" component={HauntedRoom9} />
       <Route exact path="/haunted/final" component={HauntedFinal} />
 
-      <Route exact path="/customize" component={CreateGame} />
+      {/* <Route exact path="/customize" component={CreateGame} /> */}
       <Route exact path="/users/:userId/assignpuzzles/:gameId" component={AssignPuzzles} />
       <Route exact path="/users/:userId/account/games" component={UserGames} />
 

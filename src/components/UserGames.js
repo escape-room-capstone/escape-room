@@ -18,17 +18,21 @@ const _UserGames = (props) => {
     fetchGames();
   }, []);
 
+
+  console.log(games);
+
   return (
     <div id="user-games">
       <h1>Your Games</h1>
       {games.map((game, idx) => (
         <div key={idx}>
+          <p>{game.title}</p>
           <p>{game.description}</p>
           <Link
             to={
               game.theme.type === 'default'
                 ? `/${game.theme}/${game.id}`
-                : `/games/${game.id}/1`
+                : `/games/customize/${game.id}/${game.rooms[0].id}`
             }
           >
             <button>PLAY</button>

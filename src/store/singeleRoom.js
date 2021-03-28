@@ -7,10 +7,18 @@ const SET_ROOM = 'SET_ROOM';
 const setRoom = (room) => ({ type: SET_ROOM, room });
 
 //thunk creators
-export const fetchRoom = (gameId, roomNum) => {
+// export const fetchRoom = (gameId, roomNum) => {
+//   return async (dispatch) => {
+//     //does this endpoint make sense?
+//     const room = (await axios.get(`/api/games/${gameId}/${roomNum}`)).data;
+//     console.log(room, 'room');
+//     dispatch(setRoom(room));
+//   };
+// };
+export const fetchRoom = (gameId, roomId) => {
   return async (dispatch) => {
     //does this endpoint make sense?
-    const room = (await axios.get(`/api/games/${gameId}/${roomNum}`)).data;
+    const room = (await axios.get(`/api/games/${gameId}/${roomId}`)).data;
     console.log(room, 'room');
     dispatch(setRoom(room));
   };

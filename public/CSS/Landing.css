@@ -1,0 +1,64 @@
+#landing {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-align: center;
+  height: 875px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-image: url('../Images/escapebackground.jpeg');
+}
+
+#landing h1 {
+  font-weight: normal;
+  text-shadow: #000000 1px 10px 10px;
+  padding-top: 6rem;
+  margin-top: 0;
+  font-size: 9.5rem;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: white;
+}
+
+#landing button {
+  /* font-size: 1.2rem;
+  padding: 1.5;
+  border-radius: 12px;
+  background-color: #d0c0c0;
+  color: BLACK;
+  text-align: center;
+  height: 3.5rem; */
+
+  box-shadow: inset 0px 0px 14px -3px #f2fadc;
+  background: linear-gradient(to bottom, #e6d699fa 5%, #ffffff 100%);
+  background-color: #d0c0c0;
+  border-radius: 6px;
+  border: 1px solid #4f524c;
+  display: inline-block;
+  cursor: pointer;
+  width: 13rem;
+  color: BLACK;
+  font-family: Georgia;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 1.5rem 3.5rem;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #ced9bf;
+  margin: 0 12rem;
+}
+
+#landing > div {
+  width: 50rem;
+  padding-top: 20rem;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 0 auto;
+}
+
+body {
+  margin: 0;
+}
+
+#landing button:hover {
+  /* background-color: #fbfbc7; */
+  background: linear-gradient(to bottom, #cacec8 5%, #fafafa 100%);
+  background-color: white;
+}

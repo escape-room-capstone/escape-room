@@ -42,15 +42,17 @@ import SinglePuzzle from './components/CreateGame/SinglePuzzle';
 import SingleRoom from './components/DynamicGameSrc/SingleRoom';
 import GameIntro from './components/CreateGame/GameIntro';
 
+import { Landing } from './components/Landing';
+
 const App = () => {
   return (
     <Router history={history}>
-      <Route exact path="/" component={Homepage} />
-
+      <Route exact path="/home" component={Homepage} />
+      <Route exact path="/" component={Landing} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={Signup} />
       <Route exact path="/starwars/4" component={BobaFett} />
-      <Route path="/haunted/:gameId" component={HauntedIntro} />
+      <Route exact path="/haunted/:gameId" component={HauntedIntro} />
       <Route exact path="/haunted/room1" component={HauntedRoom1} />
       <Route exact path="/haunted/room2" component={HauntedRoom2} />
       <Route exact path="/haunted/room3" component={HauntedRoom3} />

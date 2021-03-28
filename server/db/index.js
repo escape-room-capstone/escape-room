@@ -16,7 +16,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 // const dg_syncAndSeed = require('../seed/dynamic');
 
-
 // Model associations
 Game.belongsToMany(Puzzle, { through: GamePuzzles, foreignKey: 'gameId' });
 Puzzle.belongsToMany(Game, { through: GamePuzzles, foreignKey: 'puzzleId' });

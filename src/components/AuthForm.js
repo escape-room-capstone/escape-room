@@ -6,20 +6,32 @@ import Button from '@material-ui/core/Button';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { green } from '@material-ui/core/colors';
+import { getUserByToken } from '../store/auth';
 
 const buttonTheme = createMuiTheme({
   palette: {
     primary: {
-      // Purple and green play nicely together.
       main: green[900],
     },
   },
 });
 //store method
 import { authenticate } from '../store/auth';
+//check localStorage for a TOKEN - if token, that means we stil have a session for a user,
+//so we should find the user by Token and set user in state
 const AuthForm = (props) => {
   const { name, displayName, error } = props;
-
+  useEffect(() => {
+    const checkForUser = async () => {
+      const token = window.localStorage.getItem('token');
+      console.log(token, 'token');
+      if (token) {
+        await props.setUser();
+      }
+    };
+    checkForUser();
+  }, []);
+  console.log(props.isLoggedIn, 'props.isloggedin');
   return (
     <div id="authForm">
       <form
@@ -54,17 +66,18 @@ const AuthForm = (props) => {
         </div>
         {error && error.response && (
           <div style={{ color: 'red', fontStyle: 'italic', margin: '1rem' }}>
-            {' '}
-            {error.response.data}{' '}
+            {error.response.data}
           </div>
         )}
       </form>
+      {props.isLoggedIn && props.history.push('/home')}
     </div>
   );
 };
 
 const mapLogin = (state) => {
   return {
+    isLoggedIn: !!state.auth.id,
     name: 'login',
     displayName: 'Login',
     error: state.auth.error,
@@ -83,6 +96,7 @@ const mapDispatch = (dispatch, { history }) => {
   return {
     authenticate: (email, password, formName) =>
       dispatch(authenticate(email, password, formName, history)),
+    setUser: () => dispatch(getUserByToken()),
   };
 };
 

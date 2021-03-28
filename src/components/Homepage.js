@@ -121,8 +121,8 @@ const Homepage = (props) => {
       <hr />
       <Link to="/choosetheme"> Create game </Link>
       <hr />
-      <hr />
-      <Link to="/customize">Customize</Link>
+      {/* <hr /> */}
+      {/* <Link to="/customize">Customize</Link> */}
       {/* <h3
         style={{
           position: 'absolute',

@@ -37,6 +37,7 @@ const Homepage = (props) => {
   return (
     // <div id="homepage" style={{ height: '100vh' }}>
     <div id="homepage">
+      <div id="overlay"></div>
       {/*<h3
         style={{
           width: '100vw',
@@ -60,9 +61,11 @@ const Homepage = (props) => {
       </div>
       <div className="heading">
         <h1>Games</h1>{' '}
-        <Link to="/choosetheme">
-          <button> + CREATE YOUR OWN</button>
-        </Link>
+        {props.auth.id && (
+          <Link to="/choosetheme">
+            <button> + CREATE YOUR OWN</button>
+          </Link>
+        )}
       </div>
       <div id="game-div-wrapper">
         {defaultGames.map((game) => {
@@ -78,7 +81,7 @@ const Homepage = (props) => {
               <p>{game.description}</p>
 
               <Link to={`/${game.theme}/${game.id}/1`}>
-                <button>PLAY</button>
+                <button className="play">PLAY</button>
               </Link>
             </div>
           );

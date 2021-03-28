@@ -1,22 +1,36 @@
 #homepage {
   color: white;
+  position: relative;
+  background-size: cover;
   /* background-color: rgb(39, 8, 88); */
   font-family: Georgia, 'Times New Roman', Times, serif;
-  background-image: url('../Images/brick.jpeg');
+  /* background-image: url('../Images/brick.jpeg'); */
+  background-image: url('../Images/keys.jpeg');
+  filter: opacity(100%);
 }
 
+#overlay {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-color: black;
+  filter: opacity(15%);
+}
 #game-div {
+  justify-content: space-between;
+  background-color: #e0dbdb85;
   font-family: Georgia, 'Times New Roman', Times, serif;
-  color: white;
+  color: #191414;
   height: 25rem;
-  width: 15rem;
-  padding: 2rem;
+  width: 18rem;
+  font-size: 1.1rem;
+  padding: 1rem;
   display: flex;
-  border-radius: 12px;
+  border-radius: 8px;
   flex-direction: column;
-  border: 3px solid white;
   margin: 2rem;
   text-align: center;
+  box-shadow: 0px 0px 24px 11px #5a5757;
 }
 
 #game-div img {
@@ -30,27 +44,32 @@
 }
 
 #game-div a {
-  color: white;
-  text-decoration: none;
+  margin: 0 auto;
+  width: 5rem;
+  position: relative;
+  z-index: 5;
 }
 
 #game-div-wrapper {
   display: flex;
   flex-wrap: wrap;
-  width: 50rem;
+  justify-content: center;
+  width: 55rem;
   margin: 0 auto;
 }
 
 #game-div h3 {
   font-weight: normal;
-  font-size: 1.2rem;
+  font-size: 1.7rem;
   margin: 0.5rem;
+  text-shadow: 2px 2px 15px #272933;
 }
 
 #homepage .heading {
   font-size: 1.6rem;
   text-align: center;
   margin: 0 auto;
+  text-shadow: 3px 13px 21px black;
 }
 
 .heading button {
@@ -82,4 +101,21 @@
 .heading button:hover {
   background: linear-gradient(to bottom, #522875 5%, #153473 100%);
   background-color: #522875;
+}
+
+button.play {
+  box-shadow: inset 0px 1px 0px 0px #3dc21b;
+  background: linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
+  background-color: #44c767;
+  border-radius: 6px;
+  border: 1px solid #18ab29;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 9px 6px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #2f6627;
 }

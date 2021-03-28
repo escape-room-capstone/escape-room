@@ -124,5 +124,7 @@ button.play {
 }
 
 #homepage a {
+  position: relative;
+  z-index: 3;
   color: white;
 }

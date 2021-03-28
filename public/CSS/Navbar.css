@@ -1,11 +1,16 @@
 #navbar {
-  height: 5rem;
+  /* height: 5rem;
   display: flex;
   font-size: 1.4rem;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  align-items: center;
+  /* font-family: Georgia, 'Times New Roman', Times, serif; */
+  /* align-items: center;
   justify-content: flex-end;
-  margin-right: 2rem;
+  margin-right: 2rem; */
+  height: 5rem;
+  padding: 1rem;
+  /* display: flex; */
+  font-size: 1.4rem;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 #navbar span {
@@ -16,13 +21,14 @@
   font-weight: 100;
 }
 
-#navbar > div span#welcome {
-  margin-right: auto;
-}
-
 #navbar a {
   text-decoration: none;
 }
 #navbar a:visited {
   color: white;
+}
+
+#navbar .navbar-row {
+  display: flex;
+  justify-content: space-between;
 }

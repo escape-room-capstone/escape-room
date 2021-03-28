@@ -52,7 +52,7 @@ const App = () => {
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={Signup} />
       <Route exact path="/starwars/4" component={BobaFett} />
-      <Route exact path="/haunted/:gameId" component={HauntedIntro} />
+      <Route exact path="/haunted/:gameId/1" component={HauntedIntro} />
       <Route exact path="/haunted/room1" component={HauntedRoom1} />
       <Route exact path="/haunted/room2" component={HauntedRoom2} />
       <Route exact path="/haunted/room3" component={HauntedRoom3} />

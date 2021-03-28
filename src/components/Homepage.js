@@ -14,7 +14,6 @@ const Homepage = (props) => {
   useEffect(() => {
     const checkForUser = async () => {
       const token = window.localStorage.getItem('token');
-      console.log(token, 'token');
       if (token) {
         await props.setUser();
       }
@@ -91,7 +90,9 @@ const Homepage = (props) => {
       <div>
         {customGames.map((game, idx) => (
           <div key={idx}>
-            <Link to={`/games/${game.id}/1`}>{game.title}</Link>
+            <Link to={`/games/customize/${game.id}/${game.rooms[0].id}`}>
+              {game.title}
+            </Link>
             <hr />
           </div>
         ))}

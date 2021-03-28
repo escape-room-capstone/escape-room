@@ -63,7 +63,7 @@ const Homepage = (props) => {
         <h1>Games</h1>{' '}
         {props.auth.id && (
           <Link to="/choosetheme">
-            <button> + CREATE YOUR OWN</button>
+            <button> + CREATE </button>
           </Link>
         )}
       </div>
@@ -145,7 +145,7 @@ const mapState = (state) => state;
 const mapDispatch = {
   getGames: fetchGames,
   logout: logout,
-  setUser: () => dispatch(getUserByToken()),
+  setUser: getUserByToken,
 };
 
 export default connect(mapState, mapDispatch)(Homepage);

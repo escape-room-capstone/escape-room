@@ -66,6 +66,8 @@
 }
 
 #homepage .heading {
+  position: relative;
+  z-index: 3;
   font-size: 1.6rem;
   text-align: center;
   margin: 0 auto;
@@ -89,13 +91,13 @@
   cursor: pointer;
   color: #ffffff;
   font-family: Arial;
-  font-size: 15px;
+  font-size: 1.2rem;
   font-weight: bold;
-  padding: 1rem 2rem;
+  padding: .8rem 1.8rem;
   text-decoration: none;
   text-shadow: 0px 1px 0px #12081a;
   padding: 1rem 2rem;
-  border-radius: 24px;
+  border-radius: 8px;
 }
 
 .heading button:hover {

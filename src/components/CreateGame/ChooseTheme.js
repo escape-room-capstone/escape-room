@@ -8,10 +8,7 @@ const ChooseTheme = (props) => {
     props.getThemes();
   }, []);
 
-  const imgClickHandler = async (themeId) => {
-    await props.setTheme(themeId);
-    props.history.push(`/theme/${themeId}`);
-  };
+  
   // const defaultThemes = ['haunted', 'house', 'bank', 'starwars'];
   const { themes } = props;
   //default themes will be theme with type of default
@@ -43,7 +40,7 @@ const ChooseTheme = (props) => {
             <h2> {theme.name} </h2>
             <img
               className="createGameImg"
-              onClick={() => imgClickHandler(theme.id)}
+              onClick={() => props.history.push(`/theme/${theme.id}`)}
               src={theme.backgroundImageOne}
               alt="theme background image"
             ></img>

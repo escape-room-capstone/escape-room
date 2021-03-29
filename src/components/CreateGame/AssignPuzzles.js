@@ -21,6 +21,7 @@ const AssignPuzzles = (props) => {
 
   console.log(game);
 
+
   const handleRemove = (roomId, puzzleId) => {
       
       setPuzzleArray([...unassignedPuzzles, puzzleId]);
@@ -29,7 +30,7 @@ const AssignPuzzles = (props) => {
   console.log(unassignedPuzzles);
 
   return (
-    <div>
+    <div style={{paddingLeft : "10px"}}>
       <h1>Rooms for your game</h1>
       <h2> Unassigned Puzzles : {unassignedPuzzles.map(puzzleId => {
           return (
@@ -41,8 +42,9 @@ const AssignPuzzles = (props) => {
           return (
               <div key={room.id}>
                   <p> Room {room.number}</p>
-                  <img style={{ width:"200px" }}src={room.imgSrc} />
-                  <p> Puzzles for Room {room.number} : </p>
+                  <div><img style={{ width:"200px" }}src={room.imgSrc} /></div>
+                  <button onClick={()=>props.history.push(`/editsingleroom/${room.id}`)}> Customize </button>
+                  <p> Puzzles for Room {room.number} : </p>                  
                   <ul>
                       {room.puzzles.map(puzzle => {
                           return (                                                            

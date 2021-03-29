@@ -67,9 +67,10 @@ const LetterBank = (props) => {
               escape the House of Riddlez.
             </p>
           </div>
+          {/* <p className="bankParagraphs">{Room.name} =  {Room.isSolved ? Solved : ""} </p> */}
           <div className="bankDivs">
             <h3 className="bankHeadings">Clues Bank</h3>
-            <p className="bankParagraphs">Main Room = {} </p>
+            <p className="bankParagraphs">Main Room = </p>
             <p className="bankParagraphs">Living Room = </p>
             <p className="bankParagraphs">Attic =</p>
             <p className="bankParagraphs">Upstairs Bedroom =</p>

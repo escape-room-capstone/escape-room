@@ -76,7 +76,7 @@ User.authenticate = async function (email, password) {
   throw error;
 };
 
-// pass in a token and get the user associtated with that token
+// pass in a token and get the user associated with that token
 User.byToken = async function (token) {
   console.log('in the user by token function');
   try {

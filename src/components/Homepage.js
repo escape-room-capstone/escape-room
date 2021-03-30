@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchGames } from '../store/allGames';
-import { logout } from '../store/auth';
+import auth, { logout } from '../store/auth';
 import { Navbar } from './Navbar';
 import '../../public/CSS/Homepage.css';
 import { getUserByToken } from '../store/auth';
@@ -20,12 +20,15 @@ const Homepage = (props) => {
     };
     checkForUser();
   }, []);
-
+  const formatDate = (date) => {
+    date = date.toString().slice(0, 16);
+    return date;
+  };
   const { allGames } = props;
   const defaultGames = allGames.filter((game) => !game.userId);
   console.log(defaultGames, 'defaultgames');
   //will eventually need a check for if a game is public/private
-  const customGames = allGames.filter((game) => game.userId);
+  const customGames = allGames.filter((game) => game.userId === props.auth.id);
   console.log(customGames, 'customGames');
   const removeSpaceFromTheme = (title) => {
     const noSpaceTitle = title.split(' ').join('');
@@ -51,15 +54,9 @@ const Homepage = (props) => {
       {/* <h1> Welcome to escape-room </h1> */}
       <div>
         <Navbar />
-        {/* <Link to="/login">LOGIN</Link> <br></br>
-        {props.auth.id && <div>Hello, {props.auth.email}</div>}
-        <Link to="/signup">SIGN UP</Link>
-        <br></br>
-        <button onClick={() => props.logout()}>LOGOUT</button>
-        <hr /> */}
       </div>
       <div className="heading">
-        <h1>Games</h1>{' '}
+        <h1>Our Games</h1>{' '}
         {props.auth.id && (
           <Link to="/choosetheme">
             <button> + CREATE </button>
@@ -87,16 +84,25 @@ const Homepage = (props) => {
         })}
       </div>
       <hr />
-      <div>
+      <h1 className="created-games">Games You've Created</h1>
+      <div id="custom-game-div-wrapper">
         {customGames.map((game, idx) => (
-          <div key={idx}>
-            <Link to={`/games/customize/${game.id}/${game.rooms[0].id}`}>
+          <div id="custom-game-div" key={idx}>
+            <span style={{ fontSize: '1.4rem', textAlign: 'center' }}>
               {game.title}
+            </span>
+            <img src={game.rooms[0].imgSrc} />
+            <p>
+              Created On<br></br>
+              {`${formatDate(new Date(game.createdAt))}`}
+            </p>
+            <Link to={`/games/${game.id}/${game.rooms[0].id}`}>
+              <button className="play">PLAY</button>
             </Link>
-            <hr />
           </div>
         ))}
       </div>
+
       {/* <Link to="/haunted/intro">Haunted House</Link>
       <hr />
       <Link to="/houseofriddlez"> ~~House of Riddlez~~ </Link>

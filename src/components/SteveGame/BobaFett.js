@@ -4,9 +4,11 @@ import "../../../public/CSS/BobaFett.css";
 import LeverPuzzle from "./LeverPuzzle";
 import MagicSquarePuzzle from "./MagicSquarePuzzle";
 import AnnoyingPuzzle from "./AnnoyingPuzzle";
+import CaesarCipher from './CaesarCipher';
 
 export default function BobaFett() {
   const [leverModalOpen, setLeverModalOpen] = useState(false);
+  const [caesarCipherModalOpen, setCaesarCipherModalOpen] = useState(false);
   const [annoyingModalOpen, setAnnoyingModalOpen] = useState(false);
   const [magicSquareModalOpen, setMagicSquareModalOpen] = useState(false);
   const [leverPuzzleCompleted, setLeverPuzzleCompleted] = useState(false);
@@ -14,6 +16,9 @@ export default function BobaFett() {
     false
   );
   const [annoyingPuzzleCompleted, setAnnoyingPuzzleCompleted] = useState(
+    false
+  );
+  const [caesarCipherCompleted, setCaesarCipherCompleted] = useState(
     false
   );
   return (
@@ -34,6 +39,12 @@ export default function BobaFett() {
         <Modal isOpen={magicSquareModalOpen}>
           <button onClick={() => setMagicSquareModalOpen(false)}>Close Puzzle</button>
           <MagicSquarePuzzle setMagicSquarePuzzleCompleted={setMagicSquarePuzzleCompleted}/>
+        </Modal>
+        <button className='boba-caesar-button' onClick={() => setCaesarCipherModalOpen(true)}></button>
+        <Modal isOpen={caesarCipherModalOpen}>
+          <button onClick={() => setCaesarCipherModalOpen(false)}>Close Puzzle</button>
+          <p>Ugh. An encoded message. What does it say?</p>
+          <CaesarCipher setCaesarCipherCompleted={setCaesarCipherCompleted}/>
         </Modal>
       </div>
     </div>

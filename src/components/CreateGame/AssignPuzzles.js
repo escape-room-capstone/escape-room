@@ -25,6 +25,7 @@ const AssignPuzzles = (props) => {
 
   console.log(game);
 
+
   const handleRemove = (roomId, puzzleId) => {
     setPuzzleArray([...unassignedPuzzles, puzzleId]);
   };
@@ -32,7 +33,7 @@ const AssignPuzzles = (props) => {
   console.log(unassignedPuzzles);
 
   return (
-    <div>
+    <div style={{paddingLeft : "10px"}}>
       <h1>Rooms for your game</h1>
       <h2>
         {' '}
@@ -46,29 +47,22 @@ const AssignPuzzles = (props) => {
         ? game.rooms.map((room) => {
             return (
               <div key={room.id}>
-                <p> Room {room.number}</p>
-                <img style={{ width: '200px' }} src={room.imgSrc} />
-                <p> Puzzles for Room {room.number} : </p>
-                <ul>
-                  {room.puzzles.map((puzzle) => {
-                    return (
-                      <div key={puzzle.id}>
-                        {unassignedPuzzles.includes(puzzle.id) ? (
-                          <p> removed </p>
-                        ) : (
-                          <li>
-                            <button
-                              onClick={() => handleRemove(room.id, puzzle.id)}
-                            >
-                              x
-                            </button>{' '}
-                            {puzzle.name}
-                          </li>
-                        )}
-                      </div>
-                    );
-                  })}
-                </ul>
+                  <p> Room {room.number}</p>
+                  <div><img style={{ width:"200px" }}src={room.imgSrc} /></div>
+                  <button onClick={()=>props.history.push(`/editsingleroom/${room.id}`)}> Customize </button>
+                  <p> Puzzles for Room {room.number} : </p>                  
+                  <ul>
+                      {room.puzzles.map(puzzle => {
+                          return (                                                            
+                              <div key={puzzle.id}>
+                                  {unassignedPuzzles.includes(puzzle.id) ? <p> removed </p> :                                                                        
+                                  <li><button onClick={()=> handleRemove(room.id, puzzle.id) }>x</button> {puzzle.name}</li>                                  
+                                  }
+                              </div>
+                              
+                          )
+                      })}
+                  </ul>
               </div>
             );
           })

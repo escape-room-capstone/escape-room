@@ -159,3 +159,10 @@ button.play {
   z-index: 3;
   color: white;
 }
+
+#grey-background {
+  background-image: url('../Images/greybackground.jpeg');
+  background-size: cover;
+  text-shadow: none;
+  min-height: 100vh;
+}

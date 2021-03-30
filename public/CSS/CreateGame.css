@@ -1,19 +1,50 @@
 .createGameImg {
-    border: 1px solid #ddd;
-    border-radius: 4px;  
-    padding: 5px; 
-    width: 150px;
-    margin-left: 10px; 
-  }
-  
-  .createGameImg:hover {
-    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
-  } 
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+  margin-left: 10px;
+}
 
-  .puzzlesContainer {
-    display: flex;
-    flex-direction: column;
-  }
-  .puzzle {
-    border: 3px solid;
-  }
+.createGameImg:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+.puzzlesContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 2rem;
+}
+.puzzle {
+  border-radius: 12px;
+  text-align: center;
+  margin: 1rem;
+  border: 3px solid;
+}
+
+#create-game {
+  color: #e6e6e6;
+  min-height: 100vh;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-size: cover;
+  background-image: url('../Images/textured.jpeg');
+}
+
+#create-game input {
+  margin: 1rem;
+}
+
+#create-game h1,
+#create-game h3 {
+  font-weight: 100;
+}
+button.submit {
+  font-size: 1.2rem;
+  background-color: #1cd632;
+  padding: 0.5rem;
+  border-radius: 12px;
+}

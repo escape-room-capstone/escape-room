@@ -8,8 +8,8 @@ const singleTheme = (theme) => ({ type: SINGLE_THEME, theme });
 
 //thunk creators
 export const fetchTheme = (id) => {
-    return async (dispatch) => {
-        const theme = (await axios.get(`/api/themes/${id}`)).data;
+    return async (dispatch) => {        
+        const theme = (await axios.get(`/api/themes/${id}`)).data;        
         dispatch(singleTheme(theme));
     }
 }

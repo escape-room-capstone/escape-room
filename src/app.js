@@ -40,9 +40,10 @@ import AssignPuzzles from './components/CreateGame/AssignPuzzles';
 import ConfirmTheme from './components/CreateGame/ConfirmTheme';
 import SinglePuzzle from './components/CreateGame/SinglePuzzle';
 import SingleRoom from './components/DynamicGameSrc/SingleRoom';
-import GameIntro from './components/CreateGame/GameIntro';
+// import GameIntro from './components/CreateGame/GameIntro';
 
 import { Landing } from './components/Landing';
+import EditSingleRoom from './components/CreateGame/EditSingleRoom';
 
 const App = () => {
   return (
@@ -89,9 +90,10 @@ const App = () => {
       <Route exact path="/theme/:id" component={ConfirmTheme} />
       <Route exact path="/creategame/:id" component={CreateAGame} />
       <Route exact path="/puzzle/:id" component={SinglePuzzle} />
+      <Route exact path="/editsingleroom/:id" component={EditSingleRoom} /> 
 
       <Route exact path="/dg" component={SingleRoom} />
-      <Route exact path="/gameintro/:id" component={GameIntro} />
+      {/* <Route exact path="/gameintro/:id" component={GameIntro} /> */}
 
       <Route
         exact

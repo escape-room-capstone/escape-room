@@ -3,12 +3,22 @@ const { Sequelize } = require('sequelize');
 const { STRING, ARRAY, INTEGER } = Sequelize;
 
 const RoomData = db.define('roomdata', {
-    XY1: {
-        type: Sequelize.ARRAY(Sequelize.INTEGER)
+    top: {
+        type: Sequelize.STRING,
+        defaultValue: "150"
       },
-    XY2: {
-        type: Sequelize.ARRAY(Sequelize.INTEGER)
-      }      
+    left: {
+        type: Sequelize.STRING,
+        defaultValue: "600"
+      },
+      width: {
+        type: Sequelize.STRING,
+        defaultValue: "70"
+      },
+      height: {
+        type: Sequelize.STRING,
+        defaultValue: "20"
+      }
 });
 
 module.exports = RoomData;

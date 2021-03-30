@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from "react-redux";
 import { fetchSingleRoom } from '../../store/singeleRoom';
 import Modal from 'react-modal';
+import axios from 'axios';
 
 
 
@@ -66,13 +67,21 @@ const EditSingleRoom = (props) => {
         const puzzleProp = {...puzzleDimensions};        
         puzzleProp[puzzleId][e.target.name] = e.target.value;
         setPuzzleDimensions(puzzleProp);
+      
+      }
+
+      const handleSubmit = async(puzzleDims, roomId) => {
+        console.log(puzzleDims);
+        console.log(roomId);        
+
+        await (axios.put(`/api/rooms/${roomId}/puzzles`, puzzleDimensions));
       }
        
        
        
 
        if(!room.puzzles || Object.keys(puzzleDimensions).length === 0){
-         return "loading..."
+         return <h1> Nothing to see here ! </h1>
        }
 
        const styles = {
@@ -106,7 +115,7 @@ return (
         <label style={{ fontWeight:"bolder", color:"chartreuse" }}> Height <input type="text" name="height" value={puzzleDimensions[puzzle.id].height} onChange={(e, puzzleId) => handleDimensionChanges(e, puzzle.id)} /> </label>
         <br />
         <br />  
-        <div style={{ border : "4px solid red", position : "relative", top : `${puzzleDimensions[puzzle.id].top}px`, left : `${puzzleDimensions[puzzle.id].left}px`, width : `${puzzleDimensions[puzzle.id].width}px`, height : `${puzzleDimensions[puzzle.id].height}px` }} key={puzzle.id}> {puzzle.name} </div>                  
+        <div style={{ overflow:"hidden", border : "4px solid red", position : "relative", top : `${puzzleDimensions[puzzle.id].top}px`, left : `${puzzleDimensions[puzzle.id].left}px`, width : `${puzzleDimensions[puzzle.id].width}px`, height : `${puzzleDimensions[puzzle.id].height}px` }} key={puzzle.id}> {puzzle.name} </div>                  
           </div>
         )
       })}      
@@ -115,7 +124,7 @@ return (
         Once the game is created the only thing that will be visible is your background image...
         <button onClick={() => setShowPrompt(false)}> Close </button>
       </Modal>
-      <button onClick={()=>console.log(puzzleDimensions, 'ready to go')}> Submit </button>
+      <button onClick={()=>handleSubmit(puzzleDimensions, room.id)}> Submit </button>
     </div>
   );
 };

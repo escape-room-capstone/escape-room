@@ -86,7 +86,7 @@ const Homepage = (props) => {
       <hr />
       <h1 className="created-games">Games You've Created</h1>
       <div id="custom-game-div-wrapper">
-        {customGames.map((game, idx) => (
+        {customGames.length > 0 ? customGames.map((game, idx) => (
           <div id="custom-game-div" key={idx}>
             <span style={{ fontSize: '1.4rem', textAlign: 'center' }}>
               {game.title}
@@ -100,7 +100,7 @@ const Homepage = (props) => {
               <button className="play">PLAY</button>
             </Link>
           </div>
-        ))}
+        )) : <h1 style={{ width:"100%" }} className="created-games"> No Games Yet !</h1> }
       </div>
 
       {/* <Link to="/haunted/intro">Haunted House</Link>

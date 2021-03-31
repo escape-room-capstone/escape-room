@@ -41,16 +41,20 @@ import AssignPuzzles from './components/CreateGame/AssignPuzzles';
 import ConfirmTheme from './components/CreateGame/ConfirmTheme';
 import SinglePuzzle from './components/CreateGame/SinglePuzzle';
 import SingleRoom from './components/DynamicGameSrc/SingleRoom';
-import GameIntro from './components/CreateGame/GameIntro';
+// import GameIntro from './components/CreateGame/GameIntro';
+
+import { Landing } from './components/Landing';
+import EditSingleRoom from './components/CreateGame/EditSingleRoom';
 
 const App = () => {
   return (
     <Router history={history}>
-      <Route exact path="/" component={Homepage} />
+      <Route exact path="/home" component={Homepage} />
+      <Route exact path="/" component={Landing} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={Signup} />
       <Route exact path="/starwars/4" component={BobaFett} />
-      <Route path="/haunted/:gameId" component={HauntedIntro} />
+      <Route exact path="/haunted/:gameId/1" component={HauntedIntro} />
       <Route exact path="/haunted/room1" component={HauntedRoom1} />
       <Route exact path="/haunted/room2" component={HauntedRoom2} />
       <Route exact path="/haunted/room3" component={HauntedRoom3} />
@@ -86,13 +90,13 @@ const App = () => {
       <Route exact path="/theme/:id" component={ConfirmTheme} />
       <Route exact path="/creategame/:id" component={CreateAGame} />
       <Route exact path="/puzzle/:id" component={SinglePuzzle} />
+      <Route exact path="/editsingleroom/:id" component={EditSingleRoom} />
+
       <Route exact path="/dg" component={SingleRoom} />
-      <Route exact path="/gameintro/:id" component={GameIntro} />
-      <Route
-        exact
-        path="/games/customize/:gameId/:roomId"
-        component={CustomGame}
-      />
+      {/* <Route exact path="/gameintro/:id" component={GameIntro} /> */}
+
+      <Route exact path="/games/:gameId/:roomId" component={CustomGame} />
+
       {/* <Redirect to="/" /> */}
     </Router>
   );

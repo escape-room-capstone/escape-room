@@ -7,7 +7,7 @@ const {
 
 router.get('/', async (req, res, next) => {
   try {
-    const games = await Game.findAll();
+    const games = await Game.findAll({ include: [Room] });
     res.send(games);
   } catch (ex) {
     next(ex);
@@ -18,14 +18,14 @@ router.get('/', async (req, res, next) => {
 router.get('/:gameId', async (req, res, next) => {
   try {
     let game = await Game.findOne({
-      where : {
-        id : req.params.gameId
+      where: {
+        id: req.params.gameId,
       },
       include: { model: Room, include: [Puzzle] },
     });
     //very simple if statement, so both games work, this can be removed later.
     //If userId is null, this is one of our default games, so we'll use the instance method.
-    if(game.userId === null){
+    if (game.userId === null) {
       game = await game.loadGame();
     }
     //otherwise we'll just return our game with the rooms and puzzles

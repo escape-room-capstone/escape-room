@@ -4,13 +4,20 @@ import { connect } from 'react-redux';
 import { fetchTheme } from '../../store/singleTheme';
 
 const ConfirmTheme = (props) => {
-  console.log(props);
-
+  
   useEffect(() => {
     props.getTheme(props.match.params.id);
   }, []);
 
+  console.log(props);
+
   const { theme } = props;
+  
+  //Code breaks on first render because theme.images does not exist... use this conditional to prevent it from breaking...
+  if(!theme.images){
+    return "...loading"
+  }
+  
   return (
     <div>
       <h3> All images with this theme... </h3>

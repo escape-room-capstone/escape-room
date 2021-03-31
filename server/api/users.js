@@ -39,8 +39,6 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-
-
 router.get('/:userId/games', async (req, res, next) => {
   try {
     const games = await Game.findAll({
@@ -154,11 +152,8 @@ router.post('/:userId/games/custom', async (req, res, next) => {
         imgSrc: images[i - 1],
       });
     }
-    //find rooms 1, 2, 3, 4 instances
-
     //Find all the rooms we just created...
     const allRooms = await Room.findAll({ where: { gameId: game.id } });
-
     //Grab all the rooms we just created, and only print out the room data, instead of all the other stuff that comes with it...
     const allRoomsArray = allRooms.map((room) => {
       return room.dataValues;
@@ -244,9 +239,10 @@ router.post('/:userId/games/custom', async (req, res, next) => {
     //find the game with id of newly created game, include Room model (with Puzzle model)
     game = await Game.findOne({
       where: { id: game.id },
-      include: { model: Room, include: [Puzzle] },
+      include: { model: Room, order: [['id', 'ASC']], include: [Puzzle] },
     });
-    console.log(game, 'game');
+    console.log(game.rooms, 'game.rooms');
+    // console.log(game, 'game');
     res.send(game);
   } catch (ex) {
     next(ex);

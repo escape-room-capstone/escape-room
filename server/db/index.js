@@ -48,14 +48,14 @@ const syncAndSeed = async () => {
     theme: 'riddlez',
     public: true,
     imgSrc: '/Theme_Images/home.jpg',
-    numPuzzles: 15,
+    // numPuzzles: 15,
     description: `You wake up one morning only to find out that you are trapped in a House of Riddles. The only way out is to solve every riddle! But there's a catch...`,
   });
   const defaultBank = await Game.create({
     title: 'Bank Robbery',
     theme: 'bank',
     public: true,
-    numPuzzles: 12,
+    // numPuzzles: 12,
     imgSrc: 'Images/bank_background.jpg',
     description: `Rob a bank and escape with all the $$$`,
   });
@@ -63,7 +63,7 @@ const syncAndSeed = async () => {
     title: 'BobaFett',
     theme: 'starwars',
     public: true,
-    numPuzzles: 12,
+    // numPuzzles: 12,
     imgSrc:
       'https://static2.srcdn.com/wordpress/wp-content/uploads/2020/12/The-Mandalorian-Concept-Art-5-Boba-Fett-Ship.jpg?q=50&fit=crop&w=740&h=370',
     description: `description TBD`,

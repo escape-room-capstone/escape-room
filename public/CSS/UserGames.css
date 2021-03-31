@@ -6,6 +6,8 @@
 
 #user-games-wrapper {
   display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 #user-games img {
@@ -16,10 +18,12 @@
 }
 
 #user-game-div {
+  flex: 0 0 20%;
   position: relative;
   margin: 2rem;
   border-radius: 12px;
   display: flex;
+  align-items: center;
   flex-direction: column;
 }
 

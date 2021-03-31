@@ -27,13 +27,14 @@ const EditSingleRoom = (props) => {
 
 
       useEffect(() => {
-        if (puzzles) {
+        if (puzzles && puzzles[0].roomdata) {          
+          console.log(props, "PROPPPERTIRESS");
           const puzzleDims = puzzles.reduce((dimensionsObj, currentPuzzle) => {
             dimensionsObj[currentPuzzle.id] = {
-              top : "150",
-              left : "600",
-              width: "70",
-              height: "20"
+              top : currentPuzzle.roomdata ? currentPuzzle['roomdata'].top : "",
+              left : currentPuzzle.roomdata ? currentPuzzle['roomdata'].left : "",
+              width: currentPuzzle.roomdata ? currentPuzzle['roomdata'].width : "",
+              height: currentPuzzle.roomdata ? currentPuzzle['roomdata'].height : ""
             };    
             return dimensionsObj;
           }, {});
@@ -74,9 +75,13 @@ const EditSingleRoom = (props) => {
         console.log(puzzleDims);
         console.log(roomId);        
 
-        await (axios.put(`/api/rooms/${roomId}/puzzles`, puzzleDimensions));
+        await (axios.put(`/api/rooms/${roomId}/roomdata`, puzzleDimensions));
 
-        // props.history.goBack();
+        //This line would just push them back to whatever they were on before hitting "customize"        
+        //Naive solution for now. If they were to be on a random page, and Manually type in the URL to take them to edit a room, This will take them back to that random Page
+        props.history.goBack();        
+
+        
       }
        
        
@@ -94,14 +99,7 @@ const EditSingleRoom = (props) => {
         backgroundSize: 'cover',
         margin: '0 auto'
             }
-
-            
-
-                
-                
-          
-          
-          
+              
           console.log(room.puzzles);
             
       

@@ -36,7 +36,7 @@ router.get('/:id', async (req, res, next) => {
 });
 
 
-router.get('/:id/puzzles', async (req, res, next) => {
+router.get('/:id/roomdata', async (req, res, next) => {
   try {
     const roomDataArray = await RoomData.findAll({
       where : {
@@ -65,7 +65,7 @@ router.get('/:id/puzzles/:puzzleId', async (req, res, next) => {
 });
 
 //use the state from EditSingleRoom.js component to modify our DB entries
-router.put('/:id/puzzles', async(req, res, next) => {
+router.put('/:id/roomdata', async(req, res, next) => {
   try {      
    let roomDataObj = {} 
 

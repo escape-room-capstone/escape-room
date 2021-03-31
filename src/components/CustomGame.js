@@ -5,6 +5,7 @@ import { componentMapping } from './Puzzles/puzzles';
 import Modal from 'react-modal';
 import { customStyles } from '../utils/helpers';
 import { fetchUserGame } from '../store/game';
+import '../../public/CSS/CustomGame.css';
 
 //url will be /games/:gameId/:roomId/:roomNum
 //What limit do we want on amount of puzzles in one room?
@@ -111,42 +112,49 @@ const _CustomGame = (props) => {
 
   if (Object.keys(roomStatus).length) {
     return (
-      <div
-        id="game-room"
-        style={{
-          backgroundImage: `url(${room.imgSrc})`,
-          height: '800px',
-          width: '1440px',
-          backgroundSize: 'cover',
-          margin: '0 auto',
-        }}
-      >
-        {Object.keys(roomStatus).map((puzzleNum, idx) => (
-          <div key={idx}>
-            <button onClick={() => show(puzzleNum)}>Puzzle {puzzleNum}</button>
-          </div>
-        ))}
+      <div>
+        <div id="game-narrative">
+          <p>{room.narrative}</p>
+        </div>
+        <div
+          id="game-room"
+          style={{
+            backgroundImage: `url(${room.imgSrc})`,
+            height: '800px',
+            width: '1440px',
+            backgroundSize: 'cover',
+            margin: '0 auto',
+          }}
+        >
+          {Object.keys(roomStatus).map((puzzleNum, idx) => (
+            <div key={idx}>
+              <button onClick={() => show(puzzleNum)}>
+                Puzzle {puzzleNum}
+              </button>
+            </div>
+          ))}
 
-        <div>
-          {puzzles.map((puzzle, idx) => {
-            const Component = componentMapping[puzzle.name];
-            return (
-              <Modal isOpen={roomStatus[puzzle.id].showModal} key={idx}>
-                <Component solve={() => setSolved(puzzle.id)} />
-                <button onClick={() => hide(puzzle.id)}>CLOSE</button>
-                <button onClick={() => setSolved(puzzle.id)}>SOLVE</button>
-              </Modal>
-            );
-          })}
+          <div>
+            {puzzles.map((puzzle, idx) => {
+              const Component = componentMapping[puzzle.name];
+              console.log(puzzle.id, 'puzzle.id');
+              return (
+                <Modal isOpen={roomStatus[puzzle.id].showModal} key={idx}>
+                  <Component solve={() => setSolved(puzzle.id)} />
+                  <button onClick={() => hide(puzzle.id)}>CLOSE</button>
+                  <button onClick={() => setSolved(puzzle.id)}>SOLVE</button>
+                </Modal>
+              );
+            })}
 
-          {/* <Modal style={customStyles} isOpen={roomStatus.showModal}>
+            {/* <Modal style={customStyles} isOpen={roomStatus.showModal}>
           {Object.keys(roomStatus).map((puzzleNum) => (
             <div>
               {roomStatus[puzzleNum].show &&
                 generatePuzzle(`Puzzle${puzzleNum}`)}
             </div>
           ))} */}
-          {/* {roomStatus.clues[1].show && (
+            {/* {roomStatus.clues[1].show && (
             <Puzzle1 solve={() => setSolved('one')} />
           )}
           {roomStatus.clues[2].show && (
@@ -155,7 +163,7 @@ const _CustomGame = (props) => {
           {roomStatus.clues[3].show && (
             <Puzzle3 solve={() => setSolved('three')} />
           )} */}
-          {/* <button
+            {/* <button
             onClick={() =>
               setRoomStatus((prevRoom) => {
                 return {
@@ -174,6 +182,7 @@ const _CustomGame = (props) => {
             Close the modal
           </button>
         </Modal> */}
+          </div>
         </div>
       </div>
     );

@@ -4,7 +4,7 @@ import ReactModal from 'react-modal';
 import { Link } from 'react-router-dom';
 import LetterBank from './LetterBank';
 
-const BackRoom = (props) => {
+const Home3 = (props) => {
   const [puzzle1, setPuzzle1] = useState({
     riddle: '',
     solution: '',
@@ -43,7 +43,7 @@ const BackRoom = (props) => {
   return (
     <div className="container">
       <ReactModal
-        overlayClassName="OverlayBackRoom"
+        overlayClassName="OverlayHome3"
         className="modal"
         isOpen={puzzle1.showModal}
         onRequestClose={() => setPuzzle1({ showModal: false })}
@@ -60,7 +60,7 @@ const BackRoom = (props) => {
       </ReactModal>
 
       <ReactModal
-        overlayClassName="OverlayBackRoom"
+        overlayClassName="OverlayHome3"
         className="modal"
         isOpen={puzzle2.showModal}
         onRequestClose={() => setPuzzle2({ showModal: false })}
@@ -76,7 +76,7 @@ const BackRoom = (props) => {
         </div>
       </ReactModal>
       <ReactModal
-        overlayClassName="OverlayBackRoom"
+        overlayClassName="OverlayHome3"
         className="modal"
         isOpen={puzzle3.showModal}
         onRequestClose={() => setPuzzle3({ showModal: false })}
@@ -91,7 +91,7 @@ const BackRoom = (props) => {
           </button>
         </div>
       </ReactModal>
-      <div className="background" id="backRoom">
+      <div className="background" id="home3">
         <button onClick={() => setPuzzle1({ showModal: true })}>
           Puzzle 1
         </button>
@@ -107,4 +107,4 @@ const BackRoom = (props) => {
   );
 };
 
-export default BackRoom;
+export default Home3;

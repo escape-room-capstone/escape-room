@@ -3,21 +3,21 @@ import '../../../public/CSS/HouseOfRiddlez.css';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import { setPuzzles } from '../../store/puzzles.js';
 import { fetchGame } from '../../store/game';
-import HouseOfRiddlez from './HouseOfRiddlez';
-import LivingRoom from './LivingRoom';
-import BackRoom from './BackRoom';
-import RoomTwo from './RoomTwo';
-import RoomOne from './RoomOne';
-import Attic from './Attic';
+import Home from './Home';
+import Home5 from './Home5';
+import Home3 from './Home3';
+import Home2 from './Home2';
+import Home4 from './Home4';
+import Home1 from './Home1';
 
 const LetterBank = (props) => {
   const [routeLocation, setRouteLocation] = useState({
     isHome: true,
-    isAttic: false,
-    isRoomOne: false,
-    isRoomTwo: false,
-    isLivingRoom: false,
-    isBackroom: false,
+    isHome1: false,
+    isHome2: false,
+    isHome3: false,
+    isHome4: false,
+    isHome5: false,
   });
 
   const [bank, setBank] = useState([
@@ -70,11 +70,12 @@ const LetterBank = (props) => {
           {/* <p className="bankParagraphs">{Room.name} =  {Room.isSolved ? Solved : ""} </p> */}
           <div className="bankDivs">
             <h3 className="bankHeadings">Clues Bank</h3>
-            <p className="bankParagraphs">Main Room = </p>
-            <p className="bankParagraphs">Living Room = </p>
-            <p className="bankParagraphs">Attic =</p>
-            <p className="bankParagraphs">Upstairs Bedroom =</p>
-            <p className="bankParagraphs">Downstairs Bedroom =</p>
+            <p className="bankParagraphs">Main Room (COMP HOME) = {} </p>
+            <p className="bankParagraphs">Living Room (COMP HOME5)= </p>
+            <p className="bankParagraphs">Attic (COMP HOME1) =</p>
+            <p className="bankParagraphs">Upstairs Bedroom (COMP HOME2) =</p>
+            <p className="bankParagraphs">Downstairs Bedroom (COMP HOME4) =</p>
+            <p className="bankParagraphs">Backroom (COMP HOME3) =</p>
           </div>
         </div>
         <div className="returnHomeButtonDiv">
@@ -87,13 +88,12 @@ const LetterBank = (props) => {
                 setRouteLocation({
                   ...routeLocation,
                   isHome: true,
-                  isAttic: false,
-                  isBackroom: false,
-                  isLivingRoom: false,
-                  isRoomOne: false,
-                  isRoomTwo: false,
+                  isHome1: false,
+                  isHome3: false,
+                  isHome5: false,
+                  isHome4: false,
+                  isHome2: false,
                 });
-                // props.history.push('/HouseofRiddlez/2');
               }}
             >
               Back to Main Room
@@ -103,20 +103,20 @@ const LetterBank = (props) => {
       </div>
 
       {routeLocation.isHome ? (
-        <HouseOfRiddlez
+        <Home
           routeLocation={routeLocation}
           setRouteLocation={setRouteLocation}
         />
-      ) : routeLocation.isAttic ? (
-        <Attic {...props} />
-      ) : routeLocation.isRoomOne ? (
-        <RoomOne {...props} />
-      ) : routeLocation.isRoomTwo ? (
-        <RoomTwo {...props} />
-      ) : routeLocation.isLivingRoom ? (
-        <LivingRoom {...props} />
-      ) : routeLocation.isBackroom ? (
-        <BackRoom {...props} />
+      ) : routeLocation.isHome1 ? (
+        <Home1 {...props} />
+      ) : routeLocation.isHome4 ? (
+        <Home4 {...props} />
+      ) : routeLocation.isHome2 ? (
+        <Home2 {...props} />
+      ) : routeLocation.isHome5 ? (
+        <Home5 {...props} />
+      ) : routeLocation.isHome3 ? (
+        <Home3 {...props} />
       ) : null}
     </div>
   );

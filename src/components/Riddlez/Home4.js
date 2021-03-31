@@ -4,7 +4,7 @@ import ReactModal from 'react-modal';
 import { Link } from 'react-router-dom';
 import LetterBank from './LetterBank';
 
-const RoomOne = (props) => {
+const Home4 = (props) => {
   const [puzzle1, setPuzzle1] = useState({
     riddle: '',
     solution: '',
@@ -44,7 +44,7 @@ const RoomOne = (props) => {
   return (
     <div className="container">
       <ReactModal
-        overlayClassName="OverlayRoomOne"
+        overlayClassName="OverlayHome4"
         className="modal"
         isOpen={puzzle1.showModal}
         onRequestClose={() => setPuzzle1({ showModal: false })}
@@ -61,7 +61,7 @@ const RoomOne = (props) => {
       </ReactModal>
 
       <ReactModal
-        overlayClassName="OverlayRoomOne"
+        overlayClassName="OverlayHome4"
         className="modal"
         isOpen={puzzle2.showModal}
         onRequestClose={() => setPuzzle2({ showModal: false })}
@@ -77,7 +77,7 @@ const RoomOne = (props) => {
         </div>
       </ReactModal>
       <ReactModal
-        overlayClassName="OverlayRoomOne"
+        overlayClassName="OverlayHome4"
         className="modal"
         isOpen={puzzle3.showModal}
         onRequestClose={() => setPuzzle3({ showModal: false })}
@@ -93,7 +93,7 @@ const RoomOne = (props) => {
         </div>
       </ReactModal>
 
-      <div className="background" id="roomOne">
+      <div className="background" id="home4">
         {' '}
         <button onClick={() => setPuzzle1({ showModal: true })}>
           Puzzle 1
@@ -109,4 +109,4 @@ const RoomOne = (props) => {
   );
 };
 
-export default RoomOne;
+export default Home4;

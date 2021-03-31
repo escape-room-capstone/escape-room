@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import '../../../public/CSS/HouseOfRiddlez.css';
 import ReactModal from 'react-modal';
-import LetterBank from './LetterBank';
 import { connect, useSelector, useDispatch } from 'react-redux';
-import { setPuzzles } from '../../store/puzzles.js';
-import { fetchGame } from '../../store/game';
 import { updatePuzzle } from '../../store/puzzle';
 import { componentMapping } from '../Puzzles/puzzles';
 
-const Attic = (props) => {
+const Home1 = (props) => {
   console.log('atticProps=>', props);
 
   const [atticPuzzle1, setAtticPuzzle1] = useState({
@@ -72,7 +69,7 @@ const Attic = (props) => {
   return (
     <div className="container">
       <ReactModal
-        overlayClassName="OverlayAttic"
+        overlayClassName="OverlayHome1"
         className="modal"
         isOpen={showOpen}
         onRequestClose={() => {
@@ -123,7 +120,7 @@ const Attic = (props) => {
         </div>
       </ReactModal>
 
-      <div className="background" id="attic">
+      <div className="background" id="home1">
         <button onClick={() => setAtticPuzzle1({ showModal: true })}>
           Puzzle 1
         </button>
@@ -147,4 +144,4 @@ const mapToDispatch = {
   updatePuzzle: updatePuzzle,
 };
 
-export default connect(mapToState, mapToDispatch)(Attic);
+export default connect(mapToState, mapToDispatch)(Home1);

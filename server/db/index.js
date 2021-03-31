@@ -47,7 +47,7 @@ const syncAndSeed = async () => {
     title: 'House of Riddlez',
     theme: 'riddlez',
     public: true,
-    imgSrc: '/RiddlezImages/home.jpg',
+    imgSrc: '/Theme_Images/home.jpg',
     numPuzzles: 15,
     description: `You wake up one morning only to find out that you are trapped in a House of Riddles. The only way out is to solve every riddle! But there's a catch...`,
   });
@@ -172,7 +172,11 @@ const syncAndSeed = async () => {
       name: 'Cafe',
       type: 'custom',
       backgroundImageOne: '/Theme_Images/Cafe1.jpg',
-      images: ['/Theme_Images/Cafe1.jpg', '/Theme_Images/Cafe2.jpg'],
+      images: [
+        '/Theme_Images/Cafe1.jpg',
+        '/Theme_Images/Cafe2.jpg',
+        '/Theme_Images/cafe3.jpg',
+      ],
     }),
     Theme.create({
       name: 'Haunted',
@@ -196,22 +200,17 @@ const syncAndSeed = async () => {
 
     Theme.create({
       name: 'House',
-      backgroundImageOne: '../RiddlezImages/home.jpg',
+      backgroundImageOne: '../Theme_Images/home.jpg',
       images: [
-        '../RiddlezImages/home.jpg',
-        '../RiddlezImages/livingroom.jpg',
-        '../RiddlezImages/roomOne.jpg',
-        '../RiddlezImages/roomTwo.jpg',
-        '../RiddlezImages/attic.jpg',
-        '../RiddlezImages/backroom.jpg',
+        '../Theme_Images/home.jpg',
+        '../Theme_Images/home1.jpg',
+        '../Theme_Images/home2.jpg',
+        '../Theme_Images/home3.jpg',
+        '../Theme_Images/home4.jpg',
+        '../Theme_Images/home5.jpg',
       ],
       type: 'default',
     }),
-    // Theme.create({
-    //   name: 'Riddles',
-    //   numPuzzles: 9,
-    //   type: 'default',
-    // }),
   ]);
 
   // const [cody, arwinder, kate, nes, steve, roman] = users;

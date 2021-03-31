@@ -9,9 +9,17 @@ const EditSingleRoom = (props) => {
   const { room } = props;
   const { puzzles } = room;
   const [showPrompt, setShowPrompt] = useState(false);
-
+  const [hint1, setHint1] = useState('');
+  const [hint2, setHint2] = useState('');
+  const [hint3, setHint3] = useState('');
   const [puzzleDimensions, setPuzzleDimensions] = useState({});
   const [narrative, setNarrative] = useState('');
+  const [goBack, setGoBack] = useState(false);
+  useEffect(() => {
+    if (goBack) {
+      props.history.goBack();
+    }
+  }, [goBack]);
   useEffect(() => {
     props.getRoom(props.match.params.id);
   }, []);
@@ -58,19 +66,23 @@ const EditSingleRoom = (props) => {
   };
 
   const handleSubmit = async (puzzleDims, roomId) => {
-    console.log(puzzleDims);
+    console.log(puzzleDims, 'puzzleDims');
+    console.log(puzzleDimensions, 'puzzleDimensions');
     console.log(roomId);
-
-    await axios.put(`/api/rooms/${roomId}/roomdata`, {
-      puzzleDimensions,
-    });
-    await axios
-      .put(`/api/rooms/${roomId}`, { narrative })
-      .then((res) => props.history.goBack());
-
+    // await axios.put(`/api/rooms/${roomId}/roomdata`, {
+    //   puzzleDimensions,
+    // });
+    await Promise.all([
+      axios.put(`/api/rooms/${roomId}/roomdata`, {
+        puzzleDimensions,
+      }),
+      axios.put(`/api/rooms/${roomId}`, { narrative }),
+    ]);
+    // setGoBack(true);
     //This line would just push them back to whatever they were on before hitting "customize"
     //Naive solution for now. If they were to be on a random page, and Manually type in the URL to take them to edit a room, This will take them back to that random Page
     // props.history.goBack();
+    props.history.goBack();
   };
 
   if (!room.puzzles || Object.keys(puzzleDimensions).length === 0) {

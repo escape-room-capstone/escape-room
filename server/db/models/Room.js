@@ -29,9 +29,9 @@ const Room = db.define('room', {
   narrative: {
     type: TEXT,
     allowNull: true,
-    validate: {
-      notEmpty: true,
-    },
+    // validate: {
+    //   notEmpty: true,
+    // },
   },
 });
 

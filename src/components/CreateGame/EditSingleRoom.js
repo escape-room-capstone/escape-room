@@ -72,6 +72,7 @@ const EditSingleRoom = (props) => {
     // await axios.put(`/api/rooms/${roomId}/roomdata`, {
     //   puzzleDimensions,
     // });
+    // await axios.put(`/api/rooms/${roomId}`, { narrative });
     await Promise.all([
       axios.put(`/api/rooms/${roomId}/roomdata`, {
         puzzleDimensions,
@@ -81,7 +82,6 @@ const EditSingleRoom = (props) => {
     // setGoBack(true);
     //This line would just push them back to whatever they were on before hitting "customize"
     //Naive solution for now. If they were to be on a random page, and Manually type in the URL to take them to edit a room, This will take them back to that random Page
-    // props.history.goBack();
     props.history.goBack();
   };
 

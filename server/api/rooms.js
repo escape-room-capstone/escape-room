@@ -63,6 +63,7 @@ router.put('/:id', async (req, res, next) => {
     const room = await Room.findOne({ where: { id: req.params.id } });
     console.log(room, 'room');
     await room.update({ narrative: req.body.narrative });
+    res.sendStatus(200);
   } catch (ex) {
     next(ex);
   }

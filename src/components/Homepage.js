@@ -6,6 +6,7 @@ import auth, { logout } from '../store/auth';
 import { Navbar } from './Navbar';
 import '../../public/CSS/Homepage.css';
 import { getUserByToken } from '../store/auth';
+import { UserGames } from './UserGames';
 
 const Homepage = (props) => {
   useEffect(() => {
@@ -56,7 +57,7 @@ const Homepage = (props) => {
         <Navbar />
       </div>
       <div className="heading">
-        <h1>Our Games</h1>{' '}
+        <h1>Select Game</h1>{' '}
         {props.auth.id && (
           <Link to="/choosetheme">
             <button> + CREATE </button>
@@ -84,6 +85,7 @@ const Homepage = (props) => {
         })}
       </div>
       <hr />
+
       <h1 className="created-games">Games You've Created</h1>
       <div id="custom-game-div-wrapper">
         {customGames.length > 0 ? customGames.map((game, idx) => (
@@ -102,7 +104,6 @@ const Homepage = (props) => {
           </div>
         )) : <h1 style={{ width:"100%" }} className="created-games"> No Games Yet !</h1> }
       </div>
-
       {/* <Link to="/haunted/intro">Haunted House</Link>
       <hr />
       <Link to="/houseofriddlez"> ~~House of Riddlez~~ </Link>

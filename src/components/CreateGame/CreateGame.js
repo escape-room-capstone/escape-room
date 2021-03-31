@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchTheme } from '../../store/singleTheme';
 import axios from 'axios';
 import { fetchUserGame } from '../../store/game';
+import Modal from 'react-modal';
 import { setPuzzles } from '../../store/puzzles';
 import { componentMapping } from '../Puzzles/puzzles';
 import '../../../public/css/CreateGame.css';
@@ -16,12 +17,26 @@ const CreateGame = (props) => {
   const [puzzleArray, setPuzzleArray] = useState([]);
   const [error, setError] = useState('');
   // console.log('THIS COMPONENT PROPS', props);
-
+  // const [modal, setModal] = useState({
+  //   puzzleToShow: '',
+  //   showModal: false,
+  // });
+  const [puzzleToShow, setPuzzleToShow] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  useEffect(() => {
+    if (puzzleToShow.length) {
+      setShowModal(true);
+    }
+  }, [puzzleToShow]);
   useEffect(() => {
     props.getTheme(props.match.params.id);
     props.getPuzzles();
   }, []);
 
+  const generatePuzzle = (puzzleName, props) => {
+    const Component = componentMapping[puzzleName];
+    return <Component {...props} />;
+  };
   const { puzzles, theme } = props;
   console.log(puzzles, theme);
   //USING hard-coded user#2 for axios call...
@@ -71,7 +86,7 @@ const CreateGame = (props) => {
   };
 
   const handleChange = (e, puzzleId) => {
-    console.log('we are here');
+    // console.log('we are here');
     if (e.target.checked) {
       setPuzzleArray([...puzzleArray, puzzleId]);
     } else if (!e.target.checked) {
@@ -84,42 +99,57 @@ const CreateGame = (props) => {
   };
 
   return (
-    <div>
-      <h1> Theme : {theme.name} </h1>
-      <label>
-        Title of game :
-        <input
-          style={{ width: '200px', marginLeft: '10px' }}
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          type="text"
-        />
-      </label>
-      <label>
-        Description :
-        <input
-          style={{ width: '200px', marginLeft: '10px' }}
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          type="text"
-        />
-      </label>
-      <div className="puzzlesContainer">
-        Select all the puzzles you would like in your game...
-        <hr />
-        {puzzles.map((puzzle, idx) => {
-          const Component = componentMapping[puzzle.name];
-          return (
-            <div key={puzzle.id} className="puzzle">
-              {/* puzzle.nickname instead, like "Magic Squares, etc"  ???*/}
-              <h1>{puzzle.name}</h1>
-              <label> Add Puzzle </label>
-              <input
-                onChange={(e) => handleChange(e, puzzle.id)}
-                type="checkbox"
-              />
-              <hr />
-              <button
+    <div id="create-game">
+      <h1 style={{ color: '#e6e6e6' }}> Theme : {theme.name} </h1>
+      <div>
+        <label>
+          Title of game :
+          <input
+            style={{ width: '200px', marginLeft: '10px' }}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            type="text"
+          />
+        </label>
+        <label>
+          Description :
+          <input
+            style={{ width: '200px', marginLeft: '10px' }}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            type="text"
+          />
+        </label>
+      </div>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        <h3>Select all the puzzles you would like in your game...</h3>
+
+        <div className="puzzlesContainer">
+          {puzzles.map((puzzle, idx) => {
+            // const Component = componentMapping[puzzle.name];
+            return (
+              <div key={puzzle.id} className="puzzle">
+                {/* puzzle.nickname instead, like "Magic Squares, etc"  ???*/}
+                <div>
+                  <h3>{puzzle.name}</h3>
+                  <button onClick={() => setPuzzleToShow(puzzle.name)}>
+                    Try Out
+                  </button>
+                </div>
+                <label> Add Puzzle </label>
+                <input
+                  onChange={(e) => handleChange(e, puzzle.id)}
+                  type="checkbox"
+                />
+                {/* <hr /> */}
+                {/* <button
                 style={{ marginBottom: '10px' }}
                 onClick={() => props.history.push(`/puzzle/${puzzle.id}`)}
               >
@@ -127,13 +157,21 @@ const CreateGame = (props) => {
                 Details{' '}
               </button>
               <Component />
-              <hr />
-            </div>
-          );
-        })}
+              <hr /> */}
+              </div>
+            );
+          })}
+        </div>
+        <button className="submit" onClick={() => submitCreateGame()}>
+          {' '}
+          Submit{' '}
+        </button>
+        <div>{error}</div>
+        <Modal isOpen={showModal}>
+          <div>{generatePuzzle(puzzleToShow, props)}</div>
+          <button onClick={() => setShowModal(false)}>CLOSE</button>
+        </Modal>
       </div>
-      <button onClick={() => submitCreateGame()}> Submit </button>
-      <div>{error}</div>
     </div>
   );
 };

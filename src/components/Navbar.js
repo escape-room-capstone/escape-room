@@ -13,8 +13,9 @@ const _Navbar = (props) => {
             <span id="welcome">Hello, {props.auth.email}!</span>
           </div>
           <div>
+            <Link to={`/users/${props.auth.id}/account/games`}>MY GAMES</Link>
             <Link to="/choosetheme">
-              <span>CREATE</span>
+              <span>+ CREATE</span>
             </Link>
             <Link to={`/users/${props.auth.id}/account`}>
               <span>ACCOUNT</span>

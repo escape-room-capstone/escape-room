@@ -1,32 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import { fetchSingleRoom } from '../../store/singeleRoom';
 import Modal from 'react-modal';
 import axios from 'axios';
-
-
+import '../../../public/CSS/EditSingleRoom.css';
 
 const EditSingleRoom = (props) => {
-
-
-  
   const { room } = props;
   const { puzzles } = room;
   //Need this value for line 118, the label where we are dynamically rendering our "top" css.  
   const [ showPrompt, setShowPrompt ] = useState(false);
   const [ inputLabelHeight, setInputLabelHeight ] = useState(0);
-
-  
-
-  
-
-  
   const [ puzzleDimensions, setPuzzleDimensions ] = useState({});
+  const [hint1, setHint1] = useState('');
+  const [hint2, setHint2] = useState('');
+  const [hint3, setHint3] = useState('');
+  const [narrative, setNarrative] = useState('');
 
     useEffect(() => {            
       props.getRoom(props.match.params.id)      
       }, []);
-
 
       useEffect(() => {
         if (puzzles && puzzles[0].roomdata) {   
@@ -49,27 +42,6 @@ const EditSingleRoom = (props) => {
         }
       }, [props.room]);
 
-      
-      
-
-
-      //GOAL : is to have an puzzleDimensions objects in my state,          SUCCESS 
-      //puzzleDimensions : { 
-      //                      1 : {
-      //                         top : "150",
-      //                         left : "600",
-      //                         width: "70",
-      //                         height: "20"
-      //                       }
-
-      //                       5 : {
-      //                         top : "150",
-      //                         left : "600",
-      //                         width: "70",
-      //                         height: "20"
-      //                    }
-
-
       const handleDimensionChanges = (e, puzzleId) => {
         e.preventDefault();
         const puzzleProp = {...puzzleDimensions};        
@@ -82,26 +54,20 @@ const EditSingleRoom = (props) => {
         console.log(puzzleDims);
         console.log(roomId);        
 
-        await (axios.put(`/api/rooms/${roomId}/roomdata`, puzzleDims));
-
+  await Promise.all([
+      axios.put(`/api/rooms/${roomId}/roomdata`, {
+        puzzleDimensions,
+      }),
+      axios.put(`/api/rooms/${roomId}`, { narrative }),
+    ]);
         //This line would just push them back to whatever they were on before hitting "customize"        
         //Naive solution for now. If they were to be on a random page, and Manually type in the URL to take them to edit a room, This will take them back to that random Page
-        //props.history.goBack();        
-
-        
+        props.history.goBack();           
       }
        
-       
-       
-
        if(!room.puzzles || Object.keys(puzzleDimensions).length === 0){
          return <h1> Nothing to see here ! </h1>
        }
-
-       
-
-       
-
        const styles = {
         backgroundImage: `url(${room.imgSrc})`,
         height: '800px',
@@ -109,14 +75,17 @@ const EditSingleRoom = (props) => {
         position: 'relative',
         backgroundSize: 'cover',
         margin: '0 auto'
-            }
-                        
-        
-            
-             //console.log(room.puzzles, "ROOM DOT PUZZLES");
-
+            }                        
 return (
   <div id="edit-room">
+       <div style={{ width: '100%', textAlign: 'center' }}>
+        <span className="narrative">EDIT ROOM NARRATIVE HERE</span> <br></br>
+        <input
+          className="narrative"
+          placeholder="enter text/narrative for room here"
+          onChange={(e) => setNarrative(e.target.value)}
+        ></input>
+      </div>
     {room.puzzles.map(puzzle => {
         return (<div key={puzzle.id}>
           <span style={{ fontWeight:"bold", color: "red"}} >{puzzle.name} : </span> 
@@ -143,6 +112,7 @@ return (
         Once the game is created the only thing that will be visible is your background image...
         <button onClick={() => setShowPrompt(false)}> Close </button>
       </Modal>            
+
     </div>
     </div> 
   );
@@ -151,7 +121,7 @@ return (
 const mapState = (state) => state;
 
 const mapDispatch = {
-  getRoom : fetchSingleRoom
+  getRoom: fetchSingleRoom,
 };
 
 export default connect(mapState, mapDispatch)(EditSingleRoom);

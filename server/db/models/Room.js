@@ -14,6 +14,25 @@ const Room = db.define('room', {
       notEmpty: false,
     },
   },
+  hint1: {
+    type: STRING,
+    allowNull: true,
+  },
+  hint2: {
+    type: STRING,
+    allowNull: true,
+  },
+  hint3: {
+    type: STRING,
+    allowNull: true,
+  },
+  narrative: {
+    type: TEXT,
+    allowNull: true,
+    // validate: {
+    //   notEmpty: true,
+    // },
+  },
 });
 
 module.exports = Room;

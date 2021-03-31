@@ -5,37 +5,18 @@ import { componentMapping } from './Puzzles/puzzles';
 import Modal from 'react-modal';
 import { customStyles } from '../utils/helpers';
 import { fetchUserGame } from '../store/game';
+import '../../public/CSS/CustomGame.css';
 
-//url will be /games/:gameId/:roomId/:roomNum
-//What limit do we want on amount of puzzles in one room?
-//for example if we want a max of 10 puzzles in a room,
-//Thinking maybe we could make roomClues 1 - 10, and use a ternary to render a button for the puzzle only if the puzzle exists in props.room.puzzles
-//Have to think about this one...
 const _CustomGame = (props) => {
   const { room } = props;
   const { puzzles } = room;
   console.log('Our Puzzles', puzzles);
-
-  //Work in progress...
-  //Creates the room clues dynamically based on how many puzzles we have in this room...
-
-  // console.log('Room clues using .reduce', _roomClues);
-
-  // const roomClues = {
-  //   1: { solved: false, show: false },
-  //   2: { solved: false, show: false },
-  //   3: { solved: false, show: false },
-  // };
   const [roomStatus, setRoomStatus] = useState({});
   const [ puzzleDimensions, setPuzzleDimensions ] = useState({});  
-  // const { gameId, roomNum } = props.match.params;
-
   const { gameId, roomId } = props.match.params;
   useEffect(() => {
     const getRoom = async () => {
       await props.getRoom(gameId, roomId);
-      // props.getGame(2, gameId, 'custom');
-      // props.getRoom(gameId, roomId);
     };
     getRoom();
   }, []);
@@ -65,33 +46,6 @@ const _CustomGame = (props) => {
     }
   }, [props.room]);
   console.log(roomStatus, 'roomstatus');
-
-  //dynamically rendering components based on which puzzles are in the array from the DB
-
-  //Put some very simple logic in place for now...
-  //if statement to see if the puzzle is in our puzzlesarray so we don't get an error for now...
-  //Need to find a way to dynamically render puzzle/modals based on amount of puzzles in game... will do later
-  // const Puzzle1 = (props) => {
-  //   const Component = componentMapping[puzzles[0].name];
-  //   return <Component {...props} />;
-  // };
-  // const Puzzle2 = (props) => {
-  //   const Component = componentMapping[puzzles[1].name];
-  //   return <Component {...props} />;
-  // };
-  // const Puzzle3 = (props) => {
-  //   const Component = componentMapping[puzzles[2].name];
-  //   return <Component {...props} />;
-  // };
-
-  //Have to use ternary operator because on first render, room is an EMPTY OBJECT
-  //map over puzzle array inside of room to dynamically render amount of puzzles in array.
-  // const CMPuzzles = room.puzzles ? room.puzzles.map(puzzle => {
-  //   const Component = componentMapping[puzzle.name];
-  //   return <Component {...props} />
-  // }) : [];
-
-  // console.log("CM PUZZLES", CMPuzzles);
 
   //helper function that takes a puzzleNumber and sets it as solved and updates local state
   const setSolved = (puzzleNum) => {
@@ -123,6 +77,11 @@ const _CustomGame = (props) => {
 
   if (Object.keys(roomStatus).length) {        
     return (
+<div>
+     <div id="game-narrative">
+          <p>{room.narrative}</p>
+        </div>
+        <div
       <div
         id="game-room"
         style={{
@@ -153,13 +112,14 @@ const _CustomGame = (props) => {
           })}
 
           {/* <Modal style={customStyles} isOpen={roomStatus.showModal}>
+
           {Object.keys(roomStatus).map((puzzleNum) => (
             <div>
               {roomStatus[puzzleNum].show &&
                 generatePuzzle(`Puzzle${puzzleNum}`)}
             </div>
           ))} */}
-          {/* {roomStatus.clues[1].show && (
+            {/* {roomStatus.clues[1].show && (
             <Puzzle1 solve={() => setSolved('one')} />
           )}
           {roomStatus.clues[2].show && (
@@ -168,7 +128,7 @@ const _CustomGame = (props) => {
           {roomStatus.clues[3].show && (
             <Puzzle3 solve={() => setSolved('three')} />
           )} */}
-          {/* <button
+            {/* <button
             onClick={() =>
               setRoomStatus((prevRoom) => {
                 return {
@@ -187,8 +147,10 @@ const _CustomGame = (props) => {
             Close the modal
           </button>
         </Modal> */}
+          </div>
         </div>
       </div>
+</div>
     );
   } else {
     return null;

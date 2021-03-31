@@ -22,18 +22,19 @@ import { UserGames } from './components/UserGames';
 import { Login } from './components/AuthForm';
 import { Signup } from './components/AuthForm';
 
-import HouseOfRiddlez from './components/riddlez/HouseOfRiddlez';
-import LivingRoom from './components/riddlez/LivingRoom';
-import BackRoom from './components/riddlez/BackRoom';
-import Attic from './components/riddlez/Attic';
-import RoomOne from './components/riddlez/RoomOne';
-import RoomTwo from './components/riddlez/RoomTwo';
+import Home from './components/riddlez/Home';
+import Home1 from './components/riddlez/Home1';
+import Home2 from './components/riddlez/Home2';
+import Home3 from './components/riddlez/Home3';
+import Home4 from './components/riddlez/Home4';
+import Home5 from './components/riddlez/Home5';
+import LetterBank from './components/riddlez/LetterBank';
 
 import BankGameLevel2 from './components/BankGame/BankGameLevel2';
 import BankGameLevel3 from './components/BankGame/BankGameLevel3';
 import BankGameStart from './components/BankGame/BankGameStart';
 import BankGameVictory from './components/BankGame/BankGameVictory';
-import LetterBank from './components/riddlez/LetterBank';
+
 import ChooseTheme from './components/CreateGame/ChooseTheme';
 import CreateAGame from './components/CreateGame/CreateGame';
 import AssignPuzzles from './components/CreateGame/AssignPuzzles';
@@ -46,7 +47,6 @@ const App = () => {
   return (
     <Router history={history}>
       <Route exact path="/" component={Homepage} />
-
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={Signup} />
       <Route exact path="/starwars/4" component={BobaFett} />
@@ -62,7 +62,6 @@ const App = () => {
       <Route exact path="/haunted/room8" component={HauntedRoom8} />
       <Route exact path="/haunted/room9" component={HauntedRoom9} />
       <Route exact path="/haunted/final" component={HauntedFinal} />
-
       {/* <Route exact path="/customize" component={CreateGame} /> */}
       <Route
         exact
@@ -72,12 +71,12 @@ const App = () => {
       <Route exact path="/users/:userId/account/games" component={UserGames} />
 
       <Route exact path="/riddlez/:gameId" component={LetterBank} />
-      <Route exact path="/riddlez/mainroom" component={HouseOfRiddlez} />
-      <Route exact path="/riddlez/livingroom" component={LivingRoom} />
-      <Route exact path="/riddlez/roomone" component={RoomOne} />
-      <Route exact path="/riddlez/roomtwo" component={RoomTwo} />
-      <Route exact path="/riddlez/backroom" component={BackRoom} />
-      <Route exact path="/riddlez/attic" component={Attic} />
+      <Route exact path="/riddlez/home" component={Home} />
+      <Route exact path="/riddlez/home1" component={Home1} />
+      <Route exact path="/riddlez/home2" component={Home2} />
+      <Route exact path="/riddlez/home3" component={Home3} />
+      <Route exact path="/riddlez/home4" component={Home4} />
+      <Route exact path="/riddlez/home5" component={Home5} />
 
       <Route exact path="/BankRobbery/3" component={BankGameStart} />
       <Route exact path="/Bankgame2" component={BankGameLevel2} />
@@ -87,16 +86,13 @@ const App = () => {
       <Route exact path="/theme/:id" component={ConfirmTheme} />
       <Route exact path="/creategame/:id" component={CreateAGame} />
       <Route exact path="/puzzle/:id" component={SinglePuzzle} />
-
       <Route exact path="/dg" component={SingleRoom} />
       <Route exact path="/gameintro/:id" component={GameIntro} />
-
       <Route
         exact
         path="/games/customize/:gameId/:roomId"
         component={CustomGame}
       />
-
       {/* <Redirect to="/" /> */}
     </Router>
   );

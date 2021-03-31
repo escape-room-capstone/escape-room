@@ -20,27 +20,27 @@ body {
 /* background images for all components  */
 #home {
   flex: 3;
-  background-image: url('../RiddlezImages/home.jpg');
+  background-image: url('../Theme_Images/home.jpg');
 }
 
-#livingroom {
-  background-image: url('../RiddlezImages/livingroom.jpg');
+#home5 {
+  background-image: url('../Theme_Images/home5.jpg');
 }
 
-#roomOne {
-  background-image: url('../RiddlezImages/roomOne.jpg');
+#home4 {
+  background-image: url('../Theme_Images/home4.jpg');
 }
 
-#roomTwo {
-  background-image: url('../RiddlezImages/roomTwo.jpg');
+#home2 {
+  background-image: url('../Theme_Images/home2.jpg');
 }
 
-#attic {
-  background-image: url('../RiddlezImages/attic.jpg');
+#home1 {
+  background-image: url('../Theme_Images/home1.jpg');
 }
 
-#backRoom {
-  background-image: url('../RiddlezImages/backroom.jpg');
+#home3 {
+  background-image: url('../Theme_Images/home3.jpg');
 }
 
 /* HOUSE OF RIDDLES COMPONENT */
@@ -58,7 +58,9 @@ body {
 }
 
 /* secretbutton location */
-#roomOneButton {
+
+/* this is the room in the middle downstairs (window click) */
+#home4Button {
   height: 5.5rem;
   width: 11.5rem;
   position: relative;
@@ -67,7 +69,8 @@ body {
   margin-right: 0;
 }
 
-#roomTwoButton {
+/* this is the upstairs room on the left */
+#home2Button {
   height: 9rem;
   width: 5rem;
   position: relative;
@@ -76,7 +79,8 @@ body {
   margin-right: 0;
 }
 
-#atticButton {
+/* this is the attic room on the top right */
+#home1Button {
   height: 5rem;
   width: 4rem;
   position: relative;
@@ -85,7 +89,8 @@ body {
   margin-right: 0;
 }
 
-#livingRoomButton {
+/* this is the living room, first on bottomleft (front door click) */
+#home5Button {
   height: 12rem;
   width: 8rem;
   position: relative;
@@ -94,7 +99,8 @@ body {
   margin-right: 0;
 }
 
-#backRoomButton {
+/* this is the room downstairs in the back (white door click) */
+#home3Button {
   height: 11rem;
   width: 5rem;
   position: relative;
@@ -156,7 +162,8 @@ body {
 }
 
 /* used as overlayClassName */
-.OverlayAttic {
+/* this is the attic/top right */
+.OverlayHome1 {
   margin: 15.5rem auto;
   padding: 20px;
   height: 45rem;
@@ -172,7 +179,8 @@ body {
   outline: none;
 }
 
-.OverlayBackRoom {
+/* this is the bottom room to the far right */
+.OverlayHome3 {
   margin: 15.5rem auto;
   padding: 20px;
   height: 45rem;
@@ -188,7 +196,8 @@ body {
   outline: none;
 }
 
-.OverlayRoomOne {
+/* this is the bottom room in the middle (window click) */
+.OverlayHome4 {
   margin: 15.5rem auto;
   padding: 20px;
   height: 45rem;
@@ -204,7 +213,8 @@ body {
   outline: none;
 }
 
-.OverlayRoomTwo {
+/* this is the top left room */
+.OverlayHome2 {
   margin: 15.5rem auto;
   padding: 20px;
   height: 45rem;
@@ -220,7 +230,8 @@ body {
   outline: none;
 }
 
-.OverlayLivingRoom {
+/* this is the bottom room on the left (front door click) */
+.OverlayHome5 {
   margin: 15.5rem auto;
   padding: 20px;
   height: 45rem;

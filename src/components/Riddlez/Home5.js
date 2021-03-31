@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import '../../../public/CSS/HouseOfRiddlez.css';
 import ReactModal from 'react-modal';
+import { Link } from 'react-router-dom';
 import LetterBank from './LetterBank';
-import { connect, useSelector, useDispatch } from 'react-redux';
-import { setPuzzles } from '../../store/puzzles.js';
-import { fetchGame } from '../../store/game';
 
-const RoomTwo = (props) => {
+const Home5 = (props) => {
   const [puzzle1, setPuzzle1] = useState({
     riddle: '',
     solution: '',
@@ -46,7 +44,7 @@ const RoomTwo = (props) => {
   return (
     <div className="container">
       <ReactModal
-        overlayClassName="OverlayRoomTwo"
+        overlayClassName="OverlayHome5"
         className="modal"
         isOpen={puzzle1.showModal}
         onRequestClose={() => setPuzzle1({ showModal: false })}
@@ -63,7 +61,7 @@ const RoomTwo = (props) => {
       </ReactModal>
 
       <ReactModal
-        overlayClassName="OverlayRoomTwo"
+        overlayClassName="OverlayHome5"
         className="modal"
         isOpen={puzzle2.showModal}
         onRequestClose={() => setPuzzle2({ showModal: false })}
@@ -79,7 +77,7 @@ const RoomTwo = (props) => {
         </div>
       </ReactModal>
       <ReactModal
-        overlayClassName="OverlayRoomTwo"
+        overlayClassName="OverlayHome5"
         className="modal"
         isOpen={puzzle3.showModal}
         onRequestClose={() => setPuzzle3({ showModal: false })}
@@ -94,7 +92,7 @@ const RoomTwo = (props) => {
           </button>
         </div>
       </ReactModal>
-      <div className="background" id="roomTwo">
+      <div className="background" id="home5">
         <button onClick={() => setPuzzle1({ showModal: true })}>
           Puzzle 1
         </button>
@@ -110,16 +108,4 @@ const RoomTwo = (props) => {
   );
 };
 
-const mapToState = (state) => {
-  return state;
-};
-
-const mapToDispatch = (dispatch) => {
-  return {
-    getGame: (gameId) => dispatch(fetchGame(gameId)),
-    getPuzzles: () => dispatch(setPuzzles()),
-  };
-};
-
-export default connect(mapToState, mapToDispatch)(RoomTwo);
-//export default RoomTwo;
+export default Home5;

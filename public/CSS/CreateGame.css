@@ -24,6 +24,7 @@
 }
 
 #create-game {
+  filter: opacity(0.9);
   color: #e6e6e6;
   min-height: 100vh;
   font-family: Georgia, 'Times New Roman', Times, serif;

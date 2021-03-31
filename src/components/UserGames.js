@@ -3,13 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-//hard-coded user Id for now
-const userId = 2;
-
 //url will be /users/userId/account/games
 const _UserGames = (props) => {
   const [games, setGames] = useState([]);
-  //   const userId = props.match.params.userId
+  const userId = props.match.params.userId;
   useEffect(() => {
     const fetchGames = async () => {
       const games = (await axios.get(`/api/users/${userId}/games`)).data;
@@ -17,7 +14,6 @@ const _UserGames = (props) => {
     };
     fetchGames();
   }, []);
-
 
   console.log(games);
 
@@ -32,7 +28,7 @@ const _UserGames = (props) => {
             to={
               game.theme.type === 'default'
                 ? `/${game.theme}/${game.id}`
-                : `/games/customize/${game.id}/${game.rooms[0].id}`
+                : `/games/${game.id}/${game.rooms[0].id}`
             }
           >
             <button>PLAY</button>

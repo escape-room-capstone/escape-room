@@ -34,9 +34,12 @@ const CreateGame = (props) => {
   }, []);
 
   const generatePuzzle = (puzzleName, props) => {
+    if(puzzleName !== ""){
     const Component = componentMapping[puzzleName];
     return <Component {...props} />;
+    }
   };
+  
   const { puzzles, theme } = props;
   console.log(puzzles, theme);
   //USING hard-coded user#2 for axios call...

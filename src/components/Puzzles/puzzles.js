@@ -534,7 +534,7 @@ export const Puzzle6 = (props) => {
   }
 };
 
-const Puzzle7 = (props) => {
+export const Puzzle7 = (props) => {
   return (
     <div>
       THIS IS PUZZLE 7<button onClick={props.solve}>SOLVE</button>
@@ -542,7 +542,7 @@ const Puzzle7 = (props) => {
   );
 };
 
-const Puzzle8 = (props) => {
+export const Puzzle8 = (props) => {
   return (
     <div>
       THIS IS PUZZLE EIGHT
@@ -551,7 +551,7 @@ const Puzzle8 = (props) => {
   );
 };
 
-const Puzzle9 = (props) => {
+export const Puzzle9 = (props) => {
   return (
     <div>
       THIS IS PUZZLE NINE
@@ -560,7 +560,7 @@ const Puzzle9 = (props) => {
   );
 };
 
-const Puzzle10 = (props) => {
+export const Puzzle10 = (props) => {
   return (
     <div>
       THIS IS PUZZLE 10
@@ -569,7 +569,7 @@ const Puzzle10 = (props) => {
   );
 };
 
-const Puzzle11 = (props) => {
+export const Puzzle11 = (props) => {
   return (
     <div>
       THIS IS PUZZLE 11
@@ -578,7 +578,7 @@ const Puzzle11 = (props) => {
   );
 };
 
-const Puzzle12 = (props) => {
+export const Puzzle12 = (props) => {
   return (
     <div>
       THIS IS PUZZLE 12
@@ -587,7 +587,7 @@ const Puzzle12 = (props) => {
   );
 };
 
-const Puzzle13 = (props) => {
+export const Puzzle13 = (props) => {
   return (
     <div>
       THIS IS PUZZLE 13
@@ -596,7 +596,7 @@ const Puzzle13 = (props) => {
   );
 };
 
-const Puzzle14 = (props) => {
+export const Puzzle14 = (props) => {
   return (
     <div>
       THIS IS PUZZLE 14
@@ -605,7 +605,7 @@ const Puzzle14 = (props) => {
   );
 };
 
-const Puzzle15 = (props) => {
+export const Puzzle15 = (props) => {
   return (
     <div>
       THIS IS PUZZLE 15

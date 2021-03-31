@@ -69,9 +69,12 @@ router.put('/:id/roomdata', async(req, res, next) => {
   try {      
    let roomDataObj = {} 
 
+
     //Grab the KEYS from our req.body object, and put them into an Array. In editsingleroom.js we are passing down the STATE in our axios call, which sets our req.body to the state of EditSingleRoom.js. 
     //The state holds KEY VALUE pairs, where the KEY is equal to our puzzleId.
     const puzzleIdArray = Object.keys(req.body);
+    console.log("PUZZLE ARRAY!", puzzleIdArray)
+    console.log("REQ BODY", req.body);
     
 
     //dynamically fill in our roomDataObj with key value pairs. Key will equal to the puzzleId, and the value will equal to the room that has that puzzleId
@@ -79,19 +82,25 @@ router.put('/:id/roomdata', async(req, res, next) => {
       let currentPuzzleId = puzzleIdArray[i];
       roomDataObj[currentPuzzleId] = (await RoomData.findOne({
         where : {
-          puzzleId : currentPuzzleId
+          puzzleId : currentPuzzleId,
+          roomId : req.params.id
         }
       }))            
     }    
 
+    
+
     //throw the VALUES of our roomDataObj into an array, now we have an array of Room Data...
     const roomDataArray = Object.values(roomDataObj);
+
+    
     
     //Loop over our Roomdata, and update our room data dynamically.
     //req.body is our whole state, which has key value pairs where the key is equal to puzzleId. so we are finding the edits where req.body[this current rooms puzzleId] and editing the database...
     for(let i = 0; i < roomDataArray.length; i++){
       let currentRoomData = roomDataArray[i];
-      await currentRoomData.update(req.body[currentRoomData.puzzleId])
+      let updateRoomData = (await currentRoomData.update(req.body[currentRoomData.puzzleId]))      
+      console.log("ROOM DATA AFTER UPDATE", updateRoomData.dataValues);
     }
     
     res.sendStatus(200);

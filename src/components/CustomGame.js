@@ -27,6 +27,7 @@ const _CustomGame = (props) => {
   //   3: { solved: false, show: false },
   // };
   const [roomStatus, setRoomStatus] = useState({});
+  const [ puzzleDimensions, setPuzzleDimensions ] = useState({});  
   // const { gameId, roomNum } = props.match.params;
 
   const { gameId, roomId } = props.match.params;
@@ -39,7 +40,7 @@ const _CustomGame = (props) => {
     getRoom();
   }, []);
   useEffect(() => {
-    if (puzzles) {
+    if (puzzles && puzzles[0].roomdata) {      
       const _roomStatus = puzzles.reduce((cluesObj, currentPuzzle) => {
         cluesObj[currentPuzzle.id] = {
           solved: false,
@@ -49,7 +50,18 @@ const _CustomGame = (props) => {
 
         return cluesObj;
       }, {});
-      setRoomStatus(_roomStatus);
+
+      const puzzleDims = puzzles.reduce((dimensionsObj, currentPuzzle) => {
+        dimensionsObj[currentPuzzle.id] = {
+          top : currentPuzzle.roomdata ? currentPuzzle['roomdata'].top : "",
+          left : currentPuzzle.roomdata ? currentPuzzle['roomdata'].left : "",
+          width: currentPuzzle.roomdata ? currentPuzzle['roomdata'].width : "",
+          height: currentPuzzle.roomdata ? currentPuzzle['roomdata'].height : ""
+        };    
+        return dimensionsObj;
+      }, {});      
+      setPuzzleDimensions(puzzleDims);
+      setRoomStatus(_roomStatus);      
     }
   }, [props.room]);
   console.log(roomStatus, 'roomstatus');
@@ -109,7 +121,7 @@ const _CustomGame = (props) => {
     });
   };
 
-  if (Object.keys(roomStatus).length) {
+  if (Object.keys(roomStatus).length) {        
     return (
       <div
         id="game-room"
@@ -120,9 +132,10 @@ const _CustomGame = (props) => {
           backgroundSize: 'cover',
           margin: '0 auto',
         }}
-      >
+      >        
+      
         {Object.keys(roomStatus).map((puzzleNum, idx) => (
-          <div key={idx}>
+          <div style={{ top : `${ puzzleDimensions[puzzleNum] ? puzzleDimensions[puzzleNum].top : ""}px`, left : `${ puzzleDimensions[puzzleNum] ? puzzleDimensions[puzzleNum].left : ""}px`, width : `${ puzzleDimensions[puzzleNum] ? puzzleDimensions[puzzleNum].width : ""}px`, height : `${ puzzleDimensions[puzzleNum] ? puzzleDimensions[puzzleNum].height : ""}px`, border : "4px solid red", position : "relative", }} key={idx}>
             <button onClick={() => show(puzzleNum)}>Puzzle {puzzleNum}</button>
           </div>
         ))}

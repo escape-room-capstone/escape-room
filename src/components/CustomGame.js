@@ -12,7 +12,7 @@ const _CustomGame = (props) => {
   const { puzzles } = room;
   console.log('Our Puzzles', puzzles);
   const [roomStatus, setRoomStatus] = useState({});
-  const [ puzzleDimensions, setPuzzleDimensions ] = useState({});  
+  const [puzzleDimensions, setPuzzleDimensions] = useState({});
   const { gameId, roomId } = props.match.params;
   useEffect(() => {
     const getRoom = async () => {
@@ -21,7 +21,7 @@ const _CustomGame = (props) => {
     getRoom();
   }, []);
   useEffect(() => {
-    if (puzzles && puzzles[0].roomdata) {      
+    if (puzzles && puzzles[0].roomdata) {
       const _roomStatus = puzzles.reduce((cluesObj, currentPuzzle) => {
         cluesObj[currentPuzzle.id] = {
           solved: false,
@@ -34,15 +34,17 @@ const _CustomGame = (props) => {
 
       const puzzleDims = puzzles.reduce((dimensionsObj, currentPuzzle) => {
         dimensionsObj[currentPuzzle.id] = {
-          top : currentPuzzle.roomdata ? currentPuzzle['roomdata'].top : "",
-          left : currentPuzzle.roomdata ? currentPuzzle['roomdata'].left : "",
-          width: currentPuzzle.roomdata ? currentPuzzle['roomdata'].width : "",
-          height: currentPuzzle.roomdata ? currentPuzzle['roomdata'].height : ""
-        };    
+          top: currentPuzzle.roomdata ? currentPuzzle['roomdata'].top : '',
+          left: currentPuzzle.roomdata ? currentPuzzle['roomdata'].left : '',
+          width: currentPuzzle.roomdata ? currentPuzzle['roomdata'].width : '',
+          height: currentPuzzle.roomdata
+            ? currentPuzzle['roomdata'].height
+            : '',
+        };
         return dimensionsObj;
-      }, {});      
+      }, {});
       setPuzzleDimensions(puzzleDims);
-      setRoomStatus(_roomStatus);      
+      setRoomStatus(_roomStatus);
     }
   }, [props.room]);
   console.log(roomStatus, 'roomstatus');
@@ -75,43 +77,70 @@ const _CustomGame = (props) => {
     });
   };
 
-  if (Object.keys(roomStatus).length) {        
+  if (Object.keys(roomStatus).length) {
     return (
-<div>
-     <div id="game-narrative">
+      <div>
+        <div id="game-narrative">
           <p>{room.narrative}</p>
         </div>
-        <div
-      <div
-        id="game-room"
-        style={{
-          backgroundImage: `url(${room.imgSrc})`,
-          height: '800px',
-          width: '1440px',
-          backgroundSize: 'cover',
-          margin: '0 auto',
-        }}
-      >        
-      
-        {Object.keys(roomStatus).map((puzzleNum, idx) => (
-          <div style={{ top : `${ puzzleDimensions[puzzleNum] ? puzzleDimensions[puzzleNum].top : ""}px`, left : `${ puzzleDimensions[puzzleNum] ? puzzleDimensions[puzzleNum].left : ""}px`, width : `${ puzzleDimensions[puzzleNum] ? puzzleDimensions[puzzleNum].width : ""}px`, height : `${ puzzleDimensions[puzzleNum] ? puzzleDimensions[puzzleNum].height : ""}px`, border : "4px solid red", position : "relative", }} key={idx}>
-            <button onClick={() => show(puzzleNum)}>Puzzle {puzzleNum}</button>
-          </div>
-        ))}
-
         <div>
-          {puzzles.map((puzzle, idx) => {
-            const Component = componentMapping[puzzle.name];
-            return (
-              <Modal isOpen={roomStatus[puzzle.id].showModal} key={idx}>
-                <Component solve={() => setSolved(puzzle.id)} />
-                <button onClick={() => hide(puzzle.id)}>CLOSE</button>
-                <button onClick={() => setSolved(puzzle.id)}>SOLVE</button>
-              </Modal>
-            );
-          })}
+          <div
+            id="game-room"
+            style={{
+              backgroundImage: `url(${room.imgSrc})`,
+              height: '800px',
+              width: '1440px',
+              backgroundSize: 'cover',
+              margin: '0 auto',
+            }}
+          >
+            {Object.keys(roomStatus).map((puzzleNum, idx) => (
+              <div
+                style={{
+                  top: `${
+                    puzzleDimensions[puzzleNum]
+                      ? puzzleDimensions[puzzleNum].top
+                      : ''
+                  }px`,
+                  left: `${
+                    puzzleDimensions[puzzleNum]
+                      ? puzzleDimensions[puzzleNum].left
+                      : ''
+                  }px`,
+                  width: `${
+                    puzzleDimensions[puzzleNum]
+                      ? puzzleDimensions[puzzleNum].width
+                      : ''
+                  }px`,
+                  height: `${
+                    puzzleDimensions[puzzleNum]
+                      ? puzzleDimensions[puzzleNum].height
+                      : ''
+                  }px`,
+                  border: '4px solid red',
+                  position: 'relative',
+                }}
+                key={idx}
+              >
+                <button onClick={() => show(puzzleNum)}>
+                  Puzzle {puzzleNum}
+                </button>
+              </div>
+            ))}
 
-          {/* <Modal style={customStyles} isOpen={roomStatus.showModal}>
+            <div>
+              {puzzles.map((puzzle, idx) => {
+                const Component = componentMapping[puzzle.name];
+                return (
+                  <Modal isOpen={roomStatus[puzzle.id].showModal} key={idx}>
+                    <Component solve={() => setSolved(puzzle.id)} />
+                    <button onClick={() => hide(puzzle.id)}>CLOSE</button>
+                    <button onClick={() => setSolved(puzzle.id)}>SOLVE</button>
+                  </Modal>
+                );
+              })}
+
+              {/* <Modal style={customStyles} isOpen={roomStatus.showModal}>
 
           {Object.keys(roomStatus).map((puzzleNum) => (
             <div>
@@ -119,7 +148,7 @@ const _CustomGame = (props) => {
                 generatePuzzle(`Puzzle${puzzleNum}`)}
             </div>
           ))} */}
-            {/* {roomStatus.clues[1].show && (
+              {/* {roomStatus.clues[1].show && (
             <Puzzle1 solve={() => setSolved('one')} />
           )}
           {roomStatus.clues[2].show && (
@@ -128,7 +157,7 @@ const _CustomGame = (props) => {
           {roomStatus.clues[3].show && (
             <Puzzle3 solve={() => setSolved('three')} />
           )} */}
-            {/* <button
+              {/* <button
             onClick={() =>
               setRoomStatus((prevRoom) => {
                 return {
@@ -147,10 +176,10 @@ const _CustomGame = (props) => {
             Close the modal
           </button>
         </Modal> */}
+            </div>
           </div>
         </div>
       </div>
-</div>
     );
   } else {
     return null;

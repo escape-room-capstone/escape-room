@@ -8,6 +8,7 @@ import { fetchUserGame } from '../store/game';
 import '../../public/CSS/CustomGame.css';
 
 const _CustomGame = (props) => {
+  //this may have been causing a bug
   // const { room } = props;
   // const { puzzles } = room;
   // console.log('Our Puzzles', puzzles);

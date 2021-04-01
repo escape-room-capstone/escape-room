@@ -86,7 +86,7 @@ router.put('/:id/roomdata', async (req, res, next) => {
     //Grab the KEYS from our req.body object, and put them into an Array. In editsingleroom.js we are passing down the STATE in our axios call, which sets our req.body to the state of EditSingleRoom.js.
     //The state holds KEY VALUE pairs, where the KEY is equal to our puzzleId.
     const puzzleIdArray = Object.keys(req.body.puzzleDimensions);
-    // console.log('PUZZLE ARRAY!', puzzleIdArray);
+    console.log('PUZZLE ARRAY!', puzzleIdArray);
     console.log('REQ BODY', req.body);
 
     //dynamically fill in our roomDataObj with key value pairs. Key will equal to the puzzleId, and the value will equal to the room that has that puzzleId
@@ -107,9 +107,9 @@ router.put('/:id/roomdata', async (req, res, next) => {
     for (let i = 0; i < roomDataArray.length; i++) {
       let currentRoomData = roomDataArray[i];
       let updateRoomData = await currentRoomData.update(
-        req.body[currentRoomData.puzzleId]
+        req.body.puzzleDimensions[currentRoomData.puzzleId]
       );
-      console.log('ROOM DATA AFTER UPDATE', updateRoomData.dataValues);
+      // console.log('ROOM DATA AFTER UPDATE', updateRoomData.dataValues);
     }
 
     res.sendStatus(200);

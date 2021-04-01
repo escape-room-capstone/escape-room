@@ -156,6 +156,8 @@ const _CustomGame = (props) => {
                 const Component = componentMapping[puzzle.name];
                 return (
                   <Modal isOpen={roomStatus[puzzle.id].showModal} key={idx}>
+                    <div>{puzzle.roomdata.puzzleText}</div>
+                    <hr />
                     <Component solve={() => setSolved(puzzle.id)} />
                     <button onClick={() => hide(puzzle.id)}>CLOSE</button>
                     <button onClick={() => setSolved(puzzle.id)}>SOLVE</button>

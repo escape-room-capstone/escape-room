@@ -1,0 +1,28 @@
+#divColumn {
+  margin: 0 2rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+#divRow {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+#themeText h3 {
+  margin: 0 0;
+}
+
+#divImages {
+  margin: 1rem;
+}
+
+#themeImg {
+  height: 15rem;
+  width: 20rem;
+}
+
+#singleTheme {
+}

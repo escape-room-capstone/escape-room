@@ -20,9 +20,7 @@ const _UserGames = (props) => {
     date = date.toString().slice(0, 16);
     return date;
   };
-  const userpageStyles = {
-    backgroundImage: '../../public/Images/greywallpaper.jpeg',
-  };
+
   console.log(games);
   console.log(props, 'props');
   return (

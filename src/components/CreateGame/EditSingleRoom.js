@@ -14,6 +14,7 @@ const EditSingleRoom = (props) => {
   const [hint1, setHint1] = useState('');
   const [hint2, setHint2] = useState('');
   const [hint3, setHint3] = useState('');
+  const [puzzleText, setPuzzleText] = useState({});
   const [narrative, setNarrative] = useState('');
   const [buttonBoolean, setButtonBoolean] = useState(false);
   
@@ -22,31 +23,30 @@ const EditSingleRoom = (props) => {
   
   
 
-    useEffect(() => {            
-      props.getRoom(props.match.params.id)      
-      }, []);
+  useEffect(() => {
+    props.getRoom(props.match.params.id);
+  }, []);
 
-      useEffect(() => {
-        if (puzzles && puzzles[0].roomdata) {   
-          //Calculating the height we need to subtract from the "top" value in our css                    
-          
-          const puzzleDims = puzzles.reduce((dimensionsObj, currentPuzzle) => {
-            dimensionsObj[currentPuzzle.id] = {
-              top : currentPuzzle.roomdata ? currentPuzzle['roomdata'].top : "",
-              left : currentPuzzle.roomdata ? currentPuzzle['roomdata'].left : "",
-              width: currentPuzzle.roomdata ? currentPuzzle['roomdata'].width : "",
-              height: currentPuzzle.roomdata ? currentPuzzle['roomdata'].height : ""
-            };    
-            return dimensionsObj;
-          }, {});
-          console.log(puzzles, "PUZZLES");
-          setPuzzleDimensions(puzzleDims);
-          console.log("PUZZLE DIM OBJECT", puzzleDims);          
-          //Need this value because we need to subtract the INPUT LABEL HEIGHT and the BUTTONS heights if we want to be able to place our puzzle ANYWHERE on background div...                    
-        }
-      }, [props.room]);
 
-      //770 is as far as you can go with the "top" css to stay in the background div
+  useEffect(() => {
+    if (puzzles && puzzles[0].roomdata) {
+      //Calculating the height we need to subtract from the "top" value in our css
+
+      const puzzleDims = puzzles.reduce((dimensionsObj, currentPuzzle) => {
+        dimensionsObj[currentPuzzle.id] = {
+          top: currentPuzzle.roomdata ? currentPuzzle['roomdata'].top : '',
+          left: currentPuzzle.roomdata ? currentPuzzle['roomdata'].left : '',
+          width: currentPuzzle.roomdata ? currentPuzzle['roomdata'].width : '',
+          height: currentPuzzle.roomdata
+            ? currentPuzzle['roomdata'].height
+            : '',
+        };
+        return dimensionsObj;
+      }, {});
+      setPuzzleDimensions(puzzleDims);
+    }
+  }, [props.room]);
+
 
       const checkDimensionValues = (field, value) => {                       
         if(value < 0){
@@ -68,40 +68,37 @@ const EditSingleRoom = (props) => {
         puzzleProp[puzzleId][e.target.name] = e.target.value;
         setPuzzleDimensions(puzzleProp);
       
-      }
+      }    
 
-      const handleSubmit = async(puzzleDims, roomId) => {
-        console.log(puzzleDims);
-        console.log(roomId);
-        
-        //const objValuesArray = Object.values(puzzleDims);        
-        
+  const handleSubmit = async (puzzleDims, roomId) => {
 
-  await Promise.all([
-      axios.put(`/api/rooms/${roomId}/roomdata`, 
-        puzzleDimensions
-      ),
+
+    console.log(puzzleText, 'puzzleText');
+    await Promise.all([
+      axios.put(`/api/rooms/${roomId}/roomdata`, {
+        puzzleDimensions,
+      }),
       axios.put(`/api/rooms/${roomId}`, { narrative }),
     ]);
-        //This line would just push them back to whatever they were on before hitting "customize"        
-        //Naive solution for now. If they were to be on a random page, and Manually type in the URL to take them to edit a room, This will take them back to that random Page
-        props.history.goBack();           
-      }
-       
-       if(!room.puzzles || Object.keys(puzzleDimensions).length === 0){
-         return <h1> Nothing to see here ! </h1>
-       }
-       const styles = {
-        backgroundImage: `url(${room.imgSrc})`,
-        height: '800px',
-        width: '1440px',
-        position: 'relative',
-        backgroundSize: 'cover',
-        margin: '0 auto'
-            }                        
-return (
-  <div id="edit-room">
-       <div style={{ width: '100%', textAlign: 'center' }}>
+    //This line would just push them back to whatever they were on before hitting "customize"
+    //Naive solution for now. If they were to be on a random page, and Manually type in the URL to take them to edit a room, This will take them back to that random Page
+    props.history.goBack();
+  };
+
+  if (!room.puzzles || Object.keys(puzzleDimensions).length === 0) {
+    return <h1> Nothing to see here ! </h1>;
+  }
+  const styles = {
+    backgroundImage: `url(${room.imgSrc})`,
+    height: '800px',
+    width: '1440px',
+    position: 'relative',
+    backgroundSize: 'cover',
+    margin: '0 auto',
+  };
+  return (
+    <div id="edit-room">
+      <div style={{ width: '100%', textAlign: 'center' }}>
         <span className="narrative">EDIT ROOM NARRATIVE HERE</span> <br></br>
         <input
           className="narrative"
@@ -109,35 +106,138 @@ return (
           onChange={(e) => setNarrative(e.target.value)}
         ></input>
       </div>
-    {room.puzzles.map(puzzle => {
-        return (<div key={puzzle.id}>
-          <span style={{ fontWeight:"bold", color: "red"}} >{puzzle.name} : </span> 
-        <label style={{ fontWeight:"bolder", color:"chartreuse" }}> Distance from top <input name="top" type="text" value={ puzzleDimensions[puzzle.id] ? puzzleDimensions[puzzle.id].top : ""} onChange={(e, puzzleId) => handleDimensionChanges(e, puzzle.id)} /></label>
-        <label style={{ fontWeight:"bolder", color:"chartreuse" }}> Distance from left <input name="left" type="text" value={ puzzleDimensions[puzzle.id] ? puzzleDimensions[puzzle.id].left : ""} onChange={(e, puzzleId) => handleDimensionChanges(e, puzzle.id)} /></label>
-        <label style={{ fontWeight:"bolder", color:"chartreuse" }}> Width <input type="text" name="width" value={ puzzleDimensions[puzzle.id] ? puzzleDimensions[puzzle.id].width : ""} onChange={(e, puzzleId) => handleDimensionChanges(e, puzzle.id)} /></label>
-        <label style={{ fontWeight:"bolder", color:"chartreuse" }}> Height <input type="text" name="height" value={ puzzleDimensions[puzzle.id] ? puzzleDimensions[puzzle.id].height : ""} onChange={(e, puzzleId) => handleDimensionChanges(e, puzzle.id)} /> </label>
-        <br />
-        <br />        
+      {room.puzzles.map((puzzle) => {
+        return (
+          <div key={puzzle.id}>
+            <span style={{ fontWeight: 'bold', color: 'red' }}>
+              {puzzle.name} :{' '}
+            </span>
+            <label style={{ fontWeight: 'bolder', color: 'chartreuse' }}>
+              {' '}
+              Distance from top{' '}
+              <input
+                name="top"
+                type="text"
+                value={
+                  puzzleDimensions[puzzle.id]
+                    ? puzzleDimensions[puzzle.id].top
+                    : ''
+                }
+                onChange={(e, puzzleId) => handleDimensionChanges(e, puzzle.id)}
+              />
+            </label>
+            <label style={{ fontWeight: 'bolder', color: 'chartreuse' }}>
+              {' '}
+              Distance from left{' '}
+              <input
+                name="left"
+                type="text"
+                value={
+                  puzzleDimensions[puzzle.id]
+                    ? puzzleDimensions[puzzle.id].left
+                    : ''
+                }
+                onChange={(e, puzzleId) => handleDimensionChanges(e, puzzle.id)}
+              />
+            </label>
+            <label style={{ fontWeight: 'bolder', color: 'chartreuse' }}>
+              {' '}
+              Width{' '}
+              <input
+                type="text"
+                name="width"
+                value={
+                  puzzleDimensions[puzzle.id]
+                    ? puzzleDimensions[puzzle.id].width
+                    : ''
+                }
+                onChange={(e, puzzleId) => handleDimensionChanges(e, puzzle.id)}
+              />
+            </label>
+            <label style={{ fontWeight: 'bolder', color: 'chartreuse' }}>
+              {' '}
+              Height{' '}
+              <input
+                type="text"
+                name="height"
+                value={
+                  puzzleDimensions[puzzle.id]
+                    ? puzzleDimensions[puzzle.id].height
+                    : ''
+                }
+                onChange={(e, puzzleId) => handleDimensionChanges(e, puzzle.id)}
+              />{' '}
+            </label>
+            <br />
+            <br />
+            <div id="puzzle-text">
+              <label for="puzzle-text">ENTER PUZZLE TEXT</label>
+              <textarea
+                className="puzzle-text"
+                onChange={(e) =>
+                  setPuzzleText((prev) => ({
+                    ...prev,
+                    [puzzle.id]: e.target.value,
+                  }))
+                }
+                placeholder="include any text you would like with your puzzle here"
+                id="puzzle-text"
+              />
+            </div>
           </div>
-        )
+        );
       })}
-      <button onClick={()=>setShowPrompt(true)}> INSTRUCTIONS </button>
-        <button disabled={buttonBoolean} onClick={()=>handleSubmit(puzzleDimensions, room.id)}> Submit </button>
-   
-    <div style={ styles }>                                                  
-      {room.puzzles.map(puzzle => {
-          return (            
-            <div style={{ overflow:"hidden", border : "4px solid red", position : "absolute", top : `${ puzzleDimensions[puzzle.id] ? puzzleDimensions[puzzle.id].top : ""}px`, left : `${ puzzleDimensions[puzzle.id] ? puzzleDimensions[puzzle.id].left : ""}px`, width : `${ puzzleDimensions[puzzle.id] ? puzzleDimensions[puzzle.id].width : ""}px`, height : `${ puzzleDimensions[puzzle.id] ? puzzleDimensions[puzzle.id].height : ""}px` }} key={puzzle.id}> {puzzle.name} </div>
-          )
-        })}      
-      <Modal isOpen={showPrompt}>
-        Edit the dimensions above to place your puzzle where you would like ! The red box determines the clickable area for someone to access your puzzle !
-        Once the game is created the only thing that will be visible is your background image...
-        <button onClick={() => setShowPrompt(false)}> Close </button>
-      </Modal>            
 
+      <button onClick={() => setShowPrompt(true)}> INSTRUCTIONS </button>
+        <button disabled={buttonBoolean} onClick={()=>handleSubmit(puzzleDimensions, room.id)}> Submit </button>
+        {' '}
+        Submit{' '}
+      </button>
+      <div style={styles}>
+        {room.puzzles.map((puzzle) => {
+          return (
+            <div
+              style={{
+                overflow: 'hidden',
+                border: '4px solid red',
+                position: 'absolute',
+                top: `${
+                  puzzleDimensions[puzzle.id]
+                    ? puzzleDimensions[puzzle.id].top
+                    : ''
+                }px`,
+                left: `${
+                  puzzleDimensions[puzzle.id]
+                    ? puzzleDimensions[puzzle.id].left
+                    : ''
+                }px`,
+                width: `${
+                  puzzleDimensions[puzzle.id]
+                    ? puzzleDimensions[puzzle.id].width
+                    : ''
+                }px`,
+                height: `${
+                  puzzleDimensions[puzzle.id]
+                    ? puzzleDimensions[puzzle.id].height
+                    : ''
+                }px`,
+              }}
+              key={puzzle.id}
+            >
+              {' '}
+              {puzzle.name}{' '}
+            </div>
+          );
+        })}
+        <Modal isOpen={showPrompt}>
+          Edit the dimensions above to place your puzzle where you would like !
+          The red box determines the clickable area for someone to access your
+          puzzle ! Once the game is created the only thing that will be visible
+          is your background image...
+          <button onClick={() => setShowPrompt(false)}> Close </button>
+        </Modal>
+      </div>
     </div>
-    </div> 
   );
 };
 

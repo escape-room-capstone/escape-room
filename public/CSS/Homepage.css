@@ -39,7 +39,9 @@
 }
 #custom-game-div {
   display: flex;
+  flex: 0 0 15%;
   flex-direction: column;
+  justify-content: space-between;
   margin: 4rem;
   align-items: center;
   text-shadow: 1px 1px 2px black;
@@ -56,6 +58,8 @@
 }
 #custom-game-div-wrapper {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 #custom-game-div img {
   height: 4rem;

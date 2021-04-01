@@ -16,3 +16,15 @@
   font-weight: bold;
   font-size: 1.5rem;
 }
+
+#puzzle-text {
+  display: flex;
+  flex-direction: column;
+}
+
+#puzzle-text textarea {
+  font-size: 1.3rem;
+  width: 90%;
+  height: 5rem;
+  margin-bottom: 0.5rem;
+}

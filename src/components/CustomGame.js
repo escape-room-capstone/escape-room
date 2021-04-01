@@ -107,6 +107,7 @@ const _CustomGame = (props) => {
               width: '1440px',
               backgroundSize: 'cover',
               margin: '0 auto',
+              position: "relative"
             }}
           >
             {Object.keys(roomStatus).map((puzzleNum, idx) => (
@@ -133,7 +134,7 @@ const _CustomGame = (props) => {
                       : ''
                   }px`,
                   border: '4px solid red',
-                  position: 'relative',
+                  position: 'absolute',
                 }}
                 key={idx}
               >

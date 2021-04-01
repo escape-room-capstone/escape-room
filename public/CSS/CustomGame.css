@@ -4,13 +4,10 @@
 }
 
 #lock-images {
-  width: 1440px;
+  width: 1220px;
+  align-items: center;
   display: flex;
-  /* width: 90%; */
-  /* display: flex; */
   justify-content: flex-end;
-  /* text-align: right; */
-  margin: 0 auto;
 }
 
 #lock-images img {

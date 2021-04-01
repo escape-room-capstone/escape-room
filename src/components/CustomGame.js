@@ -109,8 +109,8 @@ const _CustomGame = (props) => {
           {puzzles.map((puzzle, idx) => (
             <div key={idx}>
               <img
-                height="60px"
-                width="60px"
+                height="40px"
+                width="40px"
                 src={
                   roomStatus[puzzle.id].solved
                     ? '/Images/check.png'
@@ -125,11 +125,13 @@ const _CustomGame = (props) => {
             id="game-room"
             style={{
               backgroundImage: `url(${room.imgSrc})`,
-              height: '800px',
-              width: '1440px',
+              height: '559px',
+              width: '1000px',
+              backgroundPosition: 'center',
               backgroundSize: 'cover',
               margin: '0 auto',
               position: 'relative',
+              border: '5px solid black',
             }}
           >
             {Object.keys(roomStatus).map((puzzleNum, idx) => (

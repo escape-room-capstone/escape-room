@@ -8,25 +8,19 @@ import '../../../public/CSS/EditSingleRoom.css';
 const EditSingleRoom = (props) => {
   const { room } = props;
   const { puzzles } = room;
-  //Need this value for line 118, the label where we are dynamically rendering our "top" css.  
-  const [ showPrompt, setShowPrompt ] = useState(false);  
-  const [ puzzleDimensions, setPuzzleDimensions ] = useState({});
+  //Need this value for line 118, the label where we are dynamically rendering our "top" css.
+  const [showPrompt, setShowPrompt] = useState(false);
+  const [puzzleDimensions, setPuzzleDimensions] = useState({});
   const [hint1, setHint1] = useState('');
   const [hint2, setHint2] = useState('');
   const [hint3, setHint3] = useState('');
   const [puzzleText, setPuzzleText] = useState({});
   const [narrative, setNarrative] = useState('');
   const [buttonBoolean, setButtonBoolean] = useState(false);
-  
-
-  
-  
-  
 
   useEffect(() => {
     props.getRoom(props.match.params.id);
   }, []);
-
 
   useEffect(() => {
     if (puzzles && puzzles[0].roomdata) {
@@ -47,37 +41,34 @@ const EditSingleRoom = (props) => {
     }
   }, [props.room]);
 
+  const checkDimensionValues = (field, value) => {
+    if (value < 0) {
+      return true;
+    }
+    if ((field === 'top' && value > 790) || value < 0) {
+      return true;
+    }
+    if ((field === 'left' && value > 1430) || value < 0) {
+      return true;
+    }
+    return false;
+  };
 
-      const checkDimensionValues = (field, value) => {                       
-        if(value < 0){
-          return true
-        }
-        if(field === 'top' && value > 790 || value < 0){
-              return true                    
-        }        
-        if(field === 'left' && value > 1430 || value < 0){
-          return true
-        }        
-          return false
-      }
-
-      const handleDimensionChanges = (e, puzzleId) => {
-        e.preventDefault();
-        setButtonBoolean(checkDimensionValues(e.target.name, e.target.value));
-        const puzzleProp = {...puzzleDimensions};        
-        puzzleProp[puzzleId][e.target.name] = e.target.value;
-        setPuzzleDimensions(puzzleProp);
-      
-      }    
+  const handleDimensionChanges = (e, puzzleId) => {
+    e.preventDefault();
+    setButtonBoolean(checkDimensionValues(e.target.name, e.target.value));
+    const puzzleProp = { ...puzzleDimensions };
+    puzzleProp[puzzleId][e.target.name] = e.target.value;
+    setPuzzleDimensions(puzzleProp);
+  };
 
   const handleSubmit = async (puzzleDims, roomId) => {
-
-
     console.log(puzzleText, 'puzzleText');
     await Promise.all([
-      axios.put(`/api/rooms/${roomId}/roomdata`, 
+      axios.put(`/api/rooms/${roomId}/roomdata`, {
         puzzleDimensions,
-      ),
+        puzzleText,
+      }),
       axios.put(`/api/rooms/${roomId}`, { narrative }),
     ]);
     //This line would just push them back to whatever they were on before hitting "customize"
@@ -186,9 +177,15 @@ const EditSingleRoom = (props) => {
             </div>
           </div>
         );
-      })}      
+      })}
       <button onClick={() => setShowPrompt(true)}> INSTRUCTIONS </button>
-        <button disabled={buttonBoolean} onClick={()=>handleSubmit(puzzleDimensions, room.id)}> Submit </button>            
+      <button
+        disabled={buttonBoolean}
+        onClick={() => handleSubmit(puzzleDimensions, room.id)}
+      >
+        {' '}
+        Submit{' '}
+      </button>
       <div style={styles}>
         {room.puzzles.map((puzzle) => {
           return (
@@ -233,7 +230,7 @@ const EditSingleRoom = (props) => {
           <button onClick={() => setShowPrompt(false)}> Close </button>
         </Modal>
       </div>
-    </div>    
+    </div>
   );
 };
 

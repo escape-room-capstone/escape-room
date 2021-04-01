@@ -1,12 +1,28 @@
-#choose-theme {
+#columnDiv {
   display: flex;
+  flex-direction: column;
 }
 
-#choose-theme > div {
+#themeSection {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem;
+}
+
+#choose-theme {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   flex: 0 0 25%;
   height: 10rem;
-  justify-content: space-between;
+  justify-content: space-around center;
+}
+
+#themeMap {
+  padding: 1rem;
 }
 
 #choose-theme img {
+  height: 12rem;
+  width: 16rem;
 }

@@ -48,14 +48,12 @@ const syncAndSeed = async () => {
     theme: 'riddlez',
     public: true,
     imgSrc: '/Theme_Images/home.jpg',
-    // numPuzzles: 15,
     description: `You wake up one morning only to find out that you are trapped in a House of Riddles. The only way out is to solve every riddle! But there's a catch...`,
   });
   const defaultBank = await Game.create({
     title: 'Bank Robbery',
     theme: 'bank',
     public: true,
-    // numPuzzles: 12,
     imgSrc: 'Images/bank_background.jpg',
     description: `Rob a bank and escape with all the $$$`,
   });
@@ -63,7 +61,6 @@ const syncAndSeed = async () => {
     title: 'BobaFett',
     theme: 'starwars',
     public: true,
-    // numPuzzles: 12,
     imgSrc:
       'https://static2.srcdn.com/wordpress/wp-content/uploads/2020/12/The-Mandalorian-Concept-Art-5-Boba-Fett-Ship.jpg?q=50&fit=crop&w=740&h=370',
     description: `description TBD`,
@@ -73,11 +70,11 @@ const syncAndSeed = async () => {
   for (let i = 1; i < 16; i++) {
     await Puzzle.create({ name: `Puzzle${i}` });
   }
-  //default puzzles for the Haunted Game
+  //default puzzles for the Haunted Game/riddlezGame
   const hauntedId = defaultHauntedGame.id;
   const houseGameId = defaultHouseOfRiddlez.id;
 
-  //seed puzzles for default Haunted Game
+  //seed puzzles for default Haunted Game/riddlezGame
   await Promise.all([
     GamePuzzles.create({ gameId: hauntedId, puzzleId: 1 }),
     GamePuzzles.create({ gameId: hauntedId, puzzleId: 2 }),
@@ -165,6 +162,7 @@ const syncAndSeed = async () => {
         '/Theme_Images/Forest2.jpg',
         '/Theme_Images/Forest3.jpg',
         '/Theme_Images/Forest4.jpeg',
+        'Theme_Images/Forest5.jpg',
       ],
       type: 'custom',
     }),
@@ -199,7 +197,7 @@ const syncAndSeed = async () => {
     }),
 
     Theme.create({
-      name: 'House',
+      name: 'Riddlez',
       backgroundImageOne: '../Theme_Images/home.jpg',
       images: [
         '../Theme_Images/home.jpg',
@@ -211,11 +209,131 @@ const syncAndSeed = async () => {
       ],
       type: 'default',
     }),
+    Theme.create({
+      name: 'Airport',
+      backgroundImageOne: '../Theme_Images/airport3.jpg',
+      images: [
+        '../Theme_Images/airport1.jpg',
+        '../Theme_Images/airport2.jpg',
+        '../Theme_Images/airport3.jpg',
+        '../Theme_Images/airport4.jpg',
+        '../Theme_Images/airport5.jpg',
+      ],
+      type: 'custom',
+    }),
+    Theme.create({
+      name: 'City',
+      backgroundImageOne: '../Theme_Images/city6.jpg',
+      images: [
+        '../Theme_Images/city1.jpg',
+        '../Theme_Images/city2.jpg',
+        '../Theme_Images/city3.jpg',
+        '../Theme_Images/city4.jpg',
+        '../Theme_Images/city5.jpg',
+        '../Theme_Images/city6.jpg',
+        '../Theme_Images/city7.jpg',
+      ],
+      type: 'custom',
+    }),
+    Theme.create({
+      name: 'Dentist',
+      backgroundImageOne: '../Theme_Images/dentist1.jpg',
+      images: ['../Theme_Images/dentist1.jpg', '../Theme_Images/dentist2.jpg'],
+      type: 'custom',
+    }),
+    Theme.create({
+      name: 'Facility',
+      backgroundImageOne: '../Theme_Images/facility1.jpg',
+      images: [
+        '../Theme_Images/facility1.jpg',
+        '../Theme_Images/facility2.jpg',
+        '../Theme_Images/facility3.jpg',
+      ],
+      type: 'custom',
+    }),
+    Theme.create({
+      name: 'Office',
+      backgroundImageOne: '../Theme_Images/office1.jpg',
+      images: [
+        '../Theme_Images/police4.jpg',
+        '../Theme_Images/office1.jpg',
+        '../Theme_Images/office2.jpg',
+        '../Theme_Images/home3.jpg',
+        '../Theme_Images/school5.jpg',
+        '../Theme_Images/school7.jpg',
+      ],
+      type: 'custom',
+    }),
+    Theme.create({
+      name: 'Park',
+      backgroundImageOne: '../Theme_Images/park2.jpg',
+      images: [
+        '../Theme_Images/park1.jpg',
+        '../Theme_Images/park2.jpg',
+        '../Theme_Images/park3.jpg',
+        '../Theme_Images/park4.jpg',
+        '../Theme_Images/park5.jpg',
+        '../Theme_Images/park6.jpg',
+        '../Theme_Images/park7.jpg',
+      ],
+      type: 'custom',
+    }),
+    Theme.create({
+      name: 'Police',
+      backgroundImageOne: '../Theme_Images/police1.jpg',
+      images: [
+        '../Theme_Images/police1.jpg',
+        '../Theme_Images/police2.jpg',
+        '../Theme_Images/police3.jpg',
+        '../Theme_Images/police4.jpg',
+      ],
+      type: 'custom',
+    }),
+    Theme.create({
+      name: 'School',
+      backgroundImageOne: '../Theme_Images/school1.jpg',
+      images: [
+        '../Theme_Images/school1.jpg',
+        '../Theme_Images/school2.jpg',
+        '../Theme_Images/school3.jpg',
+        '../Theme_Images/school4.jpg',
+        '../Theme_Images/school5.jpg',
+        '../Theme_Images/school6.jpg',
+        '../Theme_Images/school7.jpg',
+      ],
+      type: 'custom',
+    }),
+    Theme.create({
+      name: 'Shopping',
+      backgroundImageOne: '../Theme_Images/shopping1.jpg',
+      images: [
+        '../Theme_Images/shopping1.jpg',
+        '../Theme_Images/shopping2.jpg',
+        '../Theme_Images/shopping3.jpg',
+        '../Theme_Images/shopping4.jpg',
+      ],
+      type: 'custom',
+    }),
   ]);
 
   // const [cody, arwinder, kate, nes, steve, roman] = users;
 
-  const [forest, cafe, house, haunted, bank] = themes;
+  const [
+    forest,
+    cafe,
+    haunted,
+    bank,
+    riddlez,
+    airport,
+    city,
+    dentist,
+    facility,
+    office,
+    park,
+    police,
+    school,
+    shopping,
+  ] = themes;
 
   // return users;
 };

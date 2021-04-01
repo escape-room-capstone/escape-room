@@ -15,29 +15,31 @@ const ChooseTheme = (props) => {
   const defaultThemes = themes.filter((theme) => theme.type === 'default');
 
   return (
-    <div>
-      <h3> You can choose from one of the following themes below... </h3>
-      <ul>
-        {/* {defaultThemes.map((theme, idx) => {
-          return <li key={idx}>{theme}</li>;
-        })} */}
-        {defaultThemes.map((theme, idx) => (
-          <div key={theme.id}>
-            <h2>{theme.name}</h2>{' '}
-            <img
-              className="createGameImg"
-              // onClick={() => imgClickHandler(theme.id)}
-              src={theme.backgroundImageOne}
-              alt="theme background image"
-            ></img>
-          </div>
-        ))}
-      </ul>
-      <h3> Or choose one of the following themes... </h3>
-      <div id="choose-theme">
-        {themes.map((theme) => {
-          return (
-            <div key={theme.id}>
+    <div id="columnDiv">
+      <div id="themeSection">
+        <h3>
+          You can choose from one of the following pre-built games below...
+        </h3>
+        <div id="choose-theme">
+          {defaultThemes.map((theme, idx) => (
+            <div id="themeMap" key={theme.id}>
+              <h2>{theme.name}</h2>
+              <img
+                className="createGameImg"
+                // onClick={() => imgClickHandler(theme.id)}
+                src={theme.backgroundImageOne}
+                alt="theme background image"
+              ></img>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div id="themeSection">
+        <h3> Or choose one of the following themes... </h3>
+        <div id="choose-theme">
+          {themes.map((theme) => (
+            <div id="themeMap" key={theme.id}>
               <h2> {theme.name} </h2>
               <img
                 className="createGameImg"
@@ -46,8 +48,8 @@ const ChooseTheme = (props) => {
                 alt="theme background image"
               ></img>
             </div>
-          );
-        })}
+          ))}
+        </div>
       </div>
     </div>
   );

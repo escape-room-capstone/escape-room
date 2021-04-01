@@ -34,14 +34,14 @@ const CreateGame = (props) => {
   }, []);
 
   const generatePuzzle = (puzzleName, props) => {
-    if(puzzleName !== ""){
-    const Component = componentMapping[puzzleName];
-    return <Component {...props} />;
+    if (puzzleName !== '') {
+      const Component = componentMapping[puzzleName];
+      return <Component {...props} />;
     }
   };
-  
+
   const { puzzles, theme } = props;
-  console.log(puzzles, theme);
+  // console.log(puzzles, theme);
   //USING hard-coded user#2 for axios call...
   const submitCreateGame = async () => {
     const numPuzzles = puzzleArray.length;
@@ -88,19 +88,26 @@ const CreateGame = (props) => {
     //else if (difference === 0 && theme.type === 'custom') {
   };
 
-  const handleChange = (e, puzzleId) => {
-    // console.log('we are here');
-    if (e.target.checked) {
-      setPuzzleArray([...puzzleArray, puzzleId]);
-    } else if (!e.target.checked) {
-      const index = puzzleArray.indexOf(puzzleId);
+  // const handleChange = (e, puzzleId) => {
+  //   // console.log('we are here');
+  //   if (e.target.checked) {
+  //     setPuzzleArray([...puzzleArray, puzzleId]);
+  //   } else if (!e.target.checked) {
+  //     const index = puzzleArray.indexOf(puzzleId);
 
-      if (index > -1) {
-        setPuzzleArray(puzzleArray.filter((id) => id !== puzzleId));
-      }
+  //     if (index > -1) {
+  //       setPuzzleArray(puzzleArray.filter((id) => id !== puzzleId));
+  //     }
+  //   }
+  // };
+  const handleChange = (e, puzzleId) => {
+    if (!puzzleArray.includes(puzzleId)) {
+      setPuzzleArray([...puzzleArray, puzzleId]);
+    } else {
+      setPuzzleArray(puzzleArray.filter((id) => id !== puzzleId));
     }
   };
-
+  console.log(puzzleArray, 'puzzleArray');
   return (
     <div id="create-game">
       <h1 style={{ color: '#e6e6e6' }}> Theme : {theme.name} </h1>
@@ -138,19 +145,27 @@ const CreateGame = (props) => {
           {puzzles.map((puzzle, idx) => {
             // const Component = componentMapping[puzzle.name];
             return (
-              <div key={puzzle.id} className="puzzle">
+              <div
+                onClick={(e) => handleChange(e, puzzle.id)}
+                key={puzzle.id}
+                className={`puzzle ${
+                  puzzleArray.includes(puzzle.id) ? 'selected' : ''
+                }`}
+              >
                 {/* puzzle.nickname instead, like "Magic Squares, etc"  ???*/}
                 <div>
-                  <h3>{puzzle.name}</h3>
+                  <h3 className="puzzle-name">{puzzle.name}</h3>
                   <button onClick={() => setPuzzleToShow(puzzle.name)}>
                     Try Out
                   </button>
                 </div>
-                <label> Add Puzzle </label>
-                <input
-                  onChange={(e) => handleChange(e, puzzle.id)}
-                  type="checkbox"
-                />
+                <div>
+                  {/* <label> Add</label> */}
+                  {/* <input
+                    onChange={(e) => handleChange(e, puzzle.id)}
+                    type="checkbox"
+                  /> */}
+                </div>
                 {/* <hr /> */}
                 {/* <button
                 style={{ marginBottom: '10px' }}

@@ -162,7 +162,7 @@ const EditSingleRoom = (props) => {
             <br />
             <br />
             <div id="puzzle-text">
-              <label for="puzzle-text">ENTER PUZZLE TEXT</label>
+              <label htmlFor="puzzle-text">ENTER PUZZLE TEXT</label>
               <textarea
                 className="puzzle-text"
                 onChange={(e) =>

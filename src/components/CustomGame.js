@@ -8,20 +8,24 @@ import { fetchUserGame } from '../store/game';
 import '../../public/CSS/CustomGame.css';
 
 const _CustomGame = (props) => {
-  const { room } = props;
-  const { puzzles } = room;
-  console.log('Our Puzzles', puzzles);
+  // const { room } = props;
+  // const { puzzles } = room;
+  // console.log('Our Puzzles', puzzles);
   const [roomStatus, setRoomStatus] = useState({});
   const [puzzleDimensions, setPuzzleDimensions] = useState({});
   const { gameId, roomId } = props.match.params;
+  const [currentPuzzles, setCurrentPuzzles] = useState([]);
   useEffect(() => {
     const getRoom = async () => {
       await props.getRoom(gameId, roomId);
     };
     getRoom();
   }, []);
+
   useEffect(() => {
-    if (puzzles && puzzles[0].roomdata) {
+    if (props.room.id === props.match.params.roomId * 1) {
+      // if (puzzles && puzzles[0].roomdata) {
+      const { puzzles } = props.room;
       const _roomStatus = puzzles.reduce((cluesObj, currentPuzzle) => {
         cluesObj[currentPuzzle.id] = {
           solved: false,
@@ -46,6 +50,7 @@ const _CustomGame = (props) => {
       setPuzzleDimensions(puzzleDims);
       setRoomStatus(_roomStatus);
     }
+    // }
   }, [props.room]);
   console.log(roomStatus, 'roomstatus');
 
@@ -77,6 +82,8 @@ const _CustomGame = (props) => {
     });
   };
 
+  const { room } = props;
+  const { puzzles } = room;
   if (Object.keys(roomStatus).length) {
     return (
       <div>
@@ -84,8 +91,8 @@ const _CustomGame = (props) => {
           <p>{room.narrative}</p>
         </div>
         <div id="lock-images">
-          {puzzles.map((puzzle) => (
-            <div>
+          {puzzles.map((puzzle, idx) => (
+            <div key={idx}>
               <img
                 height="60px"
                 width="60px"
@@ -107,7 +114,7 @@ const _CustomGame = (props) => {
               width: '1440px',
               backgroundSize: 'cover',
               margin: '0 auto',
-              position: "relative"
+              position: 'relative',
             }}
           >
             {Object.keys(roomStatus).map((puzzleNum, idx) => (

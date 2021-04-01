@@ -20,8 +20,18 @@ const _UserGames = (props) => {
     date = date.toString().slice(0, 16);
     return date;
   };
+  
+  
 
   console.log(games);
+  //helper function used to sort the rooms in order using the room['number']
+  const sortGameRooms = (gameRooms) => {
+    const gameRoomsSorted = gameRooms.sort((roomA, roomB) => {
+      return roomA.number - roomB.number
+    })
+    
+    return gameRoomsSorted[0].id
+  }
   console.log(props, 'props');
   return (
     <div id="user-games">
@@ -36,7 +46,7 @@ const _UserGames = (props) => {
             <p>Description: {game.description}</p>
             <p>Created On {`${formatDate(new Date(game.createdAt))}`}</p>
             <div className="play-button">
-              <Link to={`/games/${game.id}/${game.rooms[0].id}`}>
+              <Link to={`/games/${game.id}/${sortGameRooms(game.rooms)}`}>
                 <button className="play">PLAY</button>
               </Link>
             </div>

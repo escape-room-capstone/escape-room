@@ -20,10 +20,17 @@ const AssignPuzzles = (props) => {
       ).data;
       setGame(game);
     };
-    fetchGames();
+    fetchGames();    
   }, []);
 
   console.log(game);
+
+
+  //sorted room array by number property
+  const sortedRoomArray = game.rooms ? game.rooms.sort((roomA, roomB) => {
+    return roomA.number - roomB.number
+  }) : [];
+  
 
   const handleRemove = (roomId, puzzleId) => {
     setPuzzleArray([...unassignedPuzzles, puzzleId]);
@@ -42,8 +49,8 @@ const AssignPuzzles = (props) => {
         })}{' '}
       </h2>
       <hr />
-      {game.rooms
-        ? game.rooms.map((room) => {
+      {
+        sortedRoomArray.map((room) => {
             return (
               <div key={room.id}>
                 <p> Room {room.number}</p>
@@ -81,8 +88,7 @@ const AssignPuzzles = (props) => {
                 </ul>
               </div>
             );
-          })
-        : 'No rooms'}
+          })        }
       <button
         onClick={() => props.history.push(`/users/${userId}/account/games`)}
       >

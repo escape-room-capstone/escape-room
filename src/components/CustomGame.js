@@ -83,6 +83,21 @@ const _CustomGame = (props) => {
         <div id="game-narrative">
           <p>{room.narrative}</p>
         </div>
+        <div id="lock-images">
+          {puzzles.map((puzzle) => (
+            <div>
+              <img
+                height="60px"
+                width="60px"
+                src={
+                  roomStatus[puzzle.id].solved
+                    ? '/Images/check.png'
+                    : '/Images/lock.png'
+                }
+              />
+            </div>
+          ))}
+        </div>
         <div>
           <div
             id="game-room"

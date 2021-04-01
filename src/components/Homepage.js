@@ -53,29 +53,21 @@ const Homepage = (props) => {
         /haunted/1
       </h3> */}
       {/* <h1> Welcome to escape-room </h1> */}
-      <div>
-        <Navbar />
-      </div>
+
+      <Navbar />
+
       <div className="heading">
-        <h1>Select Game</h1>{' '}
-        {props.auth.id && (
-          <Link to="/choosetheme">
-            <button> + CREATE </button>
-          </Link>
-        )}
+        <h2>Select Game</h2>
       </div>
       <div id="game-div-wrapper">
         {defaultGames.map((game) => {
           return (
             <div id="game-div" key={game.id}>
               {/* <Link to={`${removeSpaceFromTheme(game.title)}/${game.id}`}>   */}
-              <div>
-                <div>
-                  <h3>{game.title}</h3>
-                </div>
-                <img src={game.imgSrc} />
-              </div>
-              <p>{game.description}</p>
+
+              <h3>{game.title}</h3>
+              <img src={game.imgSrc} />
+              {game.description}
 
               <Link to={`/${game.theme}/${game.id}/1`}>
                 <button className="play">PLAY</button>
@@ -87,11 +79,25 @@ const Homepage = (props) => {
       <hr />
 
       <h1 className="created-games">Games You've Created</h1>
+      <div className="heading">
+        {props.auth.id && (
+          <Link to="/choosetheme">
+            <button> + CREATE </button>
+          </Link>
+        )}
+      </div>
+
       <div id="custom-game-div-wrapper">
         {customGames.length > 0 ? (
           customGames.map((game, idx) => (
             <div id="custom-game-div" key={idx}>
-              <span style={{ fontSize: '1.4rem', textAlign: 'center' }}>
+              <span
+                style={{
+                  fontSize: '1.2rem',
+                  textAlign: 'center',
+                  // paddingBottom: '5px',
+                }}
+              >
                 {game.title}
               </span>
               <img src={game.rooms[0].imgSrc} />

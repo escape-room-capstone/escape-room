@@ -1,4 +1,5 @@
 #landing {
+  min-height: 100vh;
   font-family: Georgia, 'Times New Roman', Times, serif;
   text-align: center;
   height: 875px;
@@ -13,7 +14,7 @@
   text-shadow: #000000 1px 10px 10px;
   padding-top: 6rem;
   margin-top: 0;
-  font-size: 8.5rem;
+  font-size: 7rem;
   font-family: Georgia, 'Times New Roman', Times, serif;
   color: white;
 }

@@ -2,13 +2,13 @@ import React, { useEffect } from 'react';
 import { fetchThemes } from '../../store/theme';
 import { fetchTheme } from '../../store/singleTheme';
 import { connect } from 'react-redux';
+import '../../../public/CSS/ChooseTheme.css';
 
 const ChooseTheme = (props) => {
   useEffect(() => {
     props.getThemes();
   }, []);
 
-  
   // const defaultThemes = ['haunted', 'house', 'bank', 'starwars'];
   const { themes } = props;
   //default themes will be theme with type of default
@@ -34,19 +34,21 @@ const ChooseTheme = (props) => {
         ))}
       </ul>
       <h3> Or choose one of the following themes... </h3>
-      {themes.map((theme) => {
-        return (
-          <div key={theme.id}>
-            <h2> {theme.name} </h2>
-            <img
-              className="createGameImg"
-              onClick={() => props.history.push(`/theme/${theme.id}`)}
-              src={theme.backgroundImageOne}
-              alt="theme background image"
-            ></img>
-          </div>
-        );
-      })}
+      <div id="choose-theme">
+        {themes.map((theme) => {
+          return (
+            <div key={theme.id}>
+              <h2> {theme.name} </h2>
+              <img
+                className="createGameImg"
+                onClick={() => props.history.push(`/theme/${theme.id}`)}
+                src={theme.backgroundImageOne}
+                alt="theme background image"
+              ></img>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

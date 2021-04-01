@@ -241,7 +241,6 @@ router.post('/:userId/games/custom', async (req, res, next) => {
       where: { id: game.id },
       include: { model: Room, order: [['id', 'ASC']], include: [Puzzle] },
     });
-    console.log(game.rooms, 'game.rooms');
     // console.log(game, 'game');
     res.send(game);
   } catch (ex) {

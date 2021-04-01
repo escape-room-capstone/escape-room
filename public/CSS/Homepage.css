@@ -1,6 +1,7 @@
 #homepage {
   color: white;
   position: relative;
+  background-position: center;
   background-size: cover;
   font-family: Georgia, 'Times New Roman', Times, serif;
   background-image: url('../Images/keys.jpeg');

@@ -1,0 +1,12 @@
+#choose-theme {
+  display: flex;
+}
+
+#choose-theme > div {
+  flex: 0 0 25%;
+  height: 10rem;
+  justify-content: space-between;
+}
+
+#choose-theme img {
+}

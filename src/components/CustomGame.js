@@ -8,6 +8,7 @@ import { fetchUserGame } from '../store/game';
 import '../../public/CSS/CustomGame.css';
 import '../../public/CSS/Burger.css';
 import { slide as Menu } from 'react-burger-menu';
+import { Link } from 'react-router-dom';
 
 const _CustomGame = (props) => {
   //this may have been causing a bug
@@ -91,15 +92,15 @@ const _CustomGame = (props) => {
     return (
       <div>
         <Menu>
-          <a id="home" className="menu-item" href="/">
+          <Link className="menu-item" to="/">
             Home
-          </a>
-          <a id="quit" className="menu-item" href="/about">
-            Quit
-          </a>
-          <a className="menu-item--small" href="">
+          </Link>
+          <Link className="menu-item--small" to="">
             Profile
-          </a>
+          </Link>
+          <Link id="quit" className="menu-item" to="">
+            Quit
+          </Link>
         </Menu>
         <div id="game-narrative">
           <p>{room.narrative}</p>

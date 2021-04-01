@@ -9,13 +9,18 @@ const EditSingleRoom = (props) => {
   const { room } = props;
   const { puzzles } = room;
   //Need this value for line 118, the label where we are dynamically rendering our "top" css.  
-  const [ showPrompt, setShowPrompt ] = useState(false);
-  const [ inputLabelHeight, setInputLabelHeight ] = useState(0);
+  const [ showPrompt, setShowPrompt ] = useState(false);  
   const [ puzzleDimensions, setPuzzleDimensions ] = useState({});
   const [hint1, setHint1] = useState('');
   const [hint2, setHint2] = useState('');
   const [hint3, setHint3] = useState('');
   const [narrative, setNarrative] = useState('');
+  const [buttonBoolean, setButtonBoolean] = useState(false);
+  
+
+  
+  
+  
 
     useEffect(() => {            
       props.getRoom(props.match.params.id)      
@@ -37,13 +42,28 @@ const EditSingleRoom = (props) => {
           console.log(puzzles, "PUZZLES");
           setPuzzleDimensions(puzzleDims);
           console.log("PUZZLE DIM OBJECT", puzzleDims);          
-          //Need this value because we need to subtract the INPUT LABEL HEIGHT and the BUTTONS heights if we want to be able to place our puzzle ANYWHERE on background div...
-          setInputLabelHeight(puzzles.length * 52 + 21)          
+          //Need this value because we need to subtract the INPUT LABEL HEIGHT and the BUTTONS heights if we want to be able to place our puzzle ANYWHERE on background div...                    
         }
       }, [props.room]);
 
+      //770 is as far as you can go with the "top" css to stay in the background div
+
+      const checkDimensionValues = (field, value) => {                       
+        if(value < 0){
+          return true
+        }
+        if(field === 'top' && value > 790 || value < 0){
+              return true                    
+        }        
+        if(field === 'left' && value > 1430 || value < 0){
+          return true
+        }        
+          return false
+      }
+
       const handleDimensionChanges = (e, puzzleId) => {
         e.preventDefault();
+        setButtonBoolean(checkDimensionValues(e.target.name, e.target.value));
         const puzzleProp = {...puzzleDimensions};        
         puzzleProp[puzzleId][e.target.name] = e.target.value;
         setPuzzleDimensions(puzzleProp);
@@ -52,12 +72,15 @@ const EditSingleRoom = (props) => {
 
       const handleSubmit = async(puzzleDims, roomId) => {
         console.log(puzzleDims);
-        console.log(roomId);        
+        console.log(roomId);
+        
+        //const objValuesArray = Object.values(puzzleDims);        
+        
 
   await Promise.all([
-      axios.put(`/api/rooms/${roomId}/roomdata`, {
-        puzzleDimensions,
-      }),
+      axios.put(`/api/rooms/${roomId}/roomdata`, 
+        puzzleDimensions
+      ),
       axios.put(`/api/rooms/${roomId}`, { narrative }),
     ]);
         //This line would just push them back to whatever they were on before hitting "customize"        
@@ -99,12 +122,12 @@ return (
         )
       })}
       <button onClick={()=>setShowPrompt(true)}> INSTRUCTIONS </button>
-        <button onClick={()=>handleSubmit(puzzleDimensions, room.id)}> Submit </button>
+        <button disabled={buttonBoolean} onClick={()=>handleSubmit(puzzleDimensions, room.id)}> Submit </button>
    
     <div style={ styles }>                                                  
       {room.puzzles.map(puzzle => {
           return (            
-            <div style={{ overflow:"hidden", border : "4px solid red", position : "relative", top : `${ puzzleDimensions[puzzle.id] ? puzzleDimensions[puzzle.id].top : ""}px`, left : `${ puzzleDimensions[puzzle.id] ? puzzleDimensions[puzzle.id].left : ""}px`, width : `${ puzzleDimensions[puzzle.id] ? puzzleDimensions[puzzle.id].width : ""}px`, height : `${ puzzleDimensions[puzzle.id] ? puzzleDimensions[puzzle.id].height : ""}px` }} key={puzzle.id}> {puzzle.name} </div>
+            <div style={{ overflow:"hidden", border : "4px solid red", position : "absolute", top : `${ puzzleDimensions[puzzle.id] ? puzzleDimensions[puzzle.id].top : ""}px`, left : `${ puzzleDimensions[puzzle.id] ? puzzleDimensions[puzzle.id].left : ""}px`, width : `${ puzzleDimensions[puzzle.id] ? puzzleDimensions[puzzle.id].width : ""}px`, height : `${ puzzleDimensions[puzzle.id] ? puzzleDimensions[puzzle.id].height : ""}px` }} key={puzzle.id}> {puzzle.name} </div>
           )
         })}      
       <Modal isOpen={showPrompt}>

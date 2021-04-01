@@ -30,6 +30,7 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
+
 router.get('/:id/roomdata', async (req, res, next) => {
   try {
     const roomDataArray = await RoomData.findAll({
@@ -68,6 +69,7 @@ router.put('/:id', async (req, res, next) => {
     next(ex);
   }
 });
+
 
 
 //use the state from EditSingleRoom.js component to modify our DB entries

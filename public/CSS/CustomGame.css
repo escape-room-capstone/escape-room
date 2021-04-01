@@ -16,3 +16,23 @@
 #lock-images img {
   margin: 0.3rem;
 }
+
+.burger-icon {
+  position: fixed;
+  top: 0;
+  height: 2rem;
+  width: 2rem;
+}
+
+ul.nav-menu {
+  font-size: 1.3rem;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  height: 100vh;
+  list-style-type: none;
+  display: flex;
+  width: 10rem;
+  flex-direction: column;
+  background-color: rgb(202, 27, 114);
+}

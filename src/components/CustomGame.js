@@ -6,6 +6,8 @@ import Modal from 'react-modal';
 import { customStyles } from '../utils/helpers';
 import { fetchUserGame } from '../store/game';
 import '../../public/CSS/CustomGame.css';
+import '../../public/CSS/Burger.css';
+import { slide as Menu } from 'react-burger-menu';
 
 const _CustomGame = (props) => {
   //this may have been causing a bug
@@ -88,6 +90,17 @@ const _CustomGame = (props) => {
   if (Object.keys(roomStatus).length) {
     return (
       <div>
+        <Menu>
+          <a id="home" className="menu-item" href="/">
+            Home
+          </a>
+          <a id="quit" className="menu-item" href="/about">
+            Quit
+          </a>
+          <a className="menu-item--small" href="">
+            Profile
+          </a>
+        </Menu>
         <div id="game-narrative">
           <p>{room.narrative}</p>
         </div>

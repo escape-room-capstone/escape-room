@@ -1,7 +1,20 @@
 #divColumn {
-  margin: 0 2rem 2rem 2rem;
   display: flex;
   flex-direction: column;
+  padding: 0 2rem 2rem 2rem;
+
+  color: #e6e6e6;
+  min-height: 100vh;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+
+  background-color: black;
+  /* filter: opacity(0.9); */
+  background: url('../Images/keysfloorbackground.jpeg') no-repeat center center
+    fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 #divRow {
@@ -22,6 +35,7 @@
 #themeImg {
   height: 15rem;
   width: 20rem;
+  border: white solid 3px;
 }
 
 #singleTheme {

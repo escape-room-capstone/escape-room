@@ -75,9 +75,9 @@ const EditSingleRoom = (props) => {
 
     console.log(puzzleText, 'puzzleText');
     await Promise.all([
-      axios.put(`/api/rooms/${roomId}/roomdata`, {
+      axios.put(`/api/rooms/${roomId}/roomdata`, 
         puzzleDimensions,
-      }),
+      ),
       axios.put(`/api/rooms/${roomId}`, { narrative }),
     ]);
     //This line would just push them back to whatever they were on before hitting "customize"
@@ -186,13 +186,9 @@ const EditSingleRoom = (props) => {
             </div>
           </div>
         );
-      })}
-
+      })}      
       <button onClick={() => setShowPrompt(true)}> INSTRUCTIONS </button>
-        <button disabled={buttonBoolean} onClick={()=>handleSubmit(puzzleDimensions, room.id)}> Submit </button>
-        {' '}
-        Submit{' '}
-      </button>
+        <button disabled={buttonBoolean} onClick={()=>handleSubmit(puzzleDimensions, room.id)}> Submit </button>            
       <div style={styles}>
         {room.puzzles.map((puzzle) => {
           return (
@@ -237,7 +233,7 @@ const EditSingleRoom = (props) => {
           <button onClick={() => setShowPrompt(false)}> Close </button>
         </Modal>
       </div>
-    </div>
+    </div>    
   );
 };
 

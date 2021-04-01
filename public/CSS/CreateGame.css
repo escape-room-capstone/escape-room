@@ -21,7 +21,12 @@
   border-radius: 12px;
   text-align: center;
   margin: 1rem;
+  align-items: center;
+  justify-content: space-between;
   border: 3px solid;
+  flex-direction: column;
+  padding: 1rem;
+  width: 7rem;
 }
 
 #create-game {
@@ -45,8 +50,21 @@
   font-weight: 100;
 }
 button.submit {
-  font-size: 1.2rem;
-  background-color: #1cd632;
-  padding: 0.5rem;
+  font-size: 1.5rem;
+  background-color: rgb(17, 167, 85);
+  padding: 0.8rem;
   border-radius: 12px;
+}
+
+.puzzlesContainer input {
+  height: 26px;
+}
+
+.puzzlesContainer div.selected {
+  color: black;
+  background-color: rgba(0, 255, 115, 0.418);
+}
+
+h3.puzzle-name {
+  cursor: default;
 }

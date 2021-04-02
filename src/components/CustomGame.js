@@ -70,13 +70,16 @@ const _CustomGame = (props) => {
     console.log(sortedRoomsArray);
     idx++;    
     let index = parseInt(idx);
+    if(sortedRoomsArray[index]){    
     let nextRoomId = sortedRoomsArray[index].id
-    roomId = nextRoomId;
-
-    
+    console.log(nextRoomId, "NEXT ROOM ID");
+    roomId = nextRoomId;    
     props.history.push(`/games/${gameId}/${nextRoomId}/${idx}`);          
-
     window.location.reload();
+    }
+    else{
+      props.history.push("/victorypage");
+    }
 
   }  
   //helper function that takes a puzzleNumber and sets it as solved and updates local state

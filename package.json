@@ -48,6 +48,7 @@
     "firebase": "^8.3.1",
     "jsonwebtoken": "^8.5.1",
     "konva": "^7.2.5",
+    "multer": "^1.4.2",
     "node-dev": "^6.5.0",
     "path": "^0.12.7",
     "pg": "^8.5.1",

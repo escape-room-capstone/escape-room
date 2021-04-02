@@ -78,14 +78,12 @@ User.authenticate = async function (email, password) {
 
 // pass in a token and get the user associated with that token
 User.byToken = async function (token) {
-  console.log('in the user by token function');
   try {
     const { id } = await jwt.verify(token, process.env.JWT);
     const user = await User.findByPk(id, {
       attributes: { exclude: ['password'] },
     });
     if (user) {
-      console.log(user, 'user');
       return user;
     }
     const error = Error('bad credentials');

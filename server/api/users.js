@@ -91,7 +91,6 @@ router.get('/:userId/games/custom/:gameId', async (req, res, next) => {
 });
 //route to customize a default type (bank, haunted, etc)game
 router.post('/:userId/games', async (req, res, next) => {
-  console.log(req.body, 'req.body');
   console.log(req.params.userId);
   try {
     let game = await Game.create({
@@ -112,7 +111,6 @@ router.post('/:userId/games', async (req, res, next) => {
     }
     // }
     game = await game.loadGame();
-    console.log(game, 'game');
     res.send(game);
   } catch (ex) {
     console.log(ex);

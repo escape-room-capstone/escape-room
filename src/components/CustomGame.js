@@ -4,7 +4,7 @@ import { fetchRoom } from '../store/singeleRoom';
 import { componentMapping } from './Puzzles/puzzles';
 import Modal from 'react-modal';
 import { customStyles } from '../utils/helpers';
-import { fetchUserGame } from '../store/game';
+import { fetchGame } from '../store/game';
 import '../../public/CSS/CustomGame.css';
 
 const _CustomGame = (props) => {
@@ -14,17 +14,18 @@ const _CustomGame = (props) => {
   // console.log('Our Puzzles', puzzles);
   const [roomStatus, setRoomStatus] = useState({});
   const [puzzleDimensions, setPuzzleDimensions] = useState({});
-  const { gameId, roomId } = props.match.params;
+  let { gameId, roomId, idx } = props.match.params;
   const [currentPuzzles, setCurrentPuzzles] = useState([]);
   useEffect(() => {
-    const getRoom = async () => {
-      await props.getRoom(gameId, roomId);
+    const getData = async () => {
+      await props.getGame(gameId)      
+      await props.getRoom(gameId, roomId);      
     };
-    getRoom();
+    getData();        
   }, []);
 
   useEffect(() => {
-    if (props.room.id === props.match.params.roomId * 1) {
+    if (props.room.id === props.match.params.roomId * 1) {      
       // if (puzzles && puzzles[0].roomdata) {
       const { puzzles } = props.room;
       const _roomStatus = puzzles.reduce((cluesObj, currentPuzzle) => {
@@ -53,8 +54,31 @@ const _CustomGame = (props) => {
     }
     // }
   }, [props.room]);
-  console.log(roomStatus, 'roomstatus');
+  
+  
+  
+  const sortedRoomsArray = props.game.rooms ? props.game.rooms.sort((roomA, roomB) => {
+    return roomA.number - roomB.number
+  }) : [];
+  console.log(sortedRoomsArray, "SORTED ROOMS ARR");
 
+  const handleNextRoom = (gameId, roomId) => {
+    // console.log(gameId, "Game ID")
+    // console.log(roomId, "ROOM ID");
+    
+    
+    console.log(sortedRoomsArray);
+    idx++;    
+    let index = parseInt(idx);
+    let nextRoomId = sortedRoomsArray[index].id
+    roomId = nextRoomId;
+
+    
+    props.history.push(`/games/${gameId}/${nextRoomId}/${idx}`);          
+
+    window.location.reload();
+
+  }  
   //helper function that takes a puzzleNumber and sets it as solved and updates local state
   const setSolved = (puzzleNum) => {
     setRoomStatus((prevRoomStatus) => {
@@ -83,11 +107,11 @@ const _CustomGame = (props) => {
     });
   };
 
-  const { room } = props;
+  const { room, game } = props;
   const { puzzles } = room;
   if (Object.keys(roomStatus).length) {
     return (
-      <div>
+      <div>        
         <div id="game-narrative">
           <p>{room.narrative}</p>
         </div>
@@ -205,6 +229,7 @@ const _CustomGame = (props) => {
             </div>
           </div>
         </div>
+        <button onClick={(gameId, roomId)=>handleNextRoom(game.id, room.id)}> NEXT ROOM </button>
       </div>
     );
   } else {
@@ -217,7 +242,7 @@ const mapState = (state) => state;
 const mapDispatch = (dispatch) => {
   return {
     getRoom: (gameId, roomId) => dispatch(fetchRoom(gameId, roomId)),
-    getGame: (userId, gameId) => dispatch(fetchUserGame(userId, gameId)),
+    getGame : (gameId) => dispatch(fetchGame(gameId))
   };
 };
 

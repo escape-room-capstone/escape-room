@@ -16,6 +16,29 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+router.put('/', async (req, res, next) => {
+  try {
+
+    console.log(req.body, "REQ BODY OBJECT FROM ASSIGNPUZZLES.JS");
+
+    const roomIdArray = Object.keys(req.body);
+    const roomNumberArr = Object.values(req.body);        
+
+    for(let i = 0; i < roomIdArray.length; i++){
+      let currentRoomId = roomIdArray[i];      
+      let currentRoom = (await Room.findByPk(currentRoomId))
+
+      currentRoom.number = roomNumberArr[i];
+
+      await currentRoom.save()
+    }
+    
+    res.sendStatus(200);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get('/:id', async (req, res, next) => {
   try {
     const room = await Room.findOne({

@@ -6,6 +6,9 @@ import Modal from 'react-modal';
 import { customStyles } from '../utils/helpers';
 import { fetchGame } from '../store/game';
 import '../../public/CSS/CustomGame.css';
+import '../../public/CSS/Burger.css';
+import { slide as Menu } from 'react-burger-menu';
+import { Link } from 'react-router-dom';
 
 const _CustomGame = (props) => {
   //this may have been causing a bug
@@ -114,7 +117,19 @@ const _CustomGame = (props) => {
   const { puzzles } = room;
   if (Object.keys(roomStatus).length) {
     return (
-      <div>        
+
+      <div>
+        <Menu>
+          <Link className="menu-item" to="/">
+            Home
+          </Link>
+          <Link className="menu-item--small" to="">
+            Profile
+          </Link>
+          <Link id="quit" className="menu-item" to="">
+            Quit
+          </Link>
+        </Menu>
         <div id="game-narrative">
           <p>{room.narrative}</p>
         </div>
@@ -122,8 +137,8 @@ const _CustomGame = (props) => {
           {puzzles.map((puzzle, idx) => (
             <div key={idx}>
               <img
-                height="60px"
-                width="60px"
+                height="40px"
+                width="40px"
                 src={
                   roomStatus[puzzle.id].solved
                     ? '/Images/check.png'
@@ -138,11 +153,13 @@ const _CustomGame = (props) => {
             id="game-room"
             style={{
               backgroundImage: `url(${room.imgSrc})`,
-              height: '800px',
-              width: '1440px',
+              height: '559px',
+              width: '1000px',
+              backgroundPosition: 'center',
               backgroundSize: 'cover',
               margin: '0 auto',
               position: 'relative',
+              border: '5px solid black',
             }}
           >
             {Object.keys(roomStatus).map((puzzleNum, idx) => (

@@ -1,3 +1,4 @@
 node_modules/
 dist/
-.envTheme_Uploads
+.env
+public/Theme_Uploads/

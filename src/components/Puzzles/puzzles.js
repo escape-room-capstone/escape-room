@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Stage, Layer, Circle, Line, Image } from 'react-konva';
 import useImage from 'use-image';
 import '../../../public/CSS/puzzle.css';
+import { Hints } from '../Hints';
 
 export const Puzzle1 = (props) => {
   const [puzzle, setPuzzle] = useState({
@@ -68,9 +69,14 @@ export const Puzzle1 = (props) => {
 };
 
 export const Puzzle2 = (props) => {
+  const myhints = [
+    { text: 'here is a really good hint', show: false },
+    { text: 'here is another awesome hint', show: false },
+  ];
   return (
     <div>
-      THIS IS PuzzleTwo
+      <Hints puzzlehints={myhints} />
+      This Is PuzzleTwo
       <button onClick={props.solve}>SOLVE</button>
     </div>
   );

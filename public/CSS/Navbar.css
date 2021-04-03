@@ -1,14 +1,6 @@
 #navbar {
-  /* height: 5rem;
-  display: flex;
-  font-size: 1.4rem;
-  /* font-family: Georgia, 'Times New Roman', Times, serif; */
-  /* align-items: center;
-  justify-content: flex-end;
-  margin-right: 2rem; */
   height: 5rem;
   padding: 1rem;
-  /* display: flex; */
   font-size: 1.4rem;
   font-family: Georgia, 'Times New Roman', Times, serif;
 }

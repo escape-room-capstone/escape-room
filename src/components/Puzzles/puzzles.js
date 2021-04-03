@@ -68,9 +68,38 @@ export const Puzzle1 = (props) => {
 };
 
 export const Puzzle2 = (props) => {
+  const roomhints = [
+    { text: 'here is a really good hint', show: false },
+    { text: 'here is another awesome hint', show: false },
+  ];
+  //on image click - you want to reveal the hint
+  const [hints, setHints] = useState(roomhints); //hints is an array of hints
+  const toggleHint = (e, idx) => {
+    let roomhints = [...hints];
+    roomhints = roomhints.map((hint, index) => {
+      if (idx === index) {
+        hint.show = !hint.show;
+        return hint;
+      } else {
+        return hint;
+      }
+    });
+    setHints(roomhints);
+  };
   return (
     <div>
-      THIS IS PuzzleTwo
+      {hints.map((hint, idx) => (
+        <div key={idx} id="hints">
+          <p>
+            {`Hint ${idx + 1}`}
+            <button onClick={(e) => toggleHint(e, idx)}>
+              {hint.show ? 'HIDE' : 'SHOW'}
+            </button>
+            <span className={hint.show ? 'selected' : ''}>{hint.text}</span>
+          </p>
+        </div>
+      ))}
+      This Is PuzzleTwo
       <button onClick={props.solve}>SOLVE</button>
     </div>
   );

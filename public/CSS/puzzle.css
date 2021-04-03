@@ -85,3 +85,14 @@ ul.puzzleUL {
   color: #e4fde1;
   cursor: pointer;
 }
+
+#hints p span {
+  margin: 0 2rem;
+  visibility: hidden;
+}
+#hints p span.selected {
+  visibility: visible;
+}
+#hints button {
+  margin: 0 1rem;
+}

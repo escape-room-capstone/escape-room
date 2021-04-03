@@ -12,23 +12,26 @@ const _CreateTheme = (props) => {
     // formData.append('file', e.target.files[0]);
     // console.log(formData, 'form data');
   };
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-    const config = {
-      headers: {
-        'content-type': 'multipart/form-data',
-      },
-    };
-    const formData = new FormData();
-    formData.append('file', data);
-    await axios.post('/api/upload', formData, config);
-    //     headers: { 'content-type': 'multipart/form-data' },
-    //   });
-  };
+  //   const handleFormSubmit = async (e) => {
+  //     e.preventDefault();
+  //     const config = {
+  //       headers: {
+  //         'content-type': 'multipart/form-data',
+  //       },
+  //     };
+  //     const formData = new FormData();
+  //     formData.append('file', data);
+  //     const config = { headers: { 'content-type': 'multipart/form-data' } };
+  //     await axios.post('/api/upload', formData, config);
+  //   };
   return (
-    <div>
+    <div id="create-theme">
       <h1>Create Theme</h1>
-      <form action="/api/upload" encType="multipart/form-data" method="POST">
+      <form
+        action={`/api/users/${props.auth.id}/themes`}
+        encType="multipart/form-data"
+        method="POST"
+      >
         <input
           name="theme"
           type="text"
@@ -37,8 +40,9 @@ const _CreateTheme = (props) => {
         <input
           //   onChange={(e) => uploadHandler(e)}
           className="theme"
-          name="image"
+          name="images"
           type="file"
+          multiple="multiple"
         ></input>
         <button type="submit">SUBMIT</button>
       </form>

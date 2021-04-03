@@ -18,16 +18,18 @@ var storage = multer.diskStorage({
 const upload = multer({
   storage: storage,
 });
-router.post('/', upload.single('image'), async (req, res, next) => {
-  console.log(req.body, 'req.body'), console.log(req.file, 'req.file');
+router.post('/', upload.array('images'), async (req, res, next) => {
+  console.log(req.body, 'req.body');
+  const images = req.files.map((file) => `/Theme_Uploads/${file.filename}`);
+  console.log(images, 'images');
   try {
-    const imgSrc = `/Theme_Uploads/${req.file.filename}`;
+    // const imgSrc = `/Theme_Uploads/${req.file.filename}`;
     await Theme.create({
       name: req.body.theme,
-      backgroundImageOne: imgSrc,
-      images: [imgSrc],
+      backgroundImageOne: images[0],
+      images: images,
     });
-    res.sendStatus(201);
+    res.redirect('/choosethemes');
   } catch (err) {
     next(err);
   }

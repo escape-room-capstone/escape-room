@@ -1,3 +1,7 @@
-input.theme {
+#create-theme input {
+  width: 50%;
+}
+
+#create-theme {
   width: 100%;
 }

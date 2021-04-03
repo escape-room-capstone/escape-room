@@ -97,7 +97,6 @@ const App = () => {
       {/* <Route exact path="/gameintro/:id" component={GameIntro} /> */}
 
       <Route exact path="/games/:gameId/:roomId" component={CustomGame} />
-      <CreateTheme />
       {/* <Redirect to="/" /> */}
     </Router>
   );

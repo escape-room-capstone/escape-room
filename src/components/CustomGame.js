@@ -9,6 +9,8 @@ import '../../public/CSS/CustomGame.css';
 import '../../public/CSS/Burger.css';
 import { slide as Menu } from 'react-burger-menu';
 import { Link } from 'react-router-dom';
+import RoomTimer from '../programs/RoomTimer';
+import GameTimer from '../programs/GameTimer';
 
 const _CustomGame = (props) => {
   //this may have been causing a bug
@@ -57,8 +59,6 @@ const _CustomGame = (props) => {
     }
     // }
   }, [props.room]);
-  
-  
   
   const sortedRoomsArray = props.game.rooms ? props.game.rooms.sort((roomA, roomB) => {
     return roomA.number - roomB.number
@@ -115,6 +115,16 @@ const _CustomGame = (props) => {
 
   const { room, game } = props;
   const { puzzles } = room;
+  // const { roomTimer } = room;
+  const roomTimer = {
+    initMin: 1,
+    initSec: 5
+  }
+  const gameTimer = {
+    initMin: 2,
+    initSec: 10
+  }
+
   if (Object.keys(roomStatus).length) {
     return (
 
@@ -133,20 +143,28 @@ const _CustomGame = (props) => {
         <div id="game-narrative">
           <p>{room.narrative}</p>
         </div>
-        <div id="lock-images">
-          {puzzles.map((puzzle, idx) => (
-            <div key={idx}>
-              <img
-                height="40px"
-                width="40px"
-                src={
-                  roomStatus[puzzle.id].solved
-                    ? '/Images/check.png'
-                    : '/Images/lock.png'
-                }
-              />
-            </div>
-          ))}
+        <div id='game-tools'>
+          <div id='game-timer'>
+            <GameTimer initMin={gameTimer.initMin} initSec={gameTimer.initSec} />
+          </div>
+          <div id='room-timer'>
+            <RoomTimer initMin={roomTimer.initMin} initSec={roomTimer.initSec} />
+          </div>
+            <div id="lock-images">
+              {puzzles.map((puzzle, idx) => (
+                <div key={idx}>
+                  <img
+                    height="40px"
+                    width="40px"
+                    src={
+                      roomStatus[puzzle.id].solved
+                        ? '/Images/check.png'
+                        : '/Images/lock.png'
+                    }
+                  />
+                </div>
+              ))}
+          </div>
         </div>
         <div>
           <div
@@ -162,6 +180,7 @@ const _CustomGame = (props) => {
               border: '5px solid black',
             }}
           >
+        
             {Object.keys(roomStatus).map((puzzleNum, idx) => (
               <div
                 style={{

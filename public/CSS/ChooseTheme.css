@@ -15,13 +15,13 @@
   background-size: cover;
 }
 
-#themeSection {
+.themeSection {
   display: flex;
   flex-direction: column;
   margin: 2rem;
 }
 
-#choose-theme {
+.choose-theme {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -30,11 +30,11 @@
   justify-content: space-around center;
 }
 
-#themeMap {
+.themeMap {
   padding: 1rem;
 }
 
-#choose-theme img {
+.choose-theme img {
   padding: 0;
   height: 12rem;
   width: 16rem;

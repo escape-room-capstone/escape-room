@@ -2,8 +2,10 @@ const router = require('express').Router();
 const {
   models: { User, Game, Puzzle, Room, Theme, RoomData },
 } = require('../db');
+
 const GamePuzzles = require('../db/models/GamePuzzles');
 // const Puzzle = require('../db/models/Puzzle');
+const multer = require('multer');
 
 module.exports = router;
 
@@ -91,7 +93,6 @@ router.get('/:userId/games/custom/:gameId', async (req, res, next) => {
 });
 //route to customize a default type (bank, haunted, etc)game
 router.post('/:userId/games', async (req, res, next) => {
-  console.log(req.body, 'req.body');
   console.log(req.params.userId);
   try {
     let game = await Game.create({
@@ -112,7 +113,6 @@ router.post('/:userId/games', async (req, res, next) => {
     }
     // }
     game = await game.loadGame();
-    console.log(game, 'game');
     res.send(game);
   } catch (ex) {
     console.log(ex);
@@ -184,13 +184,6 @@ router.post('/:userId/games/custom', async (req, res, next) => {
     //        etc
     //       }
 
-    //This code below was previous code where we were grabbing our hard-coded rooms. Below it is some logic to grab rooms dynamically ...
-
-    // const room1 = await Room.findOne({ where: { gameId: game.id, number: 1 } });
-    // const room2 = await Room.findOne({ where: { gameId: game.id, number: 2 } });
-    // const room3 = await Room.findOne({ where: { gameId: game.id, number: 3 } });
-    // const room4 = await Room.findOne({ where: { gameId: game.id, number: 4 } });
-
     //we will use this value in our while loop...
     let roomNumber = 1;
 
@@ -223,20 +216,6 @@ router.post('/:userId/games/custom', async (req, res, next) => {
       }
     }
 
-    //add 3 puzzles to each room instance for the newly created game
-    // for (let i = 0; i < 3; i++) {
-    //   await RoomData.create({ roomId: room1.id, puzzleId: puzzleArray[i] });
-    // }
-    // for (let i = 3; i < 6; i++) {
-    //   await RoomData.create({ roomId: room2.id, puzzleId: puzzleArray[i] });
-    // }
-    // for (let i = 6; i < 9; i++) {
-    //   await RoomData.create({ roomId: room3.id, puzzleId: puzzleArray[i] });
-    // }
-    // for (let i = 9; i < 12; i++) {
-    //   await RoomData.create({ roomId: room4.id, puzzleId: puzzleArray[i] });
-    // }
-    //find the game with id of newly created game, include Room model (with Puzzle model)
     game = await Game.findOne({
       where: { id: game.id },
       include: { model: Room, order: [['id', 'ASC']], include: [Puzzle] },
@@ -247,3 +226,40 @@ router.post('/:userId/games/custom', async (req, res, next) => {
     next(ex);
   }
 });
+
+//set storage engine
+var storage = multer.diskStorage({
+  destination: 'public/Theme_Uploads',
+
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' + file.originalname);
+  },
+});
+
+//init upload
+const upload = multer({
+  storage: storage,
+});
+
+//route for user creating a new theme
+router.post(
+  '/:userId/themes',
+  upload.array('images'),
+  async (req, res, next) => {
+    console.log(req.body, 'req.body');
+    const images = req.files.map((file) => `/Theme_Uploads/${file.filename}`);
+    console.log(images, 'images');
+    try {
+      // const imgSrc = `/Theme_Uploads/${req.file.filename}`;
+      await Theme.create({
+        name: req.body.theme,
+        backgroundImageOne: images[0],
+        images: images,
+        userId: req.params.userId,
+      });
+      res.redirect('/choosetheme');
+    } catch (err) {
+      next(err);
+    }
+  }
+);

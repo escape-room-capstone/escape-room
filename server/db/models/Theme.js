@@ -11,9 +11,9 @@ const Theme = db.define('theme', {
   backgroundImageOne: {
     type: STRING,
   },
-//   themeImages: {
-//     type: Sequelize.ARRAY(Sequelize.TEXT),
-//   },
+  //   themeImages: {
+  //     type: Sequelize.ARRAY(Sequelize.TEXT),
+  //   },
   images: {
     type: Sequelize.ARRAY(Sequelize.TEXT),
   },
@@ -24,7 +24,9 @@ const Theme = db.define('theme', {
   type: {
     type: ENUM('default', 'custom'),
   },
-
+  userId: {
+    type: INTEGER,
+  },
 });
 
 module.exports = Theme;

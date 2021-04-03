@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const db = require('./db/db');
+var bodyParser = require('body-parser');
 
 const PORT = process.env.PORT || 8080;
 const PUBLIC_PATH = path.join(__dirname, '../public');
@@ -10,7 +11,7 @@ const DIST_PATH = path.join(__dirname, '../dist');
 app.use(express.json());
 app.use(express.static(PUBLIC_PATH));
 app.use(express.static(DIST_PATH));
-
+app.use(express.urlencoded({ extended: false }));
 //mount api router
 app.use('/api', require('./api'));
 

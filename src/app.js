@@ -21,6 +21,7 @@ import { CustomGame } from './components/CustomGame';
 import { UserGames } from './components/UserGames';
 import { Login } from './components/AuthForm';
 import { Signup } from './components/AuthForm';
+import { CreateTheme } from './components/CreateTheme';
 
 import Home from './components/riddlez/Home';
 import Home1 from './components/riddlez/Home1';
@@ -73,7 +74,7 @@ const App = () => {
         component={AssignPuzzles}
       />
       <Route exact path="/users/:userId/account/games" component={UserGames} />
-
+      <Route exact path="/users/:userId/createTheme" component={CreateTheme} />
       <Route exact path="/riddlez/:gameId" component={LetterBank} />
       <Route exact path="/riddlez/home" component={Home} />
       <Route exact path="/riddlez/home1" component={Home1} />
@@ -94,6 +95,7 @@ const App = () => {
 
       <Route exact path="/dg" component={SingleRoom} />
       {/* <Route exact path="/gameintro/:id" component={GameIntro} /> */}
+
 
       <Route exact path="/games/:gameId/:roomId/:idx" component={CustomGame} />
 

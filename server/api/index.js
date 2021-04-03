@@ -7,7 +7,7 @@ router.use('/puzzles', require('./puzzles'));
 router.use('/dg', require('./dynamic'));
 router.use('/rooms', require('./rooms'));
 router.use('/auth', require('./auth'));
-
+router.use('/upload', require('./upload'));
 
 //any other request to /api/? is not defined in our routes so express will throw a 404 error
 

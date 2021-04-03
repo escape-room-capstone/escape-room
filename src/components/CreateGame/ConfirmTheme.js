@@ -33,7 +33,7 @@ const ConfirmTheme = (props) => {
         })}
       </div>
       <div>
-        <button onClick={() => props.history.push('/createtheme')}>Back</button>
+        <button onClick={() => props.history.push('/choosetheme')}>Back</button>
         <button
           onClick={() => props.history.push(`/creategame/${theme.id}`)}
           style={{ marginLeft: '10px' }}

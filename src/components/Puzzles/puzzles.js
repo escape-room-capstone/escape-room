@@ -73,11 +73,16 @@ export const Puzzle2 = (props) => {
     { text: 'here is a really good hint', show: false },
     { text: 'here is another awesome hint', show: false },
   ];
+  console.log(props.match, 'props.match');
   return (
     <div>
       <Hints puzzlehints={myhints} />
       This Is PuzzleTwo
-      <button onClick={props.solve}>SOLVE</button>
+      {!props.match.path.includes('creategame') ? (
+        <button onClick={props.solve}>SOLVE</button>
+      ) : (
+        ''
+      )}
     </div>
   );
 };

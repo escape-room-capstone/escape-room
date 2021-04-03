@@ -105,7 +105,7 @@ const Homepage = (props) => {
                 Created On<br></br>
                 {`${formatDate(new Date(game.createdAt))}`}
               </p>
-              <Link to={`/games/${game.id}/${game.rooms[0].id}`}>
+              <Link to={`/games/${game.id}/${game.rooms[0].id}/0`}>
                 <button className="play">PLAY</button>
               </Link>
             </div>

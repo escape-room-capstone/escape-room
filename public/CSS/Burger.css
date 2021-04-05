@@ -69,3 +69,7 @@
   width: 10rem;
   background: rgba(0, 0, 0, 0.3);
 }
+
+.menu-item {
+  cursor: default;
+}

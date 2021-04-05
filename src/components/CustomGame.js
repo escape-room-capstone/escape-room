@@ -142,9 +142,19 @@ const _CustomGame = (props) => {
             Home
           </span>
 
-          <Link className="menu-item--small" to="">
+          <span
+            onClick={() => {
+              const result = confirm(
+                'Are you sure? Leaving this page will result in losing all progress'
+              );
+              if (result) {
+                props.history.push(`/users/${props.auth.id}/account`);
+              }
+            }}
+            className="menu-item--small"
+          >
             Profile
-          </Link>
+          </span>
           <span
             onClick={() => {
               const result = confirm(

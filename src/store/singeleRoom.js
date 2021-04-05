@@ -20,7 +20,6 @@ const getRoom = (room) => ({ type: GET_ROOM, room });
 export const fetchRoom = (gameId, roomId) => {
   return async (dispatch) => {
     const room = (await axios.get(`/api/games/${gameId}/${roomId}`)).data;
-    console.log(room, 'room');
     dispatch(setRoom(room));
   };
 };

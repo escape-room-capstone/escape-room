@@ -13,9 +13,7 @@ import { themeReducer } from './singleTheme';
 import { singlePuzzleReducer } from './puzzle';
 import auth from './auth';
 import { singleRoomReducer } from './singeleRoom';
-// import dynamicGame from './dynamicGameStore';
-
-import dynamicGame from './dynamic';
+import gameUtilsReducer from './gameUtils';
 
 const initialState = {};
 
@@ -33,7 +31,7 @@ const rootReducer = combineReducers({
   allGames: allGamesReducer,
   room: singleRoomReducer,
   customGame: customGameReducer,
-  dg: dynamicGame,
+  gameUtils: gameUtilsReducer,
   auth,
 });
 

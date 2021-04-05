@@ -81,8 +81,8 @@ const EditSingleRoom = (props) => {
   }
   const styles = {
     backgroundImage: `url(${room.imgSrc})`,
-    height: '800px',
-    width: '1440px',
+    height: '559px',
+    width: '1000px',
     position: 'relative',
     backgroundSize: 'cover',
     margin: '0 auto',

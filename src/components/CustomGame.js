@@ -4,11 +4,13 @@ import { fetchRoom } from '../store/singeleRoom';
 import { componentMapping } from './Puzzles/puzzles';
 import Modal from 'react-modal';
 import { customStyles } from '../utils/helpers';
-import { fetchUserGame } from '../store/game';
+import { fetchGame } from '../store/game';
 import '../../public/CSS/CustomGame.css';
 import '../../public/CSS/Burger.css';
 import { slide as Menu } from 'react-burger-menu';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import RoomTimer from '../programs/RoomTimer';
+import GameTimer from '../programs/GameTimer';
 
 const _CustomGame = (props) => {
   //this may have been causing a bug
@@ -17,13 +19,14 @@ const _CustomGame = (props) => {
   // console.log('Our Puzzles', puzzles);
   const [roomStatus, setRoomStatus] = useState({});
   const [puzzleDimensions, setPuzzleDimensions] = useState({});
-  const { gameId, roomId } = props.match.params;
-  const [currentPuzzles, setCurrentPuzzles] = useState([]);
+  let { gameId, roomId, idx } = props.match.params;
+  // const [currentPuzzles, setCurrentPuzzles] = useState([]);
   useEffect(() => {
-    const getRoom = async () => {
+    const getData = async () => {
+      await props.getGame(gameId);
       await props.getRoom(gameId, roomId);
     };
-    getRoom();
+    getData();
   }, []);
 
   useEffect(() => {
@@ -56,8 +59,31 @@ const _CustomGame = (props) => {
     }
     // }
   }, [props.room]);
-  console.log(roomStatus, 'roomstatus');
 
+  const sortedRoomsArray = props.game.rooms
+    ? props.game.rooms.sort((roomA, roomB) => {
+        return roomA.number - roomB.number;
+      })
+    : [];
+  console.log(sortedRoomsArray, 'SORTED ROOMS ARR');
+
+  const handleNextRoom = (gameId, roomId) => {
+    // console.log(gameId, "Game ID")
+    // console.log(roomId, "ROOM ID");
+
+    console.log(sortedRoomsArray);
+    idx++;
+    let index = parseInt(idx);
+    if (sortedRoomsArray[index]) {
+      let nextRoomId = sortedRoomsArray[index].id;
+      console.log(nextRoomId, 'NEXT ROOM ID');
+      roomId = nextRoomId;
+      props.history.push(`/games/${gameId}/${nextRoomId}/${idx}`);
+      window.location.reload();
+    } else {
+      props.history.push('/victorypage');
+    }
+  };
   //helper function that takes a puzzleNumber and sets it as solved and updates local state
   const setSolved = (puzzleNum) => {
     setRoomStatus((prevRoomStatus) => {
@@ -86,50 +112,109 @@ const _CustomGame = (props) => {
     });
   };
 
-  const { room } = props;
+  const { room, game } = props;
   const { puzzles } = room;
+  // const { roomTimer } = room;
+  const roomTimer = {
+    initMin: 1,
+    initSec: 5,
+  };
+  const gameTimer = {
+    initMin: 2,
+    initSec: 10,
+  };
+
   if (Object.keys(roomStatus).length) {
     return (
       <div>
         <Menu>
-          <Link className="menu-item" to="/">
+          <span
+            className="menu-item"
+            onClick={() => {
+              const result = confirm(
+                'Are you sure? Leaving this page will result in losing all progress'
+              );
+              if (result) {
+                props.history.push('/home');
+              }
+            }}
+          >
             Home
-          </Link>
-          <Link className="menu-item--small" to="">
+          </span>
+
+          <span
+            onClick={() => {
+              const result = confirm(
+                'Are you sure? Leaving this page will result in losing all progress'
+              );
+              if (result) {
+                props.history.push(`/users/${props.auth.id}/account`);
+              }
+            }}
+            className="menu-item--small"
+          >
             Profile
-          </Link>
-          <Link id="quit" className="menu-item" to="">
+          </span>
+          <span
+            onClick={() => {
+              const result = confirm(
+                'Are you sure? Leaving this page will result in losing all progress'
+              );
+              if (result) {
+                props.history.push('/home');
+              }
+            }}
+            id="quit"
+            className="menu-item"
+            to=""
+          >
             Quit
-          </Link>
+          </span>
         </Menu>
         <div id="game-narrative">
           <p>{room.narrative}</p>
         </div>
-        <div id="lock-images">
-          {puzzles.map((puzzle, idx) => (
-            <div key={idx}>
-              <img
-                height="60px"
-                width="60px"
-                src={
-                  roomStatus[puzzle.id].solved
-                    ? '/Images/check.png'
-                    : '/Images/lock.png'
-                }
-              />
-            </div>
-          ))}
+        <div id="game-tools">
+          <div id="game-timer">
+            <GameTimer
+              initMin={gameTimer.initMin}
+              initSec={gameTimer.initSec}
+            />
+          </div>
+          <div id="room-timer">
+            <RoomTimer
+              initMin={roomTimer.initMin}
+              initSec={roomTimer.initSec}
+            />
+          </div>
+          <div id="lock-images">
+            {puzzles.map((puzzle, idx) => (
+              <div key={idx}>
+                <img
+                  height="40px"
+                  width="40px"
+                  src={
+                    roomStatus[puzzle.id].solved
+                      ? '/Images/check.png'
+                      : '/Images/lock.png'
+                  }
+                />
+              </div>
+            ))}
+          </div>
         </div>
         <div>
           <div
             id="game-room"
             style={{
               backgroundImage: `url(${room.imgSrc})`,
-              height: '800px',
-              width: '1440px',
+              height: '559px',
+              width: '1000px',
+              backgroundPosition: 'center',
               backgroundSize: 'cover',
               margin: '0 auto',
               position: 'relative',
+              border: '5px solid black',
             }}
           >
             {Object.keys(roomStatus).map((puzzleNum, idx) => (
@@ -179,46 +264,13 @@ const _CustomGame = (props) => {
                   </Modal>
                 );
               })}
-
-              {/* <Modal style={customStyles} isOpen={roomStatus.showModal}>
-
-          {Object.keys(roomStatus).map((puzzleNum) => (
-            <div>
-              {roomStatus[puzzleNum].show &&
-                generatePuzzle(`Puzzle${puzzleNum}`)}
-            </div>
-          ))} */}
-              {/* {roomStatus.clues[1].show && (
-            <Puzzle1 solve={() => setSolved('one')} />
-          )}
-          {roomStatus.clues[2].show && (
-            <Puzzle2 solve={() => setSolved('two')} />
-          )}
-          {roomStatus.clues[3].show && (
-            <Puzzle3 solve={() => setSolved('three')} />
-          )} */}
-              {/* <button
-            onClick={() =>
-              setRoomStatus((prevRoom) => {
-                return {
-                  ...prevRoom,
-                  showModal: false,
-                  clues: {
-                    ...prevRoom.clues,
-                    one: { ...prevRoom.clues.one, show: false },
-                    two: { ...prevRoom.clues.two, show: false },
-                    three: { ...prevRoom.clues.three, show: false },
-                  },
-                };
-              })
-            }
-          >
-            Close the modal
-          </button>
-        </Modal> */}
             </div>
           </div>
         </div>
+        <button onClick={(gameId, roomId) => handleNextRoom(game.id, room.id)}>
+          {' '}
+          NEXT ROOM{' '}
+        </button>
       </div>
     );
   } else {
@@ -231,7 +283,7 @@ const mapState = (state) => state;
 const mapDispatch = (dispatch) => {
   return {
     getRoom: (gameId, roomId) => dispatch(fetchRoom(gameId, roomId)),
-    getGame: (userId, gameId) => dispatch(fetchUserGame(userId, gameId)),
+    getGame: (gameId) => dispatch(fetchGame(gameId)),
   };
 };
 

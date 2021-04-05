@@ -49,12 +49,12 @@ const CreateGame = (props) => {
 
     //I decided that a room should have ATLEAST 1 puzzle, otherwise what's the point of a room...
     //Each ROOM will have an IMAGE. for example Forest theme has 4 images, therefore 4 rooms.
-
     //I will check to see if puzzleArray has a minimum of the amount of ROOMS we have. theme.images.length will be the amount of IMAGES we have, which
     //is also the amount of ROOMS we have.
     if (puzzleArray.length < theme.images.length) {
-      setError(`Please select a total of ${theme.images.length} puzzles.`);
-    } else if (theme.type === 'custom') {
+      setError(`Please select at least ${theme.images.length} puzzles.`);
+      // } else if (theme.type === 'custom') {
+    } else {
       props.makeCustomGame(
         props.auth.id,
         theme.name,
@@ -64,30 +64,8 @@ const CreateGame = (props) => {
         description,
         puzzleArray
       );
-    } else if (difference > 0) {
-      setError(`Please choose ${difference} more puzzles`);
-    } else if (difference < 0) {
-      setError(
-        `Oops - too many puzzles. Please remove ${Math.abs(
-          difference
-        )} puzzles from your list`
-      );
-    } else if (difference === 0 && theme.type === 'default') {
-      // console.log(puzzleArray, title, numPuzzles, theme.name);
-      //just send themeId - can find theme on back end?
-      props.makeGame(
-        props.auth.id,
-        theme.name,
-        theme.id,
-        theme.numPuzzles,
-        title,
-        description,
-        puzzleArray
-      );
     }
-    //else if (difference === 0 && theme.type === 'custom') {
   };
-
   // const handleChange = (e, puzzleId) => {
   //   // console.log('we are here');
   //   if (e.target.checked) {
@@ -159,23 +137,6 @@ const CreateGame = (props) => {
                     Try Out
                   </button>
                 </div>
-                <div>
-                  {/* <label> Add</label> */}
-                  {/* <input
-                    onChange={(e) => handleChange(e, puzzle.id)}
-                    type="checkbox"
-                  /> */}
-                </div>
-                {/* <hr /> */}
-                {/* <button
-                style={{ marginBottom: '10px' }}
-                onClick={() => props.history.push(`/puzzle/${puzzle.id}`)}
-              >
-                {' '}
-                Details{' '}
-              </button>
-              <Component />
-              <hr /> */}
               </div>
             );
           })}

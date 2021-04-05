@@ -1,0 +1,34 @@
+#create-theme input {
+  width: 80%;
+  margin: 1rem auto;
+}
+
+#create-theme {
+  position: absolute;
+  background-size: cover;
+  margin-top: 0;
+  top: 0;
+  width: 100vw;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  min-height: 100vh;
+  background: url('../Images/keysfloorbackground.jpeg') no-repeat center center
+    fixed;
+  background-size: cover;
+}
+#create-theme > div > h1 {
+  padding-top: 1.7rem;
+}
+#create-theme > div {
+  text-align: center;
+  background-color: #bfc2c68c;
+  border-radius: 12px;
+  box-shadow: 0px 0px 20px 9px #000105;
+  width: 30%;
+  margin: 7rem auto;
+  min-height: 20rem;
+}
+
+#create-theme button {
+  padding: 0.3rem;
+  margin: 1rem auto;
+}

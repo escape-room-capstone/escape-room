@@ -142,4 +142,13 @@
   100% {
     background: #fff;
   }
+#hints p span {
+  margin: 0 2rem;
+  visibility: hidden;
+}
+#hints p span.selected {
+  visibility: visible;
+}
+#hints button {
+  margin: 0 1rem;
 }

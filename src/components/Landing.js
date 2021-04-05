@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../public/CSS/Landing.css';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 export const Landing = (props) => {
   return (
@@ -11,9 +11,15 @@ export const Landing = (props) => {
         <Link to="/login">
           <button>MEMBER</button>
         </Link>
-        <Link to="/home">
-          <button>GUEST</button>
-        </Link>
+
+        <button
+          onClick={() => {
+            window.localStorage.clear();
+            props.history.push('/home');
+          }}
+        >
+          GUEST
+        </button>
       </div>
     </div>
   );

@@ -22,7 +22,7 @@ const SingleRoom = (props) => {
     dispatch(getActiveGame(gameId)), dispatch(getActiveRoom(gameId, roomId));
   }, [gameId, roomId]);
 
-  console.log(activeRoom);
+  //console.log(activeRoom);
 
   const handleRoomChange = (e) => {
     setSelectedRoom(e.target.value);

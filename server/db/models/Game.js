@@ -15,13 +15,13 @@ const Game = db.define('game', {
     type: BOOLEAN,
     defaultValue: false,
   },
-  theme: {
-    type: STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
-  },
+  // theme: {
+  //   type: STRING,
+  //   allowNull: false,
+  //   validate: {
+  //     notEmpty: true,
+  //   },
+  // },
   description: {
     type: TEXT,
   },

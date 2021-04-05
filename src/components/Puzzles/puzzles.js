@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Stage, Layer, Circle, Line, Image } from 'react-konva';
 import useImage from 'use-image';
 import '../../../public/CSS/puzzle.css';
+import { Hints } from '../Hints';
 
 export const Puzzle1 = (props) => {
   const [puzzle, setPuzzle] = useState({
@@ -68,253 +69,24 @@ export const Puzzle1 = (props) => {
 };
 
 export const Puzzle2 = (props) => {
-  const noDisks = 8;
-
-  const minDiskWidth = 25;
-  const diskHeight = 20;
-  let disksSpace = 3;
-  const colors = [
-    'Crimson',
-    'Orange',
-    'MediumPurple',
-    'Teal',
-    'CornflowerBlue',
-    'Chocolate',
-    'Salmon',
-    'Red',
+  const myhints = [
+    { text: 'here is a really good hint', show: false },
+    { text: 'here is another awesome hint', show: false },
   ];
-
-  let stacks = [
-    { disks: [], x: 150 },
-    { disks: [], x: 400 },
-    { disks: [], x: 650 },
-  ];
-
-  let stacksY = 350;
-
-  let selectedStackNo = 0;
-  let moves = 0;
-  let finished = false;
-
-  init();
-
-  function loop() {
-    clear();
-
-    draw(stacksY);
-    drawSelectedDisk();
-  }
-
-  function keyPressed() {
-    if (key.toUpperCase() === 'R') {
-      init();
-      return;
-    }
-
-    let stackNo = 0;
-
-    // User can select a stack with keys 1, 2 or 3
-    if (['1', '2', '3'].includes(key)) stackNo = parseInt(key);
-
-    processUserSelection(stackNo);
-  }
-
-  function mouseClicked() {
-    // User can select a stack with the mouse
-    let stackNo = findStackNoByXY(mouseX, mouseY);
-
-    processUserSelection(stackNo);
-  }
-
-  function processUserSelection(stackNo) {
-    if (finished) return;
-
-    // If no stack was selected before...
-    if (selectedStackNo < 1) {
-      let arDisks = getStackDisks(stackNo);
-
-      // ... and if the new selection has disks, then this become the selection
-      if (arDisks && arDisks.length > 0) selectedStackNo = stackNo;
-
-      return;
-    }
-
-    if (move(selectedStackNo, stackNo)) {
-      moves++;
-
-      // Check if the game is finished
-      if (isFinished()) {
-        finished = true;
-        sound('male_congratulations');
-      }
-    }
-
-    selectedStackNo = 0;
-  }
-
-  // Move one disk from a stack to other stack (if possible)
-  function move(fromStackNo, toStackNo) {
-    let fromStack = getStackDisks(fromStackNo);
-    let toStack = getStackDisks(toStackNo);
-
-    if (!fromStack || !toStack) return false;
-
-    if (fromStack === toStack) return false;
-
-    if (fromStack.length === 0) return false;
-
-    let fromDisk = fromStack.peek();
-    let toDisk = toStack.peek();
-
-    if (toDisk && fromDisk > toDisk) return false;
-
-    fromStack.pop();
-    toStack.push(fromDisk);
-
-    return true;
-  }
-
-  // Return the stack disks
-  function getStackDisks(stackNo) {
-    if (stackNo < 1 || stackNo > stacks.length) return null;
-
-    return stacks[stackNo - 1].disks;
-  }
-
-  // Find the stack that contains the point cx, cy (usually the mouse)
-  function findStackNoByXY(cx, cy) {
-    for (let i = 0; i < stacks.length; i++) {
-      let w = noDisks * minDiskWidth;
-      let h = noDisks * (diskHeight + disksSpace);
-      let x = stacks[i].x - w / 2;
-      let y = stacksY - h;
-
-      if (collisionPointRect(cx, cy, x, y, w, h)) return i + 1;
-    }
-
-    return 0;
-  }
-
-  function init() {
-    // Clear all stacks
-    for (let stack of stacks) stack.disks.length = 0;
-
-    // Add disks only to the first stack
-    for (let i = noDisks; i >= 1; i--) stacks[0].disks.push(i);
-
-    // Reset game variables
-    selectedStackNo = 0;
-    finished = false;
-    moves = 0;
-  }
-
-  function draw(y) {
-    // Bottom Line
-    line(0, y, width, y);
-
-    // Draw stacks
-    for (let i = 1; i <= stacks.length; i++) drawStack(i, y);
-
-    drawText();
-  }
-
-  function drawStack(stackNo, y) {
-    let disks = getStackDisks(stackNo);
-    let x = stacks[stackNo - 1].x;
-    let selected = stackNo === selectedStackNo;
-
-    // Draw stick
-    let stickHeight = diskHeight * noDisks + disksSpace * (noDisks + 1);
-    line(x, y - stickHeight, x, y);
-
-    // Draw disks
-    for (let i = 0; i < disks.length; i++) {
-      let disk = disks[i];
-      let diskWidth = disk * minDiskWidth;
-
-      push();
-      fill(colors[7 - ((disk - 1) % 8)]);
-      noStroke();
-
-      if (selected && i === disks.length - 1) {
-        strokeWeight(1);
-        stroke('Black');
-      }
-
-      rect(
-        x - diskWidth / 2,
-        y - (i + 1) * diskHeight - disksSpace * (i + 1),
-        diskWidth,
-        diskHeight
-      );
-      pop();
-    }
-  }
-
-  function drawSelectedDisk() {
-    let disks = getStackDisks(selectedStackNo);
-    if (!disks) return;
-
-    let disk = disks.peek();
-
-    let w = disk * minDiskWidth;
-
-    noFill();
-    rect(mouseX - w / 2, mouseY - diskHeight / 2, w, diskHeight);
-  }
-
-  function drawText() {
-    push();
-    noStroke();
-
-    fill('Lavender');
-    rect(0, 550, width, 50);
-
-    fill('Black');
-    textAlign(CENTER, CENTER);
-    textSize(14);
-    text(
-      'The objective of this game is to move all disks from the left tower to any other tower. However, you can only place a smaller disk on top of a bigger disk. You can play this game using mouse or keyboard (keys 1 to 3 and R to restart).',
-      20,
-      550,
-      760,
-      50
-    );
-
-    textSize(40);
-    text('Tower of Hanoi', 400, 50);
-
-    if (!finished) {
-      textSize(20);
-      text('Moves: ' + moves, 400, 450);
-    } else {
-      fill('Navy');
-      textSize(14);
-      text(
-        `Congratulations! You finished the game in ${moves} moves.`,
-        400,
-        450
-      );
-      text('Press R to play again.', 400, 480);
-    }
-
-    pop();
-  }
-
-  function isFinished() {
-    return (
-      stacks[1].disks.length === noDisks || stacks[2].disks.length === noDisks
-    );
-  }
-
+  console.log(props.match, 'props.match');
   return (
     <div>
-      {init()}
-      {/* THIS IS PuzzleTwo
-      <button onClick={props.solve}>SOLVE</button> */}
+      <Hints puzzlehints={myhints} />
+      This Is PuzzleTwo
+      {!props.match.path.includes('creategame') ? (
+        <button onClick={props.solve}>SOLVE</button>
+      ) : (
+        ''
+      )}
     </div>
   );
 };
+
 
 export const Puzzle3 = (props) => {
   const [tiles, setTiles] = useState(shuffle([1, 2, 3, 4, 5, 6, 7, 8, '']));

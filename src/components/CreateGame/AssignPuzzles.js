@@ -3,13 +3,14 @@ import Modal from 'react-modal'
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { fetchCustomGame } from '../../store/game';
 
 //hard-coded user Id for now
 // const userId = 2;
 
 //url will be /users/userId/account/games
 const AssignPuzzles = (props) => {
-  const [game, setGame] = useState([]);
+  //const [game, setGame] = useState([]);
   const [unassignedPuzzles, setPuzzleArray] = useState([]);
   const [roomOrderObj, setRoomOrderObj] = useState({});
   const [buttonBoolean, setButtonBoolean] = useState(false);
@@ -19,16 +20,11 @@ const AssignPuzzles = (props) => {
   
   
   const userId = props.match.params.userId;
+  const gameId = props.match.params.gameId;
+  const { game } = props;
   useEffect(() => {
-    const fetchGames = async () => {
-      const game = (
-        await axios.get(
-          `/api/users/${userId}/games/custom/${props.match.params.gameId}`
-        )
-      ).data;
-      setGame(game);
-    };
-    fetchGames();           
+    console.log(props);
+    props.fetchGame(userId, gameId)               
   }, []);
 
   useEffect(() => {
@@ -39,19 +35,11 @@ const AssignPuzzles = (props) => {
       }, {}): [];
       setRoomOrderObj(roomsObj);
     }
-  }, [game]);
+  }, [props.game]);
   
-  console.log(game);
+  console.log("OUR GAME", props.game);
 
-  //This is the object we receive from above useEffect...
-  // state : {
-  //   room1.id : room1.number 
-  //   room2.id : room2.number
-  //   room3.id : room3.number
-  // }
-  
-
-      
+          
 
 
   //array used to generate select tag in modal
@@ -89,8 +77,15 @@ const AssignPuzzles = (props) => {
   }
   
   
-  const handleRoomOrderSubmit = () => {
+  const handleRoomOrderSubmit = async() => {
     console.log(roomOrderObj, "ROOM ORDER OBJ");
+
+    (await axios.put('/api/rooms', roomOrderObj))
+
+    
+    props.fetchGame(userId, gameId);
+    setOrder(false);
+    
   }
        
   const handleRemove = (roomId, puzzleId) => {
@@ -169,11 +164,19 @@ const AssignPuzzles = (props) => {
             </div>
           )
         })}               
-        <button disabled={buttonBoolean} onClick={()=>handleRoomOrderSubmit()}> Submit </button>
+        <button disabled={buttonBoolean} onClick={()=>handleRoomOrderSubmit()}> Submit </button>        
         <button onClick={()=>setOrder(false)}> Close </button>
+        {buttonBoolean ? <p> Each room should have a unique room number !</p> : ""}
       </Modal>
+      
     </div>
   );
 };
 
-export default connect((state) => state)(AssignPuzzles);
+
+const mapState = (state) => state
+
+const mapDispatch = {
+  fetchGame : fetchCustomGame
+}
+export default connect(mapState, mapDispatch)(AssignPuzzles);

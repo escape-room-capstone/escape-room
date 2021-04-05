@@ -4,7 +4,7 @@
   width: 36px;
   height: 30px;
   left: 50px;
-  top: 4rem;
+  top: 2rem;
 }
 
 /* Color/shape of burger icon bars */
@@ -68,4 +68,8 @@
 .bm-overlay {
   width: 10rem;
   background: rgba(0, 0, 0, 0.3);
+}
+
+.menu-item {
+  cursor: default;
 }

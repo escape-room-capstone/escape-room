@@ -77,46 +77,51 @@ const Homepage = (props) => {
         })}
       </div>
       <hr />
-
-      <h1 className="created-games">Games You've Created</h1>
-      <div className="heading">
-        {props.auth.id && (
-          <Link to="/choosetheme">
-            <button> + CREATE </button>
-          </Link>
-        )}
-      </div>
-
-      <div id="custom-game-div-wrapper">
-        {customGames.length > 0 ? (
-          customGames.map((game, idx) => (
-            <div id="custom-game-div" key={idx}>
-              <span
-                style={{
-                  fontSize: '1.2rem',
-                  textAlign: 'center',
-                  // paddingBottom: '5px',
-                }}
-              >
-                {game.title}
-              </span>
-              <img src={game.rooms[0].imgSrc} />
-              <p>
-                Created On<br></br>
-                {`${formatDate(new Date(game.createdAt))}`}
-              </p>
-              <Link to={`/games/${game.id}/${game.rooms[0].id}/0`}>
-                <button className="play">PLAY</button>
+      {props.auth.id ? (
+        <div>
+          <h1 className="created-games">Games You've Created</h1>
+          <div className="heading">
+            {props.auth.id && (
+              <Link to="/choosetheme">
+                <button> + CREATE </button>
               </Link>
-            </div>
-          ))
-        ) : (
-          <h1 style={{ width: '100%' }} className="created-games">
-            {' '}
-            No Games Yet !
-          </h1>
-        )}
-      </div>
+            )}
+          </div>
+
+          <div id="custom-game-div-wrapper">
+            {customGames.length > 0 ? (
+              customGames.map((game, idx) => (
+                <div id="custom-game-div" key={idx}>
+                  <span
+                    style={{
+                      fontSize: '1.2rem',
+                      textAlign: 'center',
+                      // paddingBottom: '5px',
+                    }}
+                  >
+                    {game.title}
+                  </span>
+                  <img src={game.rooms[0].imgSrc} />
+                  <p>
+                    Created On<br></br>
+                    {`${formatDate(new Date(game.createdAt))}`}
+                  </p>
+                  <Link to={`/games/${game.id}/${game.rooms[0].id}/0`}>
+                    <button className="play">PLAY</button>
+                  </Link>
+                </div>
+              ))
+            ) : (
+              <h1 style={{ width: '100%' }} className="created-games">
+                {' '}
+                No Games Yet !
+              </h1>
+            )}
+          </div>
+        </div>
+      ) : (
+        ''
+      )}
       {/* <Link to="/haunted/intro">Haunted House</Link>
       <hr />
       <Link to="/houseofriddlez"> ~~House of Riddlez~~ </Link>

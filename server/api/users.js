@@ -121,11 +121,15 @@ router.post('/:userId/games', async (req, res, next) => {
 
 //route to create a dynamic game from scratch
 router.post('/:userId/games/custom', async (req, res, next) => {
+  //find theme and corresponding images
   try {
+    const theme = await Theme.findByPk(req.body.themeId);
+    const { images, backgroundImageOne } = theme;
+
     let {
       title,
       description,
-      theme,
+      // theme,
       themeId,
       numPuzzles,
       puzzleArray,
@@ -133,15 +137,13 @@ router.post('/:userId/games/custom', async (req, res, next) => {
     let game = await Game.create({
       title,
       description,
-      theme,
+      // theme,
       numPuzzles,
       themeId,
+      imgSrc: backgroundImageOne,
       userId: req.params.userId,
     });
-
-    //find theme and corresponding images
-    theme = await Theme.findOne({ where: { name: req.body.theme } });
-    const { images } = theme;
+    console.log(game, 'new game');
     // create 4 rooms associated with the new gameId with a number of 1-4 and assign an imgSrc from images array
 
     //The amount of images we have will determine how many rooms we need... therefore loop over images.length to create Rooms for each image.

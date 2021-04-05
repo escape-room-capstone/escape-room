@@ -6,10 +6,9 @@
 }
 
 #edit-room input.narrative {
-  padding: 0.2rem;
-  width: 85%;
-  margin: 1rem;
-  border-radius: 12px;
+  width: 50%;
+  font-size: 1.2rem;
+  margin: 0.2rem;
 }
 
 #edit-room span.narrative {

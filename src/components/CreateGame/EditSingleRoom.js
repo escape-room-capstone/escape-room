@@ -85,7 +85,8 @@ const EditSingleRoom = (props) => {
     width: '1000px',
     position: 'relative',
     backgroundSize: 'cover',
-    margin: '0 auto',
+    margin: '.5rem auto',
+    border: '7px solid black',
   };
   return (
     <div id="edit-room">

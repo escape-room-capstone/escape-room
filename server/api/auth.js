@@ -8,7 +8,7 @@ router.get('/user', async (req, res, next) => {
   try {
     const token = req.headers.authorization;
     const user = await User.byToken(token);
-    console.log(user, 'user from database');
+    // console.log(user, 'user from database');
     res.send(user);
   } catch (ex) {
     next(ex);

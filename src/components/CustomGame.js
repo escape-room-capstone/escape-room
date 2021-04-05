@@ -151,7 +151,7 @@ const _CustomGame = (props) => {
                 props.history.push(`/users/${props.auth.id}/account`);
               }
             }}
-            className="menu-item--small"
+            className="menu-item"
           >
             Profile
           </span>

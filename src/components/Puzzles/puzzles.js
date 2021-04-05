@@ -25,7 +25,7 @@ export const Puzzle1 = (props) => {
           }
         >
           Lever 1
-        </button>{' '}
+        </button>
         {puzzle.one === false ? 'False' : 'True'}
       </div>
       <div>
@@ -40,7 +40,7 @@ export const Puzzle1 = (props) => {
           }
         >
           Lever 2
-        </button>{' '}
+        </button>
         {puzzle.two === false ? 'False' : 'True'}
       </div>
       <div>
@@ -87,267 +87,242 @@ export const Puzzle2 = (props) => {
   );
 };
 
+
 export const Puzzle3 = (props) => {
-  // select the list items
-  let ul = document.querySelectorAll('li');
-  const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', ''];
+  const [tiles, setTiles] = useState(shuffle([1, 2, 3, 4, 5, 6, 7, 8, '']));
+  const [win, setWin] = useState(false);
+  const [animate, setAnimate] = useState(false);
+  const [moves, setMoves] = useState([
+    [null, 1, 3, null],
+    [null, 2, 4, 0],
+    [null, null, 5, 1],
+    [0, 4, 6, null],
+    [1, 5, 7, 3],
+    [2, null, 8, 4],
+    [3, 7, null, null],
+    [4, 8, null, 6],
+    [5, null, null, 7],
+  ]);
 
-  const state = {};
-  state.content = letters;
+  console.log('tiles', tiles);
+  console.log('moves', moves);
 
-  // shuffle the array
-  const shuffle = (arr) => {
-    const copy = [...arr];
-    // loop over half or full of the array
-    for (let i = 0; i < copy.length; i++) {
-      // for each index,i pick a random index j
-      let j = parseInt(Math.random() * copy.length);
-      // swap elements at i and j
-      let temp = copy[i];
-      copy[i] = copy[j];
-      copy[j] = temp;
+  function shuffle(array) {
+    let i = 0;
+    // switches first two tiles
+    function switchTiles(array) {
+      // find the first two tiles in a row
+      while (!array[i] || !array[i + 1]) i++;
+
+      // store tile value
+      let tile = array[i];
+      // switche values
+      array[i] = array[i + 1];
+      array[i + 1] = tile;
+
+      return array;
     }
-    return copy;
-  };
 
-  const isSolvable = (arr) => {
-    let number_of_inv = 0;
-    // get the number of inversions
-    for (let i = 0; i < arr.length; i++) {
-      // i picks the first element
-      for (let j = i + 1; j < arr.length; j++) {
-        // check that an element exist and index i and j, then check that element at i > at j
-        if (arr[i] && arr[j] && arr[i] > arr[j]) number_of_inv++;
+    // counts inversions
+    function countInversions(array) {
+      // make array of inversions
+      console.log('array inversions');
+      const invArray = array.map(function (num, i) {
+        let inversions = 0;
+        for (let j = i + 1; j < array.length; j++) {
+          if (array[j] && array[j] < num) {
+            inversions += 1;
+          }
+        }
+        // console.log('inversions', inversions);
+        return inversions;
+      });
+      // return sum of inversions array
+      // console.log('reducing');
+      return invArray.reduce(function (a, b) {
+        return a + b;
+      });
+    }
+
+    // fischer-yates shuffle algorithm
+    function fischerYates(array) {
+      let counter = array.length;
+      let temp;
+      let index;
+      console.log('yates');
+      // While there are elements in the array
+      while (counter > 0) {
+        // Pick a random index
+        index = Math.floor(Math.random() * counter);
+        // Decrease counter by 1
+        counter--;
+        // And swap the last element with it
+        temp = array[counter];
+        array[counter] = array[index];
+        array[index] = temp;
       }
-    }
-    // if the number of inversions is even
-    // the puzzle is solvable
-    return number_of_inv % 2 == 0;
-  };
 
-  const fillGrid = (items, letters) => {
-    let shuffled = shuffle(letters);
-    // shuffle the letters arraay until there is a combination that is solvable
-    while (!isSolvable(shuffled)) {
-      shuffled = shuffle(letters);
+      return array;
     }
 
-    items.forEach((item, i) => {
-      item.innerText = shuffled[i];
-    });
-  };
+    // Fischer-Yates shuffle
+    array = fischerYates(array);
 
-  // this function sets a unique id for each list item, in the form 'li0' to 'li8'
-  const setId = (items) => {
-    for (let i = 0; i < items.length; i++) {
-      items[i].setAttribute('id', `li${i}`);
+    // check for even number of inversions
+    if (countInversions(array) % 2 !== 0) {
+      // switch two tiles if odd
+      // console.log('array inversions if statement');
+      array = switchTiles(array);
     }
-  };
 
-  function setUp() {
-    fillGrid(ul, letters);
-    setId(ul);
-
-    state.content = getState(ul);
-    state.dimension = getDimension(state);
-    // set up the droppable and dragabble contents
-    setDroppable(ul);
-    setDraggable(ul);
-
-    console.log('The state content', state.content);
-    console.log('The state dimension', state.dimension);
+    return array;
   }
 
-  /**
-   * Getters
-   */
-  const getState = (items) => {
-    const content = [];
-    items.forEach((item, i) => {
-      content.push(item.innerText);
-    });
-    return content;
-  };
+  function checkBoard(props) {
+    // const tiles = props.tiles;
+    console.log('checkBoard');
+    for (let i = 0; i < tiles.length - 1; i++) {
+      // console.log('checkboard false');
+      if (tiles[i] !== i + 1) return false;
+    }
+    // console.log('checkboard true');
+    return true;
+  }
 
-  const getEmptyCell = () => {
-    const emptyCellNumber = state.emptyCellIndex + 1;
-    const emptyCellRow = Math.ceil(emptyCellNumber / 3);
-    const emptyCellCol = 3 - (3 * emptyCellRow - emptyCellNumber);
-    // emptyCellRow holds the actual row number the empty tile falls into in a 9-cell grid
-    // the array index will be one less than its value. Same goes for emptyCellCol
-    return [emptyCellRow - 1, emptyCellCol - 1];
-  };
+  // function handleTileClick() {
+  //   tileclick();
+  // }
 
-  const getDimension = (state) => {
-    let j = 0;
-    let arr = [];
-    const { content } = state;
-    for (let i = 0; i < 3; i++) {
-      arr.push(content.slice(j, j + 3));
-      j += 3;
+  useEffect(() => {
+    if (animate) {
+      console.log('USE EFFECT??');
+      setTiles(tiles);
+      setAnimate(false);
+    }
+  }, [tiles, setTiles, setAnimate]);
+
+  let tileEl;
+  let position;
+  let status;
+  let move;
+
+  const Tile = (props) => {
+    function clickHandler(e) {
+      tileClick(e.target, props.position, props.status, props.tiles);
+      tileEl = e.target;
+      position = props.position;
+      status = props.status;
     }
 
-    return arr;
+    return (
+      <div className="tile" onClick={clickHandler}>
+        {props.status}
+      </div>
+    );
   };
 
-  /**
-   * setters
-   */
-  const setDroppable = (items) => {
-    items.forEach((item, i) => {
-      if (!item.innerText) {
-        state.emptyCellIndex = i;
-        item.setAttribute('ondrop', drop_handler(ev));
-        item.setAttribute('ondragover', dragover_handler(ev));
-        item.setAttribute('class', 'empty');
-        item.setAttribute('draggable', false);
-        item.setAttribute('ondragstart', '');
-        item.setAttribute('ondragend', '');
+  function tileClick(tileEl, position, status, tiles) {
+    console.log('tileClick Tiles', tiles);
+    console.log('this is passed in', tileEl, position, status, tiles);
+    // Possible moves
+    // [up,right,down,left]
+    // 9 = out of bounds
+    // return if they've already won
+    if (win) return;
+
+    console.log('position', position);
+    // check possible moves
+    for (let i = 0; i < moves[position].length; i++) {
+      move = moves[position][i];
+      // if an adjacent tile is empty
+      if (typeof move === 'number' && !tiles[move]) {
+        console.log('if adjacent tile is empty');
+        animateTiles(i, move);
+        setAnimate(true);
+        setTimeout(afterAnimate(), 200);
+        break;
       }
-      return;
-    });
-  };
-
-  const removeDroppable = (items) => {
-    items.forEach((item) => {
-      item.setAttribute('ondrop', '');
-      item.setAttribute('ondragover', '');
-      item.setAttribute('draggable', false);
-      item.setAttribute('ondragstart', '');
-      item.setAttribute('ondragend', '');
-    });
-  };
-
-  const setDraggable = (items) => {
-    const [row, col] = getEmptyCell();
-
-    let left,
-      right,
-      top,
-      bottom = null;
-    if (state.dimension[row][col - 1]) left = state.dimension[row][col - 1];
-    if (state.dimension[row][col + 1]) right = state.dimension[row][col + 1];
-
-    if (state.dimension[row - 1] != undefined)
-      top = state.dimension[row - 1][col];
-    if (state.dimension[row + 1] != undefined)
-      bottom = state.dimension[row + 1][col];
-
-    // make its right and left dragabble
-    items.forEach((item) => {
-      if (
-        item.innerText == top ||
-        item.innerText == bottom ||
-        item.innerText == right ||
-        item.innerText == left
-      ) {
-        item.setAttribute('draggable', true);
-        item.setAttribute('ondragstart', dragstart_handler(ev));
-        item.setAttribute('ondragend', dragend_handler(ev));
-      }
-    });
-  };
-
-  const isCorrect = (solution, content) => {
-    if (JSON.stringify(solution) == JSON.stringify(content)) return true;
-    return false;
-  };
-
-  /**
-   * Drag and drop handlers
-   */
-  const dragstart_handler = (ev) => {
-    console.log('dragstart');
-    ev.dataTransfer.setData('text/plain', ev.target.id);
-    ev.dataTransfer.dropEffect = 'move';
-  };
-
-  const dragover_handler = (ev) => {
-    console.log('dragOver');
-    ev.preventDefault();
-  };
-
-  const drop_handler = (ev) => {
-    console.log('drag');
-    ev.preventDefault();
-    // Get the id of the target and add the moved element to the target's DOM
-    const data = ev.dataTransfer.getData('text/plain');
-    ev.target.innerText = document.getElementById(data).innerText;
-
-    // once dropped, unempty the cell :)
-    ev.target.classList.remove('empty');
-    ev.target.setAttribute('ondrop', '');
-    ev.target.setAttribute('ondragover', '');
-    document.getElementById(data).innerText = '';
-
-    // get new state
-    state.content = getState(ul);
-    // get new dimention from the state
-    state.dimension = getDimension(state);
-  };
-
-  const dragend_handler = (ev) => {
-    console.log('dragEnd');
-    // Remove all of the drag data
-    ev.dataTransfer.clearData();
-    // remove all droppable attributes
-    removeDroppable(document.querySelectorAll('li'));
-
-    // set new droppable and draggable attributes
-    setDroppable(document.querySelectorAll('li'));
-    setDraggable(document.querySelectorAll('li'));
-
-    // if correct
-    if (isCorrect(letters, state.content)) {
-      showModal();
     }
-  };
 
-  const showModal = () => {
-    document.getElementById('message').innerText = 'You Won!';
-    document.getElementById('modal').classList.remove('hide');
-  };
+    function animateTiles(i, move) {
+      const directions = ['up', 'right', 'down', 'left'];
+      const moveToEl = document.querySelector(
+        '.tile:nth-child(' + (move + 1) + ')'
+      );
+      let direction = directions[i];
+      tileEl.classList.add('move-' + direction);
 
-  const hideModal = () => {
-    document.getElementById('modal').classList.add('hide');
-  };
+      // this is all a little hackish.
+      // css/js are used together to create the illusion of moving blocks
+      setTimeout(function () {
+        console.log('moving');
+        moveToEl.classList.add('highlight');
+        tileEl.classList.remove('move-' + direction);
+        // time horribly linked with css transition
+        setTimeout(function () {
+          console.log('higlight??');
+          moveToEl.classList.remove('highlight');
+        }, 400);
+      }, 200);
+      console.log('animate');
+    }
+
+    // called after tile is fully moved
+    // sets new state
+    function afterAnimate() {
+      console.log('AFTER ANIMATE move', move);
+      tiles[position] = '';
+      tiles[move] = status;
+      setTiles(tiles);
+      setMoves(moves);
+      setWin(checkBoard(props));
+    }
+  }
+
+  function clickHandler() {
+    restartGame();
+  }
+
+  function restartGame() {
+    setTiles(shuffle([1, 2, 3, 4, 5, 6, 7, 8, '']));
+    setWin(false);
+    setMoves([
+      [null, 1, 3, null],
+      [null, 2, 4, 0],
+      [null, null, 5, 1],
+      [0, 4, 6, null],
+      [1, 5, 7, 3],
+      [2, null, 8, 4],
+      [3, 7, null, null],
+      [4, 8, null, 6],
+      [5, null, null, 7],
+    ]);
+    setAnimate(false);
+  }
 
   return (
-    <div
-      className="wrapper"
-      onLoad={() => {
-        setUp();
-      }}
-    >
-      <div id="divBody">
-        <h1 id="puzzleH1">Sliding Tile Puzzle</h1>
-        <div id="modal" className="hide">
-          <div id="header">
-            <button
-              id="closeBtn"
-              onClick={() => {
-                hideModal;
-              }}
-            >
-              x
-            </button>
-          </div>
-          <h1 id="message">You won!</h1>
+    <div className="puzzleContainer">
+      <h1 className="title">ReactJS Slide Puzzle</h1>
+      <div id="game-container">
+        <div id="game-board">
+          {tiles.map((tile, idx) => {
+            return (
+              <Tile
+                status={tile}
+                key={idx}
+                position={idx}
+                tiles={tiles}
+                tileClick={tileClick}
+              />
+            );
+          })}
         </div>
-        <div id="puzzleContainer">
-          <ul className="puzzleUL">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
+        <div id="menu">
+          <h3 id="subtitle">{win ? 'You win!' : 'Solve the puzzle.'}</h3>
+          <a className={win ? 'button win' : 'button'} onClick={clickHandler}>
+            Restart
+          </a>
         </div>
-        <button onClick={props.solve}>SOLVE</button>
       </div>
     </div>
   );

@@ -13,3 +13,19 @@
 #lock-images img {
   margin: 0.3rem;
 }
+
+#game-tools {
+  display: flex;
+  width: 50%;
+  margin: 0 auto;
+}
+
+#game-timer > div h1,
+#room-timer > div h1 {
+  font-size: 1.5rem;
+}
+
+#game-timer,
+#room-timer {
+  width: 25rem;
+}

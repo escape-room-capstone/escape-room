@@ -17,6 +17,7 @@ const _CustomGame = (props) => {
   // const { room } = props;
   // const { puzzles } = room;
   // console.log('Our Puzzles', puzzles);
+
   const [roomStatus, setRoomStatus] = useState({});
   const [puzzleDimensions, setPuzzleDimensions] = useState({});
   let { gameId, roomId, idx } = props.match.params;
@@ -203,6 +204,7 @@ const _CustomGame = (props) => {
             ))}
           </div>
         </div>
+
         <div>
           <div
             id="game-room"

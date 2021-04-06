@@ -85,7 +85,8 @@ const EditSingleRoom = (props) => {
     width: '1000px',
     position: 'relative',
     backgroundSize: 'cover',
-    margin: '0 auto',
+    margin: '.5rem auto',
+    border: '7px solid black',
   };
   return (
     <div id="edit-room">
@@ -97,95 +98,9 @@ const EditSingleRoom = (props) => {
           onChange={(e) => setNarrative(e.target.value)}
         ></input>
       </div>
-      {room.puzzles.map((puzzle) => {
-        return (
-          <div key={puzzle.id}>
-            <span style={{ fontWeight: 'bold', color: 'red' }}>
-              {puzzle.name} :{' '}
-            </span>
-            <label style={{ fontWeight: 'bolder', color: 'chartreuse' }}>
-              {' '}
-              Distance from top{' '}
-              <input
-                name="top"
-                type="text"
-                value={
-                  puzzleDimensions[puzzle.id]
-                    ? puzzleDimensions[puzzle.id].top
-                    : ''
-                }
-                onChange={(e, puzzleId) => handleDimensionChanges(e, puzzle.id)}
-              />
-            </label>
-            <label style={{ fontWeight: 'bolder', color: 'chartreuse' }}>
-              {' '}
-              Distance from left{' '}
-              <input
-                name="left"
-                type="text"
-                value={
-                  puzzleDimensions[puzzle.id]
-                    ? puzzleDimensions[puzzle.id].left
-                    : ''
-                }
-                onChange={(e, puzzleId) => handleDimensionChanges(e, puzzle.id)}
-              />
-            </label>
-            <label style={{ fontWeight: 'bolder', color: 'chartreuse' }}>
-              {' '}
-              Width{' '}
-              <input
-                type="text"
-                name="width"
-                value={
-                  puzzleDimensions[puzzle.id]
-                    ? puzzleDimensions[puzzle.id].width
-                    : ''
-                }
-                onChange={(e, puzzleId) => handleDimensionChanges(e, puzzle.id)}
-              />
-            </label>
-            <label style={{ fontWeight: 'bolder', color: 'chartreuse' }}>
-              {' '}
-              Height{' '}
-              <input
-                type="text"
-                name="height"
-                value={
-                  puzzleDimensions[puzzle.id]
-                    ? puzzleDimensions[puzzle.id].height
-                    : ''
-                }
-                onChange={(e, puzzleId) => handleDimensionChanges(e, puzzle.id)}
-              />{' '}
-            </label>
-            <br />
-            <br />
-            <div id="puzzle-text">
-              <label htmlFor="puzzle-text">ENTER PUZZLE TEXT</label>
-              <textarea
-                className="puzzle-text"
-                onChange={(e) =>
-                  setPuzzleText((prev) => ({
-                    ...prev,
-                    [puzzle.id]: e.target.value,
-                  }))
-                }
-                placeholder="include any text you would like with your puzzle here"
-                id="puzzle-text"
-              />
-            </div>
-          </div>
-        );
-      })}
+
       <button onClick={() => setShowPrompt(true)}> INSTRUCTIONS </button>
-      <button
-        disabled={buttonBoolean}
-        onClick={() => handleSubmit(puzzleDimensions, room.id)}
-      >
-        {' '}
-        Submit{' '}
-      </button>
+
       <div style={styles}>
         {room.puzzles.map((puzzle) => {
           return (
@@ -230,6 +145,107 @@ const EditSingleRoom = (props) => {
           <button onClick={() => setShowPrompt(false)}> Close </button>
         </Modal>
       </div>
+      <div id="puzzle-info">
+        {room.puzzles.map((puzzle) => {
+          return (
+            <div key={puzzle.id}>
+              <div id="dimensions">
+                <span style={{ fontWeight: 'bold', color: 'red' }}>
+                  {puzzle.name} :{' '}
+                </span>
+                <label style={{ fontWeight: 'bolder', color: 'black' }}>
+                  {' '}
+                  Distance from top{' '}
+                  <input
+                    name="top"
+                    type="text"
+                    value={
+                      puzzleDimensions[puzzle.id]
+                        ? puzzleDimensions[puzzle.id].top
+                        : ''
+                    }
+                    onChange={(e, puzzleId) =>
+                      handleDimensionChanges(e, puzzle.id)
+                    }
+                  />
+                </label>
+                <br></br>
+                <label style={{ fontWeight: 'bolder', color: 'black' }}>
+                  {' '}
+                  Distance from left{' '}
+                  <input
+                    name="left"
+                    type="text"
+                    value={
+                      puzzleDimensions[puzzle.id]
+                        ? puzzleDimensions[puzzle.id].left
+                        : ''
+                    }
+                    onChange={(e, puzzleId) =>
+                      handleDimensionChanges(e, puzzle.id)
+                    }
+                  />
+                </label>
+                <div>
+                  <label style={{ fontWeight: 'bolder', color: 'black' }}>
+                    {' '}
+                    Width{' '}
+                    <input
+                      type="text"
+                      name="width"
+                      value={
+                        puzzleDimensions[puzzle.id]
+                          ? puzzleDimensions[puzzle.id].width
+                          : ''
+                      }
+                      onChange={(e, puzzleId) =>
+                        handleDimensionChanges(e, puzzle.id)
+                      }
+                    />
+                  </label>
+                  <label style={{ fontWeight: 'bolder', color: 'black' }}>
+                    {' '}
+                    Height{' '}
+                    <input
+                      type="text"
+                      name="height"
+                      value={
+                        puzzleDimensions[puzzle.id]
+                          ? puzzleDimensions[puzzle.id].height
+                          : ''
+                      }
+                      onChange={(e, puzzleId) =>
+                        handleDimensionChanges(e, puzzle.id)
+                      }
+                    />{' '}
+                  </label>
+                </div>
+              </div>
+              <div id="puzzle-text">
+                <label htmlFor="puzzle-text">PUZZLE TEXT</label>
+                <textarea
+                  className="puzzle-text"
+                  onChange={(e) =>
+                    setPuzzleText((prev) => ({
+                      ...prev,
+                      [puzzle.id]: e.target.value,
+                    }))
+                  }
+                  placeholder="include any text you would like with your puzzle here"
+                  id="puzzle-text"
+                />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <button
+        disabled={buttonBoolean}
+        onClick={() => handleSubmit(puzzleDimensions, room.id)}
+      >
+        {' '}
+        COMPLETE{' '}
+      </button>
     </div>
   );
 };

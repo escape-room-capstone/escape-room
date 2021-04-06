@@ -30,7 +30,7 @@ const AuthForm = (props) => {
       }
     };
     checkForUser();
-  }, []);
+  }, [props.auth]);
   console.log(props.isLoggedIn, 'props.isloggedin');
   return (
     <div id="authForm">
@@ -86,6 +86,7 @@ const mapLogin = (state) => {
 
 const mapSignup = (state) => {
   return {
+    isLoggedIn: !!state.auth.id,
     name: 'signup',
     displayName: 'Sign Up',
     error: state.auth.error,

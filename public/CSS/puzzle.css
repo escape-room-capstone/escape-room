@@ -142,6 +142,8 @@
   100% {
     background: #fff;
   }
+}
+
 #hints p span {
   margin: 0 2rem;
   visibility: hidden;

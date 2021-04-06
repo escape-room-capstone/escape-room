@@ -58,12 +58,12 @@ const syncAndSeed = async () => {
     description: `Rob a bank and escape with all the $$$`,
   });
   const defaultStarWars = await Game.create({
-    title: 'BobaFett',
+    title: 'Boba Fett',
     theme: 'starwars',
     public: true,
     imgSrc:
       'https://static2.srcdn.com/wordpress/wp-content/uploads/2020/12/The-Mandalorian-Concept-Art-5-Boba-Fett-Ship.jpg?q=50&fit=crop&w=740&h=370',
-    description: `description TBD`,
+    description: `You are the bounty hunter Boba Fett and you recently captured a high value Jedi target. He managed to cause some damage to your ship with various encryptions preventing you from fixing it before the ship explodes. He's no good to you dead, so get moving.`,
   });
 
   //seed all puzzles - which will be associated with the same named components on the front end

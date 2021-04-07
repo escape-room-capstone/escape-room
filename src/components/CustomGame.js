@@ -221,6 +221,7 @@ const _CustomGame = (props) => {
           >
             {Object.keys(roomStatus).map((puzzleNum, idx) => (
               <div
+                onClick={() => show(puzzleNum)}
                 style={{
                   top: `${
                     puzzleDimensions[puzzleNum]
@@ -241,15 +242,11 @@ const _CustomGame = (props) => {
                     puzzleDimensions[puzzleNum]
                       ? puzzleDimensions[puzzleNum].height
                       : ''
-                  }px`,
-                  border: '4px solid red',
+                  }px`,                  
                   position: 'absolute',
                 }}
                 key={idx}
-              >
-                <button onClick={() => show(puzzleNum)}>
-                  Puzzle {puzzleNum}
-                </button>
+              >                
               </div>
             ))}
 

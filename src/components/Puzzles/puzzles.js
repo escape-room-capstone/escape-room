@@ -3,6 +3,7 @@ import { Stage, Layer, Circle, Line, Image } from 'react-konva';
 import useImage from 'use-image';
 import '../../../public/CSS/puzzle.css';
 import { Hints } from '../Hints';
+import { TilePuzzle } from './tilepuzzle';
 
 export const Puzzle1 = (props) => {
   const [puzzle, setPuzzle] = useState({
@@ -579,10 +580,11 @@ export const Puzzle13 = (props) => {
 };
 
 export const Puzzle14 = (props) => {
+  console.log(props, 'props of puzzle14');
   return (
     <div>
-      THIS IS PUZZLE 14
-      <button onClick={props.solve}>SOLVE</button>
+      <TilePuzzle solve={props.solve} />{' '}
+      {!props.demo ? <button onClick={() => props.solve()}>SOLVE</button> : ''}
     </div>
   );
 };

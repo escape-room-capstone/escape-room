@@ -22,7 +22,7 @@ const _HauntedRoom1 = (props) => {
   }, []);
   return (
     <div className="game-room">
-      <div className="narrative">
+      <div className="narrative intro">
         <TypeWriterEffect
           textStyle={{ fontFamily: 'Red Hat Display' }}
           cursorColor="white"
@@ -72,7 +72,7 @@ const _HauntedRoom1 = (props) => {
           ></Text>
         </Layer>
       </Stage>
-      {enterHome ? <Redirect push to="/haunted/room2" /> : ''}
+      {enterHome ? <Redirect push to="/haunted/1/room2" /> : ''}
     </div>
   );
 };

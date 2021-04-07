@@ -60,7 +60,7 @@ export const HauntedRoom4 = (props) => {
           />
         </Layer>
       </Stage>
-      {advance ? <Redirect push to="/haunted/Room5" /> : ''}
+      {advance ? <Redirect push to="/haunted/1/Room5" /> : ''}
     </div>
   );
 };

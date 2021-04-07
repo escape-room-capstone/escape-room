@@ -14,21 +14,25 @@ export const _HauntedIntro = (props) => {
   useEffect(() => {
     props.getGame(props.gameId);
   }, []);
-  useEffect(
-    () => setTimeout(() => props.history.push('/haunted/room1'), 9000),
-    []
-  );
+
   return (
     <div className="game-room">
       <div className="narrative intro">
-        <TypeWriterEffect
+        <p style={{ fontSize: '2rem' }}>
+          Driving home in a storm, your car breaks down. You leave your car to
+          look for shelter...
+        </p>
+        <button onClick={() => props.history.push('/haunted/1/room1')}>
+          Continue
+        </button>
+        {/* <TypeWriterEffect
           textStyle={{ fontFamily: 'Red Hat Display' }}
           startDelay={50}
           hideCursorAfterText={true}
           cursorColor="white"
-          text="Driving home in a storm, your car breaks down. You leave your car to look for shelter..."
+          text={`Driving home in a storm, your car breaks down. You leave your car to look for shelter...`}
           typeSpeed={70}
-        />
+        /> */}
       </div>
       <Stage
         onClick={(e) => {

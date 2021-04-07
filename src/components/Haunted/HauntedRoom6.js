@@ -65,7 +65,7 @@ export const HauntedRoom6 = (props) => {
   const [advance, setAdvance] = useState(false);
   //   const [play] = useSound(dooropen);
   useEffect(() => {
-    if (locked === false) props.history.push('/haunted/room7');
+    if (locked === false) props.history.push('/haunted/1/room7');
   }, [locked]);
 
   //helper functions

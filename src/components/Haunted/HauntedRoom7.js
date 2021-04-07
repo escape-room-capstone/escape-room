@@ -100,7 +100,7 @@ const _HauntedRoom7 = (props) => {
       room.clues.two.solved &&
       room.clues.three.solved
     ) {
-      props.history.push('/haunted/room8');
+      props.history.push('/haunted/1/room8');
     }
   }, [room]);
   const [itemsVisible, setItemsVisible] = useState({

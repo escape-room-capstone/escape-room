@@ -11,7 +11,7 @@ const Police = (props) => {
 
 export const HauntedRoom9 = (props) => {
   useEffect(() => {
-    setTimeout(() => props.history.push('/haunted/final'), 9000);
+    setTimeout(() => props.history.push('/haunted/1/final'), 9000);
   }, []);
   return (
     <div className="game-room">

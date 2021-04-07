@@ -3,3 +3,42 @@
     justify-content: space-around;
     flex-direction: row;
 }
+
+.game-board {
+    display: grid;
+    grid-template-rows: 50px 50px 50px;
+    grid-template-columns: 50px 50px 50px;
+}
+
+.box {
+    background: #444;
+    border: 1px solid #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #AAA;
+  }
+
+#game-div-boba {
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    justify-content: space-between;
+}
+
+.white {
+    background: white;
+    border-color: white;
+}
+
+.left-triangle {
+    background: linear-gradient(to top left, #444 50%, transparent 50%);
+    border-top-color: white;
+    border-left-color: white;
+}
+
+.right-triangle {
+    background: linear-gradient(to top right, #444 50%, transparent 50%);
+    border-top-color: white;
+    border-right-color: white;
+}

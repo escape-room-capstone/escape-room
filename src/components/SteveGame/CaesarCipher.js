@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import '../../../public/CSS/Caesar.css'
 
 export default function CaesarCipher({ setCaesarCipherCompleted }) {
   const [caesarCipher, setCaesarCipher] = useState({
@@ -8,7 +9,7 @@ export default function CaesarCipher({ setCaesarCipherCompleted }) {
   const cipherKey = alphabet.length;
   const solution = "be careful, elliot will hack your database";
   let problem = "";
-  let status = "You must decrypt the message! Time is running out!"
+  let status = "You must decrypt the message! Time is running out!";
 
   let cipher = { " ": " ", ",": "," };
 
@@ -29,22 +30,20 @@ export default function CaesarCipher({ setCaesarCipherCompleted }) {
 
   // Win condition -- user will have to enter integer, if wrong, generate new numbers
   useEffect(() => {
-    if (
-      caesarCipher.decrypted === solution
-    ) {
+    if (caesarCipher.decrypted.toLowerCase() === solution) {
       setCaesarCipherCompleted(true);
       console.log("passed");
     }
   }, [caesarCipher, setCaesarCipherCompleted]);
 
-  if(caesarCipher.decrypted === solution) {
-    status = "Whew! You descrypted the message!"
+  if (caesarCipher.decrypted === solution) {
+    status = "Whew! You descrypted the message!";
   }
 
   return (
-    <div>
-        <p>{status}</p>
-      <p>{problem}</p>
+    <div id="caesar-game">
+      <p>{status}</p>
+      <p style={{ fontFamily: 'copperplate' }}>{problem}</p>
       <input
         style={{ width: "30rem" }}
         type="string"

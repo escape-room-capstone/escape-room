@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchCustomGame } from '../../store/game';
 import { Navbar } from '../Navbar';
+//using choose theme css
 
 //hard-coded user Id for now
 // const userId = 2;
@@ -114,7 +115,7 @@ const AssignPuzzles = (props) => {
           {sortedRoomArray.map((room) => {
             return (
               <div className="themeMap" key={room.id}>
-                <p> Room {room.number} </p>
+                <h2> Room {room.number} </h2>
                 <div>
                   <img
                     className="createGameImg"
@@ -122,14 +123,18 @@ const AssignPuzzles = (props) => {
                     src={room.imgSrc}
                   />
                 </div>
-                <button
-                  onClick={() =>
-                    props.history.push(`/editsingleroom/${room.id}`)
-                  }
-                >
+                <div>
                   {' '}
-                  Customize{' '}
-                </button>
+                  <button
+                    onClick={() =>
+                      props.history.push(`/editsingleroom/${room.id}`)
+                    }
+                  >
+                    {' '}
+                    Customize{' '}
+                  </button>
+                </div>
+
                 <p> Puzzles for Room {room.number} : </p>
                 <ul>
                   {room.puzzles.map((puzzle) => {

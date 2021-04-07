@@ -36,8 +36,7 @@ const ChooseTheme = (props) => {
         <div className="themeSection">
           <h1 style={{ textAlign: 'center' }}>Choose A Theme</h1>
           <h2 id="heading-with-button">
-            {' '}
-            Themes You've Created{' '}
+            Themes You've Created
             <Link to={`/users/${props.auth.id}/createTheme`}>
               <button id="createButton">+ CREATE THEME</button>
             </Link>
@@ -48,7 +47,7 @@ const ChooseTheme = (props) => {
                 <h2> {theme.name} </h2>
                 <Link to={`/theme/${theme.id}`}>
                   <img
-                    className="createGameImg"
+                    // className="createGameImg"
                     src={theme.backgroundImageOne}
                     alt="theme background image"
                   />
@@ -61,17 +60,19 @@ const ChooseTheme = (props) => {
             {themes.map((theme) => (
               <div className="themeMap" key={theme.id}>
                 <h2> {theme.name} </h2>
-                <img
-                  className="createGameImg"
-                  onClick={() => props.history.push(`/theme/${theme.id}`)}
-                  src={theme.backgroundImageOne}
-                  alt="theme background image"
-                ></img>
+                <a>
+                  <img
+                    // className="createGameImg"
+                    onClick={() => props.history.push(`/theme/${theme.id}`)}
+                    src={theme.backgroundImageOne}
+                    alt="theme background image"
+                  ></img>
+                </a>
               </div>
             ))}
-          </div>{' '}
+          </div>
         </div>
-        {'      '} Designed by VARKS
+        {/*  Designed by VARKS */}
       </div>
     );
   } else {

@@ -23,6 +23,7 @@ const CreateGame = (props) => {
   // });
   const [puzzleToShow, setPuzzleToShow] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [success, setSuccess] = useState(false);
   useEffect(() => {
     if (puzzleToShow.length) {
       setShowModal(true);
@@ -32,11 +33,17 @@ const CreateGame = (props) => {
     props.getTheme(props.match.params.id);
     props.getPuzzles();
   }, []);
-
+  useEffect(() => {
+    if (success) {
+      setTimeout(() => setSuccess(false), 1500);
+    }
+  }, [success]);
   const generatePuzzle = (puzzleName, props) => {
     if (puzzleName !== '') {
       const Component = componentMapping[puzzleName];
-      return <Component {...props} />;
+      return (
+        <Component demo={true} solve={() => setSuccess(true)} {...props} />
+      );
     }
   };
 
@@ -147,7 +154,10 @@ const CreateGame = (props) => {
         </button>
         <div>{error}</div>
         <Modal isOpen={showModal}>
-          <div>{generatePuzzle(puzzleToShow, props)}</div>
+          <div>
+            <div>{generatePuzzle(puzzleToShow, props)}</div>
+            <div>{success ? 'Nice work!' : ''}</div>
+          </div>
           <button onClick={() => setShowModal(false)}>CLOSE</button>
         </Modal>
       </div>

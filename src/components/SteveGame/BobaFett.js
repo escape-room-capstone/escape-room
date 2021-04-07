@@ -21,6 +21,7 @@ export default function BobaFett() {
   const [caesarCipherCompleted, setCaesarCipherCompleted] = useState(
     false
   );
+
   return (
     <div className='boba-container'>
       <div className='boba-background'>
@@ -32,7 +33,7 @@ export default function BobaFett() {
         <button className='boba-annoying-button' onClick={() => setAnnoyingModalOpen(true)}></button>
         <Modal isOpen={annoyingModalOpen}>
           <button onClick={() => setAnnoyingModalOpen(false)}>Close Puzzle</button>
-          <p>Determine the final sequence. Incorrect answers will generate new numbers.</p>
+          <p>This Jedi is crafty. Determine the fourth sequence to deactivate this portion of the self-destruct protocol.</p>
           <AnnoyingPuzzle setAnnoyingPuzzleCompleted={setAnnoyingPuzzleCompleted} setAnnoyingModalOpen={setAnnoyingModalOpen}/>
         </Modal>
         <button className='boba-magic-square-button' onClick={() => setMagicSquareModalOpen(true)}></button>
@@ -43,7 +44,7 @@ export default function BobaFett() {
         <button className='boba-caesar-button' onClick={() => setCaesarCipherModalOpen(true)}></button>
         <Modal isOpen={caesarCipherModalOpen}>
           <button onClick={() => setCaesarCipherModalOpen(false)}>Close Puzzle</button>
-          <p>Ugh. An encoded message. What does it say?</p>
+          <p>Ugh. The Jedi encrypted the password to regain system access. Get thinking, FAST.</p>
           <CaesarCipher setCaesarCipherCompleted={setCaesarCipherCompleted}/>
         </Modal>
       </div>

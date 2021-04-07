@@ -7,7 +7,7 @@
 }
 
 .boba-background {
-  background-image: url("https://static2.srcdn.com/wordpress/wp-content/uploads/2020/12/The-Mandalorian-Concept-Art-5-Boba-Fett-Ship.jpg?q=50&fit=crop&w=740&h=370");
+  background-image: url('../Images/BobaFett.jpeg');
   background-repeat: no-repeat;
   background-size: 100% 100%;
   height: 60rem;

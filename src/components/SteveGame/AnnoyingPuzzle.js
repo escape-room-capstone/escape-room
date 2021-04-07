@@ -49,7 +49,7 @@ export default function AnnoyingPuzzle({ setAnnoyingPuzzleCompleted, setAnnoying
   useEffect(() => {
     const annoying = setTimeout(() => {
       setAnnoyingModalOpen(false)
-    }, 30000)
+    }, 30000000)
     return () => {
       clearTimeout(annoying)
     };
@@ -64,29 +64,51 @@ export default function AnnoyingPuzzle({ setAnnoyingPuzzleCompleted, setAnnoying
   return (
     <div>
       <p>{status}</p>
-      <div className='triangle'>
-        <div>Top: {pattern.firstOne}</div>
-        <div>Left: {pattern.secondOne}</div>
-        <div>Right: {pattern.thirdOne}</div>
-        <div>Result: {pattern.resultOne}</div>
+      <div id="game-div-boba">
+      <div className='game-board'>
+        <div className='box white'></div>
+        <div className='box'>{pattern.firstOne}</div>
+        <div className='box white'></div>
+        <div className='box left-triangle'></div>
+        <div className='box'>{pattern.resultOne}</div>
+        <div className='box right-triangle'></div>
+        <div className='box'>{pattern.secondOne}</div>
+        <div className='box'></div>
+        <div className='box'>{pattern.thirdOne}</div>
       </div>
-      <div className="triangle">
-        <div>Top: {pattern.firstTwo}</div>
-        <div>Left: {pattern.secondTwo}</div>
-        <div>Right: {pattern.thirdTwo}</div>
-        <div>Result: {pattern.resultTwo}</div>
+      <div className='game-board'>
+        <div className='box white'></div>
+        <div className='box'>{pattern.firstTwo}</div>
+        <div className='box white'></div>
+        <div className='box left-triangle'></div>
+        <div className='box'>{pattern.resultTwo}</div>
+        <div className='box right-triangle'></div>
+        <div className='box'>{pattern.secondTwo}</div>
+        <div className='box'></div>
+        <div className='box'>{pattern.thirdTwo}</div>
       </div>
-      <div className="triangle">
-        <div>Top: {pattern.firstThree}</div>
-        <div>Left: {pattern.secondThree}</div>
-        <div>Right: {pattern.thirdThree}</div>
-        <div>Result: {pattern.resultThree}</div>
+      <div className='game-board'>
+        <div className='box white'></div>
+        <div className='box'>{pattern.firstThree}</div>
+        <div className='box white'></div>
+        <div className='box left-triangle'></div>
+        <div className='box'>{pattern.resultThree}</div>
+        <div className='box right-triangle'></div>
+        <div className='box'>{pattern.secondThree}</div>
+        <div className='box'></div>
+        <div className='box'>{pattern.thirdThree}</div>
       </div>
-      <div className="triangle">
-        <div>Top: {pattern.firstFour}</div>
-        <div>Left: {pattern.secondFour}</div>
-        <div>Right: {pattern.thirdFour}</div>
-        <div>Result: <input style={{width: '4rem'}} type='string' value={pattern.resultFour} onChange={handleChange}/></div>
+      <div className='game-board'>
+        <div className='box white'></div>
+        <div className='box'>{pattern.firstFour}</div>
+        <div className='box white'></div>
+        <div className='box left-triangle'></div>
+        <div className='box'><input style={{width: '42px', height: '43px', background: '#444', borderColor: 'transparent', color: '#AAA', fontSize: '15px'}} type='string' value={pattern.resultFour} onChange={handleChange}/></div>
+        <div className='box right-triangle'></div>
+        <div className='box'>{pattern.secondFour}</div>
+        <div className='box'></div>
+        <div className='box'>{pattern.thirdFour}</div>
+      </div>
       </div>
     </div>
   );

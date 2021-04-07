@@ -73,20 +73,15 @@ export const Puzzle2 = (props) => {
     { text: 'here is a really good hint', show: false },
     { text: 'here is another awesome hint', show: false },
   ];
-  console.log(props.match, 'props.match');
+  console.log(props, 'props');
   return (
     <div>
       <Hints puzzlehints={myhints} />
       This Is PuzzleTwo
-      {!props.match.path.includes('creategame') ? (
-        <button onClick={props.solve}>SOLVE</button>
-      ) : (
-        ''
-      )}
+      <button onClick={props.solve}>SOLVE</button>
     </div>
   );
 };
-
 
 export const Puzzle3 = (props) => {
   const [tiles, setTiles] = useState(shuffle([1, 2, 3, 4, 5, 6, 7, 8, '']));
@@ -324,6 +319,7 @@ export const Puzzle3 = (props) => {
           </a>
         </div>
       </div>
+      <button onClick={props.solve}>SOLVE</button>
     </div>
   );
 };

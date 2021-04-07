@@ -57,18 +57,19 @@ const App = () => {
       <Route exact path="/signup" component={Signup} />
       <Route exact path="/users/:usersId/account" component={Account} />
       <Route exact path="/starwars/4" component={BobaFett} />
+
       <Route exact path="/haunted/:gameId" component={HauntedIntro} />
-      <Route exact path="/haunted/room1" component={HauntedRoom1} />
-      <Route exact path="/haunted/room2" component={HauntedRoom2} />
-      <Route exact path="/haunted/room3" component={HauntedRoom3} />
-      <Route exact path="/haunted/room2/success" component={Success} />
-      <Route exact path="/haunted/room4" component={HauntedRoom4} />
-      <Route exact path="/haunted/room5" component={HauntedRoom5} />
-      <Route exact path="/haunted/room6" component={HauntedRoom6} />
-      <Route exact path="/haunted/room7" component={HauntedRoom7} />
-      <Route exact path="/haunted/room8" component={HauntedRoom8} />
-      <Route exact path="/haunted/room9" component={HauntedRoom9} />
-      <Route exact path="/haunted/final" component={HauntedFinal} />
+      <Route exact path="/haunted/:gameId/room1" component={HauntedRoom1} />
+      <Route exact path="/haunted/:gameId/room2" component={HauntedRoom2} />
+      <Route exact path="/haunted/:gameId/room3" component={HauntedRoom3} />
+      <Route exact path="/haunted/:gameId/room2/success" component={Success} />
+      <Route exact path="/haunted/:gameId/room4" component={HauntedRoom4} />
+      <Route exact path="/haunted/:gameId/room5" component={HauntedRoom5} />
+      <Route exact path="/haunted/:gameId/room6" component={HauntedRoom6} />
+      <Route exact path="/haunted/:gameId/room7" component={HauntedRoom7} />
+      <Route exact path="/haunted/:gameId/room8" component={HauntedRoom8} />
+      <Route exact path="/haunted/:gameId/room9" component={HauntedRoom9} />
+      <Route exact path="/haunted/:gameId/final" component={HauntedFinal} />
       {/* <Route exact path="/customize" component={CreateGame} /> */}
       <Route
         exact

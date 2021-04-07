@@ -37,7 +37,7 @@ export const HauntedRoom8 = (props) => {
       phoneNumber.first + phoneNumber.middle + phoneNumber.last ===
       '2032469853'
     ) {
-      props.history.push('/haunted/room9');
+      props.history.push('/haunted/1/room9');
     }
   };
   return (

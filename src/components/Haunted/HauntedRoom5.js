@@ -233,7 +233,7 @@ const _HauntedRoom5 = (props) => {
       {room.clues.one.solved &&
       room.clues.two.solved &&
       room.clues.three.solved ? (
-        <Redirect push to="/haunted/room6" />
+        <Redirect push to="/haunted/1/room6" />
       ) : (
         ''
       )}

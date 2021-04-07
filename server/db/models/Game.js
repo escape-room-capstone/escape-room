@@ -17,7 +17,7 @@ const Game = db.define('game', {
   },
   theme: {
     type: STRING,
-    allowNull: false,
+    allowNull: true,
     validate: {
       notEmpty: true,
     },

@@ -14,7 +14,7 @@ const Doorway = (props) => {
 export const Success = (props) => {
   // const [advance, setAdvance] = useState(false);
   useEffect(
-    () => setTimeout(() => props.history.push('/haunted/room3'), 6000),
+    () => setTimeout(() => props.history.push('/haunted/1/room3'), 6000),
     []
   );
   return (

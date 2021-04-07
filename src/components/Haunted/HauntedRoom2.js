@@ -42,9 +42,8 @@ const _HauntedRoom2 = (props) => {
   };
 
   const [room, setRoom] = useState({ clues: roomClues, showModal: false });
-
   //this is now coming from DB and is set in state and mapped to props
-  const { puzzles } = props;
+  const { puzzles } = props.game;
   //dynamically rendering components based on which puzzles are in the array from the DB
   const Puzzle1 = (props) => {
     const Component = componentMapping[puzzles[0].name];
@@ -215,7 +214,7 @@ const _HauntedRoom2 = (props) => {
       {room.clues.one.solved &&
       room.clues.two.solved &&
       room.clues.three.solved ? (
-        <Redirect push to="/haunted/room2/success" />
+        <Redirect push to="/haunted/1/room2/success" />
       ) : (
         ''
       )}
@@ -223,9 +222,9 @@ const _HauntedRoom2 = (props) => {
   );
 };
 
-const mapState = (state) => {
-  const { puzzles } = state.game;
-  return { puzzles };
-};
+// const mapState = (state, routeProps) => {
+//   const { puzzles } = state.game;
+//   return { puzzles,  };
+// };
 
-export const HauntedRoom2 = connect(mapState)(_HauntedRoom2);
+export const HauntedRoom2 = connect((state) => state)(_HauntedRoom2);

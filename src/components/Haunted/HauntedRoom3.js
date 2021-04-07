@@ -89,7 +89,7 @@ export const HauntedRoom3 = (props) => {
       className="game-room"
     >
       {advance ? (
-        <Redirect push to="/Haunted/room4" />
+        <Redirect push to="/Haunted/1/room4" />
       ) : (
         <>
           <div className="narrative">

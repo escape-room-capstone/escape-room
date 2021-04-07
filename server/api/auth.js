@@ -29,14 +29,15 @@ router.post('/login', async (req, res, next) => {
 router.post('/signup', async (req, res, next) => {
   try {
     console.log('at api/auth/signup');
-    const { email, password } = req.body;
+    const { firstName, lastName, email, password } = req.body;
+    console.log(firstName, lastName, 'firstname and lastname');
     let user = await User.findOne({ where: { email } });
     if (user) {
       const error = Error('email already exists');
       error.status = 401;
       throw error;
     }
-    user = await User.create({ email, password });
+    user = await User.create({ firstName, lastName, email, password });
     const token = await User.authenticate(email, password);
     res.send({ token });
   } catch (ex) {

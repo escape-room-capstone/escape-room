@@ -31,14 +31,24 @@ export const getUserByToken = () => async (dispatch) => {
   }
 };
 
-export const authenticate = (email, password, method, history) => async (
-  dispatch
-) => {
+export const authenticate = (
+  firstName,
+  lastName,
+  email,
+  password,
+  method,
+  history
+) => async (dispatch) => {
   try {
-    console.log('in the authenticate function');
     // send user credentials to api to check credentials and then receive a JWT token
-    const res = (await axios.post(`/api/auth/${method}`, { email, password }))
-      .data;
+    const res = (
+      await axios.post(`/api/auth/${method}`, {
+        firstName,
+        lastName,
+        email,
+        password,
+      })
+    ).data;
     storage().setItem(TOKEN, res.token);
     dispatch(getUserByToken());
   } catch (authError) {

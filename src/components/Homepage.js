@@ -6,7 +6,7 @@ import auth, { logout } from '../store/auth';
 import { Navbar } from './Navbar';
 import '../../public/CSS/Homepage.css';
 import { getUserByToken } from '../store/auth';
-import { UserGames } from './UserGames';
+// import { UserGames } from './UserGames';
 
 const Homepage = (props) => {
   useEffect(() => {
@@ -56,7 +56,7 @@ const Homepage = (props) => {
               </div>
               <div id="scroll">{game.description}</div>
               <div>
-                <Link to={`/${game.theme}/${game.id}/1`}>
+                <Link to={`/${game.theme}/${game.id}`}>
                   <button className="play">PLAY</button>
                 </Link>
               </div>

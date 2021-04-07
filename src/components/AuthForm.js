@@ -5,13 +5,15 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import { green } from '@material-ui/core/colors';
+import { Navbar } from './Navbar';
+
 import { getUserByToken } from '../store/auth';
+import '../../public/CSS/Authform.css';
 
 const buttonTheme = createMuiTheme({
   palette: {
     primary: {
-      main: green[900],
+      main: '#000000',
     },
   },
 });
@@ -31,47 +33,75 @@ const AuthForm = (props) => {
     };
     checkForUser();
   }, []);
-  console.log(props.isLoggedIn, 'props.isloggedin');
   return (
-    <div id="authForm">
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          props.authenticate(
-            e.target.email.value,
-            e.target.password.value,
-            name
-          );
-        }}
-        name={name}
-      >
-        <div>
-          <TextField label="Email" margin="normal" name="email" type="text" />
-          {/* <label htmlFor="email">
-            <small>Email</small>
-          </label>{' '} */}
-        </div>
-        <div>
-          <TextField label="Password" name="password" type="password" />
-          {/* <label htmlFor="password">
-            <small>Password</small>
-          </label> */}
-        </div>
-        <div>
-          <ThemeProvider theme={buttonTheme}>
-            <Button type="submit" variant="contained" color="primary">
-              {displayName}
-            </Button>
-          </ThemeProvider>
-        </div>
-        {error && error.response && (
-          <div style={{ color: 'red', fontStyle: 'italic', margin: '1rem' }}>
-            {error.response.data}
+    <>
+      <div id="authForm">
+        <Navbar />
+
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+
+            let firstName = e.target.firstName
+              ? e.target.firstName.value
+              : null;
+            let lastName = e.target.lastName ? e.target.lastName.value : null;
+
+            props.authenticate(
+              firstName,
+              lastName,
+              e.target.email.value,
+              e.target.password.value,
+              name
+            );
+          }}
+          name={name}
+        >
+          {' '}
+          {displayName === 'Sign Up' ? (
+            <div>
+              <div>
+                <TextField
+                  label="First Name"
+                  margin="normal"
+                  name="firstName"
+                  type="text"
+                />
+              </div>
+              <div>
+                <TextField
+                  label="Last Name"
+                  margin="normal"
+                  name="lastName"
+                  type="text"
+                />
+              </div>
+            </div>
+          ) : (
+            ''
+          )}
+          <div>
+            <TextField label="Email" margin="normal" name="email" type="text" />
           </div>
-        )}
-      </form>
-      {props.isLoggedIn && props.history.push('/home')}
-    </div>
+          <div>
+            <TextField label="Password" name="password" type="password" />
+          </div>
+          <div>
+            <ThemeProvider theme={buttonTheme}>
+              <Button type="submit" variant="contained" color="primary">
+                {displayName}
+              </Button>
+            </ThemeProvider>
+          </div>
+          {error && error.response && (
+            <div style={{ color: 'red', fontStyle: 'italic', margin: '1rem' }}>
+              {error.response.data}
+            </div>
+          )}
+        </form>
+        {props.isLoggedIn && props.history.push('/home')}
+      </div>
+    </>
   );
 };
 
@@ -86,6 +116,7 @@ const mapLogin = (state) => {
 
 const mapSignup = (state) => {
   return {
+    isLoggedIn: !!state.auth.id,
     name: 'signup',
     displayName: 'Sign Up',
     error: state.auth.error,
@@ -94,8 +125,10 @@ const mapSignup = (state) => {
 
 const mapDispatch = (dispatch, { history }) => {
   return {
-    authenticate: (email, password, formName) =>
-      dispatch(authenticate(email, password, formName, history)),
+    authenticate: (firstName, lastName, email, password, formName) =>
+      dispatch(
+        authenticate(firstName, lastName, email, password, formName, history)
+      ),
     setUser: () => dispatch(getUserByToken()),
   };
 };

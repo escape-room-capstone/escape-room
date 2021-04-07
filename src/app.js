@@ -57,7 +57,7 @@ const App = () => {
       <Route exact path="/signup" component={Signup} />
       <Route exact path="/users/:usersId/account" component={Account} />
       <Route exact path="/starwars/4" component={BobaFett} />
-      <Route exact path="/haunted/:gameId/1" component={HauntedIntro} />
+      <Route exact path="/haunted/:gameId" component={HauntedIntro} />
       <Route exact path="/haunted/room1" component={HauntedRoom1} />
       <Route exact path="/haunted/room2" component={HauntedRoom2} />
       <Route exact path="/haunted/room3" component={HauntedRoom3} />
@@ -85,7 +85,7 @@ const App = () => {
       <Route exact path="/riddlez/home4" component={Home4} />
       <Route exact path="/riddlez/home5" component={Home5} />
 
-      <Route exact path="/BankRobbery/3" component={BankGameStart} />
+      <Route exact path="/Bank/3" component={BankGameStart} />
       <Route exact path="/Bankgame2" component={BankGameLevel2} />
       <Route exact path="/Bankgame3" component={BankGameLevel3} />
       <Route exact path="/BankgameVictory" component={BankGameVictory} />

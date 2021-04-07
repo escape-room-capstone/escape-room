@@ -101,6 +101,7 @@ router.post('/:userId/games', async (req, res, next) => {
       theme: req.body.theme,
       userId: req.params.userId,
       description: req.body.description,
+      timer: req.body.timer
     });
 
     const { puzzleArray } = req.body;
@@ -133,6 +134,7 @@ router.post('/:userId/games/custom', async (req, res, next) => {
       themeId,
       numPuzzles,
       puzzleArray,
+      timer
     } = req.body;
     let game = await Game.create({
       title,
@@ -142,6 +144,7 @@ router.post('/:userId/games/custom', async (req, res, next) => {
       themeId,
       imgSrc: backgroundImageOne,
       userId: req.params.userId,
+      timer
     });
     console.log(game, 'new game');
     // create 4 rooms associated with the new gameId with a number of 1-4 and assign an imgSrc from images array

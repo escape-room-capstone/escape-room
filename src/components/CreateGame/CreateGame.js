@@ -13,6 +13,7 @@ import { createCustomGame } from '../../store/customGame';
 const CreateGame = (props) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [timer, setTimer] = useState(0);
   //need a public/private variable to pass in when game is created as well
   const [puzzleArray, setPuzzleArray] = useState([]);
   const [error, setError] = useState('');
@@ -62,9 +63,33 @@ const CreateGame = (props) => {
         theme.numPuzzles,
         title,
         description,
-        puzzleArray
+        puzzleArray,
+        timer
+      );
+    } else if (difference > 0) {
+      setError(`Please choose ${difference} more puzzles`);
+    } else if (difference < 0) {
+      setError(
+        `Oops - too many puzzles. Please remove ${Math.abs(
+          difference
+        )} puzzles from your list`
       );
     }
+    // COMMENT -- this was removed, brought it back (commented out) in case something breaks 
+    // } else if (difference === 0 && theme.type === 'default') {
+    //   // console.log(puzzleArray, title, numPuzzles, theme.name);
+    //   //just send themeId - can find theme on back end?
+    //   props.makeGame(
+    //     props.auth.id,
+    //     theme.name,
+    //     theme.id,
+    //     theme.numPuzzles,
+    //     title,
+    //     description,
+    //     puzzleArray,
+    //     timer
+    //   );
+    // }
   };
   // const handleChange = (e, puzzleId) => {
   //   // console.log('we are here');
@@ -78,6 +103,25 @@ const CreateGame = (props) => {
   //     }
   //   }
   // };
+
+  // Convert timer inputs into seconds for use in the Game model
+  const convertAndSetTime = (e) => {
+    var prevTime; // grabs time from props and will consolidate updated time from passed values   
+    timer ? prevTime = timer : prevTime = 0; // on first render time in props will be undefined 
+    // define mintues and seconds currently in props
+    let minutes = Math.floor(prevTime / 60);
+    let seconds = prevTime - minutes * 60;
+    // assingn new values to minutes and seconds from input
+    if (e.target.name === "seconds") {
+      seconds = e.target.value * 1; 
+    }
+    if (e.target.name === "minutes") {
+      minutes = e.target.value * 1
+    }
+    // set new time in props
+    setTimer(minutes * 60 + seconds)
+  }
+
   const handleChange = (e, puzzleId) => {
     if (!puzzleArray.includes(puzzleId)) {
       setPuzzleArray([...puzzleArray, puzzleId]);
@@ -107,6 +151,27 @@ const CreateGame = (props) => {
             onChange={(e) => setDescription(e.target.value)}
             type="text"
           />
+        </label>
+      </div>
+      <div>
+        <label>
+          Set initial timer for the game  :
+          <input
+            name="minutes"
+            value={Math.floor(timer / 60)}
+            style={{ width: '50px', marginLeft: '10px' }}
+            onChange={(e) => convertAndSetTime(e)}
+            type="number"
+          />
+          minute(s)
+          <input
+            name="seconds"
+            value={timer - Math.floor(timer / 60) * 60}
+            style={{ width: '50px', marginLeft: '10px' }}
+            onChange={(e) => convertAndSetTime(e)}
+            type="number"
+          />
+          second(s)
         </label>
       </div>
       <div
@@ -168,7 +233,8 @@ const mapDispatch = (dispatch, { history }) => {
       numPuzzles,
       title,
       description,
-      puzzleArray
+      puzzleArray,
+      timer
     ) =>
       dispatch(
         createGame(
@@ -179,6 +245,7 @@ const mapDispatch = (dispatch, { history }) => {
           title,
           description,
           puzzleArray,
+          timer,
           history
         )
       ),
@@ -189,7 +256,8 @@ const mapDispatch = (dispatch, { history }) => {
       numPuzzles,
       title,
       description,
-      puzzleArray
+      puzzleArray,
+      timer
     ) =>
       dispatch(
         createCustomGame(
@@ -200,6 +268,7 @@ const mapDispatch = (dispatch, { history }) => {
           title,
           description,
           puzzleArray,
+          timer,
           history
         )
       ),

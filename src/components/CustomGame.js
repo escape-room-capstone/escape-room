@@ -42,8 +42,6 @@ const _CustomGame = (props) => {
     nextRoomOpen && handleNextRoom()
   }, [nextRoomOpen])
 
-  console.log(roomOpen)
-
   // set up puzzles (with status, locations, and thier modals)
   const setPuzzles = () => {
     // create local state for puzzles and its modal

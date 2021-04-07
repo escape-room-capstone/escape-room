@@ -73,16 +73,19 @@ const CreateGame = (props) => {
         puzzleArray,
         timer
       );
-    } else if (difference > 0) {
-      setError(`Please choose ${difference} more puzzles`);
-    } else if (difference < 0) {
-      setError(
-        `Oops - too many puzzles. Please remove ${Math.abs(
-          difference
-        )} puzzles from your list`
-      );
     }
-    // COMMENT -- this was removed, brought it back (commented out) in case something breaks 
+    
+    // COMMENT -- this was removed, brought it back (commented out) in case something breaks
+    // } else if (difference > 0) {
+    //   setError(`Please choose ${difference} more puzzles`);
+    // } else if (difference < 0) {
+    //   setError(
+    //     `Oops - too many puzzles. Please remove ${Math.abs(
+    //       difference
+    //     )} puzzles from your list`
+    //   );
+    // }
+
     // } else if (difference === 0 && theme.type === 'default') {
     //   // console.log(puzzleArray, title, numPuzzles, theme.name);
     //   //just send themeId - can find theme on back end?

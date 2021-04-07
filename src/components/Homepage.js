@@ -38,24 +38,9 @@ const Homepage = (props) => {
   };
 
   return (
-    // <div id="homepage" style={{ height: '100vh' }}>
     <div id="homepage">
-      <div id="overlay"></div>
-      {/*<h3
-        style={{
-          width: '100vw',
-          color: 'white',
-          backgroundColor: 'purple',
-          textAlign: 'center',
-        }}
-      >
-        Welcome to escape-room
-        /haunted/1
-      </h3> */}
-      {/* <h1> Welcome to escape-room </h1> */}
-
+      {/* <div id="overlay"></div> */}
       <Navbar />
-
       <div className="heading">
         <h2>Select Game</h2>
       </div>
@@ -63,15 +48,18 @@ const Homepage = (props) => {
         {defaultGames.map((game) => {
           return (
             <div id="game-div" key={game.id}>
-              {/* <Link to={`${removeSpaceFromTheme(game.title)}/${game.id}`}>   */}
-
-              <h3>{game.title}</h3>
-              <img src={game.imgSrc} />
-              {game.description}
-
-              <Link to={`/${game.theme}/${game.id}/1`}>
-                <button className="play">PLAY</button>
-              </Link>
+              <div>
+                <h3>{game.title}</h3>
+              </div>
+              <div>
+                <img src={game.imgSrc} />
+              </div>
+              <div id="scroll">{game.description}</div>
+              <div>
+                <Link to={`/${game.theme}/${game.id}/1`}>
+                  <button className="play">PLAY</button>
+                </Link>
+              </div>
             </div>
           );
         })}
@@ -80,35 +68,26 @@ const Homepage = (props) => {
       {props.auth.id ? (
         <div>
           <h1 className="created-games">Games You've Created</h1>
-          <div className="heading">
-            {props.auth.id && (
-              <Link to="/choosetheme">
-                <button> + CREATE </button>
-              </Link>
-            )}
-          </div>
-
-          <div id="custom-game-div-wrapper">
+          {/* <div id="custom-game-div-wrapper"> */}
+          <div id="game-div-wrapper">
             {customGames.length > 0 ? (
               customGames.map((game, idx) => (
-                <div id="custom-game-div" key={idx}>
-                  <span
-                    style={{
-                      fontSize: '1.2rem',
-                      textAlign: 'center',
-                      // paddingBottom: '5px',
-                    }}
-                  >
-                    {game.title}
-                  </span>
-                  <img src={game.rooms[0].imgSrc} />
-                  <p>
-                    Created On<br></br>
-                    {`${formatDate(new Date(game.createdAt))}`}
-                  </p>
-                  <Link to={`/games/${game.id}/${game.rooms[0].id}/0`}>
-                    <button className="play">PLAY</button>
-                  </Link>
+                <div id="game-div" key={idx}>
+                  <div>
+                    <h3>{game.title ? game.title : `Game ${game.id}`}</h3>
+                  </div>
+                  <div>
+                    <img src={game.rooms[0].imgSrc} />
+                  </div>
+                  <div id="scroll">{game.description}</div>
+                  <div>
+                    Created On: {` ${formatDate(new Date(game.createdAt))}`}
+                  </div>
+                  <div>
+                    <Link to={`/games/${game.id}/${game.rooms[0].id}/0`}>
+                      <button className="play">PLAY</button>
+                    </Link>
+                  </div>
                 </div>
               ))
             ) : (
@@ -117,50 +96,19 @@ const Homepage = (props) => {
                 No Games Yet !
               </h1>
             )}
+          </div>{' '}
+          <div className="heading">
+            {props.auth.id && (
+              <Link to="/choosetheme">
+                <button> + CREATE GAME </button>
+              </Link>
+            )}
           </div>
         </div>
       ) : (
         ''
       )}
-      {/* <Link to="/haunted/intro">Haunted House</Link>
-      <hr />
-      <Link to="/houseofriddlez"> ~~House of Riddlez~~ </Link>
-      <p>
-        You wake up one morning only to find out that you are trapped in a House
-        of Riddles. The only way out is to solve every riddle! But there's a
-        catch...
-      </p>
-      <hr />
-      <Link to="/Bobafett"> Steve Game </Link>
-      <hr />
-      <div>
-        <Link to="/Bankgame"> Bank Game </Link>
-        <p>
-          In the following game, you will have to rob a bank and escape with all
-          the $$$
-        </p>
-      </div>
-
-
-      <hr /> */}
-      <Link to="/dg">Dynamic Game</Link>
-      <hr />
-
-      {/* <hr />
-      <Link to="/customize">Customize</Link> */}
-      {/* <h3
-        style={{
-          position: 'absolute',
-          bottom: '0',
-          width: '100vw',
-          color: 'white',
-          backgroundColor: 'purple',
-          textAlign: 'center',
-        }}
-      >
-        {' '}
-        Designed by VARKS{' '}
-      </h3> */}
+      Designed by VARKS
     </div>
   );
 };

@@ -33,37 +33,30 @@ const ChooseTheme = (props) => {
     return (
       <div id="columnDiv">
         <Navbar />
-
-        {/* <div className="themeSection">
-          <h3>
-            You can choose from one of the following pre-built games below...
-          </h3>
+        <div className="themeSection">
+          <h1 style={{ textAlign: 'center' }}>Choose A Theme</h1>
+          <h2 id="heading-with-button">
+            {' '}
+            Themes You've Created{' '}
+            <Link to={`/users/${props.auth.id}/createTheme`}>
+              <button id="createButton">+ CREATE THEME</button>
+            </Link>
+          </h2>
           <div className="choose-theme">
-            {defaultThemes.map((theme, idx) => (
+            {userThemes.map((theme) => (
               <div className="themeMap" key={theme.id}>
-                <h2>{theme.name}</h2>
-                <img
-                  className="createGameImg"
-                  // onClick={() => imgClickHandler(theme.id)}
-                  src={theme.backgroundImageOne}
-                  alt="theme background image"
-                ></img>
+                <h2> {theme.name} </h2>
+                <Link to={`/theme/${theme.id}`}>
+                  <img
+                    className="createGameImg"
+                    src={theme.backgroundImageOne}
+                    alt="theme background image"
+                  />
+                </Link>
               </div>
             ))}
           </div>
-        </div> */}
-
-        <div className="themeSection">
-          <div>
-            {' '}
-            <h2> Choose A Theme </h2>
-          </div>
-          <div>
-            <h2>OR</h2>
-            <Link to={`/users/${props.auth.id}/createTheme`}>
-              <button>+ CREATE YOUR OWN</button>
-            </Link>
-          </div>
+          <h2> Default Themes</h2>
           <div className="choose-theme">
             {themes.map((theme) => (
               <div className="themeMap" key={theme.id}>
@@ -76,28 +69,9 @@ const ChooseTheme = (props) => {
                 ></img>
               </div>
             ))}
-          </div>
+          </div>{' '}
         </div>
-        <div>
-          <hr />
-          <div className="themeSection">
-            <h2> Themes You've Created </h2>
-            <div className="choose-theme">
-              {userThemes.map((theme) => (
-                <div className="themeMap" key={theme.id}>
-                  <h2> {theme.name} </h2>
-                  <Link to={`/theme/${theme.id}`}>
-                    <img
-                      className="createGameImg"
-                      src={theme.backgroundImageOne}
-                      alt="theme background image"
-                    />
-                  </Link>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        {'      '} Designed by VARKS
       </div>
     );
   } else {

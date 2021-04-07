@@ -21,6 +21,7 @@ const _ChoosePuzzleForm = (props) => {
           </div>
         ))}
       </div>
+      {/* Designed by VARKS */}
     </div>
   );
 };

@@ -3,6 +3,7 @@ import '../../../public/css/CreateGame.css';
 import { connect } from 'react-redux';
 import { fetchTheme } from '../../store/singleTheme';
 import '../../../public/CSS/ConfirmTheme.css';
+import { Navbar } from '../Navbar';
 
 const ConfirmTheme = (props) => {
   useEffect(() => {
@@ -20,6 +21,7 @@ const ConfirmTheme = (props) => {
 
   return (
     <div id="divColumn">
+      <Navbar />
       <div>
         <h3 id="themeText"> All images in this theme... </h3>
       </div>
@@ -32,9 +34,15 @@ const ConfirmTheme = (props) => {
           );
         })}
       </div>
-      <div>
-        <button onClick={() => props.history.push('/choosetheme')}>Back</button>
+      <div id="heading-with-button">
         <button
+          id="accountButton"
+          onClick={() => props.history.push('/choosetheme')}
+        >
+          Back
+        </button>
+        <button
+          id="accountButton"
           onClick={() => props.history.push(`/creategame/${theme.id}`)}
           style={{ marginLeft: '10px' }}
         >

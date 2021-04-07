@@ -94,6 +94,7 @@
   color: black;
   border: 2px solid black;
 }
+
 .button:hover {
   cursor: pointer;
 }
@@ -125,6 +126,7 @@
     background: #fdd;
   }
 }
+
 @-webkit-keyframes highlight {
   0% {
     background: #fdd;
@@ -134,6 +136,7 @@
     background: #fff;
   }
 }
+
 @keyframes highlight {
   0% {
     background: #fdd;
@@ -142,6 +145,8 @@
   100% {
     background: #fff;
   }
+}
+
 #hints p span {
   margin: 0 2rem;
   visibility: hidden;

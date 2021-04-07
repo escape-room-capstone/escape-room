@@ -10,14 +10,22 @@ const _Navbar = (props) => {
       {props.auth.id && (
         <div className="navbar-row">
           <div>
-            <span id="welcome">Hello, {props.auth.email}!</span>
+            <span>
+              <Link to={'/home'} id="welcome">
+                ESCAPE ROOM
+              </Link>
+            </span>
+            <span>
+              {/* <Link to={'/home'} id="welcome"> */}
+              Hello, {props.auth.email}!{/* </Link> */}
+            </span>
           </div>
           <div>
-            <Link to={`/users/${props.auth.id}/account/games`}>MY GAMES</Link>
+            {/* <Link to={`/users/${props.auth.id}/account/games`}>MY GAMES</Link>
             <Link to="/choosetheme">
               <span>+ CREATE</span>
-            </Link>
-            <Link to={`/users/${props.auth.id}/account`}>
+            </Link> */}
+            <Link to={`/users/${props.auth.id}/account`} props={props}>
               <span>ACCOUNT</span>
             </Link>
 

@@ -30,9 +30,9 @@ export const HauntedRoom4 = (props) => {
           console.log(e.evt.layerX, 'layerX position');
           console.log(e.evt.layerY), 'layerY position)';
         }}
-        height={700}
+        height={559}
         align="center"
-        width={1200}
+        width={1000}
       >
         <Layer>
           <DoorAjar />
@@ -49,14 +49,14 @@ export const HauntedRoom4 = (props) => {
               container.style.cursor = 'default';
             }}
             opacity={0}
-            x={1080}
+            x={730}
             y={65}
             fill="white"
             border="green"
             strokeWidth={1} // border width
             stroke="green" // border color
-            height={300}
-            width={80}
+            height={220}
+            width={150}
           />
         </Layer>
       </Stage>

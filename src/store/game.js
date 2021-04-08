@@ -2,13 +2,13 @@ import axios from 'axios';
 
 // ** ACTION TYPES **
 const SET_GAME = 'SET_GAME';
-const SET_CUSTOM_GAME = 'SET_CUSTOM_GAME'
+const SET_CUSTOM_GAME = 'SET_CUSTOM_GAME';
 // const CREATE_GAME = 'CREATE_GAME';
 // const SET_USER_GAME = 'SET_USER_GAME';
 
 // ** ACTION CREATORS **
 const setGame = (game) => ({ type: SET_GAME, game });
-const setCustomGame = (game) => ({ type: SET_CUSTOM_GAME, game })
+const setCustomGame = (game) => ({ type: SET_CUSTOM_GAME, game });
 // const setUserGame = (userGame) => ({ type: SET_USER_GAME, userGame });
 
 // ** THUNKS **
@@ -22,9 +22,11 @@ export const fetchGame = (gameId) => {
 // fetch custom game (with userId)
 export const fetchCustomGame = (userId, gameId) => {
   return async (dispatch) => {
-  const game = (await axios.get(`/api/users/${userId}/games/custom/${gameId}`)).data;
-  dispatch(setCustomGame(game));
-    };
+    const game = (
+      await axios.get(`/api/users/${userId}/games/custom/${gameId}`)
+    ).data;
+    dispatch(setCustomGame(game));
+  };
 };
 // create custom game using default game structure
 export const createGame = (
@@ -46,7 +48,7 @@ export const createGame = (
         title,
         puzzleArray,
         description,
-        timer
+        timer,
       })
     ).data;
     dispatch(setGame(game));
@@ -62,6 +64,7 @@ export const fetchUserGame = (userId, gameId) => {
 };
 // update game timer
 export const updateTimer = (gameId, time) => {
+  console.log(time, 'time');
   return async (dispatch) => {
     const game = (await axios.put(`/api/games/${gameId}`, { time })).data;
     dispatch(setGame(game));
@@ -71,7 +74,7 @@ export const updateTimer = (gameId, time) => {
 // ** GAME REDUCER **
 export const gameReducer = (state = {}, action) => {
   if (action.type === SET_CUSTOM_GAME) {
-    return action.game
+    return action.game;
   }
   if (action.type === SET_GAME) {
     return action.game;

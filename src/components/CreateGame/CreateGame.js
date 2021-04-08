@@ -50,11 +50,9 @@ const CreateGame = (props) => {
 
   const { puzzles, theme } = props;
   // console.log(puzzles, theme);
-  //USING hard-coded user#2 for axios call...
   const submitCreateGame = async () => {
     const numPuzzles = puzzleArray.length;
     const difference = theme.numPuzzles - numPuzzles;
-
     //I decided that a room should have ATLEAST 1 puzzle, otherwise what's the point of a room...
     //Each ROOM will have an IMAGE. for example Forest theme has 4 images, therefore 4 rooms.
     //I will check to see if puzzleArray has a minimum of the amount of ROOMS we have. theme.images.length will be the amount of IMAGES we have, which
@@ -116,21 +114,21 @@ const CreateGame = (props) => {
 
   // Convert timer inputs into seconds for use in the Game model
   const convertAndSetTime = (e) => {
-    var prevTime; // grabs time from props and will consolidate updated time from passed values   
-    timer ? prevTime = timer : prevTime = 0; // on first render time in props will be undefined 
+    var prevTime; // grabs time from props and will consolidate updated time from passed values
+    timer ? (prevTime = timer) : (prevTime = 0); // on first render time in props will be undefined
     // define mintues and seconds currently in props
     let minutes = Math.floor(prevTime / 60);
     let seconds = prevTime - minutes * 60;
     // assingn new values to minutes and seconds from input
-    if (e.target.name === "seconds") {
-      seconds = e.target.value * 1; 
+    if (e.target.name === 'seconds') {
+      seconds = e.target.value * 1;
     }
-    if (e.target.name === "minutes") {
-      minutes = e.target.value * 1
+    if (e.target.name === 'minutes') {
+      minutes = e.target.value * 1;
     }
     // set new time in props
-    setTimer(minutes * 60 + seconds)
-  }
+    setTimer(minutes * 60 + seconds);
+  };
 
   const handleChange = (e, puzzleId) => {
     if (!puzzleArray.includes(puzzleId)) {
@@ -165,7 +163,7 @@ const CreateGame = (props) => {
       </div>
       <div>
         <label>
-          Set initial timer for the game  :
+          Set initial timer for the game :
           <input
             name="minutes"
             value={Math.floor(timer / 60)}

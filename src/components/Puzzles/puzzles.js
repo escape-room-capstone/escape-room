@@ -65,6 +65,7 @@ export const Puzzle1 = (props) => {
         </button>{' '}
         {puzzle.four === false ? 'False' : 'True'}
       </div>
+      <button onClick={() => props.solve()}>solve</button>
     </div>
   );
 };

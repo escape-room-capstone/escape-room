@@ -40,6 +40,8 @@ const syncAndSeed = async () => {
     theme: 'haunted',
     numPuzzles: 9,
     public: true,
+    timer: 1800,
+    countdown: 0,
     description: `Seeking shelter in a rainstorm after your car breaks down, you find yourself trapped in a haunted house. Solve the puzzles to escape.`,
     imgSrc: '/Images/hauntedhousefinal.jpg',
   });

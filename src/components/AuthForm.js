@@ -26,7 +26,6 @@ const AuthForm = (props) => {
   useEffect(() => {
     const checkForUser = async () => {
       const token = window.localStorage.getItem('token');
-      console.log(token, 'token');
       if (token) {
         await props.setUser();
       }

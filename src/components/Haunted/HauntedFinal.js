@@ -12,24 +12,15 @@ const House = (props) => {
 export const HauntedFinal = (props) => {
   return (
     <div className="game-room">
-      <div className="narrative">
-        {/* <TypeWriterEffect
-          textStyle={{ fontFamily: 'Red Hat Display' }}
-          startDelay={50}
-          hideCursorAfterText={true}
-          cursorColor="white"
-          text="The police arrive and drive you home. As you dry off from the rain, you think how lucky you were to have escaped"
-          typeSpeed={65}
-        /> */}
-      </div>
+      <div className="narrative"></div>
       <Stage
         onClick={(e) => {
           console.log(e.evt.layerX, 'layerX position');
           console.log(e.evt.layerY), 'layerY position)';
         }}
-        height={700}
+        height={559}
         align="center"
-        width={1200}
+        width={1000}
       >
         <Layer>
           <House />
@@ -39,7 +30,7 @@ export const HauntedFinal = (props) => {
             x={100}
             fontFamily="sans-serif"
             text="THE HAUNTED HOUSE"
-            fontSize={90}
+            fontSize={70}
             verticalAlign="middle"
             fill="red"
           ></Text>

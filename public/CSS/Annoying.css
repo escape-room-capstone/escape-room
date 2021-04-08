@@ -42,3 +42,7 @@
     border-top-color: white;
     border-right-color: white;
 }
+
+#annoying-background {
+    background-color: red;
+}

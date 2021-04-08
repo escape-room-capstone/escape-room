@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Stage, Layer, Image, Rect } from 'react-konva';
 
+import { fetchGame, updateTimer } from '../../store/game';
+import GameTimer from '../../utils/GameTimer';
 //react modal
 import Modal from 'react-modal';
-
-//react-router
-import { Redirect } from 'react-router-dom';
 
 import useImage from 'use-image';
 
@@ -26,6 +25,10 @@ const GhostRoom = (props) => {
   return <Image image={image} />;
 };
 const _HauntedRoom5 = (props) => {
+  const saveCountdown = async (time) => {
+    await props.saveTimer(gameId, time); // to persistently reset timer here during testing, change to 'time = 1000'
+    props.history.push(`/haunted/${gameId}/room6`);
+  };
   const roomClues = {
     one: { solved: false, show: false },
     two: { solved: false, show: false },
@@ -33,10 +36,24 @@ const _HauntedRoom5 = (props) => {
   };
 
   const [room, setRoom] = useState({ clues: roomClues, showModal: false });
+  const [roomSolved, setRoomSolved] = useState(false);
+  const { puzzles } = props.game;
+  const { gameId } = props.match.params;
 
-  //this is now coming from DB and is set in state and mapped to props
-  const { puzzles } = props;
-  console.log(puzzles, 'puzzles');
+  useEffect(() => {
+    async function fetchGame() {
+      await props.getGame(gameId);
+    }
+    fetchGame();
+  }, []);
+  useEffect(() => {
+    if (Object.keys(room.clues).every((key) => room.clues[key].solved)) {
+      console.log('every clue solved');
+      setRoomSolved(true);
+    }
+  }, [room]);
+  // const { puzzles, game } = props;
+  // const { timer, countdown } = props.game;
   //dynamically rendering components based on which puzzles are in the array from the DB
   const Puzzle1 = (props) => {
     const Component = componentMapping[puzzles[3].name];
@@ -82,8 +99,20 @@ const _HauntedRoom5 = (props) => {
       };
     });
   };
+  const { timer, countdown } = props.game;
+
   return (
     <div className="game-room">
+      <div className="game-timer">
+        <GameTimer
+          timer={timer}
+          countdown={countdown}
+          timerToggle={true}
+          roomSolved={roomSolved}
+          saveCountdown={(time) => saveCountdown(time)}
+        />
+      </div>
+
       <div className="narrative">
         <TypeWriterEffect
           textStyle={{ fontFamily: 'Red Hat Display' }}
@@ -123,26 +152,7 @@ const _HauntedRoom5 = (props) => {
             x={1075}
             y={50}
           />
-          {/* <Rect
-            onMouseOver={(e) => {
-              // style stage container:
-              const container = e.target.getStage().container();
-              container.style.cursor = 'pointer';
-            }}
-            onMouseLeave={(e) => {
-              // style stage container:
-              const container = e.target.getStage().container();
-              container.style.cursor = 'default';
-            }}
-            onClick={() => show('one')}
-            solved={room.clues.one.solved}
-            x={20}
-            y={20}
-            opacity={1}
-            width={10}
-            height={100}
-            fill="green"
-          /> */}
+
           <Rect
             onMouseOver={(e) => {
               // style stage container:
@@ -230,20 +240,25 @@ const _HauntedRoom5 = (props) => {
           Close the modal
         </button>
       </Modal>
-      {room.clues.one.solved &&
+      {/* {room.clues.one.solved &&
       room.clues.two.solved &&
       room.clues.three.solved ? (
         <Redirect push to="/haunted/1/room6" />
       ) : (
         ''
-      )}
+      )} */}
     </div>
   );
 };
 
-const mapState = (state) => {
-  const { puzzles } = state.game;
-  return { puzzles };
+const mapDispatch = (dispatch) => {
+  return {
+    getGame: (gameId) => dispatch(fetchGame(gameId)),
+    saveTimer: (gameId, time) => dispatch(updateTimer(gameId, time)),
+  };
 };
 
-export const HauntedRoom5 = connect(mapState)(_HauntedRoom5);
+export const HauntedRoom5 = connect(
+  (state) => state,
+  mapDispatch
+)(_HauntedRoom5);

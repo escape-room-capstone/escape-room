@@ -38,17 +38,6 @@ export const Lock = (props) => {
 };
 
 const _HauntedRoom2 = (props) => {
-  const roomClues = {
-    one: { solved: false, show: false },
-    two: { solved: false, show: false },
-    three: { solved: false, show: false },
-  };
-
-  const [room, setRoom] = useState({ clues: roomClues, showModal: false });
-  const [roomSolved, setRoomSolved] = useState(false); // -- does this get updated to flase on next room?
-
-  const { puzzles } = props.game;
-  const { gameId } = props.match.params;
   //dynamically rendering components based on which puzzles are in the array from the DB
   const Puzzle1 = (props) => {
     const Component = componentMapping[puzzles[0].name];
@@ -96,22 +85,35 @@ const _HauntedRoom2 = (props) => {
     });
   };
   const saveCountdown = async (time) => {
-    await props.saveTimer(gameId, time); // to persitently reset timer here during testing, change to 'time = 1000'
-    // setNextRoomOpen(true);
+    console.log(gameId, 'gameId');
+    await props.saveTimer(gameId, time); // to persistently reset timer here during testing, change to 'time = 1000'
+    props.history.push(`/haunted/${gameId}/room2/success`);
   };
+  const roomClues = {
+    one: { solved: false, show: false },
+    two: { solved: false, show: false },
+    three: { solved: false, show: false },
+  };
+  const [room, setRoom] = useState({ clues: roomClues, showModal: false });
+  const [roomSolved, setRoomSolved] = useState(false);
+  const { puzzles } = props.game;
+  const { gameId } = props.match.params;
 
   useEffect(() => {
-    props.getGame(gameId);
+    async function fetchGame() {
+      await props.getGame(gameId);
+    }
+    fetchGame();
   }, []);
 
   useEffect(() => {
-    console.log(Object.keys(room.clues));
-    Object.keys(room.clues).every((key) => room.clues[key].solved) &&
-      console.log('all solved');
+    if (Object.keys(room.clues).every((key) => room.clues[key].solved)) {
+      console.log('every clue solved');
+      setRoomSolved(true);
+    }
   }, [room]);
   //timer data
   const { timer, countdown } = props.game;
-  console.log(timer, countdown, 'timer and countdown');
   return (
     <div className="game-room">
       <div className="game-timer">
@@ -251,16 +253,10 @@ const _HauntedRoom2 = (props) => {
     </div>
   );
 };
-
-// const mapState = (state, routeProps) => {
-//   const { puzzles } = state.game;
-//   return { puzzles,  };
-// };
 const mapDispatch = (dispatch) => {
   return {
     getGame: (gameId) => dispatch(fetchGame(gameId)),
-    saveTimer: (userId, gameId, time) =>
-      dispatch(updateTimer(userId, gameId, time)),
+    saveTimer: (gameId, time) => dispatch(updateTimer(gameId, time)),
   };
 };
 

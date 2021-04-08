@@ -99,8 +99,7 @@ export const _HauntedRoom3 = (props) => {
       style={{ cursor: 'url(/Images/flashlight.cur),auto' }}
       className="game-room"
     >
-      <Burger />
-
+      <Burger {...props} />
       <div className="game-timer">
         <GameTimer
           timer={timer}

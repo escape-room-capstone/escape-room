@@ -117,8 +117,7 @@ const _HauntedRoom2 = (props) => {
   const { timer, countdown } = props.game;
   return (
     <div className="game-room">
-      <Burger />
-
+      <Burger {...props} />
       <div className="game-timer">
         <GameTimer
           timer={timer}

@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import '../../../public/css/HauntedRoom.css';
 import TypeWriterEffect from 'react-typewriter-effect';
 import { fetchGame } from '../../store/game';
-
+import { Burger } from '../Burger';
 //make images to attach to stage
 const HauntedHouse = (props) => {
   const [image] = useImage('/Images/hauntedhouse2.jpg');
@@ -23,6 +23,7 @@ const _HauntedRoom1 = (props) => {
 
   return (
     <div className="game-room">
+      <Burger {...props} />
       <div className="narrative intro">
         <TypeWriterEffect
           textStyle={{ fontFamily: 'Red Hat Display' }}

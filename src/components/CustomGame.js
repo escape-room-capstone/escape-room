@@ -148,53 +148,7 @@ const _CustomGame = (props) => {
   console.log(roomStatus, 'roomStatus');
   return (
     <div id="custom-game">
-      <Burger />
-      {/* <Menu>
-        <span
-          className="menu-item"
-          onClick={() => {
-            const result = confirm(
-              'Are you sure? Leaving this page will result in losing all progress'
-            );
-            if (result) {
-              props.history.push('/home');
-            }
-          }}
-        >
-          Home
-        </span>
-
-        <span
-          onClick={() => {
-            const result = confirm(
-              'Are you sure? Leaving this page will result in losing all progress'
-            );
-            if (result) {
-              props.history.push(`/users/${props.auth.id}/account`);
-            }
-          }}
-          className="menu-item"
-        >
-          Profile
-        </span>
-
-        <span
-          onClick={() => {
-            const result = confirm(
-              'Are you sure? Leaving this page will result in losing all progress'
-            );
-            if (result) {
-              props.history.push('/home');
-            }
-          }}
-          id="quit"
-          className="menu-item"
-          to=""
-        >
-          Quit
-        </span>
-      </Menu> */}
-
+      <Burger {...props} />
       <div id="game-narrative">
         <p>{room.narrative}</p>
       </div>

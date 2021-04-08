@@ -159,7 +159,7 @@ const _HauntedRoom7 = (props) => {
   };
   return (
     <div className="game-room">
-      <Burger />
+      <Burger {...props} />
       <div className="game-timer">
         <GameTimer
           timer={timer}

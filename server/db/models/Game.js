@@ -28,6 +28,11 @@ const Game = db.define('game', {
   imgSrc: {
     type: STRING,
   },
+  timer: INTEGER,
+  countdown: {
+    type: INTEGER,
+    defaultValue: 0
+  }
 });
 
 Game.prototype.loadGame = async function () {
@@ -38,7 +43,8 @@ Game.prototype.loadGame = async function () {
   const numPuzzles = this.numPuzzles;
   const public = this.public;
   const userId = this.userId;
-  return { id, title, theme, puzzles, numPuzzles, public, userId };
+  const timer = this.timer;
+  return { id, title, theme, puzzles, numPuzzles, public, userId, timer };
 };
 
 Game.prototype.createCustomGame = async function () {};

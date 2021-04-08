@@ -6,6 +6,31 @@ import MagicSquarePuzzle from "./MagicSquarePuzzle";
 import AnnoyingPuzzle from "./AnnoyingPuzzle";
 import CaesarCipher from './CaesarCipher';
 
+const annoyingStyle = {
+    overlay: {
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: '#444'
+    },
+    content: {
+      position: 'absolute',
+      top: '40px',
+      left: '40px',
+      right: '40px',
+      bottom: '40px',
+      border: '1px solid #ccc',
+      background: '#fff',
+      overflow: 'auto',
+      WebkitOverflowScrolling: 'touch',
+      borderRadius: '4px',
+      outline: 'none',
+      padding: '20px'
+    }
+}
+
 export default function BobaFett() {
   const [leverModalOpen, setLeverModalOpen] = useState(false);
   const [caesarCipherModalOpen, setCaesarCipherModalOpen] = useState(false);
@@ -31,7 +56,7 @@ export default function BobaFett() {
           <LeverPuzzle setLeverPuzzleCompleted={setLeverPuzzleCompleted}/>
         </Modal>
         <button className='boba-annoying-button' onClick={() => setAnnoyingModalOpen(true)}></button>
-        <Modal isOpen={annoyingModalOpen}>
+        <Modal isOpen={annoyingModalOpen} style={annoyingStyle}>
           <button onClick={() => setAnnoyingModalOpen(false)}>Close Puzzle</button>
           <p>This Jedi is crafty. Determine the fourth sequence to deactivate this portion of the self-destruct protocol.</p>
           <AnnoyingPuzzle setAnnoyingPuzzleCompleted={setAnnoyingPuzzleCompleted} setAnnoyingModalOpen={setAnnoyingModalOpen}/>

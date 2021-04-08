@@ -1,0 +1,9 @@
+#caesar-game {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15rem;
+    font-size: 40px;
+}

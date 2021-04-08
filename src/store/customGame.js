@@ -28,6 +28,7 @@ export const createCustomGame = (
   title,
   description,
   puzzleArray,
+  timer,
   history
 ) => {
   return async (dispatch) => {
@@ -39,6 +40,7 @@ export const createCustomGame = (
         title,
         puzzleArray,
         description,
+        timer,
       })
     ).data;
     dispatch(setGame(game));

@@ -49,7 +49,7 @@ export default function AnnoyingPuzzle({ setAnnoyingPuzzleCompleted, setAnnoying
   useEffect(() => {
     const annoying = setTimeout(() => {
       setAnnoyingModalOpen(false)
-    }, 30000000)
+    }, 15000)
     return () => {
       clearTimeout(annoying)
     };

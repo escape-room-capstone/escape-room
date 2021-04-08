@@ -3,6 +3,8 @@ import { Stage, Layer, Image } from 'react-konva';
 import useImage from 'use-image';
 import TypeWriterEffect from 'react-typewriter-effect';
 
+import { connect } from 'react-redux';
+
 //import clue
 import { Room8Clue1 } from './Clues';
 
@@ -14,6 +16,9 @@ import '../../../public/css/HauntedRoom.css';
 
 //custom modal styles
 import { customStyles } from '../../utils/helpers';
+
+import { fetchGame, updateTimer } from '../../store/game';
+import GameTimer from '../../utils/GameTimer';
 
 //make images to attach to stage
 const NightGrass = (props) => {
@@ -34,23 +39,47 @@ const Phone = (props) => {
   );
 };
 
-export const HauntedRoom8 = (props) => {
+const _HauntedRoom8 = (props) => {
+  const saveCountdown = async (time) => {
+    await props.saveTimer(gameId, time); // to persistently reset timer here during testing, change to 'time = 1000'
+    props.history.push(`/haunted/${gameId}/room9/`);
+  };
   const [showModal, setShowModal] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState({
     first: '',
     middle: '',
     last: '',
   });
+  const { gameId } = props.match.params;
+  const { timer, countdown } = props.game;
+  const [roomSolved, setRoomSolved] = useState(false);
+
+  useEffect(() => {
+    async function fetchGame() {
+      await props.getGame(gameId);
+    }
+    fetchGame();
+  }, []);
   const checkAnswer = () => {
     if (
       phoneNumber.first + phoneNumber.middle + phoneNumber.last ===
       '2032469853'
     ) {
+      setRoomSolved(true);
       props.history.push('/haunted/1/room9');
     }
   };
   return (
     <div className="game-room">
+      <div className="game-timer">
+        <GameTimer
+          timer={timer}
+          countdown={countdown}
+          timerToggle={true}
+          roomSolved={roomSolved}
+          saveCountdown={(time) => saveCountdown(time)}
+        />
+      </div>
       <div className="narrative">
         <TypeWriterEffect
           textStyle={{ fontFamily: 'Red Hat Display' }}
@@ -91,3 +120,14 @@ export const HauntedRoom8 = (props) => {
     </div>
   );
 };
+const mapDispatch = (dispatch) => {
+  return {
+    getGame: (gameId) => dispatch(fetchGame(gameId)),
+    saveTimer: (gameId, time) => dispatch(updateTimer(gameId, time)),
+  };
+};
+
+export const HauntedRoom8 = connect(
+  (state) => state,
+  mapDispatch
+)(_HauntedRoom8);

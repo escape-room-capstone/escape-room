@@ -240,13 +240,6 @@ const _HauntedRoom5 = (props) => {
           Close the modal
         </button>
       </Modal>
-      {/* {room.clues.one.solved &&
-      room.clues.two.solved &&
-      room.clues.three.solved ? (
-        <Redirect push to="/haunted/1/room6" />
-      ) : (
-        ''
-      )} */}
     </div>
   );
 };

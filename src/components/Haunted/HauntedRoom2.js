@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 
 import { Stage, Layer, Rect, Image } from 'react-konva';
 import useImage from 'use-image';
-import { Redirect } from 'react-router-dom';
 //custom modal styles
 import { customStyles } from '../../utils/helpers';
 //import css file
@@ -243,13 +242,6 @@ const _HauntedRoom2 = (props) => {
           Close the modal
         </button>
       </Modal>
-      {/* {room.clues.one.solved &&
-      room.clues.two.solved &&
-      room.clues.three.solved ? (
-        <Redirect push to="/haunted/1/room2/success" />
-      ) : (
-        ''
-      )} */}
     </div>
   );
 };

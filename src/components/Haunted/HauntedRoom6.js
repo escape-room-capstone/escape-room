@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+
 //sound effect hook and sound
 import useSound from 'use-sound';
 // import { dooropen } from '../../sounds/opendoor.mp3';
@@ -7,6 +9,8 @@ import { Stage, Layer, Image } from 'react-konva';
 
 //react modal
 import Modal from 'react-modal';
+
+import { updateTimer } from '../../store/game';
 
 //react-router
 import { Redirect, Link } from 'react-router-dom';
@@ -18,10 +22,9 @@ import '../../../public/css/HauntedRoom.css';
 
 import TypeWriterEffect from 'react-typewriter-effect';
 import { Lock } from './HauntedRoom2';
-//clues
 
-//custom modal styles
-import { customStyles } from '../../utils/helpers';
+//game timer
+import GameTimer from '../../utils/GameTimer';
 
 //background image
 const ForestDoor = () => {
@@ -55,52 +58,33 @@ const Key = (props) => {
     />
   );
 };
-export const HauntedRoom6 = (props) => {
+const _HauntedRoom6 = (props) => {
+  const saveCountdown = async (time) => {
+    await props.saveTimer(gameId, time); // to persistently reset timer here during testing, change to 'time = 1000'
+    props.history.push(`/haunted/${gameId}/room7`);
+  };
   const roomClues = {
     one: { solved: false, show: false },
   };
 
   const [room, setRoom] = useState({ clues: roomClues, showModal: false });
   const [locked, setLocked] = useState(true);
-  const [advance, setAdvance] = useState(false);
-  //   const [play] = useSound(dooropen);
-  useEffect(() => {
-    if (locked === false) props.history.push('/haunted/1/room7');
-  }, [locked]);
+  const [roomSolved, setRoomSolved] = useState(false);
+  const { gameId } = props.match.params;
 
-  //helper functions
-  const show = (clue) => {
-    setRoom((prevRoom) => {
-      return {
-        ...prevRoom,
-        showModal: true,
-        clues: {
-          ...prevRoom.clues,
-          [clue]: {
-            ...prevRoom.clues[clue],
-            show: true,
-          },
-        },
-      };
-    });
-  };
-  const setSolved = (clue) => {
-    setRoom((prevRoom) => {
-      return {
-        ...prevRoom,
-        showModal: false,
-        clues: {
-          ...prevRoom.clues,
-          [clue]: {
-            show: false,
-            solved: true,
-          },
-        },
-      };
-    });
-  };
+  const { timer, countdown } = props.game;
+
   return (
     <div className="game-room">
+      <div className="game-timer">
+        <GameTimer
+          timer={timer}
+          countdown={countdown}
+          timerToggle={true}
+          roomSolved={roomSolved}
+          saveCountdown={(time) => saveCountdown(time)}
+        />
+      </div>
       <div className="narrative">
         <TypeWriterEffect
           textStyle={{ fontFamily: 'Red Hat Display' }}
@@ -125,7 +109,7 @@ export const HauntedRoom6 = (props) => {
           <Key
             locked={locked}
             unlock={() => {
-              setLocked(false);
+              setRoomSolved(true);
             }}
           />
           <Lock
@@ -139,3 +123,15 @@ export const HauntedRoom6 = (props) => {
     </div>
   );
 };
+
+const mapDispatch = (dispatch) => {
+  return {
+    getGame: (gameId) => dispatch(fetchGame(gameId)),
+    saveTimer: (gameId, time) => dispatch(updateTimer(gameId, time)),
+  };
+};
+
+export const HauntedRoom6 = connect(
+  (state) => state,
+  mapDispatch
+)(_HauntedRoom6);

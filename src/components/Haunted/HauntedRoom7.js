@@ -9,9 +9,8 @@ import { componentMapping } from '../Puzzles/puzzles';
 
 import useImage from 'use-image';
 
-//import clue components - hard-coded
-// import { Room7Clue1, Room7Clue2, Room7Clue3 } from './Clues';
-
+import { fetchGame, updateTimer } from '../../store/game';
+import GameTimer from '../../utils/GameTimer';
 //css
 import '../../../public/css/HauntedRoom.css';
 
@@ -80,9 +79,24 @@ const _HauntedRoom7 = (props) => {
   };
 
   const [room, setRoom] = useState({ clues: roomClues, showModal: false });
-  //this is now coming from DB and is set in state and mapped to props
-  const { puzzles } = props;
-  console.log(puzzles, 'puzzles');
+  const { puzzles } = props.game;
+  const { gameId } = props.match.params;
+  const [roomSolved, setRoomSolved] = useState(false);
+  const { timer, countdown } = props.game;
+
+  useEffect(() => {
+    async function fetchGame() {
+      await props.getGame(gameId);
+    }
+    fetchGame();
+  }, []);
+  useEffect(() => {
+    if (Object.keys(room.clues).every((key) => room.clues[key].solved)) {
+      console.log('every clue solved');
+      setRoomSolved(true);
+    }
+  }, [room]);
+
   //dynamically rendering components based on which puzzles are in the array from the DB
   const Puzzle1 = (props) => {
     const Component = componentMapping[puzzles[6].name];
@@ -96,15 +110,12 @@ const _HauntedRoom7 = (props) => {
     const Component = componentMapping[puzzles[8].name];
     return <Component {...props} />;
   };
-  useEffect(() => {
-    if (
-      room.clues.one.solved &&
-      room.clues.two.solved &&
-      room.clues.three.solved
-    ) {
-      props.history.push('/haunted/1/room8');
-    }
-  }, [room]);
+  const saveCountdown = async (time) => {
+    console.log(gameId, 'gameId');
+    await props.saveTimer(gameId, time);
+    props.history.push(`/haunted/${gameId}/room8/`);
+  };
+
   const [itemsVisible, setItemsVisible] = useState({
     frog: false,
     wolf: false,
@@ -148,6 +159,13 @@ const _HauntedRoom7 = (props) => {
   };
   return (
     <div className="game-room">
+      <GameTimer
+        timer={timer}
+        countdown={countdown}
+        timerToggle={true}
+        roomSolved={roomSolved}
+        saveCountdown={(time) => saveCountdown(time)}
+      />
       <div className="narrative">
         <TypeWriterEffect
           textStyle={{ fontFamily: 'Red Hat Display' }}
@@ -232,10 +250,13 @@ const _HauntedRoom7 = (props) => {
     </div>
   );
 };
-
-const mapState = (state) => {
-  const { puzzles } = state.game;
-  return { puzzles };
+const mapDispatch = (dispatch) => {
+  return {
+    getGame: (gameId) => dispatch(fetchGame(gameId)),
+    saveTimer: (gameId, time) => dispatch(updateTimer(gameId, time)),
+  };
 };
-
-export const HauntedRoom7 = connect(mapState)(_HauntedRoom7);
+export const HauntedRoom7 = connect(
+  (state) => state,
+  mapDispatch
+)(_HauntedRoom7);

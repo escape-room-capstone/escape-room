@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import TypeWriterEffect from 'react-typewriter-effect';
 import { componentMapping } from '../Puzzles/puzzles';
 import { connect } from 'react-redux';
+//react-burger-menu
+import { slide as Menu } from 'react-burger-menu';
+import { Burger } from '../Burger';
 
 import { Stage, Layer, Rect, Image } from 'react-konva';
 import useImage from 'use-image';
@@ -124,6 +126,7 @@ const _HauntedRoom2 = (props) => {
           saveCountdown={(time) => saveCountdown(time)}
         />
       </div>
+      <Burger />
       <div className="narrative"></div>
       <Stage
         onClick={(e) => {

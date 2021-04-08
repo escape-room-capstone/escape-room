@@ -128,6 +128,23 @@ const _HauntedRoom2 = (props) => {
       </div>
       <Burger />
       <div className="narrative"></div>
+      <div id="lock-images">
+        {Object.keys(room.clues).map((key, idx) => (
+          <div key={idx}>
+            <img
+              height="40px"
+              width="40px"
+              src={
+                room.clues[key]
+                  ? room.clues[key].solved
+                    ? '/Images/check.png'
+                    : '/Images/lock.png'
+                  : 'hello'
+              }
+            />
+          </div>
+        ))}
+      </div>
       <Stage
         onClick={(e) => {
           console.log(e.evt.layerX, 'layerX position');
@@ -201,7 +218,7 @@ const _HauntedRoom2 = (props) => {
             height={90}
             fill="green"
           />
-          <Lock
+          {/* <Lock
             showClue={() => show('one')}
             solved={room.clues.one.solved}
             x={975}
@@ -218,7 +235,7 @@ const _HauntedRoom2 = (props) => {
             solved={room.clues.three.solved}
             x={1075}
             y={50}
-          />
+          /> */}
         </Layer>
       </Stage>
 

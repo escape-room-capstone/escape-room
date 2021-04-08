@@ -7,6 +7,7 @@ import { fetchGame, updateTimer } from '../store/game';
 import '../../public/CSS/CustomGame.css';
 import '../../public/CSS/Burger.css';
 import { slide as Menu } from 'react-burger-menu';
+import { Burger } from './Burger';
 import GameTimer from '../utils/GameTimer';
 
 const _CustomGame = (props) => {
@@ -147,7 +148,8 @@ const _CustomGame = (props) => {
   console.log(roomStatus, 'roomStatus');
   return (
     <div id="custom-game">
-      <Menu>
+      <Burger />
+      {/* <Menu>
         <span
           className="menu-item"
           onClick={() => {
@@ -191,7 +193,7 @@ const _CustomGame = (props) => {
         >
           Quit
         </span>
-      </Menu>
+      </Menu> */}
 
       <div id="game-narrative">
         <p>{room.narrative}</p>

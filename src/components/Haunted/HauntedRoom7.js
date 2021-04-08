@@ -159,13 +159,15 @@ const _HauntedRoom7 = (props) => {
   };
   return (
     <div className="game-room">
-      <GameTimer
-        timer={timer}
-        countdown={countdown}
-        timerToggle={true}
-        roomSolved={roomSolved}
-        saveCountdown={(time) => saveCountdown(time)}
-      />
+      <div className="game-timer">
+        <GameTimer
+          timer={timer}
+          countdown={countdown}
+          timerToggle={true}
+          roomSolved={roomSolved}
+          saveCountdown={(time) => saveCountdown(time)}
+        />
+      </div>
       <div className="narrative">
         <TypeWriterEffect
           textStyle={{ fontFamily: 'Red Hat Display' }}

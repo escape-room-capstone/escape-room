@@ -19,7 +19,6 @@
 }
 
 .game-room .narrative {
-  height: 5rem;
   margin-top: 1rem;
   display: flex;
   color: white;
@@ -112,4 +111,10 @@ input.small {
 
 .phone-number {
   text-align: center;
+}
+.react-typewriter-text {
+  padding: 0;
+  font-size: 1.5rem;
+  margin: 0 auto;
+  text-align: left;
 }

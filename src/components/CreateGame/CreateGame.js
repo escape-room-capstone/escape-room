@@ -74,7 +74,6 @@ const CreateGame = (props) => {
         timer
       );
     }
-    
     // COMMENT -- this was removed, brought it back (commented out) in case something breaks
     // } else if (difference > 0) {
     //   setError(`Please choose ${difference} more puzzles`);
@@ -101,6 +100,7 @@ const CreateGame = (props) => {
     //   );
     // }
   };
+
   // const handleChange = (e, puzzleId) => {
   //   // console.log('we are here');
   //   if (e.target.checked) {

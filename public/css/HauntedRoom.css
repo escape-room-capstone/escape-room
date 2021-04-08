@@ -7,6 +7,9 @@
   min-height: 90vh;
 }
 
+#game-room div.game-timer {
+  color: white;
+}
 .konvajs-content {
   overflow: hidden;
   border: 20px solid white;

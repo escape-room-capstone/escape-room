@@ -5,11 +5,11 @@ import useImage from 'use-image';
 import { connect } from 'react-redux';
 import '../../../public/css/HauntedRoom.css';
 import TypeWriterEffect from 'react-typewriter-effect';
-import { fetchGame } from '../../store/game.js';
+import { fetchGame } from '../../store/game';
 
 //make images to attach to stage
 const HauntedHouse = (props) => {
-  const [image] = useImage('/Images/house.jpg');
+  const [image] = useImage('/Images/hauntedhouse2.jpg');
   return <Image image={image} />;
 };
 
@@ -18,8 +18,9 @@ const _HauntedRoom1 = (props) => {
   const [enterHome, setEnterHome] = useState(false);
   useEffect(() => {
     //hard coded gameId for now for testing purposes
-    props.getGame(1);
+    props.getGame(props.match.params.gameId);
   }, []);
+
   return (
     <div className="game-room">
       <div className="narrative intro">
@@ -46,16 +47,16 @@ const _HauntedRoom1 = (props) => {
           console.log(e.evt.layerX, 'layerX position');
           console.log(e.evt.layerY), 'layerY position)';
         }}
-        height={700}
+        height={559}
         align="center"
-        width={1200}
+        width={1000}
       >
         <Layer>
           <HauntedHouse />
           <Circle
             onClick={() => setEnterHome(true)}
-            x={810}
-            y={575}
+            x={545}
+            y={450}
             radius={35}
             fill={buttonSelected ? '#66ff00' : 'white'}
             onMouseEnter={() => setButtonSelected(true)}
@@ -64,8 +65,8 @@ const _HauntedRoom1 = (props) => {
           <Text
             onClick={() => setEnterHome(true)}
             onMouseEnter={() => setButtonSelected(true)}
-            x={785}
-            y={570}
+            x={520}
+            y={445}
             fontSize={15}
             text="ENTER"
             fill="black"
@@ -83,6 +84,8 @@ const _HauntedRoom1 = (props) => {
 const mapDispatch = (dispatch) => {
   return {
     getGame: (gameId) => dispatch(fetchGame(gameId)),
+    saveTimer: (userId, gameId, time) =>
+      dispatch(updateTimer(userId, gameId, time)),
   };
 };
 

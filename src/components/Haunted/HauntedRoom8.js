@@ -22,7 +22,16 @@ const NightGrass = (props) => {
 };
 const Phone = (props) => {
   const [image] = useImage('/Images/hauntedphone.png');
-  return <Image onClick={props.showModal} x={500} y={600} image={image} />;
+  return (
+    <Image
+      onClick={props.showModal}
+      x={450}
+      y={500}
+      height={40}
+      width={50}
+      image={image}
+    />
+  );
 };
 
 export const HauntedRoom8 = (props) => {
@@ -57,9 +66,9 @@ export const HauntedRoom8 = (props) => {
           console.log(e.evt.layerX, 'layerX position');
           console.log(e.evt.layerY), 'layerY position)';
         }}
-        height={700}
+        height={559}
         align="center"
-        width={1200}
+        width={1000}
       >
         <Layer>
           <NightGrass />

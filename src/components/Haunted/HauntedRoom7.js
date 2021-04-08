@@ -32,9 +32,9 @@ const Owl = (props) => {
     <Image
       onClick={props.show}
       onMouseOver={props.illuminate}
-      height={100}
-      width={70}
-      x={425}
+      height={90}
+      width={60}
+      x={250}
       y={100}
       opacity={props.visibile ? 1 : 0}
       image={image}
@@ -47,8 +47,10 @@ const Wolf = (props) => {
     <Image
       onClick={props.show}
       onMouseOver={props.illuminate}
-      x={900}
-      y={250}
+      x={650}
+      y={180}
+      height={165}
+      width={130}
       opacity={props.visibile ? 1 : 0}
       image={image}
     />
@@ -161,9 +163,9 @@ const _HauntedRoom7 = (props) => {
           console.log(e.evt.layerX, 'layerX position');
           console.log(e.evt.layerY), 'layerY position)';
         }}
-        height={700}
+        height={559}
         align="center"
-        width={1200}
+        width={1000}
       >
         <Layer>
           <Forest />

@@ -19,7 +19,7 @@ const KeyPad = (props) => {
       onMouseEnter={props.toggleIlluminate}
       onMouseLeave={props.toggleIlluminate}
       opacity={props.show ? 1 : 0}
-      x={90}
+      x={700}
       y={190}
       height={120}
       width={100}
@@ -108,9 +108,9 @@ export const HauntedRoom3 = (props) => {
               console.log(e.evt.layerX, 'layerX position');
               console.log(e.evt.layerY), 'layerY position)';
             }}
-            height={700}
+            height={559}
             align="center"
-            width={1200}
+            width={1000}
           >
             <Layer>
               <DarkRoom />
@@ -149,12 +149,12 @@ export const HauntedRoom3 = (props) => {
                   setCircleVisibility((prev) => ({ ...prev, three: true }))
                 }
                 opacity={cirlceVisibility.three ? 1 : 0}
-                x={1000}
+                x={200}
                 y={200}
                 fill="white"
                 radius={30}
               ></Circle>
-              <Text x={995} y={190} text="3" flll="red" fontSize={25}></Text>
+              <Text x={200} y={190} text="3" flll="red" fontSize={25}></Text>
 
               <Circle
                 onMouseOver={() =>

@@ -99,9 +99,9 @@ const _HauntedRoom5 = (props) => {
           console.log(e.evt.layerX, 'layerX position');
           console.log(e.evt.layerY), 'layerY position)';
         }}
-        height={700}
+        height={559}
         align="center"
-        width={1200}
+        width={1000}
       >
         <Layer>
           <GhostRoom />
@@ -123,6 +123,26 @@ const _HauntedRoom5 = (props) => {
             x={1075}
             y={50}
           />
+          {/* <Rect
+            onMouseOver={(e) => {
+              // style stage container:
+              const container = e.target.getStage().container();
+              container.style.cursor = 'pointer';
+            }}
+            onMouseLeave={(e) => {
+              // style stage container:
+              const container = e.target.getStage().container();
+              container.style.cursor = 'default';
+            }}
+            onClick={() => show('one')}
+            solved={room.clues.one.solved}
+            x={20}
+            y={20}
+            opacity={1}
+            width={10}
+            height={100}
+            fill="green"
+          /> */}
           <Rect
             onMouseOver={(e) => {
               // style stage container:
@@ -136,32 +156,12 @@ const _HauntedRoom5 = (props) => {
             }}
             onClick={() => show('one')}
             solved={room.clues.one.solved}
-            x={150}
-            y={300}
+            x={85}
+            y={240}
             opacity={0}
             width={155}
             height={100}
-            fill="green"
-          />
-          <Rect
-            onMouseOver={(e) => {
-              // style stage container:
-              const container = e.target.getStage().container();
-              container.style.cursor = 'pointer';
-            }}
-            onMouseLeave={(e) => {
-              // style stage container:
-              const container = e.target.getStage().container();
-              container.style.cursor = 'default';
-            }}
-            onClick={() => show('one')}
-            solved={room.clues.one.solved}
-            x={150}
-            y={300}
-            opacity={0}
-            width={155}
-            height={100}
-            fill="green"
+            fill="blue"
           />
           <Rect
             onMouseOver={(e) => {
@@ -177,11 +177,11 @@ const _HauntedRoom5 = (props) => {
             onClick={() => show('two')}
             solved={room.clues.two.solved}
             x={635}
-            y={325}
+            y={245}
             opacity={0}
             width={80}
             height={90}
-            fill="green"
+            fill="white"
           />
           <Rect
             onMouseOver={(e) => {
@@ -196,12 +196,12 @@ const _HauntedRoom5 = (props) => {
             }}
             onClick={() => show('three')}
             solved={room.clues.three.solved}
-            x={975}
-            y={310}
+            x={415}
+            y={255}
             opacity={0}
-            width={80}
-            height={80}
-            fill="green"
+            width={60}
+            height={60}
+            fill="yellow"
           />
         </Layer>
       </Stage>

@@ -11,6 +11,9 @@ import { customStyles } from '../../utils/helpers';
 //import css file
 import '../../../public/css/HauntedRoom.css';
 
+import { fetchGame, updateTimer } from '../../store/game';
+import GameTimer from '../../utils/GameTimer';
+
 //react modal
 import Modal from 'react-modal';
 
@@ -42,8 +45,10 @@ const _HauntedRoom2 = (props) => {
   };
 
   const [room, setRoom] = useState({ clues: roomClues, showModal: false });
-  //this is now coming from DB and is set in state and mapped to props
+  const [roomSolved, setRoomSolved] = useState(false); // -- does this get updated to flase on next room?
+
   const { puzzles } = props.game;
+  const { gameId } = props.match.params;
   //dynamically rendering components based on which puzzles are in the array from the DB
   const Puzzle1 = (props) => {
     const Component = componentMapping[puzzles[0].name];
@@ -90,17 +95,43 @@ const _HauntedRoom2 = (props) => {
       };
     });
   };
+  const saveCountdown = async (time) => {
+    await props.saveTimer(gameId, time); // to persitently reset timer here during testing, change to 'time = 1000'
+    // setNextRoomOpen(true);
+  };
+
+  useEffect(() => {
+    props.getGame(gameId);
+  }, []);
+
+  useEffect(() => {
+    console.log(Object.keys(room.clues));
+    Object.keys(room.clues).every((key) => room.clues[key].solved) &&
+      console.log('all solved');
+  }, [room]);
+  //timer data
+  const { timer, countdown } = props.game;
+  console.log(timer, countdown, 'timer and countdown');
   return (
     <div className="game-room">
+      <div className="game-timer">
+        <GameTimer
+          timer={timer}
+          countdown={countdown}
+          timerToggle={true}
+          roomSolved={roomSolved}
+          saveCountdown={(time) => saveCountdown(time)}
+        />
+      </div>
       <div className="narrative"></div>
       <Stage
         onClick={(e) => {
           console.log(e.evt.layerX, 'layerX position');
           console.log(e.evt.layerY), 'layerY position)';
         }}
-        height={700}
+        height={559}
         align="center"
-        width={1200}
+        width={1000}
       >
         <Layer>
           <HauntedHallway />
@@ -117,11 +148,11 @@ const _HauntedRoom2 = (props) => {
             }}
             onClick={() => show('one')}
             solved={room.clues.one.solved}
-            x={585}
-            y={300}
+            x={375}
+            y={250}
             opacity={0}
-            width={90}
-            height={350}
+            width={80}
+            height={200}
             fill="green"
           />
 
@@ -138,8 +169,8 @@ const _HauntedRoom2 = (props) => {
             }}
             onClick={() => show('two')}
             solved={room.clues.two.solved}
-            x={855}
-            y={350}
+            x={560}
+            y={270}
             opacity={0}
             width={45}
             height={100}
@@ -159,13 +190,12 @@ const _HauntedRoom2 = (props) => {
             }}
             onClick={() => show('three')}
             solved={room.clues.three.solved}
-            x={725}
-            y={175}
+            x={480}
+            y={155}
             opacity={0}
-            width={85}
-            height={150}
+            width={50}
+            height={90}
             fill="green"
-            draggable={true}
           />
           <Lock
             showClue={() => show('one')}
@@ -211,13 +241,13 @@ const _HauntedRoom2 = (props) => {
           Close the modal
         </button>
       </Modal>
-      {room.clues.one.solved &&
+      {/* {room.clues.one.solved &&
       room.clues.two.solved &&
       room.clues.three.solved ? (
         <Redirect push to="/haunted/1/room2/success" />
       ) : (
         ''
-      )}
+      )} */}
     </div>
   );
 };
@@ -226,5 +256,15 @@ const _HauntedRoom2 = (props) => {
 //   const { puzzles } = state.game;
 //   return { puzzles,  };
 // };
+const mapDispatch = (dispatch) => {
+  return {
+    getGame: (gameId) => dispatch(fetchGame(gameId)),
+    saveTimer: (userId, gameId, time) =>
+      dispatch(updateTimer(userId, gameId, time)),
+  };
+};
 
-export const HauntedRoom2 = connect((state) => state)(_HauntedRoom2);
+export const HauntedRoom2 = connect(
+  (state) => state,
+  mapDispatch
+)(_HauntedRoom2);

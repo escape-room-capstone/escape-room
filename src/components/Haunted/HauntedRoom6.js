@@ -38,10 +38,10 @@ const Key = (props) => {
       onDragEnd={(e) => {
         console.log(e.target.x(), e.target.y(), 'e.target.x( + y)');
         if (
-          e.target.x() >= 710 &&
-          e.target.x() <= 759 &&
-          e.target.y() >= 276 &&
-          e.target.y() <= 307
+          e.target.x() >= 440 &&
+          e.target.x() <= 483 &&
+          e.target.y() >= 217 &&
+          e.target.y() <= 240
         ) {
           console.log('success');
           props.unlock();
@@ -49,7 +49,7 @@ const Key = (props) => {
       }}
       draggable={true}
       x={150}
-      y={530}
+      y={400}
       opacity={props.locked ? 1 : 0}
       image={image}
     />
@@ -116,9 +116,9 @@ export const HauntedRoom6 = (props) => {
           console.log(e.evt.layerX, 'layerX position');
           console.log(e.evt.layerY), 'layerY position)';
         }}
-        height={700}
+        height={559}
         align="center"
-        width={1200}
+        width={1000}
       >
         <Layer>
           <ForestDoor />

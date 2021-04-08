@@ -45,6 +45,7 @@ const _CustomGame = (props) => {
   // set up puzzles (with status, locations, and thier modals)
   const setPuzzles = () => {
     // create local state for puzzles and its modal
+    console.log(puzzles, "PUZZLES FROM setPuzzles function");
     const _roomStatus = puzzles.reduce((cluesObj, currentPuzzle) => {
       cluesObj[currentPuzzle.id] = {
         solved: false,
@@ -111,6 +112,8 @@ const _CustomGame = (props) => {
     setNextRoomOpen(true) 
   }
 
+  
+
   // advance to next room
   const handleNextRoom = () => {
     // update local state to initiate next room with default values
@@ -141,6 +144,12 @@ const _CustomGame = (props) => {
   if (!roomOpen) {
     return <p>room not open</p>
   }
+  
+
+
+
+
+  console.log(roomStatus, "roomStatus")
   return (
     <div id='custom-game'>
       <Menu>
@@ -208,10 +217,12 @@ const _CustomGame = (props) => {
               <img
                 height="40px"
                 width="40px"
-                src={
+                src={ 
+                  roomStatus[puzzle.id] ?                  
                   roomStatus[puzzle.id].solved
                     ? '/Images/check.png'
                     : '/Images/lock.png'
+                    : "hello"
                 }
               />
             </div>
@@ -269,7 +280,7 @@ const _CustomGame = (props) => {
               {puzzles.map((puzzle, idx) => {
                 const Component = componentMapping[puzzle.name];
                 return (
-                  <Modal isOpen={roomStatus[puzzle.id].showModal} key={idx}>
+                  <Modal isOpen={roomStatus[puzzle.id] ? roomStatus[puzzle.id].showModal : false} key={idx}>
                     <div>{puzzle.roomdata.puzzleText}</div>
                     <hr />
                     <Component solve={() => setSolved(puzzle.id)} />
@@ -280,13 +291,13 @@ const _CustomGame = (props) => {
               })}
 
             </div>
-          ))}
+          ))
 
           <div>
             {puzzles.map((puzzle, idx) => {
               const Component = componentMapping[puzzle.name];
               return (
-                <Modal isOpen={roomStatus[puzzle.id].showModal} key={idx}>
+                <Modal isOpen={roomStatus[puzzle.id] ? roomStatus[puzzle.id].showModal : false} key={idx}>
                   <div>{puzzle.roomdata.puzzleText}</div>
                   <hr />
                   <Component solve={() => setSolved(puzzle.id)} />

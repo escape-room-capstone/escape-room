@@ -1,0 +1,28 @@
+#lever-board {
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    justify-content: space-between;
+    padding-top: 10rem;
+}
+
+#lever-stack {
+    display: flex;
+    flex-direction: column;
+}
+
+.leverButton {
+    margin-top: 3rem;
+    height: 150px;
+    width: 150px;
+    background: url("../Images/150_holocron.png")
+}
+
+#lock {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-family: copperplate;
+}

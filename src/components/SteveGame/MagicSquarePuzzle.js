@@ -14,7 +14,7 @@ export default function MagicSquarePuzzle({ setMagicSquarePuzzleCompleted }) {
     nine: 2,
   });
 
-  let status = "All numbers horizontally, vertically and diagonally must sum to 15 using numbers 1-9. Numbers cannot repeat."
+  let status = "Great. Six of the numbers were erased. All numbers horizontally, vertically and diagonally must sum to 15 using numbers 1-9. Numbers cannot repeat."
 
   if (
     parseInt(square.one) === 8 &&

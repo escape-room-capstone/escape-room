@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-
+import { Burger } from '../Burger';
 //sound effect hook and sound
 import useSound from 'use-sound';
 // import { dooropen } from '../../sounds/opendoor.mp3';
@@ -76,6 +76,7 @@ const _HauntedRoom6 = (props) => {
 
   return (
     <div className="game-room">
+      <Burger />
       <div className="game-timer">
         <GameTimer
           timer={timer}
@@ -94,6 +95,13 @@ const _HauntedRoom6 = (props) => {
           text=""
           typeSpeed={70}
         />
+        <div id="lock-images">
+          <img
+            height="40px"
+            width="40px"
+            src={locked ? '/Images/lock.png' : '/Images/check.png'}
+          />
+        </div>
       </div>
       <Stage
         onClick={(e) => {
@@ -112,12 +120,12 @@ const _HauntedRoom6 = (props) => {
               setRoomSolved(true);
             }}
           />
-          <Lock
+          {/* <Lock
             showClue={() => show('one')}
             solved={room.clues.one.solved}
-            x={1075}
+            x={500}
             y={50}
-          />
+          /> */}
         </Layer>
       </Stage>
     </div>

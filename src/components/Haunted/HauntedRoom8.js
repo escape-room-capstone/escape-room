@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Stage, Layer, Image } from 'react-konva';
 import useImage from 'use-image';
 import TypeWriterEffect from 'react-typewriter-effect';
-
+import { Burger } from '../Burger';
 import { connect } from 'react-redux';
 
 //import clue
@@ -71,6 +71,7 @@ const _HauntedRoom8 = (props) => {
   };
   return (
     <div className="game-room">
+      <Burger />
       <div className="game-timer">
         <GameTimer
           timer={timer}
@@ -79,6 +80,13 @@ const _HauntedRoom8 = (props) => {
           roomSolved={roomSolved}
           saveCountdown={(time) => saveCountdown(time)}
         />
+        <div id="lock-images">
+          <img
+            height="40px"
+            width="40px"
+            src={roomSolved ? '/Images/check.png' : '/Images/lock.png'}
+          />
+        </div>
       </div>
       <div className="narrative">
         <TypeWriterEffect

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Stage, Layer, Image, Rect } from 'react-konva';
-
+import { Burger } from '../Burger';
 import { fetchGame, updateTimer } from '../../store/game';
 import GameTimer from '../../utils/GameTimer';
 //react modal
@@ -103,6 +103,8 @@ const _HauntedRoom5 = (props) => {
 
   return (
     <div className="game-room">
+      <Burger />
+
       <div className="game-timer">
         <GameTimer
           timer={timer}
@@ -112,7 +114,6 @@ const _HauntedRoom5 = (props) => {
           saveCountdown={(time) => saveCountdown(time)}
         />
       </div>
-
       <div className="narrative">
         <TypeWriterEffect
           textStyle={{ fontFamily: 'Red Hat Display' }}
@@ -122,6 +123,23 @@ const _HauntedRoom5 = (props) => {
           text=""
           typeSpeed={70}
         />
+      </div>
+      <div id="lock-images">
+        {Object.keys(room.clues).map((key, idx) => (
+          <div key={idx}>
+            <img
+              height="40px"
+              width="40px"
+              src={
+                room.clues[key]
+                  ? room.clues[key].solved
+                    ? '/Images/check.png'
+                    : '/Images/lock.png'
+                  : 'hello'
+              }
+            />
+          </div>
+        ))}
       </div>
       <Stage
         onClick={(e) => {
@@ -134,7 +152,7 @@ const _HauntedRoom5 = (props) => {
       >
         <Layer>
           <GhostRoom />
-          <Lock
+          {/* <Lock
             showClue={() => show('one')}
             solved={room.clues.one.solved}
             x={975}
@@ -151,7 +169,7 @@ const _HauntedRoom5 = (props) => {
             solved={room.clues.three.solved}
             x={1075}
             y={50}
-          />
+          /> */}
 
           <Rect
             onMouseOver={(e) => {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Stage, Layer, Image } from 'react-konva';
-
+import { Burger } from '../Burger';
 //react modal
 import Modal from 'react-modal';
 
@@ -96,7 +96,7 @@ const _HauntedRoom7 = (props) => {
       setRoomSolved(true);
     }
   }, [room]);
-
+  console.log(puzzles, 'puzzles');
   //dynamically rendering components based on which puzzles are in the array from the DB
   const Puzzle1 = (props) => {
     const Component = componentMapping[puzzles[6].name];
@@ -159,6 +159,7 @@ const _HauntedRoom7 = (props) => {
   };
   return (
     <div className="game-room">
+      <Burger />
       <div className="game-timer">
         <GameTimer
           timer={timer}
@@ -178,6 +179,23 @@ const _HauntedRoom7 = (props) => {
           typeSpeed={70}
         />
       </div>
+      <div id="lock-images">
+        {Object.keys(room.clues).map((key, idx) => (
+          <div key={idx}>
+            <img
+              height="40px"
+              width="40px"
+              src={
+                room.clues[key]
+                  ? room.clues[key].solved
+                    ? '/Images/check.png'
+                    : '/Images/lock.png'
+                  : 'hello'
+              }
+            />
+          </div>
+        ))}
+      </div>
       <Stage
         onClick={(e) => {
           console.log(e.evt.layerX, 'layerX position');
@@ -189,7 +207,7 @@ const _HauntedRoom7 = (props) => {
       >
         <Layer>
           <Forest />
-          <Lock
+          {/* <Lock
             showClue={() => show('one')}
             solved={room.clues.one.solved}
             x={975}
@@ -206,7 +224,7 @@ const _HauntedRoom7 = (props) => {
             solved={room.clues.three.solved}
             x={1075}
             y={50}
-          />
+          /> */}
           <Owl
             show={() => show('one')}
             visibile={itemsVisible.owl}

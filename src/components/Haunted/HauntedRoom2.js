@@ -117,6 +117,8 @@ const _HauntedRoom2 = (props) => {
   const { timer, countdown } = props.game;
   return (
     <div className="game-room">
+      <Burger />
+
       <div className="game-timer">
         <GameTimer
           timer={timer}
@@ -126,7 +128,6 @@ const _HauntedRoom2 = (props) => {
           saveCountdown={(time) => saveCountdown(time)}
         />
       </div>
-      <Burger />
       <div className="narrative"></div>
       <div id="lock-images">
         {Object.keys(room.clues).map((key, idx) => (

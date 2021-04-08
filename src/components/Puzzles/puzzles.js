@@ -591,10 +591,86 @@ export const Puzzle14 = (props) => {
 };
 
 export const Puzzle15 = (props) => {
+  const [puzzle, setPuzzle] = useState({
+    one: false,
+    two: false,
+    three: false,
+    four: false,
+    five: false,
+    six: false,
+  });
+  useEffect(() => {
+    if (
+      puzzle.one &&
+      puzzle.two &&
+      puzzle.three &&
+      puzzle.four &&
+      puzzle.five &&
+      puzzle.six
+    ) {
+      props.solve();
+    }
+  }, [puzzle]);
+
   return (
-    <div>
-      THIS IS PUZZLE 15
-      <button onClick={props.solve}>SOLVE</button>
+    <div id="lever-board">
+      <div id="lever-stack">
+        <p id="lock">{puzzle.one === false ? 'Locked' : 'Unlocked'}</p>
+        <button
+          className="leverButton"
+          onClick={() =>
+            setPuzzle({ ...puzzle, one: !puzzle.one, two: !puzzle.two })
+          }
+        ></button>{' '}
+      </div>
+      <div id="lever-stack">
+        <p id="lock">{puzzle.two === false ? 'Locked' : 'Unlocked'}</p>
+        <button
+          className="leverButton"
+          onClick={() =>
+            setPuzzle({
+              ...puzzle,
+              two: !puzzle.two,
+              three: !puzzle.three,
+              four: !puzzle.four,
+            })
+          }
+        ></button>{' '}
+      </div>
+      <div id="lever-stack">
+        <p id="lock">{puzzle.three === false ? 'Locked' : 'Unlocked'}</p>
+        <button
+          className="leverButton"
+          onClick={() =>
+            setPuzzle({ ...puzzle, one: !puzzle.one, two: !puzzle.two })
+          }
+        ></button>{' '}
+      </div>
+      <div id="lever-stack">
+        <p id="lock">{puzzle.four === false ? 'Locked' : 'Unlocked'}</p>
+        <button
+          className="leverButton"
+          onClick={() =>
+            setPuzzle({ ...puzzle, one: !puzzle.one, five: !puzzle.five })
+          }
+        ></button>{' '}
+      </div>
+      <div id="lever-stack">
+        <p id="lock">{puzzle.five === false ? 'Locked' : 'Unlocked'}</p>
+        <button
+          className="leverButton"
+          onClick={() => setPuzzle({ ...puzzle, six: !puzzle.six })}
+        ></button>{' '}
+      </div>
+      <div id="lever-stack">
+        <p id="lock">{puzzle.six === false ? 'Locked' : 'Unlocked'}</p>
+        <button
+          className="leverButton"
+          onClick={() =>
+            setPuzzle({ ...puzzle, one: !puzzle.one, six: !puzzle.six })
+          }
+        ></button>{' '}
+      </div>
     </div>
   );
 };

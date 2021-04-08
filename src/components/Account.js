@@ -36,7 +36,17 @@ const Account = (props) => {
 
   console.log('props', props);
 
-  const { allGames } = props;
+  //HELPER FUNCTION TO SORT THE ROOMS IN ORDER BY ROOM NUMBER !
+  const sortByRoomNumber = (roomsArray) => {      
+    return (roomsArray
+    ? roomsArray.sort((roomA, roomB) => {
+      return roomA.number - roomB.number;
+    })
+  : []);
+  }
+
+
+  const { allGames } = props;    
   const userGames = allGames.filter((game) => game.userId === props.auth.id);
   console.log('userGames', userGames);
 
@@ -77,12 +87,12 @@ const Account = (props) => {
                 >
                   {game.title ? game.title : `Game ${game.id}`}
                 </p>
-                <img className="accountImg" src={game.rooms[0].imgSrc} />
+                <img className="accountImg" src={sortByRoomNumber(game.rooms)[0].imgSrc} />
                 <p>
                   Created On<br></br>
                   {`${formatDate(new Date(game.createdAt))}`}
                 </p>
-                <Link to={`/games/${game.id}/${game.rooms[0].id}/0`}>
+                <Link to={`/games/${game.id}/${sortByRoomNumber(game.rooms)[0].id}/0`}>
                   <button className="play">PLAY</button>
                 </Link>
               </div>

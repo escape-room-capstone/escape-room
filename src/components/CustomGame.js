@@ -219,51 +219,66 @@ const _CustomGame = (props) => {
         </div>
       </div>
 
-      <div id='game-body'>
-        <div
-          id="game-room"
-          style={{
-            backgroundImage: `url(${room.imgSrc})`,
-            height: '559px',
-            width: '1000px',
-            backgroundPosition: 'center',
-            backgroundSize: 'cover',
-            margin: '0 auto',
-            position: 'relative',
-            border: '5px solid black',
-          }}
-        >
-          {Object.keys(roomStatus).map((puzzleNum, idx) => (
-            <div
-              style={{
-                top: `${
-                  puzzleDimensions[puzzleNum]
-                    ? puzzleDimensions[puzzleNum].top
-                    : ''
-                }px`,
-                left: `${
-                  puzzleDimensions[puzzleNum]
-                    ? puzzleDimensions[puzzleNum].left
-                    : ''
-                }px`,
-                width: `${
-                  puzzleDimensions[puzzleNum]
-                    ? puzzleDimensions[puzzleNum].width
-                    : ''
-                }px`,
-                height: `${
-                  puzzleDimensions[puzzleNum]
-                    ? puzzleDimensions[puzzleNum].height
-                    : ''
-                }px`,
-                border: '4px solid red',
-                position: 'absolute',
-              }}
-              key={idx}
-            >
-              <button onClick={() => show(puzzleNum)}>
-                Puzzle {puzzleNum}
-              </button>
+        <div>
+          <div
+            id="game-room"
+            style={{
+              backgroundImage: `url(${room.imgSrc})`,
+              height: '559px',
+              width: '1000px',
+              backgroundPosition: 'center',
+              backgroundSize: 'cover',
+              margin: '0 auto',
+              position: 'relative',
+              border: '5px solid black',
+            }}
+          >
+            {Object.keys(roomStatus).map((puzzleNum, idx) => (
+              <div
+                onClick={() => show(puzzleNum)}
+                style={{
+                  top: `${
+                    puzzleDimensions[puzzleNum]
+                      ? puzzleDimensions[puzzleNum].top
+                      : ''
+                  }px`,
+                  left: `${
+                    puzzleDimensions[puzzleNum]
+                      ? puzzleDimensions[puzzleNum].left
+                      : ''
+                  }px`,
+                  width: `${
+                    puzzleDimensions[puzzleNum]
+                      ? puzzleDimensions[puzzleNum].width
+                      : ''
+                  }px`,
+                  height: `${
+                    puzzleDimensions[puzzleNum]
+                      ? puzzleDimensions[puzzleNum].height
+                      : ''
+                  }px`,                  
+                  position: 'absolute',
+                  border: '4px solid red'
+                }}
+                key={idx}
+              >                
+              </div>
+            ))}
+
+            <div>
+              {puzzles.map((puzzle, idx) => {
+                const Component = componentMapping[puzzle.name];
+                return (
+                  <Modal isOpen={roomStatus[puzzle.id].showModal} key={idx}>
+                    <div>{puzzle.roomdata.puzzleText}</div>
+                    <hr />
+                    <Component solve={() => setSolved(puzzle.id)} />
+                    <button onClick={() => hide(puzzle.id)}>CLOSE</button>
+                    <button onClick={() => setSolved(puzzle.id)}>SOLVE</button>
+                  </Modal>
+                );
+              })}
+
             </div>
           ))}
 

@@ -36,7 +36,7 @@ const Account = (props) => {
 
   console.log('props', props);
 
-  //HELPER FUNCTION TO SORT THE ROOMS IN ORDER BY ROOM NUMBER
+  //HELPER FUNCTION TO SORT THE ROOMS IN ORDER BY ROOM NUMBER !
   const sortByRoomNumber = (roomsArray) => {      
     return (roomsArray
     ? roomsArray.sort((roomA, roomB) => {

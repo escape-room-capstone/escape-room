@@ -15,7 +15,6 @@ export const Hints = (props) => {
     });
     setHints(puzzlehints);
   };
-  console.log(hints, 'hints');
   return (
     <div>
       {hints

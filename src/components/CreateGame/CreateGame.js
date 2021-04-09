@@ -9,6 +9,7 @@ import { componentMapping } from '../Puzzles/puzzles';
 import '../../../public/css/CreateGame.css';
 import { createGame } from '../../store/game';
 import { createCustomGame } from '../../store/customGame';
+import { Navbar } from '../Navbar';
 
 const CreateGame = (props) => {
   const [title, setTitle] = useState('');
@@ -135,109 +136,113 @@ const CreateGame = (props) => {
   };
   console.log(puzzleArray, 'puzzleArray');
   return (
-    <div id="create-game">
-      <h1 style={{ color: '#e6e6e6' }}> Theme : {theme.name} </h1>
-      <div>
-        <label>
-          Title of game :
-          <input
-            style={{ width: '200px', marginLeft: '10px' }}
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            type="text"
-          />
-        </label>
-        <label>
-          Description :
-          <input
-            style={{ width: '200px', marginLeft: '10px' }}
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            type="text"
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Set initial timer for the game :
-          <input
-            name="minutes"
-            value={Math.floor(timer / 60)}
-            style={{ width: '50px', marginLeft: '10px' }}
-            onChange={(e) => convertAndSetTime(e)}
-            type="number"
-          />
-          minute(s)
-          <input
-            name="seconds"
-            value={timer - Math.floor(timer / 60) * 60}
-            style={{ width: '50px', marginLeft: '10px' }}
-            onChange={(e) => convertAndSetTime(e)}
-            type="number"
-          />
-          second(s)
-        </label>
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}
-      >
-        <h3>Select all the puzzles you would like in your game...</h3>
+    <>
+      <Navbar />
 
-        <div className="puzzlesContainer">
-          {puzzles.map((puzzle, idx) => {
-            // const Component = componentMapping[puzzle.name];
-            return (
-              <div
-                onClick={(e) => handleChange(e, puzzle.id)}
-                key={puzzle.id}
-                className={`puzzle ${
-                  puzzleArray.includes(puzzle.id) ? 'selected' : ''
-                }`}
-              >
-                {/* puzzle.nickname instead, like "Magic Squares, etc"  ???*/}
-                <div>
-                  <h3 className="puzzle-name">{puzzle.name}</h3>
-                  <button
-                    onClick={() => {
-                      setPuzzleToShow(puzzle.name);
-                      setShowModal(true);
-                    }}
-                  >
-                    Try Out
-                  </button>
-                </div>
-              </div>
-            );
-          })}
+      <div id="create-game">
+        <h1 style={{ color: '#e6e6e6' }}> Theme : {theme.name} </h1>
+        <div>
+          <label>
+            Title of game :
+            <input
+              style={{ width: '200px', marginLeft: '10px' }}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              type="text"
+            />
+          </label>
+          <label>
+            Description :
+            <input
+              style={{ width: '200px', marginLeft: '10px' }}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              type="text"
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            Set initial timer for the game :
+            <input
+              name="minutes"
+              value={Math.floor(timer / 60)}
+              style={{ width: '50px', marginLeft: '10px' }}
+              onChange={(e) => convertAndSetTime(e)}
+              type="number"
+            />
+            minute(s)
+            <input
+              name="seconds"
+              value={timer - Math.floor(timer / 60) * 60}
+              style={{ width: '50px', marginLeft: '10px' }}
+              onChange={(e) => convertAndSetTime(e)}
+              type="number"
+            />
+            second(s)
+          </label>
         </div>
         <div
           style={{
-            color: 'red',
-            fontSize: '1.5rem',
-            margin: '1rem auto 2rem auto',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'space-between',
           }}
         >
-          {error}
-        </div>
+          <h3>Select all the puzzles you would like in your game...</h3>
 
-        <button className="submit" onClick={() => submitCreateGame()}>
-          {' '}
-          Submit{' '}
-        </button>
-        <Modal isOpen={showModal}>
-          <div>
-            <div>{generatePuzzle(puzzleToShow, props)}</div>
-            <div>{success ? 'Nice work!' : ''}</div>
+          <div className="puzzlesContainer">
+            {puzzles.map((puzzle, idx) => {
+              // const Component = componentMapping[puzzle.name];
+              return (
+                <div
+                  onClick={(e) => handleChange(e, puzzle.id)}
+                  key={puzzle.id}
+                  className={`puzzle ${
+                    puzzleArray.includes(puzzle.id) ? 'selected' : ''
+                  }`}
+                >
+                  {/* puzzle.nickname instead, like "Magic Squares, etc"  ???*/}
+                  <div>
+                    <h3 className="puzzle-name">{puzzle.name}</h3>
+                    <button
+                      onClick={() => {
+                        setPuzzleToShow(puzzle.name);
+                        setShowModal(true);
+                      }}
+                    >
+                      Try Out
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
           </div>
-          <button onClick={() => setShowModal(false)}>CLOSE</button>
-        </Modal>
+          <div
+            style={{
+              color: 'red',
+              fontSize: '1.5rem',
+              margin: '1rem auto 2rem auto',
+            }}
+          >
+            {error}
+          </div>
+
+          <button className="submit" onClick={() => submitCreateGame()}>
+            {' '}
+            Submit{' '}
+          </button>
+          <Modal isOpen={showModal}>
+            <div>
+              <div>{generatePuzzle(puzzleToShow, props)}</div>
+              <div>{success ? 'Nice work!' : ''}</div>
+            </div>
+            <button onClick={() => setShowModal(false)}>CLOSE</button>
+          </Modal>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

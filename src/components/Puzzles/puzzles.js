@@ -548,13 +548,64 @@ export const Puzzle9 = (props) => {
 };
 
 export const Puzzle10 = (props) => {
+
+
+  const [show1, setShow1] = useState(true);
+  const [show2, setShow2] = useState(true);
+  const [show3, setShow3] = useState(true);
+  const [show4, setShow4] = useState(true);
+  const [show5, setShow5] = useState(true);
+  const [show6, setShow6] = useState(true);
+  const [show7, setShow7] = useState(true);
+  const [show8, setShow8] = useState(true);
+  const [show9, setShow9] = useState(true);
+  
+  const [guess, setGuess] = useState("");
+    
+  const myhints = [
+    { text: 'The balloons might have something in them...', show: false },
+    { text: 'Sun : What is your favorite color my child ? Mine represents royalty and wealth', show: false },
+  ];          
+
+
+  
+
+  const handleChange = (e) => {
+    setGuess(e.target.value);    
+  }
   return (
-    <div>
-      THIS IS PUZZLE 10
-      <button onClick={props.solve}>SOLVE</button>
-    </div>
+    <div className="wrapper" style = {{ backgroundSize: 'cover', background : "url(https://wallpaperaccess.com/full/164679.jpg)" }}>
+      <Hints puzzlehints={myhints} />
+      <div style={{ alignContent:"center", width:"100%"}}>
+      <label>          
+          <input
+            style={{ filter:"opacity(0.8)", fontWeight:"bold", color:"white", backgroundSize:'cover', backgroundImage: guess === "" ? `url(${sun})` : "", border:"none", backgroundColor:"#1465b0", borderRadius:"60%", height: '250px', width: '250px', marginLeft: '80%' }}
+            value={guess}            
+            onChange={(e) => handleChange(e)}
+            type="text"
+          />
+        </label>
+        <span style={{ fontSize: "30px", fontWeight : "bold", color : guess === "Purple" ? "white" : "black" }}> { guess.toLowerCase() === "hello" ? "Hi, still wrong though." : guess.toLowerCase() === "good morning"  ? "Good Morning! Try again friend !" : guess === "" ? "" : guess === "Purple" ? <button id="createButton" style={{ marginLeft:"40%" }} onClick={props.solve}> Proceed </button> : "INCORRECT"} </span>        
+      </div>
+
+    <div className="sliding-background" style={{ display:"flex", alignItems:"center", justifyContent:"center", height:"100vh" }}>
+    <img onClick={()=>setShow1(false)} style={{height:"100px"}} src={ show1 ? balloon : poppedBalloon} alt="balloon"></img> 
+    {show2 ? <img onClick={()=>setShow2(false)} style={{height:"50px"}} src={balloon} alt="balloon"></img> : <div style={{ borderRadius:"50%", height:"50px", width:"50px", background:"green" }}> </div>  }    
+    <img onClick={()=>setShow3(false)} style={{height:"150px"}} src={ show3 ? balloon : poppedBalloon} alt="balloon"></img>
+    {show4 ? <img onClick={()=>setShow4(false)} style={{height:"40px"}} src={balloon} alt="balloon"></img> : <div style={{ borderRadius:"50%", height:"50px", width:"50px", background:"black" }}> </div>  }    
+    <img onClick={()=>setShow5(false)} style={{height:"120px"}} src={ show5 ? balloon : poppedBalloon} alt="balloon"></img>
+    <img onClick={()=>setShow6(false)} style={{height:"100px"}} src={ show6 ? balloon : poppedBalloon} alt="balloon"></img>
+    {show7 ? <img onClick={()=>setShow7(false)} style={{height:"80px"}} src={balloon} alt="balloon"></img> : <div style={{ borderRadius:"50%", height:"50px", width:"50px", background:"purple" }}> </div>  }
+    <img onClick={()=>setShow8(false)} style={{height:"160px"}} src={ show8 ? balloon : poppedBalloon} alt="balloon"></img>    
+    <img onClick={()=>setShow9(false)} style={{height:"120px"}} src={ show9 ? balloon : poppedBalloon} alt="balloon"></img>
+      </div>
+      
+      </div>
+    
   );
 };
+
+
 
 export const Puzzle11 = (props) => {
   return (
@@ -594,62 +645,15 @@ export const Puzzle14 = (props) => {
 };
 
 export const Puzzle15 = (props) => {
-
-
-  const [show1, setShow1] = useState(true);
-  const [show2, setShow2] = useState(true);
-  const [show3, setShow3] = useState(true);
-  const [show4, setShow4] = useState(true);
-  const [show5, setShow5] = useState(true);
-  const [show6, setShow6] = useState(true);
-  const [show7, setShow7] = useState(true);
-  const [show8, setShow8] = useState(true);
-  const [show9, setShow9] = useState(true);
-  
-  const [guess, setGuess] = useState("");
-    
-  const myhints = [
-    { text: 'The balloons might have something in them...', show: false },
-    { text: 'Sun : What is your favorite color my child ? Mine represents royalty and wealth', show: false },
-  ];          
-
-
-  
-
-  const handleChange = (e) => {
-    setGuess(e.target.value);    
-  }
   return (
-    <div style = {{ backgroundSize: 'cover', backgroundImage : "url(https://wallpaperaccess.com/full/164679.jpg)" }}>
-      <Hints puzzlehints={myhints} />
-      <div style={{ alignContent:"center", width:"100%"}}>
-      <label>          
-          <input
-            style={{ filter:"opacity(0.8)", fontWeight:"bold", color:"white", backgroundSize:'cover', backgroundImage: guess === "" ? `url(${sun})` : "", border:"none", backgroundColor:"#1465b0", borderRadius:"60%", height: '250px', width: '250px', marginLeft: '80%' }}
-            value={guess}            
-            onChange={(e) => handleChange(e)}
-            type="text"
-          />
-        </label>
-        <span style={{ fontSize: "30px", fontWeight : "bold", color : guess === "Purple" ? "white" : "black" }}> { guess.toLowerCase() === "hello" ? "Hi, still wrong though." : guess.toLowerCase() === "good morning"  ? "Good Morning! Try again friend !" : guess === "" ? "" : guess === "Purple" ? <button id="createButton" style={{ marginLeft:"40%" }} onClick={props.solve}> Proceed </button> : "INCORRECT"} </span>        
-      </div>
-
-    <div style={{ display:"flex", alignItems:"center", justifyContent:"center", height:"100vh" }}>
-    <img onClick={()=>setShow1(false)} style={{height:"100px"}} src={ show1 ? balloon : poppedBalloon} alt="balloon"></img> 
-    {show2 ? <img onClick={()=>setShow2(false)} style={{height:"50px"}} src={balloon} alt="balloon"></img> : <div style={{ borderRadius:"50%", height:"50px", width:"50px", background:"green" }}> </div>  }    
-    <img onClick={()=>setShow3(false)} style={{height:"150px"}} src={ show3 ? balloon : poppedBalloon} alt="balloon"></img>
-    {show4 ? <img onClick={()=>setShow4(false)} style={{height:"40px"}} src={balloon} alt="balloon"></img> : <div style={{ borderRadius:"50%", height:"50px", width:"50px", background:"black" }}> </div>  }    
-    <img onClick={()=>setShow5(false)} style={{height:"120px"}} src={ show5 ? balloon : poppedBalloon} alt="balloon"></img>
-    <img onClick={()=>setShow6(false)} style={{height:"100px"}} src={ show6 ? balloon : poppedBalloon} alt="balloon"></img>
-    {show7 ? <img onClick={()=>setShow7(false)} style={{height:"80px"}} src={balloon} alt="balloon"></img> : <div style={{ borderRadius:"50%", height:"50px", width:"50px", background:"purple" }}> </div>  }
-    <img onClick={()=>setShow8(false)} style={{height:"160px"}} src={ show8 ? balloon : poppedBalloon} alt="balloon"></img>    
-    <img onClick={()=>setShow9(false)} style={{height:"120px"}} src={ show9 ? balloon : poppedBalloon} alt="balloon"></img>
-      </div>
-      
-      </div>
-    
+    <div>
+      THIS IS PUZZLE FIFTEEN
+      <button onClick={props.solve}>SOLVE</button>
+    </div>
   );
 };
+
+
 
 export const componentMapping = {
   Puzzle1,

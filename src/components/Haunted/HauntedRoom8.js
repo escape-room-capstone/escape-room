@@ -124,6 +124,8 @@ const _HauntedRoom8 = (props) => {
         />
 
         <button onClick={() => setShowModal(false)}>CLOSE</button>
+        <br></br>
+        <button onClick={() => setRoomSolved(true)}>[Dev] Solve</button>
       </Modal>
     </div>
   );

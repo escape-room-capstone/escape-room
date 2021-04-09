@@ -27,20 +27,20 @@
 }
 
 .white {
-    background: white;
-    border-color: white;
+    background: transparent;
+    border-color: transparent;
 }
 
 .left-triangle {
     background: linear-gradient(to top left, #444 50%, transparent 50%);
-    border-top-color: white;
-    border-left-color: white;
+    border-top: none;
+    border-left: none;
 }
 
 .right-triangle {
     background: linear-gradient(to top right, #444 50%, transparent 50%);
-    border-top-color: white;
-    border-right-color: white;
+    border-top: none;
+    border-left: none;
 }
 
 #annoying-background {

@@ -25,11 +25,7 @@ const CreateGame = (props) => {
   const [puzzleToShow, setPuzzleToShow] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [success, setSuccess] = useState(false);
-  useEffect(() => {
-    if (puzzleToShow.length) {
-      setShowModal(true);
-    }
-  }, [puzzleToShow]);
+
   useEffect(() => {
     props.getTheme(props.match.params.id);
     props.getPuzzles();
@@ -206,7 +202,12 @@ const CreateGame = (props) => {
                 {/* puzzle.nickname instead, like "Magic Squares, etc"  ???*/}
                 <div>
                   <h3 className="puzzle-name">{puzzle.name}</h3>
-                  <button onClick={() => setPuzzleToShow(puzzle.name)}>
+                  <button
+                    onClick={() => {
+                      setPuzzleToShow(puzzle.name);
+                      setShowModal(true);
+                    }}
+                  >
                     Try Out
                   </button>
                 </div>
@@ -214,11 +215,20 @@ const CreateGame = (props) => {
             );
           })}
         </div>
+        <div
+          style={{
+            color: 'red',
+            fontSize: '1.5rem',
+            margin: '1rem auto 2rem auto',
+          }}
+        >
+          {error}
+        </div>
+
         <button className="submit" onClick={() => submitCreateGame()}>
           {' '}
           Submit{' '}
         </button>
-        <div>{error}</div>
         <Modal isOpen={showModal}>
           <div>
             <div>{generatePuzzle(puzzleToShow, props)}</div>

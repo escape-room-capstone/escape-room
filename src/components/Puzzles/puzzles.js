@@ -3,10 +3,12 @@ import { Stage, Layer, Circle, Line, Image } from 'react-konva';
 import useImage from 'use-image';
 import '../../../public/CSS/puzzle.css';
 import { Hints } from '../Hints';
-import { TilePuzzle } from './tilepuzzle';
+import { TilePuzzle, TilePuzzleSmall } from './tilepuzzle';
+
 import Modal from 'react-modal';
 import '../../../public/CSS/SmallLever.css';
 import { annoyingStyle } from '../SteveGame/BobaFett';
+
 export const Puzzle1 = (props) => {
   const [puzzle, setPuzzle] = useState({
     one: false,
@@ -395,6 +397,12 @@ export const Puzzle6 = (props) => {
       nine: 0,
     });
 
+    const myhints = [
+      { text: 'add up to 15 in each direction...', show: false },
+      { text: '3-5-7...', show: false },
+      { text: 'bottom right corner: 2', show: false },
+    ];
+
     let status = 'Make sums add up to 15...';
     if (
       parseInt(square.one) === 8 &&
@@ -426,7 +434,10 @@ export const Puzzle6 = (props) => {
 
     return (
       <>
-        <div className="status">{status}</div>
+        <Hints puzzlehints={myhints} />
+        <div style={{ paddingBottom: '0' }} className="status">
+          {status}
+        </div>
         <div className="grid-container">
           <div className="sq">
             <input
@@ -562,8 +573,8 @@ export const Puzzle11 = (props) => {
 export const Puzzle12 = (props) => {
   return (
     <div>
-      THIS IS PUZZLE 12
-      <button onClick={props.solve}>SOLVE</button>
+      <TilePuzzleSmall solve={props.solve} />{' '}
+      {/* {!props.demo ? <button onClick={() => props.solve()}>SOLVE</button> : ''} */}
     </div>
   );
 };

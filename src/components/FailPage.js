@@ -4,31 +4,32 @@ import { fetchGame, updateTimer } from '../store/game';
 import { Burger } from './Burger';
 
 
-const _VictoryPage = (props) => {
-    // pick up data from props
+const _FailPage = (props) => {
+     // pick up data from props
     let { gameId } = props.match.params;
     const { game } = props;
-    const { timer, countdown, userId } = game;
+    const { rooms } = game;
 
     // load game data when component mounts
     useEffect(() => {
         props.setGame(gameId);
     }, [gameId]);
 
-    // determine user's current time to complete game
-    const gameFinalTime = timer - countdown
-    var finalMinutes = Math.floor(gameFinalTime / 60);
-    var finalSeconds = gameFinalTime - finalMinutes * 60;
+    // sort the rooms in order using the room['number']
+    const sortGameRooms = (gameRooms) => {
+        const gameRoomsSorted = gameRooms.sort((roomA, roomB) => {
+            return roomA.number - roomB.number;
+        });
+        return gameRoomsSorted[0].id;
+    };
 
     // end the game
-    const handleEndGame = async () => {
-        // save user's game completion time record
-        // await props.saveRecord(userId, gameId, gameFinalTime)
+    const handleEndGame = async (e) => {
         // reset game timer ('-1' is the default value of the countdown when game is created)
-        const time = -1
+        const time = -1;
         await props.resetTimer(gameId, time);
-        // send the user back to homepage 
-        props.history.push(`/home`);
+        // send the user back to homepage or restart the game 
+        e.target.name === 'end' ? props.history.push(`/home`) : props.history.push(`/games/${gameId}/${sortGameRooms(rooms)}/0`);
     }
 
     // render victory page once the game was loaded
@@ -38,12 +39,12 @@ const _VictoryPage = (props) => {
     return (
         <div id="victory-page">
             <Burger {...props} />
-            <div id="spacer" style={{ height: '100px' }}></div>
+            <div id="spacer" style={{height: '100px'}}></div>
             <div id="victory-body"
                 style={{
                     height: '559px',
                     width: '1000px',
-                    backgroundImage: 'url(/Images/victory.png)',
+                    backgroundImage: 'url(/Images/fail.jpeg)',
                     backgroundPosition: 'center',
                     backgroundSize: 'cover',
                     margin: '0 auto',
@@ -51,8 +52,8 @@ const _VictoryPage = (props) => {
                     border: '5px solid black',
                 }}
             >
-                <p>Congrtats! It took you {finalMinutes ? `${finalMinutes} minutes and` : null} {finalSeconds} seconds to beat the {game.title} game!</p>
-                <button onClick={() => handleEndGame()}>Close game and return home</button>
+                <button name='restart' onClick={(e) => handleEndGame(e)}>Restart game</button>
+                <button name='end' onClick={(e) => handleEndGame(e)}>Close game and return home</button>
             </div>
         </div>
     )
@@ -65,9 +66,7 @@ const mapDispatch = (dispatch) => {
         setGame: (gameId) => dispatch(fetchGame(gameId)),
         resetTimer: (userId, gameId, time) =>
             dispatch(updateTimer(userId, gameId, time)),
-        saveRecord: (userId, gameId, countdown) =>
-            dispatch(saveRecord(userId, gameId, countdown)),
     };
 };
 
-export const VictoryPage = connect(mapState, mapDispatch)(_VictoryPage);
+export const FailPage = connect(mapState, mapDispatch)(_FailPage);

@@ -156,6 +156,8 @@ const _CustomGame = (props) => {
       <div id="game-tools">
         <div id="game-timer">
           <GameTimer
+            gameId={gameId}
+            history={props.history}
             timer={timer}
             countdown={countdown}
             roomSolved={roomSolved}
@@ -274,6 +276,7 @@ const _CustomGame = (props) => {
         </div>
       </div>
       <button onClick={() => handleNextRoom()}>[Dev] Next room</button>
+      <button onClick={() => props.history.push(`/games/${gameId}/fail`)}>[test] load fail page</button>
     </div>
   );
 };

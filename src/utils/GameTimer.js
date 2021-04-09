@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const GameTimer = (props) => {
-    const { timer, countdown, roomSolved, timerToggle, saveCountdown } = props;
+    const { gameId, history, timer, countdown, roomSolved, timerToggle, saveCountdown } = props;
     const [timerSwitch, setTimerSwitch] = useState(timerToggle);
     const [currCountdown, setCountdown] = useState(countdown);
 
@@ -23,6 +23,7 @@ const GameTimer = (props) => {
                 }
                 if (currCountdown === 0) {
                     clearInterval(initInterval)
+                    history.push(`/games/${gameId}/fail`)
                 }
                 if (roomSolved) {
                     clearInterval(initInterval)

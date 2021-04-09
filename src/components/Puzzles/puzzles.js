@@ -581,7 +581,7 @@ export const Puzzle10 = (props) => {
     setGuess(e.target.value);    
   }
   return (
-    <div className="wrapper" style = {{ backgroundSize: 'cover', background : "url(https://wallpaperaccess.com/full/164679.jpg)" }}>
+    <div style = {{ backgroundSize: 'cover', background : "url(https://wallpaperaccess.com/full/164679.jpg)" }}>
       <Hints puzzlehints={myhints} />
       <div style={{ alignContent:"center", width:"100%"}}>
       <label>          
@@ -595,7 +595,7 @@ export const Puzzle10 = (props) => {
         <span style={{ fontSize: "30px", fontWeight : "bold", color : guess === "Purple" ? "white" : "black" }}> { guess.toLowerCase() === "hello" ? "Hi, still wrong though." : guess.toLowerCase() === "good morning"  ? "Good Morning! Try again friend !" : guess === "" ? "" : guess === "Purple" ? <button id="createButton" style={{ marginLeft:"40%" }} onClick={props.solve}> Proceed </button> : "INCORRECT"} </span>        
       </div>
 
-    <div className="sliding-background" style={{ display:"flex", alignItems:"center", justifyContent:"center", height:"100vh" }}>
+    <div style={{ display:"flex", alignItems:"center", justifyContent:"center", height:"100vh" }}>
     <img onClick={()=>setShow1(false)} style={{height:"100px"}} src={ show1 ? balloon : poppedBalloon} alt="balloon"></img> 
     {show2 ? <img onClick={()=>setShow2(false)} style={{height:"50px"}} src={balloon} alt="balloon"></img> : <div style={{ borderRadius:"50%", height:"50px", width:"50px", background:"green" }}> </div>  }    
     <img onClick={()=>setShow3(false)} style={{height:"150px"}} src={ show3 ? balloon : poppedBalloon} alt="balloon"></img>

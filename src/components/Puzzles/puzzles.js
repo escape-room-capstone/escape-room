@@ -5,6 +5,7 @@ import '../../../public/CSS/puzzle.css';
 import { Hints } from '../Hints';
 import { TilePuzzle } from './tilepuzzle';
 import Modal from 'react-modal';
+import '../../../public/CSS/SmallLever.css';
 import { annoyingStyle } from '../SteveGame/BobaFett';
 export const Puzzle1 = (props) => {
   const [puzzle, setPuzzle] = useState({
@@ -13,6 +14,7 @@ export const Puzzle1 = (props) => {
     three: false,
     four: false,
   });
+  const myhints = [{ text: 'Green means go...', show: false }];
   useEffect(() => {
     if (puzzle.one && puzzle.two && puzzle.three && puzzle.four) {
       props.solve();
@@ -20,18 +22,18 @@ export const Puzzle1 = (props) => {
   }, [puzzle]);
   return (
     <div>
-      <div>
+      <Hints puzzlehints={myhints} />
+      <div id="small-lever">
         <button
+          className={`lever-div ${puzzle.one ? 'true' : 'false'}`}
           onClick={() =>
             setPuzzle({ ...puzzle, one: !puzzle.one, two: !puzzle.two })
           }
         >
-          Lever 1
+          {/* Lever 1{puzzle.one === false ? 'False' : 'True'} */}
         </button>
-        {puzzle.one === false ? 'False' : 'True'}
-      </div>
-      <div>
         <button
+          className={`lever-div ${puzzle.two ? 'true' : 'false'}`}
           onClick={() =>
             setPuzzle({
               ...puzzle,
@@ -41,12 +43,10 @@ export const Puzzle1 = (props) => {
             })
           }
         >
-          Lever 2
+          {/* Lever 2{puzzle.two === false ? 'False' : 'True'} */}
         </button>
-        {puzzle.two === false ? 'False' : 'True'}
-      </div>
-      <div>
         <button
+          className={`lever-div ${puzzle.three ? 'true' : 'false'}`}
           onClick={() =>
             setPuzzle({
               ...puzzle,
@@ -56,17 +56,15 @@ export const Puzzle1 = (props) => {
             })
           }
         >
-          Lever 3
-        </button>{' '}
-        {puzzle.three === false ? 'False' : 'True'}
+          {/* Lever 3{puzzle.three === false ? 'False' : 'True'} */}
+        </button>
+        <button
+          className={`lever-div ${puzzle.four ? 'true' : 'false'}`}
+          onClick={() => setPuzzle({ ...puzzle, one: !puzzle.one })}
+        >
+          {/* Lever 4{puzzle.four === false ? 'False' : 'True'} */}
+        </button>
       </div>
-      <div>
-        <button onClick={() => setPuzzle({ ...puzzle, one: !puzzle.one })}>
-          Lever 4
-        </button>{' '}
-        {puzzle.four === false ? 'False' : 'True'}
-      </div>
-      <button onClick={() => props.solve()}>solve</button>
     </div>
   );
 };
@@ -81,7 +79,6 @@ export const Puzzle2 = (props) => {
     <div>
       <Hints puzzlehints={myhints} />
       This Is PuzzleTwo
-      <button onClick={props.solve}>SOLVE</button>
     </div>
   );
 };
@@ -632,7 +629,7 @@ export const Puzzle13 = (props) => {
   // setTimeout and reset timer if the modal closes
   useEffect(() => {
     const annoying = setTimeout(() => {
-      setAnnoyingModalOpen(false);
+      setModalOpen(false);
     }, 15000);
     return () => {
       clearTimeout(annoying);

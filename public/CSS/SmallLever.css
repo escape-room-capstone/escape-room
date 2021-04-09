@@ -1,0 +1,20 @@
+.lever-div {
+  height: 6rem;
+  min-width: 6rem;
+  color: white;
+  flex: 1 1 25%;
+  box-shadow: 2px 2px 24px black;
+  margin: auto 3rem;
+}
+
+.true {
+  background-color: rgb(108, 250, 132);
+}
+
+.false {
+  background-color: black;
+}
+
+#small-lever {
+  text-align: center;
+}

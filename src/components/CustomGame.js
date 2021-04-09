@@ -247,7 +247,7 @@ const _CustomGame = (props) => {
               );
             })}
           </div>
-          ))
+
           <div>
             {puzzles.map((puzzle, idx) => {
               const Component = componentMapping[puzzle.name];

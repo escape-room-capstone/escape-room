@@ -74,6 +74,8 @@ const _HauntedRoom8 = (props) => {
       <Burger {...props} />
       <div className="game-timer">
         <GameTimer
+          gameId={gameId}
+          history={props.history}
           timer={timer}
           countdown={countdown}
           timerToggle={true}

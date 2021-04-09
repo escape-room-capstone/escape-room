@@ -6,7 +6,6 @@ import Modal from 'react-modal';
 import { fetchGame, updateTimer } from '../store/game';
 import '../../public/CSS/CustomGame.css';
 import '../../public/CSS/Burger.css';
-import { slide as Menu } from 'react-burger-menu';
 import { Burger } from './Burger';
 import GameTimer from '../utils/GameTimer';
 
@@ -137,7 +136,7 @@ const _CustomGame = (props) => {
     }
   };
 
-  console.log(room.imgSrc)
+  console.log(room.imgSrc);
 
   // render room if the puzzles were mounted and room is open
   if (!puzzlesReady) {
@@ -276,7 +275,9 @@ const _CustomGame = (props) => {
         </div>
       </div>
       <button onClick={() => handleNextRoom()}>[Dev] Next room</button>
-      <button onClick={() => props.history.push(`/games/${gameId}/fail`)}>[test] load fail page</button>
+      <button onClick={() => props.history.push(`/games/${gameId}/fail`)}>
+        [test] load fail page
+      </button>
     </div>
   );
 };

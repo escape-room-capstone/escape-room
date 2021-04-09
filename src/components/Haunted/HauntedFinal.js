@@ -2,14 +2,28 @@ import React, { useEffect, useState } from 'react';
 import { Stage, Layer, Image, Text } from 'react-konva';
 import useImage from 'use-image';
 import '../../../public/css/HauntedRoom.css';
-import TypeWriterEffect from 'react-typewriter-effect';
+import { connect } from 'react-redux';
+import { fetchGame } from '../../store/game';
 
 const House = (props) => {
   const [image] = useImage('/Images/hauntedhousefinal.jpg');
   return <Image image={image} />;
 };
 
-export const HauntedFinal = (props) => {
+const _HauntedFinal = (props) => {
+  const { gameId } = props.match.params;
+
+  useEffect(() => {
+    async function fetchGame() {
+      await props.getGame(gameId);
+    }
+    fetchGame();
+  }, []);
+  useEffect(() => {
+    const interval = setTimeout(() => {
+      props.history.push(`/games/${gameId}/victory`);
+    }, 2000);
+  }, []);
   return (
     <div className="game-room">
       <div className="narrative"></div>
@@ -39,3 +53,13 @@ export const HauntedFinal = (props) => {
     </div>
   );
 };
+
+const mapDispatch = (dispatch) => {
+  return {
+    getGame: (gameId) => dispatch(fetchGame(gameId)),
+  };
+};
+export const HauntedFinal = connect(
+  (state) => state,
+  mapDispatch
+)(_HauntedFinal);

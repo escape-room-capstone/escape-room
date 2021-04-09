@@ -120,6 +120,8 @@ const _HauntedRoom2 = (props) => {
       <Burger {...props} />
       <div className="game-timer">
         <GameTimer
+          gameId={gameId}
+          history={props.history}
           timer={timer}
           countdown={countdown}
           timerToggle={true}
@@ -240,9 +242,25 @@ const _HauntedRoom2 = (props) => {
       </Stage>
 
       <Modal style={customStyles} isOpen={room.showModal}>
-        {room.clues.one.show && <Puzzle1 solve={() => setSolved('one')} />}
-        {room.clues.two.show && <Puzzle2 solve={() => setSolved('two')} />}
-        {room.clues.three.show && <Puzzle3 solve={() => setSolved('three')} />}
+        {room.clues.one.show && (
+          <div>
+            <Puzzle1 solve={() => setSolved('one')} />
+            <button onClick={() => setSolved('one')}>[Dev] solve</button>
+          </div>
+        )}
+        {room.clues.two.show && (
+          <div>
+            <Puzzle2 solve={() => setSolved('two')} />{' '}
+            <button onClick={() => setSolved('two')}>[Dev] solve</button>
+          </div>
+        )}
+        {room.clues.three.show && (
+          <div>
+            <Puzzle3 solve={() => setSolved('three')} />{' '}
+            <button onClick={() => setSolved('three')}>[Dev] solve</button>
+          </div>
+        )}
+        <br></br>
         <button
           onClick={() =>
             setRoom((prevRoom) => {
@@ -259,7 +277,7 @@ const _HauntedRoom2 = (props) => {
             })
           }
         >
-          Close the modal
+          Close
         </button>
       </Modal>
     </div>

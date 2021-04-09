@@ -395,7 +395,7 @@ export const Puzzle6 = (props) => {
       nine: 0,
     });
 
-    let status = 'Ship defenses are currently offline.';
+    let status = 'Make sums add up to 15...';
     if (
       parseInt(square.one) === 8 &&
       parseInt(square.three) === 6 &&
@@ -406,7 +406,7 @@ export const Puzzle6 = (props) => {
       parseInt(square.eight) === 9 &&
       parseInt(square.nine) === 2
     ) {
-      status = 'Ship defenses have been restored. You may exit this menu.';
+      status = 'Nice work!';
     }
 
     useEffect(() => {
@@ -509,7 +509,6 @@ export const Puzzle6 = (props) => {
               required
             />
           </div>
-          <button onClick={props.solve}>SOLVE</button>
         </div>
       </>
     );

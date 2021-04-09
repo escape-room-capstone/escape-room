@@ -157,3 +157,12 @@
 #hints button {
   margin: 0 1rem;
 }
+
+button.retry {
+  padding: 0.3rem;
+  font-size: 1.2rem;
+  background-color: peru;
+  color: black;
+  margin: 1rem auto;
+  text-shadow: 1px 1px grey;
+}

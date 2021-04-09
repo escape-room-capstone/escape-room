@@ -30,6 +30,9 @@
 }
 
 #create-game {
+  position: absolute;
+  top: 0;
+  padding-top: 5rem;
   padding-bottom: 5rem;
   filter: opacity(0.9);
   color: #e6e6e6;

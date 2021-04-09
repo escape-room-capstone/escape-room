@@ -686,6 +686,7 @@ export const Puzzle13 = (props) => {
       // setAnnoyingPuzzleCompleted(true);
       props.solve();
       console.log('passed');
+    } else {
     }
   }, [pattern]);
 
@@ -707,14 +708,11 @@ export const Puzzle13 = (props) => {
 
   return (
     <div>
-      <Hints puzzlehints={myhints} />
-
       <Modal isOpen={modalOpen} style={annoyingStyle}>
+        <Hints puzzlehints={myhints} />
+
         <button onClick={() => setModalOpen(false)}>Close Puzzle</button>
-        <p>
-          Determine the fourth sequence to deactivate the puzzle and continue
-          your escape...
-        </p>
+        <p>Determine the fourth sequence...</p>
         <p>{status}</p>
         <div id="game-div-boba">
           <div className="game-board">
@@ -777,6 +775,15 @@ export const Puzzle13 = (props) => {
           </div>
         </div>
       </Modal>
+      <button
+        className="retry"
+        onClick={() => {
+          setModalOpen(true);
+          j;
+        }}
+      >
+        Retry
+      </button>
     </div>
   );
 };

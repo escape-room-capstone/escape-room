@@ -1,10 +1,12 @@
 .lever-div {
+  border: none;
   height: 6rem;
   min-width: 6rem;
   color: white;
   flex: 1 1 25%;
-  box-shadow: 2px 2px 24px black;
+  box-shadow: 1px 1px 38px black;
   margin: auto 3rem;
+  border-radius: 90%;
 }
 
 .true {
@@ -17,4 +19,7 @@
 
 #small-lever {
   text-align: center;
+}
+.lever-div:focus {
+  outline: none;
 }

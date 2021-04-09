@@ -13,6 +13,7 @@ import { createCustomGame } from '../../store/customGame';
 const CreateGame = (props) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [timer, setTimer] = useState(0);
   //need a public/private variable to pass in when game is created as well
   const [puzzleArray, setPuzzleArray] = useState([]);
   const [error, setError] = useState('');
@@ -23,30 +24,31 @@ const CreateGame = (props) => {
   // });
   const [puzzleToShow, setPuzzleToShow] = useState('');
   const [showModal, setShowModal] = useState(false);
-  useEffect(() => {
-    if (puzzleToShow.length) {
-      setShowModal(true);
-    }
-  }, [puzzleToShow]);
+  const [success, setSuccess] = useState(false);
+
   useEffect(() => {
     props.getTheme(props.match.params.id);
     props.getPuzzles();
   }, []);
-
+  useEffect(() => {
+    if (success) {
+      setTimeout(() => setSuccess(false), 1500);
+    }
+  }, [success]);
   const generatePuzzle = (puzzleName, props) => {
     if (puzzleName !== '') {
       const Component = componentMapping[puzzleName];
-      return <Component {...props} />;
+      return (
+        <Component demo={true} solve={() => setSuccess(true)} {...props} />
+      );
     }
   };
 
   const { puzzles, theme } = props;
   // console.log(puzzles, theme);
-  //USING hard-coded user#2 for axios call...
   const submitCreateGame = async () => {
     const numPuzzles = puzzleArray.length;
     const difference = theme.numPuzzles - numPuzzles;
-
     //I decided that a room should have ATLEAST 1 puzzle, otherwise what's the point of a room...
     //Each ROOM will have an IMAGE. for example Forest theme has 4 images, therefore 4 rooms.
     //I will check to see if puzzleArray has a minimum of the amount of ROOMS we have. theme.images.length will be the amount of IMAGES we have, which
@@ -62,10 +64,37 @@ const CreateGame = (props) => {
         theme.numPuzzles,
         title,
         description,
-        puzzleArray
+        puzzleArray,
+        timer
       );
     }
+    // COMMENT -- this was removed, brought it back (commented out) in case something breaks
+    // } else if (difference > 0) {
+    //   setError(`Please choose ${difference} more puzzles`);
+    // } else if (difference < 0) {
+    //   setError(
+    //     `Oops - too many puzzles. Please remove ${Math.abs(
+    //       difference
+    //     )} puzzles from your list`
+    //   );
+    // }
+
+    // } else if (difference === 0 && theme.type === 'default') {
+    //   // console.log(puzzleArray, title, numPuzzles, theme.name);
+    //   //just send themeId - can find theme on back end?
+    //   props.makeGame(
+    //     props.auth.id,
+    //     theme.name,
+    //     theme.id,
+    //     theme.numPuzzles,
+    //     title,
+    //     description,
+    //     puzzleArray,
+    //     timer
+    //   );
+    // }
   };
+
   // const handleChange = (e, puzzleId) => {
   //   // console.log('we are here');
   //   if (e.target.checked) {
@@ -78,6 +107,25 @@ const CreateGame = (props) => {
   //     }
   //   }
   // };
+
+  // Convert timer inputs into seconds for use in the Game model
+  const convertAndSetTime = (e) => {
+    var prevTime; // grabs time from props and will consolidate updated time from passed values
+    timer ? (prevTime = timer) : (prevTime = 0); // on first render time in props will be undefined
+    // define mintues and seconds currently in props
+    let minutes = Math.floor(prevTime / 60);
+    let seconds = prevTime - minutes * 60;
+    // assingn new values to minutes and seconds from input
+    if (e.target.name === 'seconds') {
+      seconds = e.target.value * 1;
+    }
+    if (e.target.name === 'minutes') {
+      minutes = e.target.value * 1;
+    }
+    // set new time in props
+    setTimer(minutes * 60 + seconds);
+  };
+
   const handleChange = (e, puzzleId) => {
     if (!puzzleArray.includes(puzzleId)) {
       setPuzzleArray([...puzzleArray, puzzleId]);
@@ -109,6 +157,27 @@ const CreateGame = (props) => {
           />
         </label>
       </div>
+      <div>
+        <label>
+          Set initial timer for the game :
+          <input
+            name="minutes"
+            value={Math.floor(timer / 60)}
+            style={{ width: '50px', marginLeft: '10px' }}
+            onChange={(e) => convertAndSetTime(e)}
+            type="number"
+          />
+          minute(s)
+          <input
+            name="seconds"
+            value={timer - Math.floor(timer / 60) * 60}
+            style={{ width: '50px', marginLeft: '10px' }}
+            onChange={(e) => convertAndSetTime(e)}
+            type="number"
+          />
+          second(s)
+        </label>
+      </div>
       <div
         style={{
           display: 'flex',
@@ -133,7 +202,12 @@ const CreateGame = (props) => {
                 {/* puzzle.nickname instead, like "Magic Squares, etc"  ???*/}
                 <div>
                   <h3 className="puzzle-name">{puzzle.name}</h3>
-                  <button onClick={() => setPuzzleToShow(puzzle.name)}>
+                  <button
+                    onClick={() => {
+                      setPuzzleToShow(puzzle.name);
+                      setShowModal(true);
+                    }}
+                  >
                     Try Out
                   </button>
                 </div>
@@ -141,13 +215,25 @@ const CreateGame = (props) => {
             );
           })}
         </div>
+        <div
+          style={{
+            color: 'red',
+            fontSize: '1.5rem',
+            margin: '1rem auto 2rem auto',
+          }}
+        >
+          {error}
+        </div>
+
         <button className="submit" onClick={() => submitCreateGame()}>
           {' '}
           Submit{' '}
         </button>
-        <div>{error}</div>
         <Modal isOpen={showModal}>
-          <div>{generatePuzzle(puzzleToShow, props)}</div>
+          <div>
+            <div>{generatePuzzle(puzzleToShow, props)}</div>
+            <div>{success ? 'Nice work!' : ''}</div>
+          </div>
           <button onClick={() => setShowModal(false)}>CLOSE</button>
         </Modal>
       </div>
@@ -168,7 +254,8 @@ const mapDispatch = (dispatch, { history }) => {
       numPuzzles,
       title,
       description,
-      puzzleArray
+      puzzleArray,
+      timer
     ) =>
       dispatch(
         createGame(
@@ -179,6 +266,7 @@ const mapDispatch = (dispatch, { history }) => {
           title,
           description,
           puzzleArray,
+          timer,
           history
         )
       ),
@@ -189,7 +277,8 @@ const mapDispatch = (dispatch, { history }) => {
       numPuzzles,
       title,
       description,
-      puzzleArray
+      puzzleArray,
+      timer
     ) =>
       dispatch(
         createCustomGame(
@@ -200,6 +289,7 @@ const mapDispatch = (dispatch, { history }) => {
           title,
           description,
           puzzleArray,
+          timer,
           history
         )
       ),

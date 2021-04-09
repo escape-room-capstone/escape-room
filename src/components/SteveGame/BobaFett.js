@@ -1,35 +1,35 @@
-import React, { useState } from "react";
-import Modal from "react-modal";
-import "../../../public/CSS/BobaFett.css";
-import LeverPuzzle from "./LeverPuzzle";
-import MagicSquarePuzzle from "./MagicSquarePuzzle";
-import AnnoyingPuzzle from "./AnnoyingPuzzle";
+import React, { useState } from 'react';
+import Modal from 'react-modal';
+import '../../../public/CSS/BobaFett.css';
+import LeverPuzzle from './LeverPuzzle';
+import MagicSquarePuzzle from './MagicSquarePuzzle';
+import AnnoyingPuzzle from './AnnoyingPuzzle';
 import CaesarCipher from './CaesarCipher';
 
-const annoyingStyle = {
-    overlay: {
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      backgroundColor: '#444'
-    },
-    content: {
-      position: 'absolute',
-      top: '40px',
-      left: '40px',
-      right: '40px',
-      bottom: '40px',
-      border: '1px solid #ccc',
-      background: '#fff',
-      overflow: 'auto',
-      WebkitOverflowScrolling: 'touch',
-      borderRadius: '4px',
-      outline: 'none',
-      padding: '20px'
-    }
-}
+export const annoyingStyle = {
+  overlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: '#444',
+  },
+  content: {
+    position: 'absolute',
+    top: '40px',
+    left: '40px',
+    right: '40px',
+    bottom: '40px',
+    border: '1px solid #ccc',
+    background: '#fff',
+    overflow: 'auto',
+    WebkitOverflowScrolling: 'touch',
+    borderRadius: '4px',
+    outline: 'none',
+    padding: '20px',
+  },
+};
 
 export default function BobaFett() {
   const [leverModalOpen, setLeverModalOpen] = useState(false);
@@ -40,12 +40,8 @@ export default function BobaFett() {
   const [magicSquarePuzzleCompleted, setMagicSquarePuzzleCompleted] = useState(
     false
   );
-  const [annoyingPuzzleCompleted, setAnnoyingPuzzleCompleted] = useState(
-    false
-  );
-  const [caesarCipherCompleted, setCaesarCipherCompleted] = useState(
-    false
-  );
+  const [annoyingPuzzleCompleted, setAnnoyingPuzzleCompleted] = useState(false);
+  const [caesarCipherCompleted, setCaesarCipherCompleted] = useState(false);
 
   return (
     <div className='boba-container'>

@@ -3,6 +3,11 @@ import { Stage, Layer, Circle, Line, Image } from 'react-konva';
 import useImage from 'use-image';
 import '../../../public/CSS/puzzle.css';
 import { Hints } from '../Hints';
+import { TilePuzzle, TilePuzzleSmall } from './tilepuzzle';
+
+import Modal from 'react-modal';
+import '../../../public/CSS/SmallLever.css';
+import { annoyingStyle } from '../SteveGame/BobaFett';
 
 export const Puzzle1 = (props) => {
   const [puzzle, setPuzzle] = useState({
@@ -11,6 +16,7 @@ export const Puzzle1 = (props) => {
     three: false,
     four: false,
   });
+  const myhints = [{ text: 'Green means go...', show: false }];
   useEffect(() => {
     if (puzzle.one && puzzle.two && puzzle.three && puzzle.four) {
       props.solve();
@@ -18,18 +24,18 @@ export const Puzzle1 = (props) => {
   }, [puzzle]);
   return (
     <div>
-      <div>
+      <Hints puzzlehints={myhints} />
+      <div id="small-lever">
         <button
+          className={`lever-div ${puzzle.one ? 'true' : 'false'}`}
           onClick={() =>
             setPuzzle({ ...puzzle, one: !puzzle.one, two: !puzzle.two })
           }
         >
-          Lever 1
+          {/* Lever 1{puzzle.one === false ? 'False' : 'True'} */}
         </button>
-        {puzzle.one === false ? 'False' : 'True'}
-      </div>
-      <div>
         <button
+          className={`lever-div ${puzzle.two ? 'true' : 'false'}`}
           onClick={() =>
             setPuzzle({
               ...puzzle,
@@ -39,12 +45,10 @@ export const Puzzle1 = (props) => {
             })
           }
         >
-          Lever 2
+          {/* Lever 2{puzzle.two === false ? 'False' : 'True'} */}
         </button>
-        {puzzle.two === false ? 'False' : 'True'}
-      </div>
-      <div>
         <button
+          className={`lever-div ${puzzle.three ? 'true' : 'false'}`}
           onClick={() =>
             setPuzzle({
               ...puzzle,
@@ -54,15 +58,14 @@ export const Puzzle1 = (props) => {
             })
           }
         >
-          Lever 3
-        </button>{' '}
-        {puzzle.three === false ? 'False' : 'True'}
-      </div>
-      <div>
-        <button onClick={() => setPuzzle({ ...puzzle, one: !puzzle.one })}>
-          Lever 4
-        </button>{' '}
-        {puzzle.four === false ? 'False' : 'True'}
+          {/* Lever 3{puzzle.three === false ? 'False' : 'True'} */}
+        </button>
+        <button
+          className={`lever-div ${puzzle.four ? 'true' : 'false'}`}
+          onClick={() => setPuzzle({ ...puzzle, one: !puzzle.one })}
+        >
+          {/* Lever 4{puzzle.four === false ? 'False' : 'True'} */}
+        </button>
       </div>
     </div>
   );
@@ -78,7 +81,6 @@ export const Puzzle2 = (props) => {
     <div>
       <Hints puzzlehints={myhints} />
       This Is PuzzleTwo
-      <button onClick={props.solve}>SOLVE</button>
     </div>
   );
 };
@@ -395,7 +397,13 @@ export const Puzzle6 = (props) => {
       nine: 0,
     });
 
-    let status = 'Ship defenses are currently offline.';
+    const myhints = [
+      { text: 'add up to 15 in each direction...', show: false },
+      { text: '3-5-7...', show: false },
+      { text: 'bottom right corner: 2', show: false },
+    ];
+
+    let status = 'Make sums add up to 15...';
     if (
       parseInt(square.one) === 8 &&
       parseInt(square.three) === 6 &&
@@ -406,7 +414,7 @@ export const Puzzle6 = (props) => {
       parseInt(square.eight) === 9 &&
       parseInt(square.nine) === 2
     ) {
-      status = 'Ship defenses have been restored. You may exit this menu.';
+      status = 'Nice work!';
     }
 
     useEffect(() => {
@@ -426,7 +434,10 @@ export const Puzzle6 = (props) => {
 
     return (
       <>
-        <div className="status">{status}</div>
+        <Hints puzzlehints={myhints} />
+        <div style={{ paddingBottom: '0' }} className="status">
+          {status}
+        </div>
         <div className="grid-container">
           <div className="sq">
             <input
@@ -509,7 +520,6 @@ export const Puzzle6 = (props) => {
               required
             />
           </div>
-          <button onClick={props.solve}>SOLVE</button>
         </div>
       </>
     );
@@ -563,17 +573,157 @@ export const Puzzle11 = (props) => {
 export const Puzzle12 = (props) => {
   return (
     <div>
-      THIS IS PUZZLE 12
-      <button onClick={props.solve}>SOLVE</button>
+      <TilePuzzleSmall solve={props.solve} />{' '}
+      {/* {!props.demo ? <button onClick={() => props.solve()}>SOLVE</button> : ''} */}
     </div>
   );
 };
 
 export const Puzzle13 = (props) => {
+  const myhints = [
+    { text: 'top minus lower left...', show: false },
+    { text: 'multiplied  by bottom right...', show: false },
+  ];
+  const [modalOpen, setModalOpen] = useState(true);
+  const [pattern, setPattern] = useState({
+    firstOne: Math.floor(Math.random() * 4) + 6,
+    secondOne: Math.floor(Math.random() * 5) + 1,
+    thirdOne: Math.floor(Math.random() * 4) + 1,
+    resultOne: 0,
+    firstTwo: Math.floor(Math.random() * 4) + 6,
+    secondTwo: Math.floor(Math.random() * 5) + 1,
+    thirdTwo: Math.floor(Math.random() * 4) + 1,
+    resultTwo: 0,
+    firstThree: Math.floor(Math.random() * 4) + 6,
+    secondThree: Math.floor(Math.random() * 5) + 1,
+    thirdThree: Math.floor(Math.random() * 4) + 1,
+    resultThree: 0,
+    firstFour: Math.floor(Math.random() * 4) + 6,
+    secondFour: Math.floor(Math.random() * 5) + 1,
+    thirdFour: Math.floor(Math.random() * 4) + 1,
+    resultFour: 0,
+  });
+
+  // flip the status message so user knows they solved it
+  let status = 'Unsolved...';
+  if (
+    pattern.resultFour ===
+    (pattern.firstFour - pattern.secondFour) * pattern.thirdFour
+  ) {
+    status = "Solved! It's now safe to close the window.";
+  }
+
+  // sets initial state values like a componentDidMount
+  useEffect(() => {
+    setPattern({
+      ...pattern,
+      resultOne: (pattern.firstOne - pattern.secondOne) * pattern.thirdOne,
+      resultTwo: (pattern.firstTwo - pattern.secondTwo) * pattern.thirdTwo,
+      resultThree:
+        (pattern.firstThree - pattern.secondThree) * pattern.thirdThree,
+    });
+  }, []);
+
+  // Win condition -- user will have to enter integer, if wrong, generate new numbers
+  useEffect(() => {
+    if (
+      pattern.resultFour ===
+      (pattern.firstFour - pattern.secondFour) * pattern.thirdFour
+    ) {
+      // setAnnoyingPuzzleCompleted(true);
+      props.solve();
+      console.log('passed');
+    }
+  }, [pattern]);
+
+  // setTimeout and reset timer if the modal closes
+  useEffect(() => {
+    const annoying = setTimeout(() => {
+      setModalOpen(false);
+    }, 15000);
+    return () => {
+      clearTimeout(annoying);
+    };
+  }, []);
+
+  // onChange will set the value of the fourth result in state with the entered number
+  const handleChange = (event) => {
+    setPattern({ ...pattern, resultFour: Number(event.target.value) });
+    console.log(typeof pattern.resultFour);
+  };
+
   return (
     <div>
-      THIS IS PUZZLE 13
-      <button onClick={props.solve}>SOLVE</button>
+      <Hints puzzlehints={myhints} />
+
+      <Modal isOpen={modalOpen} style={annoyingStyle}>
+        <button onClick={() => setModalOpen(false)}>Close Puzzle</button>
+        <p>
+          Determine the fourth sequence to deactivate the puzzle and continue
+          your escape...
+        </p>
+        <p>{status}</p>
+        <div id="game-div-boba">
+          <div className="game-board">
+            <div className="box white"></div>
+            <div className="box">{pattern.firstOne}</div>
+            <div className="box white"></div>
+            <div className="box left-triangle"></div>
+            <div className="box">{pattern.resultOne}</div>
+            <div className="box right-triangle"></div>
+            <div className="box">{pattern.secondOne}</div>
+            <div className="box"></div>
+            <div className="box">{pattern.thirdOne}</div>
+          </div>
+          <div className="game-board">
+            <div className="box white"></div>
+            <div className="box">{pattern.firstTwo}</div>
+            <div className="box white"></div>
+            <div className="box left-triangle"></div>
+            <div className="box">{pattern.resultTwo}</div>
+            <div className="box right-triangle"></div>
+            <div className="box">{pattern.secondTwo}</div>
+            <div className="box"></div>
+            <div className="box">{pattern.thirdTwo}</div>
+          </div>
+          <div className="game-board">
+            <div className="box white"></div>
+            <div className="box">{pattern.firstThree}</div>
+            <div className="box white"></div>
+            <div className="box left-triangle"></div>
+            <div className="box">{pattern.resultThree}</div>
+            <div className="box right-triangle"></div>
+            <div className="box">{pattern.secondThree}</div>
+            <div className="box"></div>
+            <div className="box">{pattern.thirdThree}</div>
+          </div>
+          <div className="game-board">
+            <div className="box white"></div>
+            <div className="box">{pattern.firstFour}</div>
+            <div className="box white"></div>
+            <div className="box left-triangle"></div>
+            <div className="box">
+              <input
+                style={{
+                  width: '42px',
+                  height: '43px',
+                  background: '#444',
+                  borderColor: 'transparent',
+                  color: '#AAA',
+                  fontSize: '15px',
+                }}
+                type="string"
+                value={pattern.resultFour}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="box right-triangle"></div>
+            <div className="box">{pattern.secondFour}</div>
+            <div className="box"></div>
+            <div className="box">{pattern.thirdFour}</div>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };
@@ -581,17 +731,93 @@ export const Puzzle13 = (props) => {
 export const Puzzle14 = (props) => {
   return (
     <div>
-      THIS IS PUZZLE 14
-      <button onClick={props.solve}>SOLVE</button>
+      <TilePuzzle solve={props.solve} />{' '}
+      {/* {!props.demo ? <button onClick={() => props.solve()}>SOLVE</button> : ''} */}
     </div>
   );
 };
 
 export const Puzzle15 = (props) => {
+  const [puzzle, setPuzzle] = useState({
+    one: false,
+    two: false,
+    three: false,
+    four: false,
+    five: false,
+    six: false,
+  });
+  useEffect(() => {
+    if (
+      puzzle.one &&
+      puzzle.two &&
+      puzzle.three &&
+      puzzle.four &&
+      puzzle.five &&
+      puzzle.six
+    ) {
+      props.solve();
+    }
+  }, [puzzle]);
+
   return (
-    <div>
-      THIS IS PUZZLE 15
-      <button onClick={props.solve}>SOLVE</button>
+    <div id="lever-board">
+      <div id="lever-stack">
+        <p id="lock">{puzzle.one === false ? 'Locked' : 'Unlocked'}</p>
+        <button
+          className="leverButton"
+          onClick={() =>
+            setPuzzle({ ...puzzle, one: !puzzle.one, two: !puzzle.two })
+          }
+        ></button>{' '}
+      </div>
+      <div id="lever-stack">
+        <p id="lock">{puzzle.two === false ? 'Locked' : 'Unlocked'}</p>
+        <button
+          className="leverButton"
+          onClick={() =>
+            setPuzzle({
+              ...puzzle,
+              two: !puzzle.two,
+              three: !puzzle.three,
+              four: !puzzle.four,
+            })
+          }
+        ></button>{' '}
+      </div>
+      <div id="lever-stack">
+        <p id="lock">{puzzle.three === false ? 'Locked' : 'Unlocked'}</p>
+        <button
+          className="leverButton"
+          onClick={() =>
+            setPuzzle({ ...puzzle, one: !puzzle.one, two: !puzzle.two })
+          }
+        ></button>{' '}
+      </div>
+      <div id="lever-stack">
+        <p id="lock">{puzzle.four === false ? 'Locked' : 'Unlocked'}</p>
+        <button
+          className="leverButton"
+          onClick={() =>
+            setPuzzle({ ...puzzle, one: !puzzle.one, five: !puzzle.five })
+          }
+        ></button>{' '}
+      </div>
+      <div id="lever-stack">
+        <p id="lock">{puzzle.five === false ? 'Locked' : 'Unlocked'}</p>
+        <button
+          className="leverButton"
+          onClick={() => setPuzzle({ ...puzzle, six: !puzzle.six })}
+        ></button>{' '}
+      </div>
+      <div id="lever-stack">
+        <p id="lock">{puzzle.six === false ? 'Locked' : 'Unlocked'}</p>
+        <button
+          className="leverButton"
+          onClick={() =>
+            setPuzzle({ ...puzzle, one: !puzzle.one, six: !puzzle.six })
+          }
+        ></button>{' '}
+      </div>
     </div>
   );
 };

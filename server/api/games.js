@@ -43,10 +43,25 @@ router.get('/:gameId/:roomId', async (req, res, next) => {
       where: { gameId: req.params.gameId, id: req.params.roomId },
       include: [Puzzle],
     });
-    console.log(room, 'room');
     res.send(room);
   } catch (ex) {
     next(ex);
+  }
+});
+
+// route to update game timer in custom game
+router.put('/:gameId', async (req, res, next) => {
+  try {
+    let game = await Game.findOne({
+      where: {
+        id: req.params.gameId,
+      },
+      include: { model: Room, include: [Puzzle] },
+    });
+    await game.update({ countdown: req.body.time })
+    res.send(game);
+  } catch (er) {
+    next(er);
   }
 });
 

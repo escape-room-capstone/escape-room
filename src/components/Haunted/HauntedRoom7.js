@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Stage, Layer, Image } from 'react-konva';
-
+import { Burger } from '../Burger';
 //react modal
 import Modal from 'react-modal';
 
@@ -9,9 +9,8 @@ import { componentMapping } from '../Puzzles/puzzles';
 
 import useImage from 'use-image';
 
-//import clue components - hard-coded
-// import { Room7Clue1, Room7Clue2, Room7Clue3 } from './Clues';
-
+import { fetchGame, updateTimer } from '../../store/game';
+import GameTimer from '../../utils/GameTimer';
 //css
 import '../../../public/css/HauntedRoom.css';
 
@@ -32,9 +31,9 @@ const Owl = (props) => {
     <Image
       onClick={props.show}
       onMouseOver={props.illuminate}
-      height={100}
-      width={70}
-      x={425}
+      height={90}
+      width={60}
+      x={250}
       y={100}
       opacity={props.visibile ? 1 : 0}
       image={image}
@@ -47,8 +46,10 @@ const Wolf = (props) => {
     <Image
       onClick={props.show}
       onMouseOver={props.illuminate}
-      x={900}
-      y={250}
+      x={650}
+      y={180}
+      height={165}
+      width={130}
       opacity={props.visibile ? 1 : 0}
       image={image}
     />
@@ -78,8 +79,23 @@ const _HauntedRoom7 = (props) => {
   };
 
   const [room, setRoom] = useState({ clues: roomClues, showModal: false });
-  //this is now coming from DB and is set in state and mapped to props
-  const { puzzles } = props;
+  const { puzzles } = props.game;
+  const { gameId } = props.match.params;
+  const [roomSolved, setRoomSolved] = useState(false);
+  const { timer, countdown } = props.game;
+
+  useEffect(() => {
+    async function fetchGame() {
+      await props.getGame(gameId);
+    }
+    fetchGame();
+  }, []);
+  useEffect(() => {
+    if (Object.keys(room.clues).every((key) => room.clues[key].solved)) {
+      console.log('every clue solved');
+      setRoomSolved(true);
+    }
+  }, [room]);
   console.log(puzzles, 'puzzles');
   //dynamically rendering components based on which puzzles are in the array from the DB
   const Puzzle1 = (props) => {
@@ -94,15 +110,12 @@ const _HauntedRoom7 = (props) => {
     const Component = componentMapping[puzzles[8].name];
     return <Component {...props} />;
   };
-  useEffect(() => {
-    if (
-      room.clues.one.solved &&
-      room.clues.two.solved &&
-      room.clues.three.solved
-    ) {
-      props.history.push('/haunted/1/room8');
-    }
-  }, [room]);
+  const saveCountdown = async (time) => {
+    console.log(gameId, 'gameId');
+    await props.saveTimer(gameId, time);
+    props.history.push(`/haunted/${gameId}/room8/`);
+  };
+
   const [itemsVisible, setItemsVisible] = useState({
     frog: false,
     wolf: false,
@@ -146,6 +159,16 @@ const _HauntedRoom7 = (props) => {
   };
   return (
     <div className="game-room">
+      <Burger {...props} />
+      <div className="game-timer">
+        <GameTimer
+          timer={timer}
+          countdown={countdown}
+          timerToggle={true}
+          roomSolved={roomSolved}
+          saveCountdown={(time) => saveCountdown(time)}
+        />
+      </div>
       <div className="narrative">
         <TypeWriterEffect
           textStyle={{ fontFamily: 'Red Hat Display' }}
@@ -156,18 +179,35 @@ const _HauntedRoom7 = (props) => {
           typeSpeed={70}
         />
       </div>
+      <div id="lock-images">
+        {Object.keys(room.clues).map((key, idx) => (
+          <div key={idx}>
+            <img
+              height="40px"
+              width="40px"
+              src={
+                room.clues[key]
+                  ? room.clues[key].solved
+                    ? '/Images/check.png'
+                    : '/Images/lock.png'
+                  : 'hello'
+              }
+            />
+          </div>
+        ))}
+      </div>
       <Stage
         onClick={(e) => {
           console.log(e.evt.layerX, 'layerX position');
           console.log(e.evt.layerY), 'layerY position)';
         }}
-        height={700}
+        height={559}
         align="center"
-        width={1200}
+        width={1000}
       >
         <Layer>
           <Forest />
-          <Lock
+          {/* <Lock
             showClue={() => show('one')}
             solved={room.clues.one.solved}
             x={975}
@@ -184,7 +224,7 @@ const _HauntedRoom7 = (props) => {
             solved={room.clues.three.solved}
             x={1075}
             y={50}
-          />
+          /> */}
           <Owl
             show={() => show('one')}
             visibile={itemsVisible.owl}
@@ -230,10 +270,13 @@ const _HauntedRoom7 = (props) => {
     </div>
   );
 };
-
-const mapState = (state) => {
-  const { puzzles } = state.game;
-  return { puzzles };
+const mapDispatch = (dispatch) => {
+  return {
+    getGame: (gameId) => dispatch(fetchGame(gameId)),
+    saveTimer: (gameId, time) => dispatch(updateTimer(gameId, time)),
+  };
 };
-
-export const HauntedRoom7 = connect(mapState)(_HauntedRoom7);
+export const HauntedRoom7 = connect(
+  (state) => state,
+  mapDispatch
+)(_HauntedRoom7);

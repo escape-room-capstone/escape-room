@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { Burger } from '../Burger';
 //sound effect hook and sound
 import useSound from 'use-sound';
 // import { dooropen } from '../../sounds/opendoor.mp3';
@@ -7,6 +9,8 @@ import { Stage, Layer, Image } from 'react-konva';
 
 //react modal
 import Modal from 'react-modal';
+
+import { updateTimer } from '../../store/game';
 
 //react-router
 import { Redirect, Link } from 'react-router-dom';
@@ -18,10 +22,9 @@ import '../../../public/css/HauntedRoom.css';
 
 import TypeWriterEffect from 'react-typewriter-effect';
 import { Lock } from './HauntedRoom2';
-//clues
 
-//custom modal styles
-import { customStyles } from '../../utils/helpers';
+//game timer
+import GameTimer from '../../utils/GameTimer';
 
 //background image
 const ForestDoor = () => {
@@ -38,10 +41,10 @@ const Key = (props) => {
       onDragEnd={(e) => {
         console.log(e.target.x(), e.target.y(), 'e.target.x( + y)');
         if (
-          e.target.x() >= 710 &&
-          e.target.x() <= 759 &&
-          e.target.y() >= 276 &&
-          e.target.y() <= 307
+          e.target.x() >= 440 &&
+          e.target.x() <= 483 &&
+          e.target.y() >= 217 &&
+          e.target.y() <= 240
         ) {
           console.log('success');
           props.unlock();
@@ -49,58 +52,40 @@ const Key = (props) => {
       }}
       draggable={true}
       x={150}
-      y={530}
+      y={400}
       opacity={props.locked ? 1 : 0}
       image={image}
     />
   );
 };
-export const HauntedRoom6 = (props) => {
+const _HauntedRoom6 = (props) => {
+  const saveCountdown = async (time) => {
+    await props.saveTimer(gameId, time); // to persistently reset timer here during testing, change to 'time = 1000'
+    props.history.push(`/haunted/${gameId}/room7`);
+  };
   const roomClues = {
     one: { solved: false, show: false },
   };
 
   const [room, setRoom] = useState({ clues: roomClues, showModal: false });
   const [locked, setLocked] = useState(true);
-  const [advance, setAdvance] = useState(false);
-  //   const [play] = useSound(dooropen);
-  useEffect(() => {
-    if (locked === false) props.history.push('/haunted/1/room7');
-  }, [locked]);
+  const [roomSolved, setRoomSolved] = useState(false);
+  const { gameId } = props.match.params;
 
-  //helper functions
-  const show = (clue) => {
-    setRoom((prevRoom) => {
-      return {
-        ...prevRoom,
-        showModal: true,
-        clues: {
-          ...prevRoom.clues,
-          [clue]: {
-            ...prevRoom.clues[clue],
-            show: true,
-          },
-        },
-      };
-    });
-  };
-  const setSolved = (clue) => {
-    setRoom((prevRoom) => {
-      return {
-        ...prevRoom,
-        showModal: false,
-        clues: {
-          ...prevRoom.clues,
-          [clue]: {
-            show: false,
-            solved: true,
-          },
-        },
-      };
-    });
-  };
+  const { timer, countdown } = props.game;
+
   return (
     <div className="game-room">
+      <Burger {...props} />
+      <div className="game-timer">
+        <GameTimer
+          timer={timer}
+          countdown={countdown}
+          timerToggle={true}
+          roomSolved={roomSolved}
+          saveCountdown={(time) => saveCountdown(time)}
+        />
+      </div>
       <div className="narrative">
         <TypeWriterEffect
           textStyle={{ fontFamily: 'Red Hat Display' }}
@@ -110,32 +95,51 @@ export const HauntedRoom6 = (props) => {
           text=""
           typeSpeed={70}
         />
+        <div id="lock-images">
+          <img
+            height="40px"
+            width="40px"
+            src={locked ? '/Images/lock.png' : '/Images/check.png'}
+          />
+        </div>
       </div>
       <Stage
         onClick={(e) => {
           console.log(e.evt.layerX, 'layerX position');
           console.log(e.evt.layerY), 'layerY position)';
         }}
-        height={700}
+        height={559}
         align="center"
-        width={1200}
+        width={1000}
       >
         <Layer>
           <ForestDoor />
           <Key
             locked={locked}
             unlock={() => {
-              setLocked(false);
+              setRoomSolved(true);
             }}
           />
-          <Lock
+          {/* <Lock
             showClue={() => show('one')}
             solved={room.clues.one.solved}
-            x={1075}
+            x={500}
             y={50}
-          />
+          /> */}
         </Layer>
       </Stage>
     </div>
   );
 };
+
+const mapDispatch = (dispatch) => {
+  return {
+    getGame: (gameId) => dispatch(fetchGame(gameId)),
+    saveTimer: (gameId, time) => dispatch(updateTimer(gameId, time)),
+  };
+};
+
+export const HauntedRoom6 = connect(
+  (state) => state,
+  mapDispatch
+)(_HauntedRoom6);

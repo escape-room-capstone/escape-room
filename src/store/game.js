@@ -1,35 +1,34 @@
 import axios from 'axios';
 
-//action types
+// ** ACTION TYPES **
 const SET_GAME = 'SET_GAME';
-const SET_CUSTOM_GAME = 'SET_CUSTOM_GAME'
+const SET_CUSTOM_GAME = 'SET_CUSTOM_GAME';
 // const CREATE_GAME = 'CREATE_GAME';
 // const SET_USER_GAME = 'SET_USER_GAME';
 
-//action creators
+// ** ACTION CREATORS **
 const setGame = (game) => ({ type: SET_GAME, game });
-const setCustomGame = (game) => ({ type : SET_CUSTOM_GAME, game })
+const setCustomGame = (game) => ({ type: SET_CUSTOM_GAME, game });
 // const setUserGame = (userGame) => ({ type: SET_USER_GAME, userGame });
 
-//thunk creators
-
-//for fetching a default game with no associated userId
+// ** THUNKS **
+// fetch default game (no associated userId)
 export const fetchGame = (gameId) => {
   return async (dispatch) => {
-    console.log("GETTING GAME");
     const game = (await axios.get(`/api/games/${gameId}`)).data;
     dispatch(setGame(game));
   };
 };
-
+// fetch custom game (with userId)
 export const fetchCustomGame = (userId, gameId) => {
   return async (dispatch) => {
-  const game = (await axios.get(`/api/users/${userId}/games/custom/${gameId}`)).data;
-  dispatch(setCustomGame(game));
-    };
+    const game = (
+      await axios.get(`/api/users/${userId}/games/custom/${gameId}`)
+    ).data;
+    dispatch(setCustomGame(game));
+  };
 };
-
-//customize game in style of default game - haunted, bank, riddles, etc
+// create custom game using default game structure
 export const createGame = (
   userId,
   theme,
@@ -37,7 +36,8 @@ export const createGame = (
   numPuzzles,
   title,
   description,
-  puzzleArray
+  puzzleArray,
+  timer
 ) => {
   return async (dispatch) => {
     const game = (
@@ -48,13 +48,13 @@ export const createGame = (
         title,
         puzzleArray,
         description,
+        timer,
       })
     ).data;
     dispatch(setGame(game));
   };
 };
-
-//fetch default-style user game
+// fetch default-style user game
 export const fetchUserGame = (userId, gameId) => {
   return async (dispatch) => {
     let userGame = (await axios.get(`/api/users/${userId}/games/${gameId}`, {}))
@@ -62,11 +62,19 @@ export const fetchUserGame = (userId, gameId) => {
     dispatch(setGame(userGame));
   };
 };
+// update game timer
+export const updateTimer = (gameId, time) => {
+  console.log(time, 'time');
+  return async (dispatch) => {
+    const game = (await axios.put(`/api/games/${gameId}`, { time })).data;
+    dispatch(setGame(game));
+  };
+};
 
-//reducer
+// ** GAME REDUCER **
 export const gameReducer = (state = {}, action) => {
   if (action.type === SET_CUSTOM_GAME) {
-    return action.game
+    return action.game;
   }
   if (action.type === SET_GAME) {
     return action.game;

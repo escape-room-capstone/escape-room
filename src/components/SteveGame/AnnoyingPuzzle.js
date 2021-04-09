@@ -63,7 +63,7 @@ export default function AnnoyingPuzzle({ setAnnoyingPuzzleCompleted, setAnnoying
 
   return (
     <div>
-      <p>{status}</p>
+      <p style={{ fontSize: '40px', color: 'white' }}>{status}</p>
       <div id="game-div-boba">
       <div className='game-board'>
         <div className='box white'></div>

@@ -62,9 +62,8 @@ export const fetchUserGame = (userId, gameId) => {
     dispatch(setGame(userGame));
   };
 };
-// update game timer
+// update or rest game timer
 export const updateTimer = (gameId, time) => {
-  console.log(time, 'time');
   return async (dispatch) => {
     const game = (await axios.put(`/api/games/${gameId}`, { time })).data;
     dispatch(setGame(game));

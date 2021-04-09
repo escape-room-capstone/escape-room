@@ -31,7 +31,7 @@ const Game = db.define('game', {
   timer: INTEGER,
   countdown: {
     type: INTEGER,
-    defaultValue: 0,
+    defaultValue: -1,
   },
 });
 

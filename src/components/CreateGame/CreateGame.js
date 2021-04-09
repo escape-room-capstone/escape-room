@@ -162,6 +162,7 @@ const CreateGame = (props) => {
           Set initial timer for the game :
           <input
             name="minutes"
+            min={0}
             value={Math.floor(timer / 60)}
             style={{ width: '50px', marginLeft: '10px' }}
             onChange={(e) => convertAndSetTime(e)}
@@ -170,6 +171,7 @@ const CreateGame = (props) => {
           minute(s)
           <input
             name="seconds"
+            min={0}
             value={timer - Math.floor(timer / 60) * 60}
             style={{ width: '50px', marginLeft: '10px' }}
             onChange={(e) => convertAndSetTime(e)}

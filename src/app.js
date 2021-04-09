@@ -47,6 +47,8 @@ import SingleRoom from './components/DynamicGameSrc/SingleRoom';
 
 import { Landing } from './components/Landing';
 import EditSingleRoom from './components/CreateGame/EditSingleRoom';
+import { VictoryPage }  from './components/VictoryPage'
+
 
 const App = () => {
   return (
@@ -100,6 +102,8 @@ const App = () => {
       {/* <Route exact path="/gameintro/:id" component={GameIntro} /> */}
 
       <Route exact path="/games/:gameId/:roomId/:idx" component={CustomGame} />
+      <Route exact path="/games/:gameId/victory" component={VictoryPage} />
+
 
       {/* <Redirect to="/" /> */}
     </Router>

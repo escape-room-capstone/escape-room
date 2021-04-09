@@ -132,10 +132,12 @@ const _CustomGame = (props) => {
         const nextRoomId = sortedRoomsArray[nextRoomIdx].id;
         props.history.push(`/games/${gameId}/${nextRoomId}/${nextRoomIdx}`);
       } else {
-        props.history.push('/victorypage');
+        props.history.push(`/games/${gameId}/victory`);
       }
     }
   };
+
+  console.log(room.imgSrc)
 
   // render room if the puzzles were mounted and room is open
   if (!puzzlesReady) {
@@ -144,8 +146,6 @@ const _CustomGame = (props) => {
   if (!roomOpen) {
     return <p>room not open</p>;
   }
-
-  console.log(roomStatus, 'roomStatus');
   return (
     <div id="custom-game">
       <Burger {...props} />
@@ -156,6 +156,8 @@ const _CustomGame = (props) => {
       <div id="game-tools">
         <div id="game-timer">
           <GameTimer
+            gameId={gameId}
+            history={props.history}
             timer={timer}
             countdown={countdown}
             roomSolved={roomSolved}
@@ -274,6 +276,7 @@ const _CustomGame = (props) => {
         </div>
       </div>
       <button onClick={() => handleNextRoom()}>[Dev] Next room</button>
+      <button onClick={() => props.history.push(`/games/${gameId}/fail`)}>[test] load fail page</button>
     </div>
   );
 };

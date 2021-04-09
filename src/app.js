@@ -48,6 +48,11 @@ import SingleRoom from './components/DynamicGameSrc/SingleRoom';
 import { Landing } from './components/Landing';
 import EditSingleRoom from './components/CreateGame/EditSingleRoom';
 
+// victory and fail components
+import { VictoryPage } from './components/VictoryPage'
+import { FailPage } from './components/FailPage'
+
+
 const App = () => {
   return (
     <Router history={history}>
@@ -99,7 +104,12 @@ const App = () => {
       <Route exact path="/dg" component={SingleRoom} />
       {/* <Route exact path="/gameintro/:id" component={GameIntro} /> */}
 
+      {/* custome game route */}
       <Route exact path="/games/:gameId/:roomId/:idx" component={CustomGame} />
+
+      {/* victory and fail routes */}
+      <Route exact path="/games/:gameId/victory" component={VictoryPage} />
+      <Route exact path="/games/:gameId/fail" component={FailPage} />
 
       {/* <Redirect to="/" /> */}
     </Router>

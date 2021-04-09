@@ -25,7 +25,7 @@ export const Hints = (props) => {
                 <button onClick={(e) => toggleHint(e, idx)}>
                   {hint.show ? 'HIDE' : 'SHOW'}
                 </button>
-                <span className={hint.show ? 'selected' : ''}>{hint.text}</span>
+                <span style={{ backgroundColor: "black", color: "white" }} className={hint.show ? 'selected' : ''}>{hint.text}</span>
               </p>
             </div>
           ))

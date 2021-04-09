@@ -44,58 +44,31 @@ export default function BobaFett() {
   const [caesarCipherCompleted, setCaesarCipherCompleted] = useState(false);
 
   return (
-    <div className="boba-container">
-      <div className="boba-background">
-        <button
-          className="boba-lever-button"
-          onClick={() => setLeverModalOpen(true)}
-        ></button>
-        <Modal isOpen={leverModalOpen}>
+    <div className='boba-container'>
+      <div className='boba-background'>
+        <button className='boba-lever-button' onClick={() => setLeverModalOpen(true)}></button>
+        <Modal isOpen={leverModalOpen} overlayClassName="OverlayHome1" className="modal">
           <button onClick={() => setLeverModalOpen(false)}>Close Puzzle</button>
-          <LeverPuzzle setLeverPuzzleCompleted={setLeverPuzzleCompleted} />
+          <p className="status" style={{ color: "white" }}>Are these... holocrons? How did he... nevermind. The Jedi replaced your ship controls with locked holocrons. Open them all to regain system access.</p>
+          <LeverPuzzle setLeverPuzzleCompleted={setLeverPuzzleCompleted}/>
         </Modal>
-        <button
-          className="boba-annoying-button"
-          onClick={() => setAnnoyingModalOpen(true)}
-        ></button>
-        <Modal isOpen={annoyingModalOpen} style={annoyingStyle}>
-          <button onClick={() => setAnnoyingModalOpen(false)}>
-            Close Puzzle
-          </button>
-          <p>
-            This Jedi is crafty. Determine the fourth sequence to deactivate
-            this portion of the self-destruct protocol.
-          </p>
-          <AnnoyingPuzzle
-            setAnnoyingPuzzleCompleted={setAnnoyingPuzzleCompleted}
-            setAnnoyingModalOpen={setAnnoyingModalOpen}
-          />
+        <button className='boba-annoying-button' onClick={() => setAnnoyingModalOpen(true)}></button>
+        <Modal isOpen={annoyingModalOpen} overlayClassName="OverlayHome4" className="modal">
+          <button onClick={() => setAnnoyingModalOpen(false)}>Close Puzzle</button>
+          <p className="status" style={{ fontSize: '40px', color: 'white' }}>This Jedi is crafty. Determine the fourth sequence to deactivate this portion of the self-destruct protocol.</p>
+          <AnnoyingPuzzle setAnnoyingPuzzleCompleted={setAnnoyingPuzzleCompleted} setAnnoyingModalOpen={setAnnoyingModalOpen}/>
         </Modal>
-        <button
-          className="boba-magic-square-button"
-          onClick={() => setMagicSquareModalOpen(true)}
-        ></button>
-        <Modal isOpen={magicSquareModalOpen}>
-          <button onClick={() => setMagicSquareModalOpen(false)}>
-            Close Puzzle
-          </button>
-          <MagicSquarePuzzle
-            setMagicSquarePuzzleCompleted={setMagicSquarePuzzleCompleted}
-          />
+        <button className='boba-magic-square-button' onClick={() => setMagicSquareModalOpen(true)}></button>
+        <Modal isOpen={magicSquareModalOpen} overlayClassName="OverlayHome3" className="modal">
+          <button onClick={() => setMagicSquareModalOpen(false)}>Close Puzzle</button>
+          <p className="status">Now to make sure that the fuel system is working properly...</p>
+          <MagicSquarePuzzle setMagicSquarePuzzleCompleted={setMagicSquarePuzzleCompleted}/>
         </Modal>
-        <button
-          className="boba-caesar-button"
-          onClick={() => setCaesarCipherModalOpen(true)}
-        ></button>
-        <Modal isOpen={caesarCipherModalOpen}>
-          <button onClick={() => setCaesarCipherModalOpen(false)}>
-            Close Puzzle
-          </button>
-          <p>
-            Ugh. The Jedi encrypted the password to regain system access. Get
-            thinking, FAST.
-          </p>
-          <CaesarCipher setCaesarCipherCompleted={setCaesarCipherCompleted} />
+        <button className='boba-caesar-button' onClick={() => setCaesarCipherModalOpen(true)}></button>
+        <Modal isOpen={caesarCipherModalOpen} overlayClassName="OverlayHome2" className="modal">
+          <button onClick={() => setCaesarCipherModalOpen(false)}>Close Puzzle</button>
+          <p className="status">Ugh. The Jedi encrypted the password to regain shield system access. Get thinking, FAST.</p>
+          <CaesarCipher setCaesarCipherCompleted={setCaesarCipherCompleted}/>
         </Modal>
       </div>
     </div>

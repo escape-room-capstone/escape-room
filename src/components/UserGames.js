@@ -44,9 +44,11 @@ const _UserGames = (props) => {
             <p>Description: {game.description}</p>
             <p>Created On {`${formatDate(new Date(game.createdAt))}`}</p>
             <div className="play-button">
-              <Link to={`/games/${game.id}/${sortGameRooms(game.rooms)}/0`}>
+              {/* <Link to={`/games/${game.id}/${sortGameRooms(game.rooms)}/0`}>
                 <button className="play">PLAY</button>
-              </Link>
+              </Link> */}
+              <button className="play"
+                onClick={() => props.history.push(`/games/${gameId}/${sortGameRooms(game.rooms)}/0`)}>PLAY</button>
             </div>
           </div>
         ))}

@@ -136,8 +136,64 @@ const CreateGame = (props) => {
   };
   console.log(puzzleArray, 'puzzleArray');
   return (
-    <>
+
       <Navbar />
+
+    <div id="create-game">
+      <h1 style={{ color: '#e6e6e6' }}> Theme : {theme.name} </h1>
+      <div>
+        <label>
+          Title of game :
+          <input
+            style={{ width: '200px', marginLeft: '10px' }}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            type="text"
+          />
+        </label>
+        <label>
+          Description :
+          <input
+            style={{ width: '200px', marginLeft: '10px' }}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            type="text"
+          />
+        </label>
+      </div>
+      <div>
+        <label>
+          Set initial timer for the game :
+          <input
+            name="minutes"
+            min={0}
+            value={Math.floor(timer / 60)}
+            style={{ width: '50px', marginLeft: '10px' }}
+            onChange={(e) => convertAndSetTime(e)}
+            type="number"
+          />
+          minute(s)
+          <input
+            name="seconds"
+            min={0}
+            value={timer - Math.floor(timer / 60) * 60}
+            style={{ width: '50px', marginLeft: '10px' }}
+            onChange={(e) => convertAndSetTime(e)}
+            type="number"
+          />
+          second(s)
+        </label>
+      </div>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        <h3>Select all the puzzles you would like in your game...</h3>
+
 
       <div id="create-game">
         <h1 style={{ color: '#e6e6e6' }}> Theme : {theme.name} </h1>

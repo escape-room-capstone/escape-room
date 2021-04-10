@@ -16,10 +16,12 @@ const _FailPage = (props) => {
 
     // sort the rooms in order using the room['number']
     const sortGameRooms = (gameRooms) => {
-        const sorted = gameRooms.sort((roomA, roomB) => {
-            return roomA.number - roomB.number;
-        });
-        return sorted;
+        if (rooms) {
+            const sorted = gameRooms.sort((roomA, roomB) => {
+                return roomA.number - roomB.number;
+            });
+            return sorted;
+        }
     };
 
     // end the game

@@ -59,7 +59,7 @@ const _FailPage = (props) => {
           borderRadius: '20px',
           position: 'relative',
           //   border: '5px solid black',
-          boxShadow: '1px 1px 12px 4px beige',
+          boxShadow: '1px 1px 12px 6px deepskyblue',
         }}
       >
         <button name="restart" onClick={(e) => handleEndGame(e)}>

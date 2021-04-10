@@ -51,7 +51,7 @@ const _VictoryPage = (props) => {
           borderRadius: '20px',
           margin: '0 auto',
           position: 'relative',
-          boxShadow: '1px 1px 12px 4px peachpuff',
+          boxShadow: '1px 1px 12px 6px deepskyblue',
         }}
       >
         <p>

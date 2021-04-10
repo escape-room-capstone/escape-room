@@ -217,6 +217,9 @@ const _CustomGame = (props) => {
         >
           {Object.keys(roomStatus).map((puzzleNum, idx) => (
             <div
+              onMouseOver={(e) => {
+                e.target.style.cursor = 'pointer';
+              }}
               onClick={() => show(puzzleNum)}
               style={{
                 top: `${

@@ -14,8 +14,9 @@
 }
 
 #victory-page {
+  height: 100vh;
   padding: 5rem;
-  background-image: url('../Images/blackbricks.jpeg');
+  background-image: url('../Images/brickalley.jpg');
   background-size: cover;
 }
 #victory-body button {

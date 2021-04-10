@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import '../../../public/css/HauntedRoom.css';
 import GameTimer from '../../utils/GameTimer';
 import { updateTimer } from '../../store/game';
+import { Burger } from '../Burger';
 
 const DarkRoom = (props) => {
   const [image] = useImage('/Images/darkroom.jpg');

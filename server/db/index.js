@@ -40,7 +40,7 @@ const syncAndSeed = async () => {
     theme: 'haunted',
     numPuzzles: 9,
     public: true,
-    timer: 600,
+    timer: 120,
     description: `Seeking shelter in a rainstorm after your car breaks down, you find yourself trapped in a haunted house. Solve the puzzles to escape.`,
     imgSrc: '/Images/hauntedhousefinal.jpg',
   });
@@ -77,10 +77,10 @@ const syncAndSeed = async () => {
   //seed puzzles for default Haunted Game/riddlezGame
   await Promise.all([
     GamePuzzles.create({ gameId: hauntedId, puzzleId: 1 }),
-    GamePuzzles.create({ gameId: hauntedId, puzzleId: 2 }),
-    GamePuzzles.create({ gameId: hauntedId, puzzleId: 3 }),
-    GamePuzzles.create({ gameId: hauntedId, puzzleId: 4 }),
-    GamePuzzles.create({ gameId: hauntedId, puzzleId: 5 }),
+    GamePuzzles.create({ gameId: hauntedId, puzzleId: 14 }),
+    GamePuzzles.create({ gameId: hauntedId, puzzleId: 15 }),
+    GamePuzzles.create({ gameId: hauntedId, puzzleId: 13 }),
+    GamePuzzles.create({ gameId: hauntedId, puzzleId: 12 }),
     GamePuzzles.create({ gameId: hauntedId, puzzleId: 6 }),
     GamePuzzles.create({ gameId: hauntedId, puzzleId: 7 }),
     GamePuzzles.create({ gameId: hauntedId, puzzleId: 8 }),

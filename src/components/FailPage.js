@@ -4,39 +4,42 @@ import { fetchGame, updateTimer } from '../store/game';
 import { Burger } from './Burger';
 
 const _FailPage = (props) => {
-  // pick up data from props
-  let { gameId } = props.match.params;
-  const { game } = props;
-  const { rooms } = game;
 
   // load game data when component mounts
   useEffect(() => {
     props.setGame(gameId);
   }, [gameId]);
 
-  // sort the rooms in order using the room['number']
-  const sortGameRooms = (gameRooms) => {
-    const gameRoomsSorted = gameRooms.sort((roomA, roomB) => {
-      return roomA.number - roomB.number;
-    });
-    return gameRoomsSorted[0].id;
-  };
+     // pick up data from props
+    let { gameId } = props.match.params;
+    const { game } = props;
+    const { rooms } = game;
+    
 
-  // end the game
-  const handleEndGame = async (e) => {
-    // reset game timer ('-1' is the default value of the countdown when game is created)
-    const time = -1;
-    await props.resetTimer(gameId, time);
+    // sort the rooms in order using the room['number']
+    const sortGameRooms = (gameRooms) => {
+        const sorted = gameRooms.sort((roomA, roomB) => {
+            return roomA.number - roomB.number;
+        });
+        return sorted;
+    };
 
-    //send user home or restart game -- if restarting, go to different url depending on type of game
+    // end the game
+    const handleEndGame = async (e) => {
+        // reset game timer ('-1' is the default value of the countdown when game is created)
+        const time = -1;
+        await props.resetTimer(gameId, time);
+        // sort the rooms
+        const sortedGameRooms = sortGameRooms(rooms)
+            //send user home or restart game -- if restarting, go to different url depending on type of game
     e.target.name === 'restart'
       ? !game.userId
         ? props.history.push(`/${game.theme}/${gameId}`)
         : props.history.push(`/games/${gameId}/${sortGameRooms(rooms)}/0`)
       : props.history.push('/home');
-    // send the user back to homepage or restart the game
-    // e.target.name === 'end' ? props.history.push(`/home`) : props.history.push(`/games/${gameId}/${sortGameRooms(rooms)}/0`);
-  };
+        // send the user back to homepage or restart the game 
+       // e.target.name === 'end' ? props.history.push(`/home`) : props.history.push(`/games/${gameId}/${sortedGameRooms[0].id}/0`);
+    }
 
   // render victory page once the game was loaded
   if (!game) {

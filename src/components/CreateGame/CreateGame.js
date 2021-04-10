@@ -134,7 +134,7 @@ const CreateGame = (props) => {
       setPuzzleArray(puzzleArray.filter((id) => id !== puzzleId));
     }
   };
-  console.log(puzzleArray, 'puzzleArray');
+
   return (
     <>
       <Navbar />

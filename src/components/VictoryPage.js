@@ -50,6 +50,7 @@ const _VictoryPage = (props) => {
           margin: '0 auto',
           position: 'relative',
           border: '5px solid black',
+          boxShadow: '13px 13px 549px #dcbaba',
         }}
       >
         <p>

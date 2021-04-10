@@ -9,6 +9,11 @@
   line-height: 2rem;
 }
 
+#victory-page {
+  padding: 5rem;
+  background-image: url('../Images/blackbricks.jpeg');
+  background-size: cover;
+}
 #victory-body button {
   font-size: 1rem;
   padding: 0.6rem;

@@ -27,13 +27,13 @@ const Homepage = (props) => {
   };
   const { allGames } = props;
   const defaultGames = allGames.filter((game) => !game.userId);
-  console.log(defaultGames, 'defaultgames');
+  // console.log(defaultGames, 'defaultgames');
   //will eventually need a check for if a game is public/private
   const customGames = allGames.filter((game) => game.userId === props.auth.id);
-  console.log(customGames, 'customGames');
+  // console.log(customGames, 'customGames');
   const removeSpaceFromTheme = (title) => {
     const noSpaceTitle = title.split(' ').join('');
-    console.log(noSpaceTitle);
+    // console.log(noSpaceTitle);
     return noSpaceTitle;
   };
 

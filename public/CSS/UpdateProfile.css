@@ -1,0 +1,15 @@
+#accountDiv form {
+  margin: 1rem;
+  font-family: 'Unna', serif;
+  font-size: 1.5rem;
+  padding: 0 1rem 3px 1rem;
+}
+
+#accountUpdate-p {
+  width: 80%;
+  text-align: center;
+}
+
+#accountUpdate-p input {
+  width: 80%;
+}

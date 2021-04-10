@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { puzzleReducer } from '../store/puzzles';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { userReducer } from '../store/users';
+import { singleUserReducer, userReducer } from '../store/users';
 import { gameReducer } from './game';
 import { customGameReducer } from './customGame';
 import { allGamesReducer } from './allGames';
@@ -25,6 +25,7 @@ const rootReducer = combineReducers({
   puzzles: puzzleReducer,
   puzzle: singlePuzzleReducer,
   users: userReducer,
+  user: singleUserReducer,
   game: gameReducer,
   themes: themesReducer,
   theme: themeReducer,
@@ -32,6 +33,7 @@ const rootReducer = combineReducers({
   room: singleRoomReducer,
   customGame: customGameReducer,
   gameUtils: gameUtilsReducer,
+
   auth,
 });
 

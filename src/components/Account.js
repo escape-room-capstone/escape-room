@@ -34,36 +34,37 @@ const Account = (props) => {
     return date;
   };
 
-  console.log('props', props);
+  // console.log('props', props);
 
   //HELPER FUNCTION TO SORT THE ROOMS IN ORDER BY ROOM NUMBER !
-  const sortByRoomNumber = (roomsArray) => {      
-    return (roomsArray
-    ? roomsArray.sort((roomA, roomB) => {
-      return roomA.number - roomB.number;
-    })
-  : []);
-  }
+  const sortByRoomNumber = (roomsArray) => {
+    return roomsArray
+      ? roomsArray.sort((roomA, roomB) => {
+          return roomA.number - roomB.number;
+        })
+      : [];
+  };
 
-
-  const { allGames } = props;    
+  const { allGames } = props;
   const userGames = allGames.filter((game) => game.userId === props.auth.id);
-  console.log('userGames', userGames);
+  // console.log('userGames', userGames);
 
   const themes = props.themes.filter((theme) => theme.userId === null);
-  console.log(themes, 'themes');
+  // console.log(themes, 'themes');
   const userThemes = props.themes.filter(
     (theme) => theme.userId === props.auth.id
   );
+
+  const id = props.auth.id;
   return (
     <div id="account">
       <Navbar />
       <div id="accountDiv">
         <h1 id="heading-with-button">
           My Account{' '}
-          <button id="accountButton" component={Link}>
-            + UPDATE PROFILE
-          </button>
+          <Link to={`/users/${id}/account/updateprofile`}>
+            <button id="accountButton">+ UPDATE PROFILE</button>
+          </Link>
         </h1>
       </div>
       <br />
@@ -87,12 +88,19 @@ const Account = (props) => {
                 >
                   {game.title ? game.title : `Game ${game.id}`}
                 </p>
-                <img className="accountImg" src={sortByRoomNumber(game.rooms)[0].imgSrc} />
+                <img
+                  className="accountImg"
+                  src={sortByRoomNumber(game.rooms)[0].imgSrc}
+                />
                 <p>
                   Created On<br></br>
                   {`${formatDate(new Date(game.createdAt))}`}
                 </p>
-                <Link to={`/games/${game.id}/${sortByRoomNumber(game.rooms)[0].id}/0`}>
+                <Link
+                  to={`/games/${game.id}/${
+                    sortByRoomNumber(game.rooms)[0].id
+                  }/0`}
+                >
                   <button className="play">PLAY</button>
                 </Link>
               </div>

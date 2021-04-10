@@ -67,6 +67,7 @@
   background: linear-gradient(to bottom, #522875 5%, #153473 100%);
   background-color: #522875;
 }
+
 #heading-with-button {
   display: flex;
   justify-content: space-between;

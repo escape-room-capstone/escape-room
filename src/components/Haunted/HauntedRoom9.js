@@ -11,9 +11,9 @@ const Police = (props) => {
 };
 
 const _HauntedRoom9 = (props) => {
-  useEffect(() => {
-    setTimeout(() => props.history.push('/haunted/1/final'), 2000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => props.history.push('/haunted/1/final'), 2000);
+  // }, []);
   return (
     <div className="game-room">
       <div className="narrative">

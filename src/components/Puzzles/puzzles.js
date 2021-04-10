@@ -950,7 +950,9 @@ export const Puzzle15 = (props) => {
   return (
     <div id="lever-board">
       <div id="lever-stack">
-        <p id="lock">{puzzle.one === false ? 'Locked' : 'Unlocked'}</p>
+        <p style={{ color: 'red' }} id="lock">
+          {puzzle.one === false ? 'Locked' : 'Unlocked'}
+        </p>
         <button
           className="leverButton"
           onClick={() =>
@@ -959,7 +961,9 @@ export const Puzzle15 = (props) => {
         ></button>{' '}
       </div>
       <div id="lever-stack">
-        <p id="lock">{puzzle.two === false ? 'Locked' : 'Unlocked'}</p>
+        <p style={{ color: 'red' }} id="lock">
+          {puzzle.two === false ? 'Locked' : 'Unlocked'}
+        </p>
         <button
           className="leverButton"
           onClick={() =>
@@ -973,7 +977,9 @@ export const Puzzle15 = (props) => {
         ></button>{' '}
       </div>
       <div id="lever-stack">
-        <p id="lock">{puzzle.three === false ? 'Locked' : 'Unlocked'}</p>
+        <p style={{ color: 'red' }} id="lock">
+          {puzzle.three === false ? 'Locked' : 'Unlocked'}
+        </p>
         <button
           className="leverButton"
           onClick={() =>
@@ -982,7 +988,9 @@ export const Puzzle15 = (props) => {
         ></button>{' '}
       </div>
       <div id="lever-stack">
-        <p id="lock">{puzzle.four === false ? 'Locked' : 'Unlocked'}</p>
+        <p style={{ color: 'red' }} id="lock">
+          {puzzle.four === false ? 'Locked' : 'Unlocked'}
+        </p>
         <button
           className="leverButton"
           onClick={() =>
@@ -991,14 +999,18 @@ export const Puzzle15 = (props) => {
         ></button>{' '}
       </div>
       <div id="lever-stack">
-        <p id="lock">{puzzle.five === false ? 'Locked' : 'Unlocked'}</p>
+        <p style={{ color: 'red' }} id="lock">
+          {puzzle.five === false ? 'Locked' : 'Unlocked'}
+        </p>
         <button
           className="leverButton"
           onClick={() => setPuzzle({ ...puzzle, six: !puzzle.six })}
         ></button>{' '}
       </div>
       <div id="lever-stack">
-        <p id="lock">{puzzle.six === false ? 'Locked' : 'Unlocked'}</p>
+        <p style={{ color: 'red' }} id="lock">
+          {puzzle.six === false ? 'Locked' : 'Unlocked'}
+        </p>
         <button
           className="leverButton"
           onClick={() =>

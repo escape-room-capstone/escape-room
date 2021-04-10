@@ -16,12 +16,12 @@ export const _HauntedIntro = (props) => {
   useEffect(() => {
     props.getGame(props.gameId);
   }, []);
-  useEffect(() => {
-    setTimeout(
-      () => props.history.push(`/haunted/${props.gameId}/room1`),
-      6000
-    );
-  });
+  // useEffect(() => {
+  //   setTimeout(
+  //     () => props.history.push(`/haunted/${props.gameId}/room1`),
+  //     6000
+  //   );
+  // });
   return (
     <div className="game-room">
       <Burger {...props} />

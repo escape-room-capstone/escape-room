@@ -24,24 +24,28 @@ const _HauntedRoom1 = (props) => {
   return (
     <div className="game-room">
       <Burger {...props} />
-      <div className="narrative intro">
-        <TypeWriterEffect
-          textStyle={{ fontFamily: 'Red Hat Display' }}
-          cursorColor="white"
-          text="You spot a house in the distance..."
-          typeSpeed={80}
-          hideCursorAfterText={true}
-        />
-        <div>
+      <div className="narrative">
+        <p>
+          You spot a house in the distance. You go in...
+          {/* <TypeWriterEffect
+            textStyle={{ fontFamily: 'Red Hat Display' }}
+            cursorColor="white"
+            fontSize="2rem"
+            text="You spot a house in the distance..."
+            typeSpeed={60}
+            hideCursorAfterText={true} */}
+          {/* /> */}
+        </p>
+        {/* <div>
           <TypeWriterEffect
             textStyle={{ fontFamily: 'Red Hat Display' }}
-            startDelay={5000}
+            startDelay={3000}
             cursorColor="white"
             text="You go in."
             typeSpeed={80}
             hideCursorAfterText={true}
           />
-        </div>
+        </div> */}
       </div>
       <Stage
         onClick={(e) => {

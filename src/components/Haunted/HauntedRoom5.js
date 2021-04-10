@@ -13,11 +13,10 @@ import useImage from 'use-image';
 import '../../../public/css/HauntedRoom.css';
 
 // set style for the game timer
-const defaultTimerStyle = { barColor: "#3c15eb", digitColor: 'white' };
+const defaultTimerStyle = { barColor: '#3c15eb', digitColor: 'white' };
 
 import TypeWriterEffect from 'react-typewriter-effect';
 import { componentMapping } from '../Puzzles/puzzles';
-import { Lock } from './HauntedRoom2';
 
 //custom modal styles
 import { customStyles } from '../../utils/helpers';
@@ -107,17 +106,36 @@ const _HauntedRoom5 = (props) => {
   return (
     <div className="game-room">
       <Burger {...props} />
-      <div className="game-timer">
-        <GameTimer
-          gameId={gameId}
-          history={props.history}
-          timer={timer}
-          countdown={countdown}
-          timerToggle={true}
-          roomSolved={roomSolved}
-          saveCountdown={(time) => saveCountdown(time)}
-          styleInput={defaultTimerStyle}
-        />
+      <div id="utils">
+        <div className="game-timer">
+          <GameTimer
+            gameId={gameId}
+            history={props.history}
+            timer={timer}
+            countdown={countdown}
+            timerToggle={true}
+            roomSolved={roomSolved}
+            saveCountdown={(time) => saveCountdown(time)}
+            styleInput={defaultTimerStyle}
+          />
+        </div>
+        <div id="lock-images">
+          {Object.keys(room.clues).map((key, idx) => (
+            <div key={idx}>
+              <img
+                height="40px"
+                width="40px"
+                src={
+                  room.clues[key]
+                    ? room.clues[key].solved
+                      ? '/Images/check.png'
+                      : '/Images/lock.png'
+                    : 'hello'
+                }
+              />
+            </div>
+          ))}
+        </div>
       </div>
       <div className="narrative">
         <TypeWriterEffect
@@ -129,23 +147,7 @@ const _HauntedRoom5 = (props) => {
           typeSpeed={70}
         />
       </div>
-      <div id="lock-images">
-        {Object.keys(room.clues).map((key, idx) => (
-          <div key={idx}>
-            <img
-              height="40px"
-              width="40px"
-              src={
-                room.clues[key]
-                  ? room.clues[key].solved
-                    ? '/Images/check.png'
-                    : '/Images/lock.png'
-                  : 'hello'
-              }
-            />
-          </div>
-        ))}
-      </div>
+
       <Stage
         onClick={(e) => {
           console.log(e.evt.layerX, 'layerX position');
@@ -157,25 +159,6 @@ const _HauntedRoom5 = (props) => {
       >
         <Layer>
           <GhostRoom />
-          {/* <Lock
-            showClue={() => show('one')}
-            solved={room.clues.one.solved}
-            x={975}
-            y={50}
-          />
-          <Lock
-            showClue={() => show('two')}
-            solved={room.clues.two.solved}
-            x={1025}
-            y={50}
-          />
-          <Lock
-            showClue={() => show('three')}
-            solved={room.clues.three.solved}
-            x={1075}
-            y={50}
-          /> */}
-
           <Rect
             onMouseOver={(e) => {
               // style stage container:
@@ -240,7 +223,6 @@ const _HauntedRoom5 = (props) => {
       </Stage>
 
       <Modal style={customStyles} isOpen={room.showModal}>
-        <p>This is a modal. please close it now</p>
         {room.clues.one.show && (
           <div>
             <Puzzle1 solve={() => setSolved('one')} />{' '}
@@ -276,9 +258,14 @@ const _HauntedRoom5 = (props) => {
             })
           }
         >
-          Close the modal
+          Close
         </button>
       </Modal>
+      <div>
+        <button onClick={() => props.history.push(`/haunted/${gameId}/room6`)}>
+          [Dev] next room
+        </button>
+      </div>
     </div>
   );
 };

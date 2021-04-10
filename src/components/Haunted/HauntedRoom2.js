@@ -19,7 +19,7 @@ import GameTimer from '../../utils/GameTimer';
 import Modal from 'react-modal';
 
 // set style for the game timer
-const defaultTimerStyle = { barColor: "#3c15eb", digitColor: 'white' };
+const defaultTimerStyle = { barColor: '#3c15eb', digitColor: 'white' };
 
 //background image
 const HauntedHallway = (props) => {
@@ -90,7 +90,7 @@ const _HauntedRoom2 = (props) => {
   };
   const saveCountdown = async (time) => {
     console.log(gameId, 'gameId');
-    await props.saveTimer(gameId, time); // to persistently reset timer here during testing, change to 'time = 1000'
+    await props.saveTimer(gameId, time);
     props.history.push(`/haunted/${gameId}/room2/success`);
   };
   const roomClues = {
@@ -112,7 +112,6 @@ const _HauntedRoom2 = (props) => {
 
   useEffect(() => {
     if (Object.keys(room.clues).every((key) => room.clues[key].solved)) {
-      console.log('every clue solved');
       setRoomSolved(true);
     }
   }, [room]);
@@ -121,35 +120,43 @@ const _HauntedRoom2 = (props) => {
   return (
     <div className="game-room">
       <Burger {...props} />
-      <div className="game-timer">
-        <GameTimer
-          gameId={gameId}
-          history={props.history}
-          timer={timer}
-          countdown={countdown}
-          timerToggle={true}
-          roomSolved={roomSolved}
-          saveCountdown={(time) => saveCountdown(time)}
-          styleInput={defaultTimerStyle}
-        />
+      <div id="utils">
+        <div className="game-timer">
+          <GameTimer
+            gameId={gameId}
+            history={props.history}
+            timer={timer}
+            countdown={countdown}
+            timerToggle={true}
+            roomSolved={roomSolved}
+            saveCountdown={(time) => saveCountdown(time)}
+            styleInput={defaultTimerStyle}
+          />
+        </div>
+        <div id="lock-images">
+          {Object.keys(room.clues).map((key, idx) => (
+            <div key={idx}>
+              <img
+                height="40px"
+                width="40px"
+                src={
+                  room.clues[key]
+                    ? room.clues[key].solved
+                      ? '/Images/check.png'
+                      : '/Images/lock.png'
+                    : 'hello'
+                }
+              />
+            </div>
+          ))}
+        </div>
       </div>
-      <div className="narrative"></div>
-      <div id="lock-images">
-        {Object.keys(room.clues).map((key, idx) => (
-          <div key={idx}>
-            <img
-              height="40px"
-              width="40px"
-              src={
-                room.clues[key]
-                  ? room.clues[key].solved
-                    ? '/Images/check.png'
-                    : '/Images/lock.png'
-                  : 'hello'
-              }
-            />
-          </div>
-        ))}
+      <div className="narrative">
+        {' '}
+        <p>
+          You rush inside the house. Staring at you are what can only be
+          described as three spectral beings...
+        </p>
       </div>
       <Stage
         onClick={(e) => {
@@ -224,24 +231,6 @@ const _HauntedRoom2 = (props) => {
             height={90}
             fill="green"
           />
-          {/* <Lock
-            showClue={() => show('one')}
-            solved={room.clues.one.solved}
-            x={975}
-            y={50}
-          />
-          <Lock
-            showClue={() => show('two')}
-            solved={room.clues.two.solved}
-            x={1025}
-            y={50}
-          />
-          <Lock
-            showClue={() => show('three')}
-            solved={room.clues.three.solved}
-            x={1075}
-            y={50}
-          /> */}
         </Layer>
       </Stage>
 
@@ -284,6 +273,14 @@ const _HauntedRoom2 = (props) => {
           Close
         </button>
       </Modal>
+      <div>
+        <button
+          style={{ textAlign: 'left' }}
+          onClick={() => props.history.push(`/haunted/${gameId}/room2/success`)}
+        >
+          [Dev] next room
+        </button>
+      </div>
     </div>
   );
 };

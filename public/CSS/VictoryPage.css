@@ -1,12 +1,16 @@
 #victory-body p {
+  background: #f0f8ff33;
   margin: 5rem auto;
-  font-size: 2rem;
-  width: 25rem;
+  font-size: 1.7rem;
+  width: inherit;
+  text-overflow: hidden;
   font-weight: bold;
   text-align: center;
+  border-radius: 20px;
+  height: inherit;
   font-family: Georgia, 'Times New Roman', Times, serif;
-  text-shadow: 1px 1px white;
-  line-height: 2rem;
+  text-shadow: 1px 1px #d8c2c2;
+  line-height: 2.1rem;
 }
 
 #victory-page {

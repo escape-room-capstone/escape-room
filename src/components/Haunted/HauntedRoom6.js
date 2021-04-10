@@ -27,7 +27,7 @@ import { Lock } from './HauntedRoom2';
 import GameTimer from '../../utils/GameTimer';
 
 // set style for the game timer
-const defaultTimerStyle = { barColor: "#3c15eb", digitColor: 'white' };
+const defaultTimerStyle = { barColor: '#3c15eb', digitColor: 'white' };
 
 //background image
 const ForestDoor = () => {
@@ -80,17 +80,26 @@ const _HauntedRoom6 = (props) => {
   return (
     <div className="game-room">
       <Burger {...props} />
-      <div className="game-timer">
-        <GameTimer
-          gameId={gameId}
-          history={props.history}
-          timer={timer}
-          countdown={countdown}
-          timerToggle={true}
-          roomSolved={roomSolved}
-          saveCountdown={(time) => saveCountdown(time)}
-          styleInput={defaultTimerStyle}
-        />
+      <div id="utils">
+        <div className="game-timer">
+          <GameTimer
+            gameId={gameId}
+            history={props.history}
+            timer={timer}
+            countdown={countdown}
+            timerToggle={true}
+            roomSolved={roomSolved}
+            saveCountdown={(time) => saveCountdown(time)}
+            styleInput={defaultTimerStyle}
+          />
+        </div>
+        <div id="lock-images">
+          <img
+            height="40px"
+            width="40px"
+            src={locked ? '/Images/lock.png' : '/Images/check.png'}
+          />
+        </div>
       </div>
       <div className="narrative">
         <TypeWriterEffect
@@ -101,13 +110,6 @@ const _HauntedRoom6 = (props) => {
           text=""
           typeSpeed={70}
         />
-        <div id="lock-images">
-          <img
-            height="40px"
-            width="40px"
-            src={locked ? '/Images/lock.png' : '/Images/check.png'}
-          />
-        </div>
       </div>
       <Stage
         onClick={(e) => {
@@ -126,14 +128,13 @@ const _HauntedRoom6 = (props) => {
               setRoomSolved(true);
             }}
           />
-          {/* <Lock
-            showClue={() => show('one')}
-            solved={room.clues.one.solved}
-            x={500}
-            y={50}
-          /> */}
         </Layer>
       </Stage>
+      <div>
+        <button onClick={() => props.history.push(`/haunted/${gameId}/room7`)}>
+          [Dev] next room
+        </button>
+      </div>
     </div>
   );
 };

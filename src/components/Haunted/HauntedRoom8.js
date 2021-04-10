@@ -21,7 +21,7 @@ import { fetchGame, updateTimer } from '../../store/game';
 import GameTimer from '../../utils/GameTimer';
 
 // set style for the game timer
-const defaultTimerStyle = { barColor: "#3c15eb", digitColor: 'white' };
+const defaultTimerStyle = { barColor: '#3c15eb', digitColor: 'white' };
 
 //make images to attach to stage
 const NightGrass = (props) => {
@@ -75,17 +75,19 @@ const _HauntedRoom8 = (props) => {
   return (
     <div className="game-room">
       <Burger {...props} />
-      <div className="game-timer">
-        <GameTimer
-          gameId={gameId}
-          history={props.history}
-          timer={timer}
-          countdown={countdown}
-          timerToggle={true}
-          roomSolved={roomSolved}
-          saveCountdown={(time) => saveCountdown(time)}
-          styleInput={defaultTimerStyle}
-        />
+      <div id="utils">
+        <div className="game-timer">
+          <GameTimer
+            gameId={gameId}
+            history={props.history}
+            timer={timer}
+            countdown={countdown}
+            timerToggle={true}
+            roomSolved={roomSolved}
+            saveCountdown={(time) => saveCountdown(time)}
+            styleInput={defaultTimerStyle}
+          />
+        </div>
         <div id="lock-images">
           <img
             height="40px"
@@ -95,14 +97,19 @@ const _HauntedRoom8 = (props) => {
         </div>
       </div>
       <div className="narrative">
-        <TypeWriterEffect
+        <p>
+          {' '}
+          You run through the forest and see a road through the grass ahead of
+          you...Something in the grass catches your eye...
+        </p>
+        {/* <TypeWriterEffect
           textStyle={{ fontFamily: 'Red Hat Display' }}
           startDelay={50}
           hideCursorAfterText={true}
           cursorColor="white"
           text="You run through the forest and see a road through the grass ahead of you...Something in the grass catches your eye..."
           typeSpeed={70}
-        />
+        /> */}
       </div>
       <Stage
         onClick={(e) => {
@@ -133,6 +140,11 @@ const _HauntedRoom8 = (props) => {
         <br></br>
         <button onClick={() => setRoomSolved(true)}>[Dev] Solve</button>
       </Modal>
+      <div>
+        <button onClick={() => props.history.push(`/haunted/${gameId}/room9`)}>
+          [Dev] next room
+        </button>
+      </div>
     </div>
   );
 };

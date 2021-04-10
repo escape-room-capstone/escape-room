@@ -9,6 +9,9 @@ import GameTimer from '../../utils/GameTimer';
 import { updateTimer } from '../../store/game';
 import { Burger } from '../Burger';
 
+// set style for the game timer
+const defaultTimerStyle = { barColor: "#3c15eb", digitColor: 'white' };
+
 const DarkRoom = (props) => {
   const [image] = useImage('/Images/darkroom.jpg');
   return <Image image={image} />;
@@ -110,6 +113,7 @@ export const _HauntedRoom3 = (props) => {
           timerToggle={true}
           roomSolved={roomSolved}
           saveCountdown={(time) => saveCountdown(time)}
+          styleInput={defaultTimerStyle}
         />
       </div>
 

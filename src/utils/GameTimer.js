@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import TimerBar from './TimerBar';
 
 const GameTimer = (props) => {
-    const { gameId, history, timer, countdown, roomSolved, timerToggle, saveCountdown } = props;
+    const { gameId, history, timer, countdown, roomSolved, timerToggle, saveCountdown, styleInput } = props;
     const [timerSwitch, setTimerSwitch] = useState(timerToggle);
     const [currCountdown, setCountdown] = useState(countdown);
+    const [timerBarComplete, setTimerBar] = useState(0);
 
     // on first render of timer (when countdown is 0) initiate countdown with value from game timer
     useEffect(() => {
         countdown === -1 && setCountdown(timer);
     }, [countdown, timer]);
 
-    // split timer into minutes and seconds
-    var minutes = Math.floor(currCountdown / 60);
-    var seconds = currCountdown - minutes * 60;
-
-     // update current countdown in timer's local state
+    // update current countdown in timer's local state
     useEffect(() => {
         if (timerSwitch) {
             let initInterval = setInterval(() => {
@@ -35,6 +33,12 @@ const GameTimer = (props) => {
         }
     });
 
+    // update competion % of the timer bar
+    useEffect(() => {
+        let percentage = Math.floor((currCountdown / timer) * 100);
+        setTimerBar(Math.floor(percentage)) ;
+    });
+
     // if room is solved (1) stop timer (2) pass current countdown to the parent to upadte the game 
     useEffect(() => {
         if (roomSolved) {
@@ -45,8 +49,9 @@ const GameTimer = (props) => {
 
     return (
         <div>
-            { currCountdown === 0 ? "Time's up!" :
-                <h1> Time left in game: {minutes}:{seconds < 10 ? `0${seconds}`:seconds}</h1>
+            { currCountdown === 0
+                ? <div id='fail-message'>Time's up!</div>
+                : <TimerBar barColor={styleInput.barColor} digitColor={styleInput.digitColor} completed={timerBarComplete} time={currCountdown} />
             }
         </div>
     )

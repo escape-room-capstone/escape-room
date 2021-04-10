@@ -20,6 +20,9 @@ import { customStyles } from '../../utils/helpers';
 import { fetchGame, updateTimer } from '../../store/game';
 import GameTimer from '../../utils/GameTimer';
 
+// set style for the game timer
+const defaultTimerStyle = { barColor: "#3c15eb", digitColor: 'white' };
+
 //make images to attach to stage
 const NightGrass = (props) => {
   const [image] = useImage('/Images/nightgrass2.jpg');
@@ -81,6 +84,7 @@ const _HauntedRoom8 = (props) => {
           timerToggle={true}
           roomSolved={roomSolved}
           saveCountdown={(time) => saveCountdown(time)}
+          styleInput={defaultTimerStyle}
         />
         <div id="lock-images">
           <img

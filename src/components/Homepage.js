@@ -33,7 +33,7 @@ const Homepage = (props) => {
  
   const removeSpaceFromTheme = (title) => {
     const noSpaceTitle = title.split(' ').join('');
-    console.log(noSpaceTitle);
+    // console.log(noSpaceTitle);
     return noSpaceTitle;
   };
 

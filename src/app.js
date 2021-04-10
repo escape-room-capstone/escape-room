@@ -23,6 +23,7 @@ import { Login } from './components/AuthForm';
 import { Signup } from './components/AuthForm';
 import { CreateTheme } from './components/CreateTheme';
 import Account from './components/Account';
+import UpdateProfile from './components/UpdateProfile';
 
 import Home from './components/riddlez/Home';
 import Home1 from './components/riddlez/Home1';
@@ -60,7 +61,13 @@ const App = () => {
       <Route exact path="/" component={Landing} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={Signup} />
-      <Route exact path="/users/:usersId/account" component={Account} />
+      <Route exact path="/users/:id/account" component={Account} />
+      <Route
+        exact
+        path="/users/:id/account/updateprofile"
+        component={UpdateProfile}
+      />
+
       <Route exact path="/starwars/4" component={BobaFett} />
 
       <Route exact path="/haunted/:gameId" component={HauntedIntro} />

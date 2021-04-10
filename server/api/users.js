@@ -22,7 +22,6 @@ router.get('/', async (req, res, next) => {
         'phoneNumber',
         'birthdate',
         'email',
-        'isAdmin',
       ],
     });
     res.json(users);
@@ -34,8 +33,26 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const id = req.params.id;
-    const user = await User.findByPk(id);
+    const user = await User.findByPk(id, {
+      attributes: [
+        'firstName',
+        'lastName',
+        'phoneNumber',
+        'birthdate',
+        'email',
+      ],
+    });
     res.status(200).send(user);
+  } catch (er) {
+    next(er);
+  }
+});
+
+//update user profile
+router.put('/:id', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+    res.status(201).send(await user.update(req.body));
   } catch (er) {
     next(er);
   }
@@ -101,7 +118,7 @@ router.post('/:userId/games', async (req, res, next) => {
       theme: req.body.theme,
       userId: req.params.userId,
       description: req.body.description,
-      timer: req.body.timer
+      timer: req.body.timer,
     });
 
     const { puzzleArray } = req.body;
@@ -134,7 +151,7 @@ router.post('/:userId/games/custom', async (req, res, next) => {
       themeId,
       numPuzzles,
       puzzleArray,
-      timer
+      timer,
     } = req.body;
     let game = await Game.create({
       title,
@@ -144,7 +161,7 @@ router.post('/:userId/games/custom', async (req, res, next) => {
       themeId,
       imgSrc: backgroundImageOne,
       userId: req.params.userId,
-      timer
+      timer,
     });
     console.log(game, 'new game');
     // create 4 rooms associated with the new gameId with a number of 1-4 and assign an imgSrc from images array

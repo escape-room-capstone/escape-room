@@ -17,12 +17,10 @@ const TimerBar = (props) => {
         dynamicCompleted = 17
     }
 
-    console.log(completed)
-
     // styles for the bar
     const containerStyles = {
         height: 40,
-        width: '100%',  
+        width: 275,  
         backgroundColor: "#bdbbb7",
         borderRadius: 50,
         marginleft: 0,

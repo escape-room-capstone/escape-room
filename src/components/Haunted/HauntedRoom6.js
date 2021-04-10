@@ -26,6 +26,9 @@ import { Lock } from './HauntedRoom2';
 //game timer
 import GameTimer from '../../utils/GameTimer';
 
+// set style for the game timer
+const defaultTimerStyle = { barColor: "#3c15eb", digitColor: 'white' };
+
 //background image
 const ForestDoor = () => {
   const [image] = useImage('/Images/forestdoor.jpg');
@@ -86,6 +89,7 @@ const _HauntedRoom6 = (props) => {
           timerToggle={true}
           roomSolved={roomSolved}
           saveCountdown={(time) => saveCountdown(time)}
+          styleInput={defaultTimerStyle}
         />
       </div>
       <div className="narrative">

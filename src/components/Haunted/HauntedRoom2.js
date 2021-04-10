@@ -18,6 +18,9 @@ import GameTimer from '../../utils/GameTimer';
 //react modal
 import Modal from 'react-modal';
 
+// set style for the game timer
+const defaultTimerStyle = { barColor: "#3c15eb", digitColor: 'white' };
+
 //background image
 const HauntedHallway = (props) => {
   const [image] = useImage('/Images/spooky-stairs.jpg');
@@ -127,6 +130,7 @@ const _HauntedRoom2 = (props) => {
           timerToggle={true}
           roomSolved={roomSolved}
           saveCountdown={(time) => saveCountdown(time)}
+          styleInput={defaultTimerStyle}
         />
       </div>
       <div className="narrative"></div>

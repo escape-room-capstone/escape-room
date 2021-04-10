@@ -10,7 +10,7 @@ const TimerBar = (props) => {
     // styles for the bar
     const containerStyles = {
         height: 40,
-        width: '100%',
+        width: '80%',
         backgroundColor: "#bdbbb7",
         borderRadius: 50,
         margin: 50

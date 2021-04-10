@@ -14,6 +14,9 @@ import GameTimer from '../../utils/GameTimer';
 //css
 import '../../../public/css/HauntedRoom.css';
 
+// set style for the game timer
+const defaultTimerStyle = { barColor: "#3c15eb", digitColor: 'white' };
+
 import TypeWriterEffect from 'react-typewriter-effect';
 import { Lock } from './HauntedRoom2';
 //custom modal styles
@@ -169,6 +172,7 @@ const _HauntedRoom7 = (props) => {
           timerToggle={true}
           roomSolved={roomSolved}
           saveCountdown={(time) => saveCountdown(time)}
+          styleInput={defaultTimerStyle}
         />
       </div>
       <div className="narrative">

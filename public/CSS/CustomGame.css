@@ -6,7 +6,7 @@
 }
 
 #lock-images {
-  width: 1220px;
+  width: 850px;
   align-items: center;
   display: flex;
   justify-content: flex-end;
@@ -19,7 +19,7 @@
 #game-tools {
   height: 3rem;
   display: flex;
-  width: 50%;
+  width: 65%;
   margin: 0 auto;
   align-items: center;
 }

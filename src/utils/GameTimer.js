@@ -50,7 +50,16 @@ const GameTimer = (props) => {
     return (
         <div>
             { currCountdown === 0
-                ? <div id='fail-message'>Time's up!</div>
+                ? <div id='fail-message'
+                    style={{
+                    color: 'red',
+                    fontFamily: 'Stencil Std, fantasy',
+                    fontSize: 50,
+                    fontWeight: 'bold',
+                    position: 'relative',
+                    bottom: 5
+                    }}
+                >Time's up!</div>
                 : <TimerBar barColor={styleInput.barColor} digitColor={styleInput.digitColor} completed={timerBarComplete} time={currCountdown} />
             }
         </div>

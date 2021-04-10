@@ -287,7 +287,7 @@ const _CustomGame = (props) => {
                   <Component solve={() => setSolved(puzzle.id)} />
                   <button onClick={() => hide(puzzle.id)}>Close Puzzle</button>
                   <button onClick={() => setSolved(puzzle.id)}>
-                    [Dev] Solve
+                    [Dev] solve
                   </button>
                 </Modal>
               );
@@ -295,10 +295,20 @@ const _CustomGame = (props) => {
           </div>
         </div>
       </div>
-      <button onClick={() => handleNextRoom()}>[Dev] Next room</button>
-      <button onClick={() => props.history.push(`/games/${gameId}/fail`)}>
-        [test] load fail page
-      </button>
+      <div id='dev-buttons'
+        style={{
+          color: 'white',
+          width: 1000,
+          top: 20,
+          left: 60,
+          position: 'relative',
+        }}
+      >
+        <p>Developer mode buttons</p>
+        <button onClick={() => handleNextRoom()}>[Dev] advance next room</button>
+        <br/>
+        <button onClick={() => props.history.push(`/games/${gameId}/fail`)}>[Dev] load fail page</button>
+      </div>
     </div>
   );
 };

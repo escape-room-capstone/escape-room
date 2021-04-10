@@ -7,33 +7,50 @@ const TimerBar = (props) => {
     var minutes = Math.floor(time / 60);
     var seconds = time - minutes * 60;
 
+    // assign passed props to dynamic variables
+    let barDynamicColor = barColor
+    let dynamicCompleted = completed
+
+    // change bar color and width based on time remaining
+    if (time < 10) {
+        barDynamicColor = 'red'
+        dynamicCompleted = 17
+    }
+
+    console.log(completed)
+
     // styles for the bar
     const containerStyles = {
         height: 40,
-        width: '80%',
+        width: '100%',  
         backgroundColor: "#bdbbb7",
         borderRadius: 50,
-        margin: 50
+        marginleft: 0,
     }
     const fillerStyles = {
         height: '100%',
-        width: `${completed}%`,
-        backgroundColor: barColor,
+        width: `${dynamicCompleted}%`,
+        backgroundColor: barDynamicColor,
         borderRadius: 'inherit',
         textAlign: 'right',
         transition: 'width 1s ease-in-out'
     }
     const labelStyles = {
+        fontFamily: 'Stencil Std, fantasy',
+        position: 'relative',
+        top: 4,
         padding: 5,
         color: digitColor,
-        fontSize: 30,
-        fontWeight: 'bold'
+        fontSize: 25,
+        fontWeight: 'bold',
+        marginRight: 10,
+        marginleft: 6,
     }
 
     return (
         <div style={containerStyles}>
             <div style={fillerStyles}>
-                <span style={labelStyles}>{minutes}: {seconds < 10 ? `0${seconds}` : seconds}</span>
+                <span style={labelStyles}>{minutes >= 1 ? `${minutes} : ` : ''}{seconds < 10 ? `0${seconds}` : seconds}</span>
             </div>
         </div>
     );

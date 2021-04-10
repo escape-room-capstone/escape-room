@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchGame, updateTimer } from '../store/game';
 import { Burger } from './Burger';
+import '../../public/CSS/ChooseTheme.css';
 
 const _FailPage = (props) => {
   // pick up data from props
@@ -58,16 +59,19 @@ const _FailPage = (props) => {
           margin: '0 auto',
           borderRadius: '20px',
           position: 'relative',
-          //   border: '5px solid black',
           boxShadow: '1px 1px 12px 6px deepskyblue',
         }}
       >
-        <button name="restart" onClick={(e) => handleEndGame(e)}>
-          Restart game
-        </button>
-        <button name="end" onClick={(e) => handleEndGame(e)}>
-          Close game and return home
-        </button>
+        <div id='fail-buttons'
+          style={{
+            position: 'relative',
+            left: 380,
+            top: 427,
+          }}
+        >
+          <button id='createButton' name="restart" onClick={(e) => handleEndGame(e)}>Restart game</button>
+          <button id='createButton' name="end" onClick={(e) => handleEndGame(e)}>Return home</button>
+        </div>
       </div>
     </div>
   );

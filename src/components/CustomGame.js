@@ -24,6 +24,9 @@ const _CustomGame = (props) => {
   let { puzzles } = room;
   let { timer, countdown } = game;
 
+  // set style for the game timer
+  const defaultTimerStyle = { barColor: "#3c15eb", digitColor: 'white' };
+
   // load game and room data when component mounts/updates
   useEffect(() => {
     props.setGame(gameId);
@@ -123,7 +126,7 @@ const _CustomGame = (props) => {
 
   // when room is solved push timer countdown to game model for use in next room
   const saveCountdown = async (time) => {
-    await props.saveTimer(gameId, time); // -- DEV NOTE: to persitently reset timer for testing, change to 'time = 1000'
+    await props.saveTimer(gameId, time);
     setNextRoomOpen(true);
   };
 
@@ -171,12 +174,12 @@ const _CustomGame = (props) => {
           <GameTimer
             gameId={gameId}
             history={props.history}
-            timer={timer}
+            timer={timer = 30} // -- DEV NOTE: to persitently reset timer for testing, change to 'time = 1000'
             countdown={countdown}
             roomSolved={roomSolved}
             timerToggle={true}
             saveCountdown={(time) => saveCountdown(time)}
-            // style={}
+            styleInput={defaultTimerStyle}
           />
         </div>
         <div id="lock-images">

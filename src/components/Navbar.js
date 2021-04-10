@@ -9,10 +9,11 @@ const _Navbar = (props) => {
     <div id="navbar">
       {/* {props.auth.id && ( */}
       <div className="navbar-row">
-        <div>
+        <div className="navbar-left">
           <span>
-            <Link to={'/home'} id="welcome">
-              ESCAPE ROOM
+            <Link to={'/home'}>
+              HOME
+              {/* <img src="/Images/navbarkey.png" height="80" width="80" /> */}
             </Link>
           </span>
           <span>

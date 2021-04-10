@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import TypeWriterEffect from 'react-typewriter-effect';
 import { componentMapping } from '../Puzzles/puzzles';
 import { connect } from 'react-redux';
+//react-burger-menu
+import { slide as Menu } from 'react-burger-menu';
+import { Burger } from '../Burger';
 
 import { Stage, Layer, Rect, Image } from 'react-konva';
 import useImage from 'use-image';
-import { Redirect } from 'react-router-dom';
 //custom modal styles
 import { customStyles } from '../../utils/helpers';
 //import css file
 import '../../../public/css/HauntedRoom.css';
+
+import { fetchGame, updateTimer } from '../../store/game';
+import GameTimer from '../../utils/GameTimer';
 
 //react modal
 import Modal from 'react-modal';
@@ -35,15 +39,6 @@ export const Lock = (props) => {
 };
 
 const _HauntedRoom2 = (props) => {
-  const roomClues = {
-    one: { solved: false, show: false },
-    two: { solved: false, show: false },
-    three: { solved: false, show: false },
-  };
-
-  const [room, setRoom] = useState({ clues: roomClues, showModal: false });
-  //this is now coming from DB and is set in state and mapped to props
-  const { puzzles } = props.game;
   //dynamically rendering components based on which puzzles are in the array from the DB
   const Puzzle1 = (props) => {
     const Component = componentMapping[puzzles[0].name];
@@ -90,17 +85,76 @@ const _HauntedRoom2 = (props) => {
       };
     });
   };
+  const saveCountdown = async (time) => {
+    console.log(gameId, 'gameId');
+    await props.saveTimer(gameId, time); // to persistently reset timer here during testing, change to 'time = 1000'
+    props.history.push(`/haunted/${gameId}/room2/success`);
+  };
+  const roomClues = {
+    one: { solved: false, show: false },
+    two: { solved: false, show: false },
+    three: { solved: false, show: false },
+  };
+  const [room, setRoom] = useState({ clues: roomClues, showModal: false });
+  const [roomSolved, setRoomSolved] = useState(false);
+  const { puzzles } = props.game;
+  const { gameId } = props.match.params;
+
+  useEffect(() => {
+    async function fetchGame() {
+      await props.getGame(gameId);
+    }
+    fetchGame();
+  }, []);
+
+  useEffect(() => {
+    if (Object.keys(room.clues).every((key) => room.clues[key].solved)) {
+      console.log('every clue solved');
+      setRoomSolved(true);
+    }
+  }, [room]);
+  //timer data
+  const { timer, countdown } = props.game;
   return (
     <div className="game-room">
+      <Burger {...props} />
+      <div className="game-timer">
+        <GameTimer
+          gameId={gameId}
+          history={props.history}
+          timer={timer}
+          countdown={countdown}
+          timerToggle={true}
+          roomSolved={roomSolved}
+          saveCountdown={(time) => saveCountdown(time)}
+        />
+      </div>
       <div className="narrative"></div>
+      <div id="lock-images">
+        {Object.keys(room.clues).map((key, idx) => (
+          <div key={idx}>
+            <img
+              height="40px"
+              width="40px"
+              src={
+                room.clues[key]
+                  ? room.clues[key].solved
+                    ? '/Images/check.png'
+                    : '/Images/lock.png'
+                  : 'hello'
+              }
+            />
+          </div>
+        ))}
+      </div>
       <Stage
         onClick={(e) => {
           console.log(e.evt.layerX, 'layerX position');
           console.log(e.evt.layerY), 'layerY position)';
         }}
-        height={700}
+        height={559}
         align="center"
-        width={1200}
+        width={1000}
       >
         <Layer>
           <HauntedHallway />
@@ -117,11 +171,11 @@ const _HauntedRoom2 = (props) => {
             }}
             onClick={() => show('one')}
             solved={room.clues.one.solved}
-            x={585}
-            y={300}
+            x={375}
+            y={250}
             opacity={0}
-            width={90}
-            height={350}
+            width={80}
+            height={200}
             fill="green"
           />
 
@@ -138,8 +192,8 @@ const _HauntedRoom2 = (props) => {
             }}
             onClick={() => show('two')}
             solved={room.clues.two.solved}
-            x={855}
-            y={350}
+            x={560}
+            y={270}
             opacity={0}
             width={45}
             height={100}
@@ -159,15 +213,14 @@ const _HauntedRoom2 = (props) => {
             }}
             onClick={() => show('three')}
             solved={room.clues.three.solved}
-            x={725}
-            y={175}
+            x={480}
+            y={155}
             opacity={0}
-            width={85}
-            height={150}
+            width={50}
+            height={90}
             fill="green"
-            draggable={true}
           />
-          <Lock
+          {/* <Lock
             showClue={() => show('one')}
             solved={room.clues.one.solved}
             x={975}
@@ -184,14 +237,30 @@ const _HauntedRoom2 = (props) => {
             solved={room.clues.three.solved}
             x={1075}
             y={50}
-          />
+          /> */}
         </Layer>
       </Stage>
 
       <Modal style={customStyles} isOpen={room.showModal}>
-        {room.clues.one.show && <Puzzle1 solve={() => setSolved('one')} />}
-        {room.clues.two.show && <Puzzle2 solve={() => setSolved('two')} />}
-        {room.clues.three.show && <Puzzle3 solve={() => setSolved('three')} />}
+        {room.clues.one.show && (
+          <div>
+            <Puzzle1 solve={() => setSolved('one')} />
+            <button onClick={() => setSolved('one')}>[Dev] solve</button>
+          </div>
+        )}
+        {room.clues.two.show && (
+          <div>
+            <Puzzle2 solve={() => setSolved('two')} />{' '}
+            <button onClick={() => setSolved('two')}>[Dev] solve</button>
+          </div>
+        )}
+        {room.clues.three.show && (
+          <div>
+            <Puzzle3 solve={() => setSolved('three')} />{' '}
+            <button onClick={() => setSolved('three')}>[Dev] solve</button>
+          </div>
+        )}
+        <br></br>
         <button
           onClick={() =>
             setRoom((prevRoom) => {
@@ -208,23 +277,20 @@ const _HauntedRoom2 = (props) => {
             })
           }
         >
-          Close the modal
+          Close
         </button>
       </Modal>
-      {room.clues.one.solved &&
-      room.clues.two.solved &&
-      room.clues.three.solved ? (
-        <Redirect push to="/haunted/1/room2/success" />
-      ) : (
-        ''
-      )}
     </div>
   );
 };
+const mapDispatch = (dispatch) => {
+  return {
+    getGame: (gameId) => dispatch(fetchGame(gameId)),
+    saveTimer: (gameId, time) => dispatch(updateTimer(gameId, time)),
+  };
+};
 
-// const mapState = (state, routeProps) => {
-//   const { puzzles } = state.game;
-//   return { puzzles,  };
-// };
-
-export const HauntedRoom2 = connect((state) => state)(_HauntedRoom2);
+export const HauntedRoom2 = connect(
+  (state) => state,
+  mapDispatch
+)(_HauntedRoom2);

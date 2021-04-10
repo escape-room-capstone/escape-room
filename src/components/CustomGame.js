@@ -6,41 +6,49 @@ import Modal from 'react-modal';
 import { fetchGame, updateTimer } from '../store/game';
 import '../../public/CSS/CustomGame.css';
 import '../../public/CSS/Burger.css';
-import { slide as Menu } from 'react-burger-menu';
+import { Burger } from './Burger';
 import GameTimer from '../utils/GameTimer';
-
 
 const _CustomGame = (props) => {
   // set default local sate
-  const [roomOpen, setRoomOpen] = useState(false);
+  // const [roomOpen, setRoomOpen] = useState(false); -- FOR LATER; functionality to prevent forcing access to next room (add idx === '0' &&)
   const [roomSolved, setRoomSolved] = useState(false); // -- does this get updated to flase on next room?
-  const [puzzlesReady, setPuzzlesReady] = useState(false) 
+  const [puzzlesReady, setPuzzlesReady] = useState(false);
   const [roomStatus, setRoomStatus] = useState({});
   const [puzzleDimensions, setPuzzleDimensions] = useState({});
-  const [nextRoomOpen, setNextRoomOpen] = useState(false)
+  const [nextRoomOpen, setNextRoomOpen] = useState(false);
 
-  // pick up data from props 
+  // pick up data from props
   let { gameId, roomId, idx } = props.match.params;
-  const { room, game } = props;
-  const { puzzles } = room;
-  const { timer, countdown } = game;
+  let { room, game } = props;
+  let { puzzles } = room;
+  let { timer, countdown } = game;
 
   // load game and room data when component mounts/updates
   useEffect(() => {
-    props.setGame(gameId)
-    props.setRoom(gameId, roomId)
-    setRoomOpen(true) // testing fucntionality to prevent forcing access to next room (add idx === '0' &&)
-  }, [gameId, roomId, idx])
+    props.setGame(gameId);
+    props.setRoom(gameId, roomId);
+    // setRoomOpen(true); -- FOR LATER; see comment in state declaration
+  }, [gameId, roomId, idx]);
+
+  // component clean-up
+  useEffect(() => {
+    return () => {
+      setRoomSolved(false);
+      setNextRoomOpen(false);
+      setPuzzlesReady(false);
+    };
+  }, []);
 
   // check if puzzles are availble to set or have been updated
   useEffect(() => {
-    puzzles && setPuzzles()
-  }, [puzzles])
-  
+    puzzles && setPuzzles();
+  }, [puzzles]);
+
   // check if next room is open before redirecting
   useEffect(() => {
-    nextRoomOpen && handleNextRoom()
-  }, [nextRoomOpen])
+    nextRoomOpen && handleNextRoom();
+  }, [nextRoomOpen]);
 
   // set up puzzles (with status, locations, and thier modals)
   const setPuzzles = () => {
@@ -50,8 +58,8 @@ const _CustomGame = (props) => {
         solved: false,
         show: false,
         showModal: false,
-      }
-      return cluesObj
+      };
+      return cluesObj;
     }, {});
     // set puzzles into their positions
     const _puzzleDimensions = puzzles.reduce((dimensionsObj, currentPuzzle) => {
@@ -59,17 +67,15 @@ const _CustomGame = (props) => {
         top: currentPuzzle.roomdata ? currentPuzzle['roomdata'].top : '',
         left: currentPuzzle.roomdata ? currentPuzzle['roomdata'].left : '',
         width: currentPuzzle.roomdata ? currentPuzzle['roomdata'].width : '',
-        height: currentPuzzle.roomdata
-          ? currentPuzzle['roomdata'].height
-          : '',
+        height: currentPuzzle.roomdata ? currentPuzzle['roomdata'].height : '',
       };
       return dimensionsObj;
     }, {});
-    // update state with puzzle properties (status, position) 
+    // update state with puzzle properties (status, position)
     setRoomStatus(_roomStatus);
     setPuzzleDimensions(_puzzleDimensions);
     setPuzzlesReady(true);
-  }
+  };
 
   // show/hide puzzle modal
   const show = (puzzleNum) => {
@@ -101,15 +107,25 @@ const _CustomGame = (props) => {
 
   // check if all puzzles are solved and prompt timer to save current countdown
   useEffect(() => {
-    // check if room has been loaded (otherwise '.every' returns true on empty array)
-    room.id && Object.keys(roomStatus).every(key => roomStatus[key].solved) && setRoomSolved(true)
+    // check if roomStatus has been mapped
+    if (Object.keys(roomStatus).length > 0 ) {
+      const checkAllPuzzlesSolved = (roomStatus) => {
+        for (var puzzle in roomStatus)
+          if (!roomStatus[puzzle].solved) {
+            return false;
+          }
+        return true;
+      }
+      checkAllPuzzlesSolved(roomStatus) && setRoomSolved(true);
+    }
   }, [roomStatus]);
+
 
   // when room is solved push timer countdown to game model for use in next room
   const saveCountdown = async (time) => {
-    await props.saveTimer(gameId, time); // to persitently reset timer here during testing, change to 'time = 1000'
-    setNextRoomOpen(true) 
-  }
+    await props.saveTimer(gameId, time); // -- DEV NOTE: to persitently reset timer for testing, change to 'time = 1000'
+    setNextRoomOpen(true);
+  };
 
   // advance to next room
   const handleNextRoom = () => {
@@ -117,90 +133,51 @@ const _CustomGame = (props) => {
     setPuzzlesReady(false);
     setRoomSolved(false);
     setNextRoomOpen(false);
-    setRoomOpen(true);
+    // setRoomOpen(true); -- FOR LATER; see comment in state declaration
     if (room) {
       // create array with rooms sorted in order
-      const sortedRoomsArray = props.game.rooms ? props.game.rooms.sort((roomA, roomB) => {
-        return roomA.number - roomB.number
-      }) : [];
+      const sortedRoomsArray = props.game.rooms
+        ? props.game.rooms.sort((roomA, roomB) => {
+            return roomA.number - roomB.number;
+          })
+        : [];
       // set next room Id and index from 'match.params.idx'
-      const nextRoomIdx = (parseInt(idx) + 1);
+      const nextRoomIdx = parseInt(idx) + 1;
       if (sortedRoomsArray[nextRoomIdx]) {
-        const nextRoomId = sortedRoomsArray[nextRoomIdx].id
+        const nextRoomId = sortedRoomsArray[nextRoomIdx].id;
         props.history.push(`/games/${gameId}/${nextRoomId}/${nextRoomIdx}`);
       } else {
-        props.history.push('/victorypage');
+        props.history.push(`/games/${gameId}/victory`);
       }
     }
-  }
+  };
 
   // render room if the puzzles were mounted and room is open
   if (!puzzlesReady) {
-    return null
+    return null;
   }
-  if (!roomOpen) {
-    return <p>room not open</p>
-  }
+  // if (!roomOpen) { -- FOR LATER; see comment in state declaration
+  //   return <p>room not open</p>;
+  // }
   return (
-    <div id='custom-game'>
-      <Menu>
-        <span
-          className="menu-item"
-          onClick={() => {
-            const result = confirm(
-              'Are you sure? Leaving this page will result in losing all progress'
-            );
-            if (result) {
-              props.history.push('/home');
-            }
-          }}
-        >
-          Home
-        </span>
-
-        <span
-          onClick={() => {
-            const result = confirm(
-              'Are you sure? Leaving this page will result in losing all progress'
-            );
-            if (result) {
-              props.history.push(`/users/${props.auth.id}/account`);
-            }
-          }}
-          className="menu-item"
-        >
-          Profile
-        </span>
-          
-        <span
-          onClick={() => {
-            const result = confirm(
-              'Are you sure? Leaving this page will result in losing all progress'
-            );
-            if (result) {
-              props.history.push('/home');
-            }
-          }}
-          id="quit"
-          className="menu-item"
-          to=""
-        >
-          Quit
-        </span>
-      </Menu>
-
+    <div id="custom-game">
+      <Burger {...props} />
       <div id="game-narrative">
         <p>{room.narrative}</p>
       </div>
 
-      <div id='game-tools'>
-        <div id='game-timer'>
+      <div id="game-tools">
+        <div id="game-timer">
           <GameTimer
+            gameId={gameId}
+            history={props.history}
             timer={timer}
             countdown={countdown}
             roomSolved={roomSolved}
             timerToggle={true}
-            saveCountdown={(time) => saveCountdown(time)} />
+            saveCountdown={(time) => saveCountdown(time)}
+            // style={}
+          />
         </div>
         <div id="lock-images">
           {puzzles.map((puzzle, idx) => (
@@ -209,9 +186,11 @@ const _CustomGame = (props) => {
                 height="40px"
                 width="40px"
                 src={
-                  roomStatus[puzzle.id].solved
-                    ? '/Images/check.png'
-                    : '/Images/lock.png'
+                  roomStatus[puzzle.id]
+                    ? roomStatus[puzzle.id].solved
+                      ? '/Images/check.png'
+                      : '/Images/lock.png'
+                    : 'hello'
                 }
               />
             </div>
@@ -219,79 +198,91 @@ const _CustomGame = (props) => {
         </div>
       </div>
 
-        <div>
-          <div
-            id="game-room"
-            style={{
-              backgroundImage: `url(${room.imgSrc})`,
-              height: '559px',
-              width: '1000px',
-              backgroundPosition: 'center',
-              backgroundSize: 'cover',
-              margin: '0 auto',
-              position: 'relative',
-              border: '5px solid black',
-            }}
-          >
-            {Object.keys(roomStatus).map((puzzleNum, idx) => (
-              <div
-                onClick={() => show(puzzleNum)}
-                style={{
-                  top: `${
-                    puzzleDimensions[puzzleNum]
-                      ? puzzleDimensions[puzzleNum].top
-                      : ''
-                  }px`,
-                  left: `${
-                    puzzleDimensions[puzzleNum]
-                      ? puzzleDimensions[puzzleNum].left
-                      : ''
-                  }px`,
-                  width: `${
-                    puzzleDimensions[puzzleNum]
-                      ? puzzleDimensions[puzzleNum].width
-                      : ''
-                  }px`,
-                  height: `${
-                    puzzleDimensions[puzzleNum]
-                      ? puzzleDimensions[puzzleNum].height
-                      : ''
-                  }px`,                  
-                  position: 'absolute',
-                  border: '4px solid red'
-                }}
-                key={idx}
-              >                
-              </div>
-            ))}
-
-            <div>
-              {puzzles.map((puzzle, idx) => {
-                const Component = componentMapping[puzzle.name];
-                return (
-                  <Modal isOpen={roomStatus[puzzle.id].showModal} key={idx}>
-                    <div>{puzzle.roomdata.puzzleText}</div>
-                    <hr />
-                    <Component solve={() => setSolved(puzzle.id)} />
-                    <button onClick={() => hide(puzzle.id)}>CLOSE</button>
-                    <button onClick={() => setSolved(puzzle.id)}>SOLVE</button>
-                  </Modal>
-                );
-              })}
-
-            </div>
+      <div>
+        <div
+          id="game-room"
+          style={{
+            backgroundImage: `url(${room.imgSrc})`,
+            height: '559px',
+            width: '1000px',
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            margin: '0 auto',
+            position: 'relative',
+            border: '5px solid black',
+          }}
+        >
+          {Object.keys(roomStatus).map((puzzleNum, idx) => (
+            <div
+              onClick={() => show(puzzleNum)}
+              style={{
+                top: `${
+                  puzzleDimensions[puzzleNum]
+                    ? puzzleDimensions[puzzleNum].top
+                    : ''
+                }px`,
+                left: `${
+                  puzzleDimensions[puzzleNum]
+                    ? puzzleDimensions[puzzleNum].left
+                    : ''
+                }px`,
+                width: `${
+                  puzzleDimensions[puzzleNum]
+                    ? puzzleDimensions[puzzleNum].width
+                    : ''
+                }px`,
+                height: `${
+                  puzzleDimensions[puzzleNum]
+                    ? puzzleDimensions[puzzleNum].height
+                    : ''
+                }px`,
+                position: 'absolute',
+                border: '4px solid red',
+              }}
+              key={idx}
+            ></div>
           ))}
+          <div>
+            {puzzles.map((puzzle, idx) => {
+              const Component = componentMapping[puzzle.name];
+              return (
+                <Modal
+                  isOpen={
+                    roomStatus[puzzle.id]
+                      ? roomStatus[puzzle.id].showModal
+                      : false
+                  }
+                  key={idx}
+                >
+                  <div>{puzzle.roomdata.puzzleText}</div>
+                  <hr />
+                  <Component solve={() => setSolved(puzzle.id)} />
+                  <button onClick={() => hide(puzzle.id)}>CLOSE</button>
+                  <button onClick={() => setSolved(puzzle.id)}>SOLVE</button>
+                </Modal>
+              );
+            })}
+          </div>
 
           <div>
             {puzzles.map((puzzle, idx) => {
               const Component = componentMapping[puzzle.name];
               return (
-                <Modal isOpen={roomStatus[puzzle.id].showModal} key={idx}>
+                <Modal
+                  isOpen={
+                    roomStatus[puzzle.id]
+                      ? roomStatus[puzzle.id].showModal
+                      : false
+                  }
+                  key={idx}
+                >
                   <div>{puzzle.roomdata.puzzleText}</div>
                   <hr />
                   <Component solve={() => setSolved(puzzle.id)} />
                   <button onClick={() => hide(puzzle.id)}>Close Puzzle</button>
-                  <button onClick={() => setSolved(puzzle.id)}>[Dev] Solve</button>
+                  <button onClick={() => setSolved(puzzle.id)}>
+                    [Dev] Solve
+                  </button>
                 </Modal>
               );
             })}
@@ -299,6 +290,9 @@ const _CustomGame = (props) => {
         </div>
       </div>
       <button onClick={() => handleNextRoom()}>[Dev] Next room</button>
+      <button onClick={() => props.history.push(`/games/${gameId}/fail`)}>
+        [test] load fail page
+      </button>
     </div>
   );
 };
@@ -309,7 +303,8 @@ const mapDispatch = (dispatch) => {
   return {
     setGame: (gameId) => dispatch(fetchGame(gameId)),
     setRoom: (gameId, roomId) => dispatch(fetchRoom(gameId, roomId)),
-    saveTimer: (userId, gameId, time) => dispatch(updateTimer(userId, gameId, time))
+    saveTimer: (userId, gameId, time) =>
+      dispatch(updateTimer(userId, gameId, time)),
   };
 };
 

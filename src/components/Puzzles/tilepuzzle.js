@@ -240,3 +240,21 @@ export class TilePuzzle extends React.Component {
     );
   }
 }
+
+export class TilePuzzleSmall extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <Tiles
+        solve={this.props.solve}
+        rows={3}
+        cols={2}
+        hole={5}
+        width={150}
+        height={200}
+      />
+    );
+  }
+}

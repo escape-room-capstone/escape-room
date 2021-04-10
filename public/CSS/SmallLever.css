@@ -1,0 +1,25 @@
+.lever-div {
+  border: none;
+  height: 6rem;
+  min-width: 6rem;
+  color: white;
+  flex: 1 1 25%;
+  box-shadow: 1px 1px 38px black;
+  margin: auto 3rem;
+  border-radius: 90%;
+}
+
+.true {
+  background-color: rgb(108, 250, 132);
+}
+
+.false {
+  background-color: black;
+}
+
+#small-lever {
+  text-align: center;
+}
+.lever-div:focus {
+  outline: none;
+}

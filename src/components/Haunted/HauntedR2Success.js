@@ -34,9 +34,9 @@ export const Success = (props) => {
           console.log(e.evt.layerX, 'layerX position');
           console.log(e.evt.layerY), 'layerY position)';
         }}
-        height={700}
+        height={559}
         align="center"
-        width={1200}
+        width={1000}
       >
         <Layer>
           <Doorway />

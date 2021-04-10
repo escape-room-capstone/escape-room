@@ -7,6 +7,9 @@
   min-height: 90vh;
 }
 
+.game-room div.game-timer h1 {
+  color: white;
+}
 .konvajs-content {
   overflow: hidden;
   border: 20px solid white;
@@ -15,10 +18,10 @@
   margin-bottom: 5rem;
 }
 
-.game-room.narrative {
-  height: 5rem;
+.game-room .narrative {
   margin-top: 1rem;
   display: flex;
+  color: white;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -108,4 +111,10 @@ input.small {
 
 .phone-number {
   text-align: center;
+}
+.react-typewriter-text {
+  padding: 0;
+  font-size: 1.5rem;
+  margin: 0 auto;
+  text-align: left;
 }

@@ -2,34 +2,39 @@ import React, { useEffect, useState } from 'react';
 import { Stage, Layer, Image, Text } from 'react-konva';
 import useImage from 'use-image';
 import '../../../public/css/HauntedRoom.css';
-import TypeWriterEffect from 'react-typewriter-effect';
+import { connect } from 'react-redux';
+import { fetchGame } from '../../store/game';
 
 const House = (props) => {
   const [image] = useImage('/Images/hauntedhousefinal.jpg');
   return <Image image={image} />;
 };
 
-export const HauntedFinal = (props) => {
+const _HauntedFinal = (props) => {
+  const { gameId } = props.match.params;
+
+  useEffect(() => {
+    async function fetchGame() {
+      await props.getGame(gameId);
+    }
+    fetchGame();
+  }, []);
+  useEffect(() => {
+    const interval = setTimeout(() => {
+      props.history.push(`/games/${gameId}/victory`);
+    }, 2000);
+  }, []);
   return (
     <div className="game-room">
-      <div className="narrative">
-        {/* <TypeWriterEffect
-          textStyle={{ fontFamily: 'Red Hat Display' }}
-          startDelay={50}
-          hideCursorAfterText={true}
-          cursorColor="white"
-          text="The police arrive and drive you home. As you dry off from the rain, you think how lucky you were to have escaped"
-          typeSpeed={65}
-        /> */}
-      </div>
+      <div className="narrative"></div>
       <Stage
         onClick={(e) => {
           console.log(e.evt.layerX, 'layerX position');
           console.log(e.evt.layerY), 'layerY position)';
         }}
-        height={700}
+        height={559}
         align="center"
-        width={1200}
+        width={1000}
       >
         <Layer>
           <House />
@@ -39,7 +44,7 @@ export const HauntedFinal = (props) => {
             x={100}
             fontFamily="sans-serif"
             text="THE HAUNTED HOUSE"
-            fontSize={90}
+            fontSize={70}
             verticalAlign="middle"
             fill="red"
           ></Text>
@@ -48,3 +53,13 @@ export const HauntedFinal = (props) => {
     </div>
   );
 };
+
+const mapDispatch = (dispatch) => {
+  return {
+    getGame: (gameId) => dispatch(fetchGame(gameId)),
+  };
+};
+export const HauntedFinal = connect(
+  (state) => state,
+  mapDispatch
+)(_HauntedFinal);

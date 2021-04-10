@@ -27,14 +27,22 @@ const Homepage = (props) => {
   };
   const { allGames } = props;
   const defaultGames = allGames.filter((game) => !game.userId);
-  // console.log(defaultGames, 'defaultgames');
+ 
   //will eventually need a check for if a game is public/private
   const customGames = allGames.filter((game) => game.userId === props.auth.id);
-  // console.log(customGames, 'customGames');
+ 
   const removeSpaceFromTheme = (title) => {
     const noSpaceTitle = title.split(' ').join('');
     // console.log(noSpaceTitle);
     return noSpaceTitle;
+  };
+
+  // sort the rooms for each game in order using the room['number']
+  const sortGameRooms = (gameRooms) => {
+    const gameRoomsSorted = gameRooms.sort((roomA, roomB) => {
+      return roomA.number - roomB.number;
+    });
+    return gameRoomsSorted[0].id;
   };
 
   return (
@@ -84,9 +92,11 @@ const Homepage = (props) => {
                     Created On: {` ${formatDate(new Date(game.createdAt))}`}
                   </div>
                   <div>
-                    <Link to={`/games/${game.id}/${game.rooms[0].id}/0`}>
+                    {/* <Link to={`/games/${game.id}/${game.rooms[0].id}/0`}>
                       <button className="play">PLAY</button>
-                    </Link>
+                    </Link> */}
+                    <button className="play"
+                      onClick={() => props.history.push(`/games/${game.id}/${sortGameRooms(game.rooms)}/0`)}>PLAY</button>
                   </div>
                 </div>
               ))

@@ -3,7 +3,7 @@
     flex-direction: row;
     align-content: space-between;
     justify-content: space-between;
-    padding-top: 10rem;
+    padding-top: 4rem;
 }
 
 #lever-stack {
@@ -25,4 +25,15 @@
     align-items: center;
     font-size: 30px;
     font-family: copperplate;
+    color: white;
+}
+
+.status {
+    font-size: x-large;
+    font-family: verdana;
+    padding-bottom: 5rem;
+    font-family: copperplate;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
 }

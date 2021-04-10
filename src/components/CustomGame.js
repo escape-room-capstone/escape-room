@@ -174,7 +174,7 @@ const _CustomGame = (props) => {
           <GameTimer
             gameId={gameId}
             history={props.history}
-            timer={timer = 30} // -- DEV NOTE: to persitently reset timer for testing, change to 'time = 1000'
+            timer={timer} // -- DEV NOTE: to persitently reset timer for testing, change to 'time = 1000'
             countdown={countdown}
             roomSolved={roomSolved}
             timerToggle={true}

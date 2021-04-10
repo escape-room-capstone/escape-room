@@ -25,7 +25,7 @@ const _CustomGame = (props) => {
   let { timer, countdown } = game;
 
   // set style for the game timer
-  const defaultTimerStyle = { barColor: "#3c15eb", digitColor: 'white' };
+  const defaultTimerStyle = { barColor: '#3c15eb', digitColor: 'white' };
 
   // load game and room data when component mounts/updates
   useEffect(() => {
@@ -111,18 +111,17 @@ const _CustomGame = (props) => {
   // check if all puzzles are solved and prompt timer to save current countdown
   useEffect(() => {
     // check if roomStatus has been mapped
-    if (Object.keys(roomStatus).length > 0 ) {
+    if (Object.keys(roomStatus).length > 0) {
       const checkAllPuzzlesSolved = (roomStatus) => {
         for (var puzzle in roomStatus)
           if (!roomStatus[puzzle].solved) {
             return false;
           }
         return true;
-      }
+      };
       checkAllPuzzlesSolved(roomStatus) && setRoomSolved(true);
     }
   }, [roomStatus]);
-
 
   // when room is solved push timer countdown to game model for use in next room
   const saveCountdown = async (time) => {
@@ -208,11 +207,12 @@ const _CustomGame = (props) => {
             backgroundImage: `url(${room.imgSrc})`,
             height: '559px',
             width: '1000px',
+            borderRadius: '20px',
             backgroundPosition: 'center',
             backgroundSize: 'cover',
-            margin: '0 auto',
+            margin: '1rem auto',
             position: 'relative',
-            border: '5px solid black',
+            boxShadow: '1px 1px 12px 6px deepskyblue',
           }}
         >
           {Object.keys(roomStatus).map((puzzleNum, idx) => (

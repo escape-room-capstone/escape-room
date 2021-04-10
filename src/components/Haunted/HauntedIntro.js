@@ -4,6 +4,8 @@ import TypeWriterEffect from 'react-typewriter-effect';
 import { Stage, Layer, Image } from 'react-konva';
 import { connect } from 'react-redux';
 import { fetchGame } from '../../store/game.js';
+import { Burger } from '../Burger';
+import '../../../public/CSS/HauntedRoom.css';
 
 const RainScene = (props) => {
   const [image] = useImage('/Images/thunder.jpg');
@@ -14,25 +16,28 @@ export const _HauntedIntro = (props) => {
   useEffect(() => {
     props.getGame(props.gameId);
   }, []);
-
+  useEffect(() => {
+    setTimeout(
+      () => props.history.push(`/haunted/${props.gameId}/room1`),
+      6000
+    );
+  });
   return (
     <div className="game-room">
-      <div className="narrative intro">
-        <p style={{ fontSize: '2rem' }}>
+      <Burger {...props} />
+      <div className="narrative">
+        <p>
           Driving home in a storm, your car breaks down. You leave your car to
           look for shelter...
+          {/* <TypeWriterEffect
+            textStyle={{ fontFamily: 'Red Hat Display' }}
+            startDelay={50}
+            hideCursorAfterText={true}
+            cursorColor="white"
+            text={`Driving home in a storm, your car breaks down. You leave your car to look for shelter...`}
+            typeSpeed={40}
+          /> */}
         </p>
-        <button onClick={() => props.history.push('/haunted/1/room1')}>
-          Continue
-        </button>
-        {/* <TypeWriterEffect
-          textStyle={{ fontFamily: 'Red Hat Display' }}
-          startDelay={50}
-          hideCursorAfterText={true}
-          cursorColor="white"
-          text={`Driving home in a storm, your car breaks down. You leave your car to look for shelter...`}
-          typeSpeed={70}
-        /> */}
       </div>
       <Stage
         onClick={(e) => {
@@ -47,6 +52,13 @@ export const _HauntedIntro = (props) => {
           <RainScene />
         </Layer>
       </Stage>
+      <div>
+        <button
+          onClick={() => props.history.push(`/haunted/${props.gameId}/room1`)}
+        >
+          [Dev] next room
+        </button>
+      </div>
     </div>
   );
 };

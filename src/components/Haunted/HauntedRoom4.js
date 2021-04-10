@@ -5,13 +5,13 @@ import { Stage, Layer, Rect, Text, Circle, Group, Image } from 'react-konva';
 import { Redirect } from 'react-router-dom';
 import Modal from 'react-modal';
 import '../../../public/css/HauntedRoom.css';
-
+import { connect } from 'react-redux';
 const DoorAjar = (props) => {
   const [image] = useImage('/Images/doorajar.jpg');
   return <Image image={image} />;
 };
 
-export const HauntedRoom4 = (props) => {
+const _HauntedRoom4 = (props) => {
   const [advance, setAdvance] = useState(false);
   return (
     <div className="game-room">
@@ -60,7 +60,21 @@ export const HauntedRoom4 = (props) => {
           />
         </Layer>
       </Stage>
+      <div>
+        <button
+          onClick={() => props.history.push(`/haunted/${props.gameId}/room5`)}
+        >
+          [Dev] next room
+        </button>
+      </div>
       {advance ? <Redirect push to="/haunted/1/Room5" /> : ''}
     </div>
   );
 };
+
+const mapState = (state, routeProps) => {
+  const gameId = routeProps.match.params.gameId * 1;
+  return { gameId };
+};
+
+export const HauntedRoom4 = connect(mapState)(_HauntedRoom4);

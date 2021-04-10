@@ -6,17 +6,18 @@ import useImage from 'use-image';
 
 // import css
 import '../../../public/css/HauntedRoom.css';
+import { connect } from 'react-redux';
 
 const Doorway = (props) => {
   const [image] = useImage('/Images/darkdoor.jpg');
   return <Image image={image} />;
 };
-export const Success = (props) => {
+const Success = (props) => {
   // const [advance, setAdvance] = useState(false);
-  useEffect(
-    () => setTimeout(() => props.history.push('/haunted/1/room3'), 6000),
-    []
-  );
+  // useEffect(
+  //   () => setTimeout(() => props.history.push('/haunted/1/room3'), 6000),
+  //   []
+  // );
   return (
     <div className="game-room">
       <div className="narrative">
@@ -25,7 +26,7 @@ export const Success = (props) => {
           startDelay={100}
           cursorColor="white"
           text="You run past the ghosts and through an open door at the top of the stairway..."
-          typeSpeed={60}
+          typeSpeed={30}
         />
       </div>
 
@@ -42,8 +43,16 @@ export const Success = (props) => {
           <Doorway />
         </Layer>
       </Stage>
-
+      <div>
+        <button
+          onClick={() => props.history.push(`/haunted/${props.game.id}/room3`)}
+        >
+          [Dev] next room
+        </button>
+      </div>
       {/* {advance ? <Redirect push to="/haunted/room3" /> : ''} */}
     </div>
   );
 };
+
+export const HauntedR2Success = connect((state) => state)(Success);

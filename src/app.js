@@ -10,7 +10,7 @@ import { HauntedRoom3 } from './components/Haunted/HauntedRoom3';
 import { HauntedRoom4 } from './components/Haunted/HauntedRoom4';
 import { HauntedRoom5 } from './components/Haunted/HauntedRoom5';
 import { HauntedIntro } from './components/Haunted/HauntedIntro';
-import { Success } from './components/Haunted/HauntedR2Success';
+import { HauntedR2Success } from './components/Haunted/HauntedR2Success';
 import { HauntedRoom6 } from './components/Haunted/HauntedRoom6';
 import { HauntedRoom7 } from './components/Haunted/HauntedRoom7';
 import { HauntedRoom8 } from './components/Haunted/HauntedRoom8';
@@ -50,9 +50,8 @@ import { Landing } from './components/Landing';
 import EditSingleRoom from './components/CreateGame/EditSingleRoom';
 
 // victory and fail components
-import { VictoryPage } from './components/VictoryPage'
-import { FailPage } from './components/FailPage'
-
+import { VictoryPage } from './components/VictoryPage';
+import { FailPage } from './components/FailPage';
 
 const App = () => {
   return (
@@ -74,7 +73,11 @@ const App = () => {
       <Route exact path="/haunted/:gameId/room1" component={HauntedRoom1} />
       <Route exact path="/haunted/:gameId/room2" component={HauntedRoom2} />
       <Route exact path="/haunted/:gameId/room3" component={HauntedRoom3} />
-      <Route exact path="/haunted/:gameId/room2/success" component={Success} />
+      <Route
+        exact
+        path="/haunted/:gameId/room2/success"
+        component={HauntedR2Success}
+      />
       <Route exact path="/haunted/:gameId/room4" component={HauntedRoom4} />
       <Route exact path="/haunted/:gameId/room5" component={HauntedRoom5} />
       <Route exact path="/haunted/:gameId/room6" component={HauntedRoom6} />

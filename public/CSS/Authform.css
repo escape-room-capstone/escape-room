@@ -1,4 +1,5 @@
 #authForm {
+  color: white;
   background-image: url('../Images/blackbricks.jpeg');
   background-size: cover;
   min-height: 100vh;
@@ -23,5 +24,7 @@
 }
 
 #authForm input {
+  font-size: 1.4rem;
   margin: 0.4rem;
+  color: white;
 }

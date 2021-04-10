@@ -1,10 +1,12 @@
 .game-room {
+  padding-top: 1rem;
   font-family: Georgia, 'Times New Roman', Times, serif;
-  border: 3px solid white;
-  background-color: black;
   text-align: center;
   color: #073138;
-  min-height: 90vh;
+  min-height: 100vh;
+  background-image: url('../Images/brickalley.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .game-room div.game-timer h1 {
@@ -12,8 +14,9 @@
 }
 .konvajs-content {
   overflow: hidden;
-  border: 20px solid white;
-  margin: 0 auto;
+  border-radius: 20px;
+  margin: 1rem auto;
+  box-shadow: 1px 1px 12px 4px deepskyblue;
   margin-top: 2rem;
   margin-bottom: 5rem;
 }
@@ -26,17 +29,21 @@
   justify-content: center;
   align-items: center;
 }
-
+.game-room .narrative p {
+  margin: 0;
+  text-shadow: 1px 1px 24px black;
+  font-size: 1.5rem;
+}
 .intro {
+  font-size: 2rem;
   border-radius: 20px;
   position: absolute;
+  left: 90px;
   width: 30vw;
-  background-color: #f1f3e59c;
   z-index: 3;
   translate: 50px 50px;
   transform: translate(100%, 50%);
   font-weight: 100;
-  padding: 2rem;
 }
 #house.selected {
   background-color: greenyellow;
@@ -117,4 +124,20 @@ input.small {
   font-size: 1.5rem;
   margin: 0 auto;
   text-align: left;
+}
+
+#utils {
+  justify-content: center;
+  display: flex;
+}
+
+#utils div#lock-images {
+  width: auto;
+}
+
+div.game-timer {
+  align-items: center;
+  display: flex;
+  width: 20rem;
+  height: 3rem;
 }

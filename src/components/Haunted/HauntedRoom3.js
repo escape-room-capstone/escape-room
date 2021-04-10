@@ -10,7 +10,7 @@ import { updateTimer } from '../../store/game';
 import { Burger } from '../Burger';
 
 // set style for the game timer
-const defaultTimerStyle = { barColor: "#3c15eb", digitColor: 'white' };
+const defaultTimerStyle = { barColor: '#3c15eb', digitColor: 'white' };
 
 const DarkRoom = (props) => {
   const [image] = useImage('/Images/darkroom.jpg');
@@ -104,19 +104,20 @@ export const _HauntedRoom3 = (props) => {
       className="game-room"
     >
       <Burger {...props} />
-      <div className="game-timer">
-        <GameTimer
-          gameId={gameId}
-          history={props.history}
-          timer={timer}
-          countdown={countdown}
-          timerToggle={true}
-          roomSolved={roomSolved}
-          saveCountdown={(time) => saveCountdown(time)}
-          styleInput={defaultTimerStyle}
-        />
+      <div id="utils">
+        <div className="game-timer">
+          <GameTimer
+            gameId={gameId}
+            history={props.history}
+            timer={timer}
+            countdown={countdown}
+            timerToggle={true}
+            roomSolved={roomSolved}
+            saveCountdown={(time) => saveCountdown(time)}
+            styleInput={defaultTimerStyle}
+          />
+        </div>
       </div>
-
       <div className="narrative">
         {' '}
         <TypeWriterEffect
@@ -218,6 +219,11 @@ export const _HauntedRoom3 = (props) => {
           <button onClick={() => setShowModal(false)}>CLOSE</button>
         </div>
       </Modal>
+      <div>
+        <button onClick={() => props.history.push(`/haunted/${gameId}/room4`)}>
+          [Dev] next room
+        </button>
+      </div>
     </div>
   );
 };

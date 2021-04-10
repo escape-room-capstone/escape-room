@@ -38,7 +38,8 @@ const _VictoryPage = (props) => {
   return (
     <div id="victory-page">
       <Burger {...props} />
-      <div id="spacer" style={{ height: '100px' }}></div>
+      {/* <div id="spacer" style={{ height: '100px' }}></div> */}
+
       <div
         id="victory-body"
         style={{
@@ -47,10 +48,10 @@ const _VictoryPage = (props) => {
           backgroundImage: 'url(/Images/success.jpeg)',
           backgroundPosition: 'center',
           backgroundSize: 'cover',
+          borderRadius: '20px',
           margin: '0 auto',
           position: 'relative',
-          border: '5px solid black',
-          boxShadow: '13px 13px 549px #dcbaba',
+          boxShadow: '1px 1px 12px 4px peachpuff',
         }}
       >
         <p>

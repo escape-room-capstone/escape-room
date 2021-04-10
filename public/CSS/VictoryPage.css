@@ -1,0 +1,26 @@
+#victory-body p {
+  margin: 5rem auto;
+  font-size: 2rem;
+  width: 25rem;
+  font-weight: bold;
+  text-align: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-shadow: 1px 1px white;
+  line-height: 2rem;
+}
+
+#victory-page {
+  padding: 5rem;
+  background-image: url('../Images/blackbricks.jpeg');
+  background-size: cover;
+}
+#victory-body button {
+  font-size: 1rem;
+  padding: 0.6rem;
+  margin: 1rem auto;
+}
+
+#victory-body span {
+  color: green;
+  font-size: 2rem;
+}

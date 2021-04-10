@@ -28,15 +28,15 @@
 #game-div {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   background-color: #e0dbdbeb;
   font-family: Georgia, 'Times New Roman', Times, serif;
   color: #191414;
   height: 20rem;
-  width: 14rem;
+  width: 15rem;
   font-size: 14px;
-  padding: 4px;
+  padding: 1rem;
   display: flex;
   border-radius: 8px;
 
@@ -47,7 +47,6 @@
 
 #game-div div {
   display: flex;
-  flex: 1;
   /* contain: content; */
 }
 
@@ -64,6 +63,7 @@
   /* margin: 0 5px; */
   /* border: black 1px solid; */
   /* margin-top: 0.5rem; */
+  height: 6rem;
   overflow-y: auto;
 }
 
@@ -123,7 +123,7 @@
 #homepage .heading {
   position: relative;
   z-index: 3;
-  font-size: 1.6rem;
+  font-size: 2.4rem;
   text-align: center;
   margin: 0 auto;
   text-shadow: 3px 13px 21px black;

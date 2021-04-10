@@ -8,15 +8,27 @@ import '../../public/CSS/Account.css';
 import TextField from '@material-ui/core/TextField';
 
 const UpdateProfile = (props) => {
-  const { firstName, lastName, phoneNumber, birthdate, email } = props.user;
+  
 
+  
   const [userInfo, setUserInfo] = useState({
-    firstName: props.auth.firstName ? props.auth.firstName : '',
-    lastName: props.auth.lastName ? props.auth.lastName : '',
-    phoneNumber: props.auth.phoneNumber ? props.auth.phoneNumber : '',
-    birthdate: props.auth.birthdate ? props.auth.birthdate : '',
-    email: props.auth.email ? props.auth.email : '',
+    firstName: "", 
+    lastName: "", 
+    phoneNumber: "",
+    birthdate: "",
+    email: ""
   });
+
+  useEffect(() => {
+
+    setUserInfo({
+      firstName: props.auth.firstName, 
+      lastName: props.auth.lastName, 
+      phoneNumber: props.auth.phoneNumber,
+      birthdate: props.auth.birthdate,
+      email: props.auth.email
+    })
+  }, [props.auth])
 
   const paramsID = props.match.params.id;
   console.log('paramsID', paramsID);
@@ -30,19 +42,7 @@ const UpdateProfile = (props) => {
     };
     checkToken();
   }, []);
-
-  // useEffect(() => {
-  //   const _getUser = async () => {
-  //     if (paramsID) {
-  //       await props.getUser(paramsID);
-  //     }
-  //     if (!props.user) {
-  //       _getUser();
-  //     }
-  //   };
-  // }, []);
-
-  console.log('Update Profile PROPS', props);
+  
 
   const onChange = (e) => {
     let targetName = e.target.name;
@@ -50,24 +50,23 @@ const UpdateProfile = (props) => {
       return { ...prevInfo, [targetName]: e.target.value };
     });
   };
+  
 
-  console.log('userInfo', userInfo);
-
-  const onSubmit = () => {
-    console.log(props);
+  const onSubmit = async(e) => {    
     e.preventDefault();
 
-    props.updateProfile(
-      authID,
+    await props.updateProfile(
+      props.auth.id,
       userInfo.firstName,
       userInfo.lastName,
       userInfo.phoneNumber,
       userInfo.birthdate,
       userInfo.email
     );
-  };
 
-  // console.log(firstName, lastName, phoneNumber, birthdate, email);
+    props.history.push(`/users/${props.auth.id}/account`);
+  };
+  
 
   return (
     <div id="account">
@@ -138,15 +137,13 @@ const UpdateProfile = (props) => {
           ></TextField>
         </div>
 
-        <button id="accountButton">SAVE CHANGES</button>
+        <button onClick={(e)=>onSubmit(e)} id="accountButton">SAVE CHANGES</button>
       </form>
     </div>
   );
 };
 
-const mapToState = (state) => {
-  // const { auth, user } = state;
-  // return { auth, user };
+const mapToState = (state) => {  
   return state;
 };
 

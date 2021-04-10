@@ -8,7 +8,7 @@ const UPDATE_PROFILE = 'UPDATE_PROFILE';
 //ACTION CREATORS //
 const setUsers = (users) => ({ type: SET_USERS, users });
 const _setUser = (user) => ({ type: SET_USER, user });
-const _updateProfile = (users) => ({ type: UPDATE_PROFILE, users });
+const _updateProfile = (user) => ({ type: UPDATE_PROFILE, user });
 
 //THUNK CREATOR
 export const fetchUsers = () => {
@@ -36,7 +36,7 @@ export const updateProfile = (
   history
 ) => {
   return async (dispatch) => {
-    console.log('i am updating!!!');
+    console.log("MY ID", id);
     const user = (
       await axios.put(`/api/users/${id}`, {
         firstName,
@@ -46,8 +46,7 @@ export const updateProfile = (
         email,
       })
     ).data;
-    dispatch(_updateProfile(user));
-    history.push(`/users/${id}/account`);
+    dispatch(_updateProfile(user));    
   };
 };
 

@@ -22,14 +22,13 @@ const ConfirmTheme = (props) => {
   return (
     <div id="divColumn">
       <Navbar />
-      <div>
-        <h3 id="themeText"> All images in this theme... </h3>
+      <div>        
       </div>
       <div id="divRow">
         {theme.images.map((image, idx) => {
           return (
             <div id="divImages" key={idx}>
-              <img id="themeImg" src={image} alt=""></img>
+              <img id="themeImg" style={{ borderRadius:"10%"}} src={image} alt=""></img>
             </div>
           );
         })}

@@ -126,6 +126,7 @@ const AssignPuzzles = (props) => {
                 <div>
                   {' '}
                   <button
+                  id="accountButton"
                     onClick={() =>
                       props.history.push(`/editsingleroom/${room.id}`)
                     }
@@ -143,12 +144,7 @@ const AssignPuzzles = (props) => {
                         {unassignedPuzzles.includes(puzzle.id) ? (
                           <p> removed </p>
                         ) : (
-                          <li>
-                            <button
-                              onClick={() => handleRemove(room.id, puzzle.id)}
-                            >
-                              x
-                            </button>{' '}
+                          <li>                            
                             {puzzle.name}
                           </li>
                         )}

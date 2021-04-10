@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { fetchRoom } from '../store/singeleRoom';
 import { componentMapping } from './Puzzles/puzzles';
@@ -176,6 +176,7 @@ const _CustomGame = (props) => {
             roomSolved={roomSolved}
             timerToggle={true}
             saveCountdown={(time) => saveCountdown(time)}
+            // style={}
           />
         </div>
         <div id="lock-images">

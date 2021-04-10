@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import { fetchRoom } from '../store/singeleRoom';
 import { componentMapping } from './Puzzles/puzzles';
@@ -11,7 +11,7 @@ import GameTimer from '../utils/GameTimer';
 
 const _CustomGame = (props) => {
   // set default local sate
-  const [roomOpen, setRoomOpen] = useState(false);
+  // const [roomOpen, setRoomOpen] = useState(false); -- FOR LATER; functionality to prevent forcing access to next room (add idx === '0' &&)
   const [roomSolved, setRoomSolved] = useState(false); // -- does this get updated to flase on next room?
   const [puzzlesReady, setPuzzlesReady] = useState(false);
   const [roomStatus, setRoomStatus] = useState({});
@@ -20,16 +20,25 @@ const _CustomGame = (props) => {
 
   // pick up data from props
   let { gameId, roomId, idx } = props.match.params;
-  const { room, game } = props;
-  const { puzzles } = room;
-  const { timer, countdown } = game;
+  let { room, game } = props;
+  let { puzzles } = room;
+  let { timer, countdown } = game;
 
   // load game and room data when component mounts/updates
   useEffect(() => {
     props.setGame(gameId);
     props.setRoom(gameId, roomId);
-    setRoomOpen(true); // testing fucntionality to prevent forcing access to next room (add idx === '0' &&)
+    // setRoomOpen(true); -- FOR LATER; see comment in state declaration
   }, [gameId, roomId, idx]);
+
+  // component clean-up
+  useEffect(() => {
+    return () => {
+      setRoomSolved(false);
+      setNextRoomOpen(false);
+      setPuzzlesReady(false);
+    };
+  }, []);
 
   // check if puzzles are availble to set or have been updated
   useEffect(() => {
@@ -44,7 +53,6 @@ const _CustomGame = (props) => {
   // set up puzzles (with status, locations, and thier modals)
   const setPuzzles = () => {
     // create local state for puzzles and its modal
-    console.log(puzzles, 'PUZZLES FROM setPuzzles function');
     const _roomStatus = puzzles.reduce((cluesObj, currentPuzzle) => {
       cluesObj[currentPuzzle.id] = {
         solved: false,
@@ -99,15 +107,23 @@ const _CustomGame = (props) => {
 
   // check if all puzzles are solved and prompt timer to save current countdown
   useEffect(() => {
-    // check if room has been loaded (otherwise '.every' returns true on empty array)
-    room.id &&
-      Object.keys(roomStatus).every((key) => roomStatus[key].solved) &&
-      setRoomSolved(true);
+    // check if roomStatus has been mapped
+    if (Object.keys(roomStatus).length > 0 ) {
+      const checkAllPuzzlesSolved = (roomStatus) => {
+        for (var puzzle in roomStatus)
+          if (!roomStatus[puzzle].solved) {
+            return false;
+          }
+        return true;
+      }
+      checkAllPuzzlesSolved(roomStatus) && setRoomSolved(true);
+    }
   }, [roomStatus]);
+
 
   // when room is solved push timer countdown to game model for use in next room
   const saveCountdown = async (time) => {
-    await props.saveTimer(gameId, time); // to persitently reset timer here during testing, change to 'time = 1000'
+    await props.saveTimer(gameId, time); // -- DEV NOTE: to persitently reset timer for testing, change to 'time = 1000'
     setNextRoomOpen(true);
   };
 
@@ -117,7 +133,7 @@ const _CustomGame = (props) => {
     setPuzzlesReady(false);
     setRoomSolved(false);
     setNextRoomOpen(false);
-    setRoomOpen(true);
+    // setRoomOpen(true); -- FOR LATER; see comment in state declaration
     if (room) {
       // create array with rooms sorted in order
       const sortedRoomsArray = props.game.rooms
@@ -136,15 +152,13 @@ const _CustomGame = (props) => {
     }
   };
 
-  console.log(room.imgSrc);
-
   // render room if the puzzles were mounted and room is open
   if (!puzzlesReady) {
     return null;
   }
-  if (!roomOpen) {
-    return <p>room not open</p>;
-  }
+  // if (!roomOpen) { -- FOR LATER; see comment in state declaration
+  //   return <p>room not open</p>;
+  // }
   return (
     <div id="custom-game">
       <Burger {...props} />

@@ -8,7 +8,7 @@ const GameTimer = (props) => {
     // on first render of timer (when countdown is 0) initiate countdown with value from game timer
     useEffect(() => {
         countdown === -1 && setCountdown(timer);
-    }, []);
+    }, [countdown, timer]);
 
     // split timer into minutes and seconds
     var minutes = Math.floor(currCountdown / 60);

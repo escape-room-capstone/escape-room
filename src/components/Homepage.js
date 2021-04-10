@@ -27,10 +27,10 @@ const Homepage = (props) => {
   };
   const { allGames } = props;
   const defaultGames = allGames.filter((game) => !game.userId);
-  console.log(defaultGames, 'defaultgames');
+ 
   //will eventually need a check for if a game is public/private
   const customGames = allGames.filter((game) => game.userId === props.auth.id);
-  console.log(customGames, 'customGames');
+ 
   const removeSpaceFromTheme = (title) => {
     const noSpaceTitle = title.split(' ').join('');
     console.log(noSpaceTitle);
@@ -42,7 +42,6 @@ const Homepage = (props) => {
     const gameRoomsSorted = gameRooms.sort((roomA, roomB) => {
       return roomA.number - roomB.number;
     });
-
     return gameRoomsSorted[0].id;
   };
 

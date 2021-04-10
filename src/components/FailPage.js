@@ -9,6 +9,7 @@ const _FailPage = (props) => {
     let { gameId } = props.match.params;
     const { game } = props;
     const { rooms } = game;
+    
 
     // load game data when component mounts
     useEffect(() => {
@@ -17,10 +18,10 @@ const _FailPage = (props) => {
 
     // sort the rooms in order using the room['number']
     const sortGameRooms = (gameRooms) => {
-        const gameRoomsSorted = gameRooms.sort((roomA, roomB) => {
+        const sorted = gameRooms.sort((roomA, roomB) => {
             return roomA.number - roomB.number;
         });
-        return gameRoomsSorted[0].id;
+        return sorted;
     };
 
     // end the game
@@ -28,8 +29,10 @@ const _FailPage = (props) => {
         // reset game timer ('-1' is the default value of the countdown when game is created)
         const time = -1;
         await props.resetTimer(gameId, time);
+        // sort the rooms
+        const sortedGameRooms = sortGameRooms(rooms)
         // send the user back to homepage or restart the game 
-        e.target.name === 'end' ? props.history.push(`/home`) : props.history.push(`/games/${gameId}/${sortGameRooms(rooms)}/0`);
+        e.target.name === 'end' ? props.history.push(`/home`) : props.history.push(`/games/${gameId}/${sortedGameRooms[0].id}/0`);
     }
 
     // render victory page once the game was loaded

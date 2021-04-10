@@ -9,12 +9,12 @@ const TimerBar = (props) => {
 
     // assign passed props to dynamic variables
     let barDynamicColor = barColor
-    let dynamicCompleted = Math.max(completed, 18) 
+    let dynamicCompleted = Math.max(completed, 19) 
 
     // change bar color and width based on time remaining
     if (time < 10) {
         barDynamicColor = 'red'
-        dynamicCompleted = 18
+        dynamicCompleted = 19
     }
 
     // styles for the bar

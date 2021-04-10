@@ -950,7 +950,7 @@ export const Puzzle15 = (props) => {
   return (
     <div id="lever-board">
       <div id="lever-stack">
-        <p style={{ color: 'red' }} id="lock">
+        <p style={{ color: puzzle.one === false ? 'red' : 'black' }} id="lock">
           {puzzle.one === false ? 'Locked' : 'Unlocked'}
         </p>
         <button
@@ -961,7 +961,7 @@ export const Puzzle15 = (props) => {
         ></button>{' '}
       </div>
       <div id="lever-stack">
-        <p style={{ color: 'red' }} id="lock">
+        <p style={{ color: puzzle.two === false ? 'red' : 'black' }} id="lock">
           {puzzle.two === false ? 'Locked' : 'Unlocked'}
         </p>
         <button
@@ -977,7 +977,10 @@ export const Puzzle15 = (props) => {
         ></button>{' '}
       </div>
       <div id="lever-stack">
-        <p style={{ color: 'red' }} id="lock">
+        <p
+          style={{ color: puzzle.three === false ? 'red' : 'black' }}
+          id="lock"
+        >
           {puzzle.three === false ? 'Locked' : 'Unlocked'}
         </p>
         <button
@@ -988,7 +991,7 @@ export const Puzzle15 = (props) => {
         ></button>{' '}
       </div>
       <div id="lever-stack">
-        <p style={{ color: 'red' }} id="lock">
+        <p style={{ color: puzzle.four === false ? 'red' : 'black' }} id="lock">
           {puzzle.four === false ? 'Locked' : 'Unlocked'}
         </p>
         <button
@@ -999,7 +1002,7 @@ export const Puzzle15 = (props) => {
         ></button>{' '}
       </div>
       <div id="lever-stack">
-        <p style={{ color: 'red' }} id="lock">
+        <p style={{ color: puzzle.five === false ? 'red' : 'black' }} id="lock">
           {puzzle.five === false ? 'Locked' : 'Unlocked'}
         </p>
         <button
@@ -1008,7 +1011,7 @@ export const Puzzle15 = (props) => {
         ></button>{' '}
       </div>
       <div id="lever-stack">
-        <p style={{ color: 'red' }} id="lock">
+        <p style={{ color: puzzle.six === false ? 'red' : 'black' }} id="lock">
           {puzzle.six === false ? 'Locked' : 'Unlocked'}
         </p>
         <button

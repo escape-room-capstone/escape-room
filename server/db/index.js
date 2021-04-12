@@ -177,6 +177,16 @@ const syncAndSeed = async () => {
       ],
     }),
     Theme.create({
+      name: 'Island',
+      backgroundImageOne: '/Images/GameImages/IslandGame/landingpage.png',
+      images: [
+        '/Images/GameImages/IslandGame/landingpage.png',
+        '/Images/GameImages/IslandGame/lobby-islandmap.png',
+        '/Images/GameImages/IslandGame/room-boat.png',
+        '/Images/GameImages/IslandGame/room-crashsite.png',
+      ],
+    }),
+    Theme.create({
       name: 'Haunted',
       numPuzzles: 9,
       type: 'default',

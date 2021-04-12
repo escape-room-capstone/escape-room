@@ -30,12 +30,15 @@ const _Navbar = (props) => {
             <Link to={`/users/${props.auth.id}/account`} props={props}>
               <span>ACCOUNT</span>
             </Link>
+            <Link to="/about">ABOUT</Link>
             <span onClick={() => props.logout()}>LOGOUT</span>
           </div>
         ) : (
           <div className="navbar-row">
             <div></div>
             <div>
+              <Link to="/about">ABOUT</Link>
+
               <Link to="/login">
                 <span>LOGIN</span>
               </Link>

@@ -1,8 +1,11 @@
 import React from 'react';
 import '../../public/CSS/About.css';
+import { Navbar } from './Navbar';
+
 export const About = (props) => {
   return (
     <div id="about">
+      <Navbar />
       <div className="section column">
         <h1>Technologies</h1>
         <div>

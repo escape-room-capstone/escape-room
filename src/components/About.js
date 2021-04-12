@@ -32,6 +32,36 @@ export const About = (props) => {
       </div>
       <div className="section column">
         <h1>Future Enhancements</h1>
+        <ul>
+          <li>Integrate with Firebase for real-time multiplayer experience</li>
+          <li>Integrate with AWS S3 for storing uploaded user images</li>
+        </ul>
+      </div>
+
+      <h1 className="shadow">The Team</h1>
+
+      <div id="team">
+        <div>
+          <h2>Steve </h2>
+          <img src="/Images/AboutImages/steve2.png"></img>
+        </div>
+        <div>
+          <h2>Vanessa</h2>
+          <img src="/Images/AboutImages/vanessa.png"></img>
+        </div>
+
+        <div>
+          <h2>Kate</h2>
+          <img src="/Images/AboutImages/kate.png"></img>
+        </div>
+        <div>
+          <h2> Roman</h2>
+          <img src="/Images/AboutImages/roman.png"></img>
+        </div>
+        <div>
+          <h2>Arwinder</h2>
+          <img src="/Images/AboutImages/arwinder.png"></img>
+        </div>
       </div>
     </div>
   );

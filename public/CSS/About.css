@@ -1,9 +1,11 @@
-#about img {
+.section img {
   height: 5rem;
   margin: 1rem;
 }
 
 #about {
+  color: white;
+  text-align: center;
   font-family: Georgia, 'Times New Roman', Times, serif;
   padding: 2rem;
   min-height: 100vh;
@@ -11,6 +13,9 @@
   background-image: url('../Images/keysfloorbackground.jpeg');
 }
 
+#about div.section {
+  color: black;
+}
 .section {
   box-shadow: 2px 2px 18px 8px black;
   margin: 3rem auto;
@@ -34,6 +39,32 @@
   align-items: center;
 }
 
+ul {
+  width: 90%;
+}
 li {
   font-size: 1.5rem;
+  /* width: 90%; */
+}
+
+#team {
+  justify-content: center;
+  flex-wrap: wrap;
+  color: white;
+  display: flex;
+}
+#team > div {
+  font-weight: 100;
+  margin: 1rem;
+}
+#team img {
+  box-shadow: 1px 1px 14px 3px black;
+  border: 1px solid black;
+  height: 12rem;
+  border-radius: 12px;
+}
+
+h1.team,
+.shadow {
+  text-shadow: 1px 1px 19px black;
 }

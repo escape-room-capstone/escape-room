@@ -5,7 +5,7 @@ import { Link, Redirect } from 'react-router-dom';
 export const Landing = (props) => {
   return (
     <div id="landing">
-      <h1>Escape The Room</h1>
+      <h1>Puzzle Break</h1>
 
       <div>
         <Link to="/login">

@@ -27,6 +27,7 @@ const Homepage = (props) => {
   };
   const { allGames } = props;
   const defaultGames = allGames.filter((game) => !game.userId);
+  const _customGames = allGames.filter((game) => game.userId);
  
   //will eventually need a check for if a game is public/private
   const customGames = allGames.filter((game) => game.userId === props.auth.id);
@@ -50,10 +51,34 @@ const Homepage = (props) => {
       {/* <div id="overlay"></div> */}
       <Navbar />
       <div className="heading">
-        <h2>Select Game</h2>
+        <h2>Developer Games</h2>
       </div>
       <div id="game-div-wrapper">
         {defaultGames.map((game) => {
+          return (
+            <div id="game-div" key={game.id}>
+              <div>
+                <h3>{game.title}</h3>
+              </div>
+              <div>
+                <img src={game.imgSrc} />
+              </div>
+              <div id="scroll">{game.description}</div>
+              <div>
+                <Link to={`/${game.theme}/${game.id}`}>
+                  <button className="play">PLAY</button>
+                </Link>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <hr />
+      <div className="heading">
+        <h2>Custom Games</h2>
+      </div>
+      <div id="game-div-wrapper">
+        {_customGames.map((game) => {
           return (
             <div id="game-div" key={game.id}>
               <div>
@@ -132,3 +157,4 @@ const mapDispatch = {
 };
 
 export default connect(mapState, mapDispatch)(Homepage);
+

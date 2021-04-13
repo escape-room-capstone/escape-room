@@ -27,7 +27,8 @@ export const About = (props) => {
             Dynamically rendering front-end React components based on user data
             in database
           </li>
-          <li></li>
+          <li>Defining complex database model associations</li>
+          <li>Converting static to dynamic rendering </li>
         </ul>
       </div>
       <div className="section column">
@@ -35,6 +36,8 @@ export const About = (props) => {
         <ul>
           <li>Integrate with Firebase for real-time multiplayer experience</li>
           <li>Integrate with AWS S3 for storing uploaded user images</li>
+          <li>Integrate video chat feature to multiplayer experience</li>
+          <li>Ability for user to create puzzles</li>
         </ul>
       </div>
 

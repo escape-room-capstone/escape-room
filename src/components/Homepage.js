@@ -38,12 +38,20 @@ const Homepage = (props) => {
     return noSpaceTitle;
   };
 
+  
   // sort the rooms for each game in order using the room['number']
   const sortGameRooms = (gameRooms) => {
     const gameRoomsSorted = gameRooms.sort((roomA, roomB) => {
       return roomA.number - roomB.number;
     });
     return gameRoomsSorted[0].id;
+  };
+
+  const sortCustomGame = (gameRooms) => {
+    console.log(gameRooms, "gameRooms");
+    return gameRooms.sort((roomA, roomB) => {
+      return roomA.number - roomB.number;
+    });    
   };
 
   return (
@@ -84,12 +92,12 @@ const Homepage = (props) => {
               <div>
                 <h3>{game.title}</h3>
               </div>
-              <div>
-                <img src={game.imgSrc} />
+              <div>                              
+                <img src={sortCustomGame(game.rooms)[0].imgSrc} />
               </div>
               <div id="scroll">{game.description}</div>
               <div>
-                <Link to={`/${game.theme}/${game.id}`}>
+                <Link to={`/games/${game.id}/${sortGameRooms(game.rooms)}/0`}>
                   <button className="play">PLAY</button>
                 </Link>
               </div>
@@ -109,7 +117,7 @@ const Homepage = (props) => {
                   <div>
                     <h3>{game.title ? game.title : `Game ${game.id}`}</h3>
                   </div>
-                  <div>
+                  <div>                    
                     <img src={game.rooms[0].imgSrc} />
                   </div>
                   <div id="scroll">{game.description}</div>

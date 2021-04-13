@@ -63,7 +63,7 @@ export const About = (props) => {
         </div>
         <div>
           <h2>Arwinder</h2>
-          <img src="/Images/AboutImages/arwinder.png"></img>
+          <img src="/Images/AboutImages/arwinder.jpg"></img>
         </div>
       </div>
     </div>
